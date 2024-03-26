@@ -5,7 +5,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 @NgModule({
     imports: [
         CommonModule,
-        AuthRoutingModule
+        AuthRoutingModule,
     ]
 })
 export class AuthModule { }

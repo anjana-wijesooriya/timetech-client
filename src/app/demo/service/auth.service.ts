@@ -1,8 +1,9 @@
-import { LoginModel } from '../models/user/login.model';
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BaseService } from './base.service';
-import { LoginResponseModel } from '../models/user/login-response.model';
+import { LoginResponseModel } from '../api/user/login-response.model';
+import { LoginModel } from '../api/user/login.model';
 
 @Injectable({providedIn: 'root'})
 export class AuthService extends BaseService{

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { LoginResponseModel } from '../models/user/login-response.model';
-import { UserPermissionModel } from '../models/user/user-permission.model';
 import { BehaviorSubject } from 'rxjs';
+import { UserPermissionModel } from '../api/user/user-permission.model';
+import { LoginResponseModel } from '../api/user/login-response.model';
 
 @Injectable({
   providedIn: 'root'
