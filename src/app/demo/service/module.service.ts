@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
-import { ModuleModel } from '../models/module/module.model';
 import { BehaviorSubject } from 'rxjs';
+import { ModuleModel } from '../api/module/module.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 export class ModuleService extends BaseService {
 
   private $activeModules = new BehaviorSubject<ModuleModel[]>([]);
-  
+
   constructor(private http: HttpClient) {
     super();
   }
@@ -20,11 +20,11 @@ export class ModuleService extends BaseService {
     return this.http.get<ModuleModel[]>(`${this.apiEndpoint}${endpoint}`);
   }
 
-  public setActiveModules(modules: ModuleModel[]){
+  public setActiveModules(modules: ModuleModel[]) {
     this.$activeModules.next(modules);
   }
 
-  public getActiveModules(){
+  public getActiveModules() {
     return this.$activeModules.asObservable();
   }
 

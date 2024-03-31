@@ -1,6 +1,13 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { LayoutService } from './service/app.layout.service';
+import { ModuleService } from '../demo/service/module.service';
+import { ModuleModel } from '../demo/api/module/module.model';
+import { NavigationService } from '../demo/service/navigation.service';
+import { Router } from '@angular/router';
+import { IChildItem, IMenuItem } from '../demo/api/module/menu-item.model';
+import { MenuIconsEnum } from '../demo/shared/enum/menu-icons';
+import { BaseService } from '../demo/service/base.service';
 
 @Component({
     selector: 'app-menu',
@@ -9,8 +16,13 @@ import { LayoutService } from './service/app.layout.service';
 export class AppMenuComponent implements OnInit {
 
     model: any[] = [];
+    activeModules: ModuleModel[] = [];
+    selectedItem: any[] = [];
+    menuItems: IMenuItem[] = []
 
-    constructor(public layoutService: LayoutService) { }
+    constructor(public layoutService: LayoutService, private moduleService: ModuleService,
+        public navigationService: NavigationService, private router: Router,
+        private baseService: BaseService) { }
 
     ngOnInit() {
         this.model = [
@@ -161,5 +173,84 @@ export class AppMenuComponent implements OnInit {
                 ]
             }
         ];
+        this.getMenuItemsByBaseMenu()
+        this.getMenuItems();
+    }
+
+    getMenuItemsByBaseMenu() {
+        const userDetails = this.baseService.userDetails$.getValue();
+        this.moduleService.getModules(userDetails.id, 2, 'en').subscribe(response => {
+            // this.subModules = response;
+            // this.groupBy(response, 'groupName')
+            this.moduleService.setActiveModules(response);
+            localStorage.setItem('Personal', JSON.stringify(response));
+        })
+    }
+
+    getMenuItems() {
+        this.moduleService.getActiveModules().subscribe(result => {
+            this.activeModules = result;
+            this.prepareMenuItems(result);
+        })
+    }
+
+    groupBy(items: any[], key: string) {
+        return items.reduce((result, item) => (
+            { ...result, [item[key]]: [...(result[item[key]] || []), item,], }), {},);
+    }
+
+    prepareMenuItems(result: ModuleModel[]) {
+        var grouped = this.groupBy(result, 'groupName');
+        let keys: string[] = Object.keys(grouped);
+        let values: any[] = Object.values(grouped);
+        this.model = [];
+        keys.forEach((element, index) => {
+            let sub: any[] = [];
+            values[index].forEach((item) => {
+                sub.push({
+                    label: item.btnDisplay,
+                    type: 'link',
+                    tooltip: item.btnToolTip,
+                    icon: 'ic ' + item.btnPicture,
+                    routerLink: item.btnTag
+                })
+            });
+
+            let icon = MenuIconsEnum.find(a => a.name == element);
+            this.model.push({
+                label: element,
+                icon: 'ic ' + icon.icon,
+                items: sub
+            });
+        });
+
+        this.navigationService.setMenuItems(this.menuItems);
+    }
+
+    onClickChangeActiveFlag(item: any) {
+        this.setActiveMainItem(item);
+    }
+
+    setActiveMainItem(item: any) {
+        this.menuItems.forEach(i => {
+            i.active = false;
+        });
+        item.active = true;
+    }
+
+    selectItem(item: IMenuItem) {
+        this.navigationService.sidebarState.childnavOpen = true;
+        this.navigationService.selectedItem = item;
+        this.setActiveMainItem(item);
+    }
+
+    closeChildNav() {
+        this.navigationService.sidebarState.childnavOpen = false;
+        // this.setActiveFlag();
+    }
+
+    onNavigate(childMenu: IChildItem) {
+        this.navigationService.selectedChildMenu = childMenu;
+        this.router.navigate([childMenu.state]);
     }
 }

@@ -80,13 +80,31 @@ export class AppConfigComponent {
         return this.layoutService.config().colorScheme;
     }
 
+    set menuColor(val: string) {
+        this.layoutService.config.update((config) => ({
+            ...config,
+            menuColor: val,
+        }));
+    }
+
+    get menuColor(): string {
+        return this.layoutService.config().menuColor;
+    }
+
     onConfigButtonClick() {
         this.layoutService.showConfigSidebar();
     }
 
+    changeMenuColor(color: string) {
+        this.menuColor = color
+    }
+
+    // changeColorScheme(colorScheme: string) {
+    //     this.colorScheme = colorScheme;
+    // }
+
     changeTheme(theme: string, colorScheme: string) {
         this.theme = theme;
-        this.colorScheme = colorScheme;
     }
 
     decrementScale() {

@@ -7,6 +7,7 @@ export interface AppConfig {
     theme: string;
     ripple: boolean;
     menuMode: string;
+    menuColor: string;
     scale: number;
 }
 
@@ -30,6 +31,7 @@ export class LayoutService {
         colorScheme: 'light',
         theme: 'lara-light-indigo',
         scale: 14,
+        menuColor: 'white',
     };
 
     config = signal<AppConfig>(this._config);

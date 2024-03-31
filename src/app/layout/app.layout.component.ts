@@ -1,15 +1,17 @@
-import { Component, OnDestroy, Renderer2, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
 import { LayoutService } from "./service/app.layout.service";
 import { AppSidebarComponent } from "./app.sidebar.component";
 import { AppTopBarComponent } from './app.topbar.component';
+import { LocalStorage } from '../demo/shared/enum/local-storage.enum';
+import { BaseService } from '../demo/service/base.service';
 
 @Component({
     selector: 'app-layout',
     templateUrl: './app.layout.component.html'
 })
-export class AppLayoutComponent implements OnDestroy {
+export class AppLayoutComponent implements OnDestroy, OnInit {
 
     overlayMenuOpenSubscription: Subscription;
 
@@ -21,13 +23,14 @@ export class AppLayoutComponent implements OnDestroy {
 
     @ViewChild(AppTopBarComponent) appTopbar!: AppTopBarComponent;
 
-    constructor(public layoutService: LayoutService, public renderer: Renderer2, public router: Router) {
+    constructor(public layoutService: LayoutService, public renderer: Renderer2, public router: Router,
+        private baseService: BaseService) {
         this.overlayMenuOpenSubscription = this.layoutService.overlayOpen$.subscribe(() => {
             if (!this.menuOutsideClickListener) {
                 this.menuOutsideClickListener = this.renderer.listen('document', 'click', event => {
-                    const isOutsideClicked = !(this.appSidebar.el.nativeElement.isSameNode(event.target) || this.appSidebar.el.nativeElement.contains(event.target) 
+                    const isOutsideClicked = !(this.appSidebar.el.nativeElement.isSameNode(event.target) || this.appSidebar.el.nativeElement.contains(event.target)
                         || this.appTopbar.menuButton.nativeElement.isSameNode(event.target) || this.appTopbar.menuButton.nativeElement.contains(event.target));
-                    
+
                     if (isOutsideClicked) {
                         this.hideMenu();
                     }
@@ -55,6 +58,15 @@ export class AppLayoutComponent implements OnDestroy {
                 this.hideMenu();
                 this.hideProfileMenu();
             });
+    }
+
+    ngOnInit(): void {
+        this.setLoggedUserDetails()
+    }
+
+    setLoggedUserDetails() {
+        let user = JSON.parse(localStorage.getItem(LocalStorage.UserDetails) || '{}');
+        this.baseService.setLoginDetails(user);
     }
 
     hideMenu() {
@@ -101,11 +113,29 @@ export class AppLayoutComponent implements OnDestroy {
             'layout-theme-dark': this.layoutService.config().colorScheme === 'dark',
             'layout-overlay': this.layoutService.config().menuMode === 'overlay',
             'layout-static': this.layoutService.config().menuMode === 'static',
+            'layout-slim': this.layoutService.config().menuMode === 'slim',
+            'layout-compact': this.layoutService.config().menuMode === 'compact',
+            'layout-horizontal': this.layoutService.config().menuMode === 'horizontal',
+            'layout-reveal': this.layoutService.config().menuMode === 'reveal',
+            'layout-drawer': this.layoutService.config().menuMode === 'drawer',
             'layout-static-inactive': this.layoutService.state.staticMenuDesktopInactive && this.layoutService.config().menuMode === 'static',
             'layout-overlay-active': this.layoutService.state.overlayMenuActive,
             'layout-mobile-active': this.layoutService.state.staticMenuMobileActive,
             'p-input-filled': this.layoutService.config().inputStyle === 'filled',
-            'p-ripple-disabled': !this.layoutService.config().ripple
+            'p-ripple-disabled': !this.layoutService.config().ripple,
+            'layout-sidebar-white': this.layoutService.config().menuColor == 'white',
+            'layout-sidebar-darkgray': this.layoutService.config().menuColor == 'darkgray',
+            'layout-sidebar-blue': this.layoutService.config().menuColor == 'blue',
+            'layout-sidebar-bluegray': this.layoutService.config().menuColor == 'bluegray',
+            'layout-sidebar-brown': this.layoutService.config().menuColor == 'brown',
+            'layout-sidebar-cyan': this.layoutService.config().menuColor == 'cyan',
+            'layout-sidebar-green': this.layoutService.config().menuColor == 'green',
+            'layout-sidebar-indigo': this.layoutService.config().menuColor == 'indigo',
+            'layout-sidebar-deeppurple': this.layoutService.config().menuColor == 'deeppurple',
+            'layout-sidebar-orange': this.layoutService.config().menuColor == 'orange',
+            'layout-sidebar-pink': this.layoutService.config().menuColor == 'pink',
+            'layout-sidebar-purple': this.layoutService.config().menuColor == 'purple',
+            'layout-sidebar-teal': this.layoutService.config().menuColor == 'teal',
         }
     }
 

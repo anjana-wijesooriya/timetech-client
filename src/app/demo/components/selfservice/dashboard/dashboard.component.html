@@ -1,0 +1,136 @@
+<div class="grid">
+    <div class="col-12 py-1">
+        <ul class="layout-breadcrumb list-none p-0 m-0 surface-card flex font-medium overflow-y-hidden overflow-x-auto">
+            <li class="relative p-3">
+                <a class="cursor-pointer"><i class="pi pi-home"></i></a>
+            </li>
+            <li class="relative p-3">
+                <div class="absolute left-0 top-0 z-1"
+                    style="border-left: 20px solid var(--surface-card); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0;">
+                </div>
+                <a class="cursor-pointer pl-4 white-space-nowrap">Self-Service</a>
+                <div class="absolute top-0"
+                    style="left: 1px; border-left: 20px solid var(--surface-border); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0;">
+                </div>
+            </li>
+            <li class="relative p-3">
+                <div class="absolute left-0 top-0 z-1"
+                    style="border-left: 20px solid var(--surface-card); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0;">
+                </div><a class="cursor-pointer pl-4 white-space-nowrap">Dashboard</a>
+                <div class="absolute top-0"
+                    style="left: 1px; border-left: 20px solid var(--surface-border); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0;">
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="col-12 lg:col-4 p-3">
+        <div class="px-4 py-5 shadow-2 flex flex-column md:flex-row md:align-items-center justify-content-between mb-3"
+            style="border-radius: 1rem; background: linear-gradient(0deg, rgba(0, 123, 255, 0.5), rgba(0, 123, 255, 0.5)), linear-gradient(92.54deg, rgb(28, 128, 207) 47.88%, rgb(255, 255, 255) 100.01%);">
+            <div>
+                <div class="text-blue-100 font-medium text-xl mt-2 mb-3">Welcome Back, John</div>
+                <div class="text-white font-medium text-l">You have 5 unread Notifications.</div>
+            </div>
+            <div class="mt-4 mr-auto md:mt-0 md:mr-0">
+                <a target="_blank" href="https://www.primefaces.org/primeblocks-ng"
+                    class="p-button font-bold px-5 py-3 p-button-warning p-button-rounded p-button-raised"> 
+                    Profile 
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 md:col-4 p-3 surface-ground ng-star-inserted">
+        <div class="shadow-2 border-round surface-card p-4">
+            <div class="flex align-items-center justify-content-between mb-4">
+                <span class="text-xl font-medium text-900">Attendance
+                    and Leaves</span>
+                <p-dropdown [options]="years"></p-dropdown>
+            </div>
+            <div class="grid">
+                <div class="col-12 sm:col-6 lg:col-4 p-3">
+                    <div class="text-center">
+                        <div class=" flex align-items-center justify-content-center mb-3 mx-auto">
+                            <h4 class="text-primary">9</h4>
+                        </div>
+                        <span class="text-900 font-medium">Total Leaves</span>
+                    </div>
+                </div>
+                <div class="col-12 sm:col-6 lg:col-4 p-3">
+                    <div class="text-center">
+                        <div class=" flex align-items-center justify-content-center mb-3 mx-auto">
+                            <h4 class="text-pink-500">5.5</h4>
+                        </div>
+                        <span class="text-900 font-medium">Leaves Taken</span>
+                    </div>
+                </div>
+                <div class="col-12 sm:col-6 lg:col-4 p-3">
+                    <div class="text-center">
+                        <div class=" flex align-items-center justify-content-center mb-3 mx-auto">
+                            <h4 class="text-teal-500">9</h4>
+                        </div>
+                        <span class="text-900 font-medium">Leaves Absent</span>
+                    </div>
+                </div>
+                <div class="col-12 sm:col-6 lg:col-4 p-3">
+                    <div class="text-center">
+                        <div class=" flex align-items-center justify-content-center mb-3 mx-auto">
+                            <h4 class="text-purple-500">0</h4>
+                        </div>
+                        <span class="text-900 font-medium">Pending Approval</span>
+                    </div>
+                </div>
+                <div class="col-12 sm:col-6 lg:col-4 p-3">
+                    <div class="text-center">
+                        <div class=" flex align-items-center justify-content-center mb-3 mx-auto">
+                            <h4 class="text-cyan-500">214</h4>
+                        </div>
+                        <span class="text-900 font-medium">Pending Approval</span>
+                    </div>
+                </div>
+                <div class="col-12 sm:col-6 lg:col-4 p-3">
+                    <div class="text-center">
+                        <div class=" flex align-items-center justify-content-center mb-3 mx-auto">
+                            <h4 class="text-red-600">2</h4>
+                        </div>
+                        <span class="text-900 font-medium">Loss of Pay</span>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    <div class="col-12 md:col-6 lg:col-4 p-3 surface-ground ">
+        <div class="flex flex-wrap surface-card">
+            <div class="col-6 p-3">
+                <div class="bg-blue-50 text-center p-3 border-round flex flex-column"><i
+                        class="text-blue-500 pi pi-play text-4xl block mb-4"></i><span
+                        class="text-black-alpha-90 text-5xl">152h</span>
+                    <div class="text-blue-700 mt-3 font-medium">Total Hours</div>
+                </div>
+            </div>
+            <div class="col-6 p-3">
+                <div class="bg-purple-50 text-center p-3 border-round flex flex-column"><i
+                        class="text-purple-500 pi pi-users text-4xl block mb-4"></i><span
+                        class="text-black-alpha-90 text-5xl">21000h</span>
+                    <div class="text-purple-700 mt-3 font-medium">Extra Hours</div>
+                </div>
+            </div>
+            <div class="col-6 p-3">
+                <div class="bg-teal-50 text-center p-3 border-round flex flex-column"><i
+                        class="text-teal-500 pi pi-camera text-4xl block mb-4"></i><span
+                        class="text-black-alpha-90 text-5xl">71.2h</span>
+                    <div class="text-teal-700 mt-3 font-medium">Late Entry</div>
+                </div>
+            </div>
+            <div class="col-6 p-3">
+                <div class="bg-indigo-50 text-center p-3 border-round flex flex-column"><i
+                        class="text-indigo-500 pi pi-thumbs-up text-4xl block mb-4"></i><span
+                        class="text-black-alpha-90 text-5xl">4500h</span>
+                    <div class="text-indigo-700 mt-3 font-medium">Early Exit</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    
+</div>

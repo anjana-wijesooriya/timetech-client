@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ISidebarState } from '../models/module/sidebar-state.model';
-import { IChildItem, IMenuItem } from '../models/module/menu-item.model';
 import { BehaviorSubject } from 'rxjs';
+import { ISidebarState } from '../api/module/sidebar-state.model';
+import { IChildItem, IMenuItem } from '../api/module/menu-item.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,11 +18,11 @@ export class NavigationService {
 
   constructor() { }
 
-  setMenuItems(menuItems: IMenuItem[]){
+  setMenuItems(menuItems: IMenuItem[]) {
     this.menuItems$.next(menuItems);
   }
 
-  getMenuItems(){
+  getMenuItems() {
     return this.menuItems$.asObservable();
   }
 
