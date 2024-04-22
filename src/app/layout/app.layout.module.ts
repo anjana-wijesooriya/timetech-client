@@ -17,7 +17,8 @@ import { AppFooterComponent } from './app.footer.component';
 import { AppConfigModule } from './config/config.module';
 import { AppSidebarComponent } from "./app.sidebar.component";
 import { AppLayoutComponent } from "./app.layout.component";
-import { BaseService } from '../demo/service/base.service';
+import { SkeletonModule } from 'primeng/skeleton';
+import { SharedComponentsModule } from '../demo/shared/components/shared-components.module';
 
 @NgModule({
     declarations: [
@@ -38,11 +39,12 @@ import { BaseService } from '../demo/service/base.service';
         BadgeModule,
         RadioButtonModule,
         InputSwitchModule,
+        SkeletonModule,
         RippleModule,
         RouterModule,
-        AppConfigModule
+        AppConfigModule,
+        SharedComponentsModule,
     ],
     exports: [AppLayoutComponent],
-    providers: [BaseService]
 })
 export class AppLayoutModule { }

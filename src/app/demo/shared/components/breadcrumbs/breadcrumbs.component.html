@@ -1,0 +1,26 @@
+<div class="grid">
+    <div class="col-12 surface-ground p-2 mb-3">
+        <div class="flex align-items-center justify-content-between card surface-card px-2 py-0 m-0">
+            <ul class="layout-breadcrumb list-none flex font-medium overflow-y-hidden overflow-x-auto  p-0 m-0">
+                <li class="relative p-3">
+                    <a class="cursor-pointer" [routerLink]="'/self-service/dashboard'" >
+                        <i class="pi pi-home text-lg"></i>
+                    </a>
+                </li>
+                <li class="relative p-3" *ngFor="let item of breadcrumbs">
+                    <div class="absolute left-0 top-0 z-1"
+                        style="border-left: 20px solid var(--surface-card); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0;">
+                    </div>
+                    <a class="pl-4 white-space-nowrap" [ngClass]="{'cursor-pointer': item.path != undefined }" [routerLink]="item.path">
+                        <i [class]="item.icon" class="text-lg"></i>
+                        {{item.label}}
+                    </a>
+                    <div class="absolute top-0"
+                        style="left: 1px; border-left: 20px solid var(--surface-border); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0;">
+                    </div>
+                </li>
+            </ul>
+            <p-calendar class="max-w-full dashboard-month-picker" [inline]="true" [showWeek]="true"></p-calendar>
+        </div>
+    </div>
+</div>

@@ -28,14 +28,14 @@
 
     <div class="w-full lg:w-4 h-full flex flex-column justify-content-between align-items-center px-6 py-6"
         style="background-color: var(--surface-0);">
-        <div class="z-5 w-full px-6 text-center mt-8">
+        <div class="z-5 w-full px-6 text-center my-4">
             <div class="w-full flex align-items-center justify-content-center">
                 <img src="../../../../../assets/demo/images/time-tech/TimeTech_M.png" alt="timetch-layout"
                     class="w-7rem">
             </div>
             <h1 class="text-4xl font-light mt-4 text-primary-500">Sign in to TimeTech</h1>
             <p>Welcome, Please use the form to sign-in TimeTech network</p>
-            <div class="mt-5 text-left">
+            <div class="my-5 text-left">
                 <p-messages></p-messages>
                 <form [formGroup]="signinForm" (ngSubmit)="onSubmitLogin()" novalidate autocomplete="off">
 
@@ -85,10 +85,9 @@
                         <!---->
                     </p-checkbox>
                     <div class="flex align-items-center justify-content-between mt-4 gap-3">
-                        <button pbutton="" type="submit" label="Login" class="p-element w-10rem p-button p-component"
-                            tabindex="0" [disabled]="signinForm.invalid">
-                            <span class="p-button-label">Login</span>
-                        </button>
+                        <p-button pbutton type="submit" label="Login" 
+                            tabindex="0" [loading]="loading">
+                        </p-button>
                         <a href="#" class="secondary-button">Forgot Password?</a>
                     </div>
                 </form>

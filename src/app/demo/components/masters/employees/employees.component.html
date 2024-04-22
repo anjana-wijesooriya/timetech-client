@@ -1,0 +1,301 @@
+<div class="grid surface-ground">
+
+    <div class="col-12 surface-ground">
+        <div class="card surface-card">
+            <h5>Employees</h5>
+            <p> Add, Edit, Delete or Search by Creating custom search criterieas. </p>
+            <div class="grid">
+                <div class="col-12">
+                    <p-toast></p-toast>
+                    <p-toolbar styleClass="mb-4 gap-2">
+                        <ng-template pTemplate="left">
+                            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2"
+                                (click)="allDepartments = allDepartments"></button>
+                            <button pButton pRipple [label]="'Delete'" icon="pi pi-trash" class="p-button-danger"
+                                (click)="allDepartments = allDepartments" [disabled]="false"></button>
+                        </ng-template>
+
+                        <ng-template pTemplate="right">
+                            <!-- <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import"
+                                class="mr-2 inline-block"></p-fileUpload>
+                            <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button> -->
+                        </ng-template>
+                    </p-toolbar>
+                    <p-table #empTable [columns]="selectedColumns" [value]="_employees" dataKey="id" [rowHover]="true"
+                        styleClass="p-datatable-sm p-datatable-gridlines" [paginator]="true"
+                        [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 25, 50, 100]"
+                        [globalFilterFields]="['empCd', 'empName', 'userProfileObj.name', 'designationObj.name', 'nationalID']"
+                        responsiveLayout="scroll" responsiveLayout="stack" [breakpoint]="'960px'"
+                        [tableStyle]="{'min-width': '50rem'}">
+                        <ng-template pTemplate="caption">
+                            <div class="flex">
+                                <p-multiSelect class="mb-2" [options]="columns" [(ngModel)]="selectedColumns"
+                                    optionLabel="header" placeholder="Please select columns" display="chip">
+                                </p-multiSelect>
+                                <button pButton pRipple [label]="'Delete'" icon="pi pi-trash"
+                                    class="p-button-danger p-button-outlined mb-2"
+                                    (click)="allDepartments = allDepartments" [disabled]="false"></button>
+
+
+                                <p-iconField iconPosition="left">
+                                    <p-inputIcon styleClass="pi pi-search" />
+                                    <input class="w-full" type="text" pInputText placeholder="Search Keyword" #filter
+                                        (input)="onGlobalFilter(dt1, $event)" />
+                                </p-iconField>
+                                <button pButton label="Clear" class="p-button-outlined ml-auto mb-2"
+                                    icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+
+
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="width:3rem">#</th>
+                                <th style="min-width: 10rem" pSortableColumn="empCd" pFrozenColumn>
+                                    <div class="flex justify-content-between align-items-center">
+                                        Code
+                                        <p-sortIcon field="empCd"></p-sortIcon>
+                                        <p-columnFilter type="text" field="empCd" display="menu"
+                                            placeholder="Search by Code"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th style="min-width: 16rem" pSortableColumn="empName"
+                                    [hidden]="!isShowColumn('empName')" [resizableColumns]="true">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Name
+                                        <p-sortIcon field="empName"></p-sortIcon>
+                                        <p-columnFilter type="text" field="empName" display="menu"
+                                            placeholder="Search by Name"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th style="min-width: 12rem" pSortableColumn="userProfileObj.name"
+                                    [hidden]="!isShowColumn('userProfileObj.name')" [resizableColumns]="true">
+                                    <div class="flex justify-content-between align-items-center">
+                                        User Profile
+                                        <p-sortIcon field="userProfileObj.name"></p-sortIcon>
+                                        <p-columnFilter field="userProfileObj" matchMode="in" display="menu"
+                                            [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                                            <ng-template pTemplate="header">
+                                                <div class="px-3 pt-3 pb-0">
+                                                    <span class="font-bold">User Profile Picker</span>
+                                                </div>
+                                            </ng-template>
+                                            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                                <p-multiSelect [ngModel]="value" [options]="userProfiles"
+                                                    placeholder="Any" (onChange)="filter($event.value)"
+                                                    optionLabel="name">
+                                                    <ng-template let-option pTemplate="item">
+                                                        <div class="inline-block vertical-align-middle">
+                                                            <!-- <img [alt]="option.label"
+                                                                src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ option.image }}" width="24"
+                                                                class="vertical-align-middle" /> -->
+                                                            <span class="ml-1 mt-1">{{ option.name }}</span>
+                                                        </div>
+                                                    </ng-template>
+                                                </p-multiSelect>
+                                            </ng-template>
+                                        </p-columnFilter>
+                                    </div>
+                                </th>
+                                <th style="min-width: 14rem" pSortableColumn="designationObj.name"
+                                    [hidden]="!isShowColumn('designationObj.name')" [resizableColumns]="true">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Designation
+                                        <p-sortIcon field="designationObj.name"></p-sortIcon>
+                                        <p-columnFilter field="designationObj.name" matchMode="in" display="menu"
+                                            [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                                            <ng-template pTemplate="header">
+                                                <div class="px-3 pt-3 pb-0">
+                                                    <span class="font-bold">Designation Picker</span>
+                                                </div>
+                                            </ng-template>
+                                            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                                <p-multiSelect [ngModel]="value" [options]="designations"
+                                                    placeholder="Any" (onChange)="filter($event.value)"
+                                                    optionLabel="name">
+                                                    <ng-template let-option pTemplate="item">
+                                                        <div class="inline-block vertical-align-middle">
+                                                            <span class="ml-1 mt-1">{{ option.name }}</span>
+                                                        </div>
+                                                    </ng-template>
+                                                </p-multiSelect>
+                                            </ng-template>
+                                        </p-columnFilter>
+                                    </div>
+                                </th>
+                                <th style="min-width: 12em" pSortableColumn="nationalID"
+                                    [hidden]="!isShowColumn('nationalID')" [resizableColumns]="true">
+                                    <div class="flex justify-content-between align-items-center">
+                                        National ID
+                                        <p-sortIcon field="nationalID"></p-sortIcon>
+                                        <p-columnFilter type="text" field="nationalID" display="menu"
+                                            placeholder="Search by ID No."></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th style="min-width: 13rem" pSortableColumn="email" [hidden]="!isShowColumn('email')"
+                                    [resizableColumns]="true">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Email
+                                        <p-sortIcon field="nationalID"></p-sortIcon>
+                                        <p-columnFilter type="text" field="email" display="menu"
+                                            placeholder="Search by ID No."></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th style="min-width: 10em" pSortableColumn="active" [hidden]="!isShowColumn('active')"
+                                    [resizableColumns]="true">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Status
+                                        <p-sortIcon field="active"></p-sortIcon>
+                                        <p-columnFilter type="boolean" field="isActive"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th style="min-width: 10rem" pFrozenColumn alignFrozen="right">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Actions
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr *ngIf="false">
+                                <th style="min-width: 12rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Name
+
+                                    </div>
+                                </th>
+                                <th style="min-width: 12rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Country
+                                        <p-columnFilter type="text" field="country.name" display="menu"
+                                            placeholder="Search by country"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th style="min-width: 14rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Agent
+                                        <p-columnFilter field="representative" matchMode="in" display="menu"
+                                            [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                                            <ng-template pTemplate="header">
+                                                <div class="px-3 pt-3 pb-0">
+                                                    <span class="font-bold">Agent Picker</span>
+                                                </div>
+                                            </ng-template>
+                                            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                                <p-multiSelect [ngModel]="value" [options]="representatives"
+                                                    placeholder="Any" (onChange)="filter($event.value)"
+                                                    optionLabel="name">
+                                                    <ng-template let-option pTemplate="item">
+                                                        <div class="p-multiselect-representative-option">
+                                                            <img [alt]="option.label"
+                                                                src="assets/demo/images/avatar/{{option.image}}"
+                                                                width="32" style="vertical-align: middle" />
+                                                            <span class="ml-2">{{option.name}}</span>
+                                                        </div>
+                                                    </ng-template>
+                                                </p-multiSelect>
+                                            </ng-template>
+                                        </p-columnFilter>
+                                    </div>
+                                </th>
+                                <th style="min-width: 10rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Date
+                                        <p-columnFilter type="date" field="date" display="menu"
+                                            placeholder="mm/dd/yyyy"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th style="min-width: 10rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Balance
+                                        <p-columnFilter type="numeric" field="balance" display="menu"
+                                            currency="USD"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th style="min-width: 12rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Status
+                                        <p-columnFilter field="status" matchMode="equals" display="menu">
+                                            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                                <p-dropdown [ngModel]="value" [options]="statuses"
+                                                    (onChange)="filter($event.value)" placeholder="Any"
+                                                    [style]="{'min-width': '12rem'}">
+                                                    <ng-template let-option pTemplate="item">
+                                                        <span
+                                                            [class]="'customer-badge status-' + option.value">{{option.label}}</span>
+                                                    </ng-template>
+                                                </p-dropdown>
+                                            </ng-template>
+                                        </p-columnFilter>
+                                    </div>
+                                </th>
+                                <th style="min-width: 12rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Activity
+                                        <p-columnFilter field="activity" matchMode="between" display="menu"
+                                            [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                                            <ng-template pTemplate="filter" let-filter="filterCallback">
+                                                <p-slider [ngModel]="activityValues" [range]="true"
+                                                    (onSlideEnd)="filter($event.values)" styleClass="m-3"
+                                                    [style]="{'min-width': '12rem'}"></p-slider>
+                                                <div class="flex align-items-center justify-content-between px-2">
+                                                    <span>{{activityValues[0]}}</span>
+                                                    <span>{{activityValues[1]}}</span>
+                                                </div>
+                                            </ng-template>
+                                        </p-columnFilter>
+                                    </div>
+                                </th>
+                                <th style="min-width: 8rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Verified
+                                        <p-columnFilter type="boolean" field="verified" display="menu"></p-columnFilter>
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-customer let-rowIndex="rowIndex">
+                            <tr>
+                                <td>{{rowIndex}}</td>
+                                <td pFrozenColumn>{{employee.empCd}}</td>
+                                <td [hidden]="!isShowColumn('empName')">{{employee.empName}}</td>
+                                <td [hidden]="!isShowColumn('userProfileObj.name')">{{employee.userProfileObj.name}}
+                                </td>
+                                <td [hidden]="!isShowColumn('designationObj.name')">{{employee.designation}}</td>
+                                <td [hidden]="!isShowColumn('nationalID')">{{employee.nationalID}}</td>
+                                <td [hidden]="!isShowColumn('email')">
+                                    <p-button [label]="employee.email.replace('mailto:', '')" [link]="true"
+                                        *ngIf="employee.email != ''" (onClick)="onMailToClick(employee.email)">
+                                    </p-button>
+                                </td>
+                                <td [hidden]="!isShowColumn('active')">
+                                    <p-tag [value]="employee.active.indexOf('forestgreen') > -1 ? 'Active' : 'Inactive'"
+                                        [severity]="employee.active.indexOf('forestgreen') > -1 ? 'success' : 'warning'">
+                                    </p-tag>
+                                </td>
+                                <td pFrozenColumn alignFrozen="right">
+                                    <button pButton pRipple icon="pi pi-pencil"
+                                        class="p-button-rounded p-button-success p-button-outlined mr-2"
+                                        (click)="router.navigate(['../employee/' + employee.empId], { relativeTo: this.route })">
+                                    </button>
+                                    <button pButton pRipple icon=" pi pi-trash"
+                                        class="p-button-rounded p-button-outlined p-button-warning"
+                                        (click)="onMailToClick(employee.email)">
+                                    </button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <!-- <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="8">No Employees found.</td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="loadingbody">
+                            <tr>
+                                <td colspan="8">Loading Employee data. Please wait.</td>
+                            </tr>
+                        </ng-template> -->
+                    </p-table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

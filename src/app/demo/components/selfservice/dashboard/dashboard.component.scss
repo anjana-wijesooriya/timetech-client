@@ -1,0 +1,98 @@
+.stats-cards {
+    span.text-green-500, span.text-500{
+        display: none;
+    }
+}
+.p-datepicker-calendar-container {
+    display: none;
+}
+
+.p-organizationchart-table {
+    border-spacing: 0;
+    border-collapse: separate;
+    margin: 0 auto;
+
+    >tbody {
+        >tr {
+            >td {
+                text-align: center;
+                vertical-align: top;
+                padding: 0 .75rem;
+            }
+        }
+    }
+}
+
+.p-organizationchart-node-content {
+    display: inline-block;
+    position: relative;
+
+    .p-node-toggler {
+        position: absolute;
+        bottom: -.75rem;
+        margin-left: -.75rem;
+        z-index: 2;
+        left: 50%;
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: pointer;
+        width: 1.5rem;
+        height: 1.5rem;
+
+        .p-node-toggler-icon {
+            position: relative;
+            top: .25rem;
+        }
+    }
+}
+
+.p-organizationchart-line-down {
+    margin: 0 auto;
+    height: 20px;
+    width: 1px;
+}
+
+.p-organizationchart-line-right {
+    border-radius: 0;
+}
+
+.p-organizationchart-line-left {
+    border-radius: 0;
+}
+
+.p-organizationchart-selectable-node {
+    cursor: pointer;
+}
+
+.p-organizationchart {
+    .p-organizationchart-node-hidden {
+        display: none;
+    }
+}
+
+.p-organizationchart-preservespace {
+    .p-organizationchart-node-hidden {
+        visibility: hidden;
+        display: inherit;
+    }
+}
+
+apx-chart {
+    // .apexcharts-legend.apexcharts-align-center.position-right {
+    //     display: none;
+    // }
+
+    .apexcharts-toolbar {
+        display: none !important;
+    }
+
+    #sales_charts,
+    .chart-set {
+        overflow: hidden;
+    }
+
+    .apexcharts-canvas {
+        width: 100% !important;
+    }
+}
+

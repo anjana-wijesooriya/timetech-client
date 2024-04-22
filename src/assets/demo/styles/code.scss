@@ -13,3 +13,16 @@ pre.app-code {
         font-family: monaco, Consolas, monospace;
     }
 }
+
+.apexcharts-toolbar {
+    display: none !important;
+}
+
+#sales_charts,
+.chart-set {
+    overflow: hidden;
+}
+
+.apexcharts-canvas {
+    width: 100% !important;
+}

@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, Data, NavigationEnd, Router } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
 import { LayoutService } from "./service/app.layout.service";
 import { AppSidebarComponent } from "./app.sidebar.component";
 import { AppTopBarComponent } from './app.topbar.component';
 import { LocalStorage } from '../demo/shared/enum/local-storage.enum';
 import { BaseService } from '../demo/service/base.service';
+import { Utils } from 'src/app/demo/shared/utils';
 
 @Component({
     selector: 'app-layout',
@@ -23,7 +24,7 @@ export class AppLayoutComponent implements OnDestroy, OnInit {
 
     @ViewChild(AppTopBarComponent) appTopbar!: AppTopBarComponent;
 
-    constructor(public layoutService: LayoutService, public renderer: Renderer2, public router: Router,
+    constructor(private route: ActivatedRoute, public layoutService: LayoutService, public renderer: Renderer2, public router: Router,
         private baseService: BaseService) {
         this.overlayMenuOpenSubscription = this.layoutService.overlayOpen$.subscribe(() => {
             if (!this.menuOutsideClickListener) {
@@ -54,10 +55,37 @@ export class AppLayoutComponent implements OnDestroy, OnInit {
         });
 
         this.router.events.pipe(filter(event => event instanceof NavigationEnd))
-            .subscribe(() => {
+            .subscribe((res) => {
+                // console.log(res)
                 this.hideMenu();
                 this.hideProfileMenu();
+                // let bread = this.createBreadcrumbs(this.route.root);
+                // console.log(bread)
             });
+
+        this.route.data.subscribe((data: Data) => {
+            console.log(data);
+        })
+    }
+
+    private createBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: Array<{ label: any, url: string }> = []): Array<{ label: string, url: string }> {
+        const children: ActivatedRoute[] = route.children;
+
+        if (children.length === 0) {
+            return breadcrumbs;
+        }
+
+        for (const child of children) {
+            const routeURL: string = child.snapshot.url.map(segment => segment.path).join('/');
+            if (routeURL !== '') {
+                url += `/${routeURL}`;
+            }
+
+            breadcrumbs.push({ label: child.snapshot.data, url: url });
+            return this.createBreadcrumbs(child, url, breadcrumbs);
+        }
+
+        return breadcrumbs;
     }
 
     ngOnInit(): void {
@@ -65,7 +93,7 @@ export class AppLayoutComponent implements OnDestroy, OnInit {
     }
 
     setLoggedUserDetails() {
-        let user = JSON.parse(localStorage.getItem(LocalStorage.UserDetails) || '{}');
+        let user = Utils.getLocalStorage(LocalStorage.UserDetails);
         this.baseService.setLoginDetails(user);
     }
 

@@ -25,6 +25,7 @@
         line-height: inherit;
         transform: rotate(0deg);
         transition: transform 1s;
+        animation: fa-spin 5s infinite linear;
     }
     
     &:hover {

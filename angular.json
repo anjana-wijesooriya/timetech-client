@@ -32,7 +32,11 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/apexcharts/dist/apexcharts.min.js",
+              "node_modules/chart.js/dist/Chart.js",
+              "node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -92,7 +96,11 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/apexcharts/dist/apexcharts.min.js",
+              "node_modules/chart.js/dist/Chart.js",
+              "node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.js"
+            ]
           }
         }
       }

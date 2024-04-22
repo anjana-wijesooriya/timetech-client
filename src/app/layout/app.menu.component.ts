@@ -18,7 +18,8 @@ export class AppMenuComponent implements OnInit {
     model: any[] = [];
     activeModules: ModuleModel[] = [];
     selectedItem: any[] = [];
-    menuItems: IMenuItem[] = []
+    menuItems: IMenuItem[] = [];
+    isLoading: boolean = false;
 
     constructor(public layoutService: LayoutService, private moduleService: ModuleService,
         public navigationService: NavigationService, private router: Router,
@@ -178,10 +179,14 @@ export class AppMenuComponent implements OnInit {
     }
 
     getMenuItemsByBaseMenu() {
+        this.isLoading = true;
         const userDetails = this.baseService.userDetails$.getValue();
         this.moduleService.getModules(userDetails.id, 2, 'en').subscribe(response => {
             // this.subModules = response;
             // this.groupBy(response, 'groupName')
+            setTimeout(() => {
+                this.isLoading = false;
+            }, 2000);
             this.moduleService.setActiveModules(response);
             localStorage.setItem('Personal', JSON.stringify(response));
         })

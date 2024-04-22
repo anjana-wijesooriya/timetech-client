@@ -14,7 +14,7 @@ export class BaseService {
 
   public userDetails$ = new BehaviorSubject<LoginResponseModel>(new LoginResponseModel());
 
-  constructor() { 
+  constructor() {
   }
 
   public setLoginDetails(user: LoginResponseModel) {

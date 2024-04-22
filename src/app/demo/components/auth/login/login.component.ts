@@ -6,6 +6,8 @@ import { LoginModel } from 'src/app/demo/api/user/login.model';
 import { AuthService } from 'src/app/demo/service/auth.service';
 import { LocalStorage } from 'src/app/demo/shared/enum/local-storage.enum';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { BaseService } from 'src/app/demo/service/base.service';
+import { StateService } from 'src/app/demo/service/sharedstate/state.service';
 
 @Component({
     selector: 'app-login',
@@ -28,7 +30,8 @@ export class LoginComponent {
     errorMsg: string = '';
 
     constructor(private router: Router, private fb: FormBuilder, public layoutService: LayoutService,
-        private authService: AuthService, private msgService: MessageService) {
+        private authService: AuthService, private msgService: MessageService, private baseService: BaseService,
+    ) {
 
     }
 
@@ -48,6 +51,11 @@ export class LoginComponent {
             localStorage.setItem(LocalStorage.BaseModules, JSON.stringify(response.baseModules));
             response.baseModules = [];
             localStorage.setItem(LocalStorage.UserDetails, JSON.stringify(response));
+            this.baseService.setLoginDetails(response);
+
+            // this.state.setState(response);
+            // this.state.setState(response.baseModules);
+            // this.state.setState(response.token as any);
 
             setTimeout(() => {
                 if (response.isValidLogin) {

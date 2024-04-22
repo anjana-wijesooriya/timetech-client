@@ -11,10 +11,28 @@ import { EventService } from './demo/service/event.service';
 import { IconService } from './demo/service/icon.service';
 import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
+import { JwtModule } from '@auth0/angular-jwt';
+import { LocalStorage } from './demo/shared/enum/local-storage.enum';
+import { StoreModule } from '@ngrx/store';
+
+export function getToken() {
+    return localStorage.getItem(LocalStorage.JWT);
+}
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],
-    imports: [AppRoutingModule, AppLayoutModule],
+    imports: [
+        AppRoutingModule,
+        AppLayoutModule,
+        JwtModule.forRoot({
+            config: {
+                tokenGetter: getToken,
+                allowedDomains: ['localhost:44319'],
+                disallowedRoutes: []
+            }
+        }),
+        StoreModule.forRoot({}, {}),
+    ],
     providers: [
         { provide: LocationStrategy, useClass: PathLocationStrategy },
         ProductService, CountryService, CustomerService, EventService, IconService, NodeService, PhotoService
@@ -23,4 +41,4 @@ import { PhotoService } from './demo/service/photo.service';
     ],
     bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

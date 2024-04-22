@@ -13,3 +13,19 @@ $gutter: 1rem; //for primeflex grid system
 @import "assets/demo/styles/flags/flags.css";
 @import "assets/demo/styles/badges.scss";
 @import "assets/demo/styles/code.scss";
+
+.dashboard-month-picker {
+    .p-datepicker-calendar-container {
+        display: none;
+    }
+
+    .p-datepicker-inline{
+        border: none;;
+    }
+
+    .p-datepicker-header {
+        border:none;
+        padding: 0;
+    }
+}
+

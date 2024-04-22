@@ -99,12 +99,37 @@ export class AppConfigComponent {
         this.menuColor = color
     }
 
-    // changeColorScheme(colorScheme: string) {
-    //     this.colorScheme = colorScheme;
-    // }
+    /*  set changeColorScheme(colorScheme: string) {
+        
+        this.theme = this.theme;
+        switch (colorScheme) {
+            case 'bootstrap4-light-blue':
+            case 'bootstrap4-light-purple':
+            case 'md-light-indigo':
+            case 'md-light-deeppurple':
+            case 'mdc-light-indigo':
+            case 'mdc-light-deeppurple':
+            case 'lara-light-indigo':
+            case 'mdc-light-deeppurple':
+            case 'mdc-light-deeppurple':
+            case 'mdc-light-deeppurple':
+            case 'mdc-light-deeppurple':
+            case 'mdc-light-deeppurple':
+            this.theme = 'saga-blue';
+            break;
+            case 'light':
+            this.theme = 'saga-blue';
+            break;
+        this.colorScheme = colorScheme;
+        
+    }
 
+    get changeColorScheme() {
+        return this.colorScheme;    }
+*/
     changeTheme(theme: string, colorScheme: string) {
         this.theme = theme;
+        this.colorScheme = this.colorScheme;
     }
 
     decrementScale() {

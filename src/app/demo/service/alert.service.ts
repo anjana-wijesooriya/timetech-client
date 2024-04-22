@@ -17,15 +17,15 @@ export class AlertService {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: msg });
   }
 
-  success(msg: string){
+  success(msg: string) {
     this.toastrService.success(msg, 'Success', { timeOut: 5000, closeButton: true, progressBar: true })
   }
 
-  error(msg: any){
-    if(typeof(msg) == 'string'){
+  error(msg: any) {
+    if (typeof (msg) == 'string') {
       this.toastrService.error(msg, 'Error', { timeOut: 5000, closeButton: true, progressBar: true })
     } else {
-      if(msg.error.statusCode == 500){
+      if (msg.error.statusCode == 500) {
         this.toastrService.error(msg.error.description, 'Error', { timeOut: 5000, closeButton: true, progressBar: true })
       } else {
         this.toastrService.error(msg.error, 'Error', { timeOut: 5000, closeButton: true, progressBar: true })
