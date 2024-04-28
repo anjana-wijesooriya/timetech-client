@@ -30,7 +30,7 @@ export class LayoutService {
         menuMode: 'static',
         colorScheme: 'light',
         theme: 'lara-light-indigo',
-        scale: 14,
+        scale: 13,
         menuColor: 'white',
     };
 
@@ -71,7 +71,7 @@ export class LayoutService {
         );
     }
 
-    onMenuToggle() {
+    onMenuToggle(isHideMenu: boolean = false) {
         if (this.isOverlay()) {
             this.state.overlayMenuActive = !this.state.overlayMenuActive;
             if (this.state.overlayMenuActive) {
@@ -79,7 +79,7 @@ export class LayoutService {
             }
         }
 
-        if (this.isDesktop()) {
+        if (this.isDesktop(isHideMenu)) {
             this.state.staticMenuDesktopInactive =
                 !this.state.staticMenuDesktopInactive;
         } else {
@@ -107,8 +107,9 @@ export class LayoutService {
         return this.config().menuMode === 'overlay';
     }
 
-    isDesktop() {
-        return window.innerWidth > 991;
+    isDesktop(isHideMenu: boolean = false) {
+
+        return window.innerWidth > (isHideMenu ? 1359 : 991);
     }
 
     isMobile() {
@@ -130,8 +131,8 @@ export class LayoutService {
                 el == this._config.theme
                     ? (el = config.theme)
                     : el == `theme-${this._config.colorScheme}`
-                    ? (el = `theme-${config.colorScheme}`)
-                    : el
+                        ? (el = `theme-${config.colorScheme}`)
+                        : el
             )
             .join('/');
 

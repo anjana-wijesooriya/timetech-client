@@ -1,0 +1,317 @@
+<div class="grid surface-ground employees-layout-wrapper">
+    <div class="col-12 surface-ground p-2 mb-3">
+        <div class="card surface-card  p-3 m-0">
+            <h5 class="mb-0">Employees</h5>
+            <p> Add, Edit, Delete or Search by Creating custom search criterieas. </p>
+            <p-toast></p-toast>
+            <p-toolbar styleClass="mb-2 gap-2">
+                <ng-template pTemplate="left">
+                    <div class="flex flex-wrap gap-2">
+                        <button pButton pRipple [label]="'Filter'" [outlined]="true" icon="pi pi-filter-slash"
+                            class="p-button-danger" (click)="showFilterMenu();" [disabled]="false"></button>
+                        <button pButton pRipple label="New" [outlined]="true" icon="pi pi-plus"
+                            class="p-button-success mr-2" (click)="allDepartments = allDepartments"></button>
+                    </div>
+                    <!-- <div class="flex flex-wrap gap-2">
+                        <button pButton pRipple [label]="'check All'" [outlined]="true" icon="pi pi-filter-slash" class="p-button-danger"
+                            (click)="showFilterMenu();" [disabled]="false"></button>
+                        <button pButton pRipple label="New" [outlined]="true" icon="pi pi-plus" class="p-button-success mr-2"
+                            (click)="allDepartments = allDepartments"></button>
+                    </div> -->
+
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                    <!-- <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import"
+                                            class="mr-2 inline-block"></p-fileUpload>
+                                        <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button> -->
+                </ng-template>
+            </p-toolbar>
+            <div #tableContent class="flex flex-wrap align-items-start justify-content-start w-full"
+                [ngClass]="{'table-sidebar-active': showDepartments}">
+                <div class="filterbar-container">
+                    <p-sidebar styleClass="absolute top-auto left-auto bottom-auto h-auto z-1"
+                        [appendTo]="'#tableContent'" [modal]="false" [(visible)]="showDepartments" position="left">
+                        <ng-template pTemplate="header">
+                            <div class="flex flex-column align-items-center justify-content-start">
+                                <p-dropdown [options]="companies" [(ngModel)]="selectedComapny" optionValue="compId"
+                                    optionLabel="name" [showClear]="false" placeholder="Select a Company"
+                                    styleClass="w-15rem"
+                                    (ngModelChange)="onChangeCompany($event); this.getEmployees();">
+                                    <ng-template let-selectedValue pTemplate="selectedItem">
+                                        <div class="flex align-items-center gap-2" *ngIf="selectedValue">
+                                            <img src="https://primefaces.org/cdn/primeng/images/context/flag/flag_placeholder.png"
+                                                [class]="'flag flag-' + selectedValue.logo" style="width: 18px" />
+                                            <div>{{ selectedValue.name }}</div>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template let-company pTemplate="item">
+                                        <div class="flex align-items-center gap-2">
+                                            <img src="https://primefaces.org/cdn/primeng/images/context/flag/flag_placeholder.png"
+                                                [class]="'flag flag-' + company.logo" style="width: 18px" />
+                                            <div>{{ company.name }}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-dropdown>
+
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="content">
+                            <div class="flex flex-column align-items-start justify-content-center">
+                                <div class="flex flex-column  w-full row-gap-3 h-37rem">
+                                    <div class="mb-0">
+                                        <button pButton type="button" *ngIf="isExpand" size="small" label="Expand all"
+                                            (click)="expandAll()" class="mr-2" icon="pi pi-plus"></button>
+                                        <button pButton type="button" *ngIf="!isExpand" size="small"
+                                            label="Collapse all" (click)="expandAll()" icon="pi pi-minus"></button>
+                                    </div>
+                                    <p-tree [metaKeySelection]="true" [value]="departmentTree" class="w-full"
+                                        [loading]="isLoading" selectionMode="multiple" scrollHeight="28rem"
+                                        [(selection)]="selectedDepartments" [filter]="true" filterMode="strict"
+                                        selectionMode="checkbox" filterPlaceholder="Search Departments"
+                                        (onNodeSelect)="onDepartmentSelected($event)"
+                                        (onNodeUnselect)="onDepartmentSelected($event)">
+                                        <ng-template let-node pTemplate="url">
+                                            <a [href]="node.data" target="_blank" rel="noopener noreferrer"
+                                                class="text-700 hover:text-primary">{{
+                                                node.label
+                                                }}</a>
+                                        </ng-template>
+                                        <ng-template let-node pTemplate="default">
+                                            <b>{{ node.label }}</b>
+                                        </ng-template>
+                                    </p-tree>
+                                </div>
+                            </div>
+                        </ng-template>
+
+                    </p-sidebar>
+                </div>
+                <!-- <div class="col"> -->
+                <div class="grid-container employees-table transition-all transition-duration-300 box-layout">
+                    <p-table #empTable [columns]="selectedColumns" [value]="_employees" dataKey="id" [rowHover]="true"
+                        styleClass="p-datatable-sm p-datatable-gridlines" [paginator]="true" [rows]="10"
+                        [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 25, 50, 100]"
+                        [virtualScrollItemSize]="5" [loading]="isLoading" scrollHeight="36rem"
+                        [globalFilterFields]="['empCd', 'empName', 'userProfileObj.name', 'designationObj.name', 'email', 'nationalID']"
+                        responsiveLayout="stack" [breakpoint]="'1360px'" tableStyleClass="table-layout-fixed"
+                        [resizableColumns]="true" columnResizeMode="fit" [autoLayout]="true">
+                        <ng-template pTemplate="caption" layout>
+
+                            <div class="flex flex-wrap justify-content-between">
+                                <!-- <p-multiSelect class="" [options]="columns" [(ngModel)]="selectedColumns" optionLabel="header"
+                                                                placeholder="Please select columns" display="chip">
+                                                            </p-multiSelect> -->
+
+                                <div class="flex flex-wrap">
+                                    <p-iconField iconPosition="left">
+                                        <p-inputIcon styleClass="pi pi-search" />
+                                        <input type="text" pInputText placeholder="Global Search" #filter
+                                            (input)="empTable.filterGlobal($event.target.value, 'contains')" />
+                                    </p-iconField>
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                                        (click)="empTable.clear(empTable);"></button>
+                                    <button pButton label="Settings" class="p-button-outlined" icon="pi pi-cog"
+                                        (click)="empTable.clear(empTable); "></button>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th pSortableColumn="empCd" pFrozenColumn style="width:7rem !important;">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Code
+                                        <p-sortIcon field="empCd"></p-sortIcon>
+                                        <p-columnFilter class="ml-auto" type="text" field="empCd" display="menu"
+                                            placeholder="Search by Code"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th pSortableColumn="empName" [hidden]="!isShowColumn('empName')" pResizableColumn>
+                                    <div class="flex justify-content-between align-items-center">
+                                        Name
+                                        <p-sortIcon field="empName"></p-sortIcon>
+                                        <p-columnFilter class="ml-auto" type="text" field="empName" display="menu"
+                                            placeholder="Search by Name"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th pSortableColumn="userProfileObj.name" pResizableColumn
+                                    [hidden]="!isShowColumn('userProfileObj.name')">
+                                    <div class="flex justify-content-between align-items-center">
+                                        User Profile
+                                        <p-sortIcon field="userProfileObj.name"></p-sortIcon>
+                                        <p-columnFilter class="ml-auto" field="userProfileObj" matchMode="in"
+                                            display="menu" [showMatchModes]="false" [showOperator]="false"
+                                            [showAddButton]="false">
+                                            <ng-template pTemplate="header">
+                                                <div class="px-3 pt-3 pb-0">
+                                                    <span class="font-bold">User Profile Picker</span>
+                                                </div>
+                                            </ng-template>
+                                            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                                <p-multiSelect [ngModel]="value" [options]="userProfiles"
+                                                    placeholder="Any" (onChange)="filter($event.value)"
+                                                    optionLabel="name">
+                                                    <ng-template let-option pTemplate="item">
+                                                        <div class="inline-block vertical-align-middle">
+                                                            <!-- <img [alt]="option.label"
+                                                                                                                src="https://primefaces.org/cdn/primeng/images/context/avatar/{{ option.image }}" width="24"
+                                                                                                                class="vertical-align-middle" /> -->
+                                                            <span class="ml-1 mt-1">{{ option.name }}</span>
+                                                        </div>
+                                                    </ng-template>
+                                                </p-multiSelect>
+                                            </ng-template>
+                                        </p-columnFilter>
+                                    </div>
+                                </th>
+                                <th pSortableColumn="designationObj.name" pResizableColumn
+                                    [hidden]="!isShowColumn('designationObj.name')">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Designation
+                                        <p-sortIcon field="designationObj.name"></p-sortIcon>
+                                        <p-columnFilter field="designationObj.name" matchMode="in" display="menu"
+                                            [showMatchModes]="false" [showOperator]="false" class="ml-auto"
+                                            [showAddButton]="false">
+                                            <ng-template pTemplate="header">
+                                                <div class="px-3 pt-3 pb-0">
+                                                    <span class="font-bold">Designation Picker</span>
+                                                </div>
+                                            </ng-template>
+                                            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                                <p-multiSelect [ngModel]="value" [options]="designations"
+                                                    placeholder="Any" (onChange)="filter($event.value)"
+                                                    optionLabel="name">
+                                                    <ng-template let-option pTemplate="item">
+                                                        <div class="inline-block vertical-align-middle">
+                                                            <span class="ml-1 mt-1">{{ option.name }}</span>
+                                                        </div>
+                                                    </ng-template>
+                                                </p-multiSelect>
+                                            </ng-template>
+                                        </p-columnFilter>
+                                    </div>
+                                </th>
+                                <th pSortableColumn="nationalID" [hidden]="!isShowColumn('nationalID')"
+                                    pResizableColumn>
+                                    <div class="flex justify-content-between align-items-center">
+                                        National ID
+                                        <p-sortIcon field="nationalID"></p-sortIcon>
+                                        <p-columnFilter type="text" field="nationalID" display="menu"
+                                            placeholder="Search by ID No." class="ml-auto"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th pSortableColumn="email" [hidden]="!isShowColumn('email')" pResizableColumn>
+                                    <div class="flex justify-content-between align-items-center">
+                                        Email
+                                        <p-sortIcon field="nationalID"></p-sortIcon>
+                                        <p-columnFilter type="text" field="email" display="menu"
+                                            placeholder="Search by ID No." class="ml-auto"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th pSortableColumn="active" [hidden]="!isShowColumn('active')" pResizableColumn>
+                                    <div class="flex justify-content-between align-items-center">
+                                        Status
+                                        <p-sortIcon field="active"></p-sortIcon>
+                                        <p-columnFilter type="boolean" field="isActive"
+                                            class="ml-auto"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th pFrozenColumn alignFrozen="right" style="width:7rem !important;">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Actions
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
+                            <tr class="card shadow-5 w-18rem flex flex-wrap p-1">
+                                <td pFrozenColumn>
+                                    <span class="p-column-title font-bold mr-3">Employee Code:</span>
+                                    {{employee.empCd}}
+                                </td>
+                                <td [hidden]="!isShowColumn('empName')">
+                                    <span class="p-column-title font-bold mr-3">Employee Name:</span>
+                                    {{employee.empName}}
+                                </td>
+                                <td [hidden]="!isShowColumn('userProfileObj.name')">
+                                    <span class="p-column-title font-bold mr-3">User Profile:</span>
+                                    {{employee.userProfileObj.name}}
+                                </td>
+                                <td [hidden]="!isShowColumn('designationObj.name')">
+                                    <span class="p-column-title font-bold mr-3">Designation:</span>
+                                    {{employee.designation}}
+                                </td>
+                                <td [hidden]="!isShowColumn('nationalID')">
+                                    <span class="p-column-title font-bold mr-3">Natinal Id:</span>
+                                    {{employee.nationalID}}
+                                </td>
+                                <td [hidden]="!isShowColumn('email')">
+                                    <span class="p-column-title font-bold mr-3">Email:</span>
+                                    <p-button [raised]="true" [label]="employee.email.replace('mailto:', '')"
+                                        [link]="true" styleClass="py-1 px-2" *ngIf="employee.email != ''"
+                                        (onClick)="onMailToClick(employee.email)">
+                                    </p-button>
+                                </td>
+                                <td [hidden]="!isShowColumn('active')">
+                                    <span class="p-column-title font-bold mr-3">Status:</span>
+                                    <p-tag [value]="employee.isActive ? 'Active' : 'Inactive'"
+                                        [severity]="!employee.isActive ? 'success' : 'warning'">
+                                    </p-tag>
+                                </td>
+                                <td pFrozenColumn alignFrozen="right">
+                                    <span class="p-column-title font-bold mr-3">Actions:</span>
+                                    <p-button pRipple icon="pi pi-pencil" [text]="true" size="small" severity="success"
+                                        [rounded]="true" [raised]="true" styleClass="mr-2"
+                                        (click)="router.navigate(['../employee/' + employee.empId], { relativeTo: this.route })"
+                                        [outlined]="true">
+                                    </p-button>
+                                    <p-button icon="pi pi-trash" size="small" [text]="true" severity="warning"
+                                        [rounded]="true" (click)="onMailToClick(employee.email)" [outlined]="true"
+                                        [raised]="true">
+                                    </p-button>
+                                    <!-- <button pButton pRipple icon="pi pi-pencil" size="small" 
+                                                            class="p-button-rounded p-button-success p-button-outlined mr-2"
+                                                            (click)="router.navigate(['../employee/' + employee.empId], { relativeTo: this.route })">
+                                                        </button>
+                                                        <button pButton pRipple icon=" pi pi-trash" size="small"
+                                                            class="p-button-rounded p-button-outlined p-button-warning p-button-sm"
+                                                            (click)="onMailToClick(employee.email)">
+                                                        </button> -->
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="8" class="flex flex-wrap justify-content-center">
+                                    <div class="flex justify-content-center flex-wrap h-15rem">
+                                        <div class="flex align-items-center justify-content-center">
+                                            <p-message severity="warn" text="Employees Data Not Found"></p-message>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="loadingbody">
+                            <tr>
+                                <td colspan="8">
+                                    <div class="flex justify-content-center flex-wrap h-15rem">
+                                        <div class="flex align-items-center justify-content-center">
+                                            <p-message severity="info"
+                                                text="Loading Employee data. Please wait."></p-message>
+                                        </div>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+                <!-- </div> -->
+
+
+            </div>
+        </div>
+    </div>
+</div>

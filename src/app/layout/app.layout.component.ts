@@ -4,9 +4,9 @@ import { filter, Subscription } from 'rxjs';
 import { LayoutService } from "./service/app.layout.service";
 import { AppSidebarComponent } from "./app.sidebar.component";
 import { AppTopBarComponent } from './app.topbar.component';
-import { LocalStorage } from '../demo/shared/enum/local-storage.enum';
-import { BaseService } from '../demo/service/base.service';
-import { Utils } from 'src/app/demo/shared/utils';
+import { LocalStorage } from '../context/shared/enum/local-storage.enum';
+import { BaseService } from '../context/service/base.service';
+import { Utils } from 'src/app/context/shared/utils';
 
 @Component({
     selector: 'app-layout',

@@ -18,7 +18,7 @@ import { AppConfigModule } from './config/config.module';
 import { AppSidebarComponent } from "./app.sidebar.component";
 import { AppLayoutComponent } from "./app.layout.component";
 import { SkeletonModule } from 'primeng/skeleton';
-import { SharedComponentsModule } from '../demo/shared/components/shared-components.module';
+import { SharedComponentsModule } from '../context/shared/components/shared-components.module';
 
 @NgModule({
     declarations: [

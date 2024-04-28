@@ -9,12 +9,14 @@ import { MenuService } from '../app.menu.service';
 export class AppConfigComponent {
     @Input() minimal: boolean = false;
 
-    scales: number[] = [12, 13, 14, 15, 16];
+    scales: number[] = [11, 12, 13, 14, 15];
+    menuColors: string[] = ['white', 'darkgray', 'blue', 'bluegray', 'brown', 'cyan', 'green',
+        'indigo', 'deeppurple', 'orange', 'pink', 'purple', 'teal']
 
     constructor(
         public layoutService: LayoutService,
         public menuService: MenuService
-    ) {}
+    ) { }
 
     get visible(): boolean {
         return this.layoutService.state.configSidebarVisible;

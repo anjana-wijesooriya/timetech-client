@@ -4,7 +4,7 @@ pre.app-code {
     padding: 0;
     border-radius: var(--border-radius);
     overflow: auto;
-    
+
     code {
         color: var(--surface-900);
         padding: 1rem;
@@ -25,4 +25,164 @@ pre.app-code {
 
 .apexcharts-canvas {
     width: 100% !important;
+}
+
+.dashboard-month-picker {
+    .p-datepicker-calendar-container {
+        display: none;
+    }
+
+    .p-datepicker-inline {
+        border: none;
+        ;
+    }
+
+    .p-datepicker-header {
+        border: none;
+        padding: 0;
+    }
+}
+
+$employeeTableWidth: calc(100% - 21rem);
+
+@media screen and (min-width: 1360px) {
+    .employees-layout-wrapper {
+        .table-sidebar-active {
+            .grid-container.employees-table {
+                margin-left: 21rem !important;
+                width: $employeeTableWidth;
+            }
+        }
+
+    }
+}
+
+@media screen and (min-width: 992px) {
+
+    .layout-static.layout-static-inactive,
+    .layout-overlay,
+    .layout-slim,
+    .layout-compact,
+    .layout-horizontal,
+    .layout-drawer {
+        .employees-layout-wrapper {
+            .table-sidebar-active {
+                .grid-container.employees-table {
+                    margin-left: 21rem !important;
+                    width: $employeeTableWidth;
+                }
+            }
+
+        }
+    }
+
+}
+
+// $md-trMinWidth: calc(30%)
+
+@mixin responsive-table-grid() {
+    @extend .flex;
+    @extend .flex-wrap;
+    // @extend .'md:justify-content-between';
+    @extend .align-items-between;
+    @extend .align-content-between;
+    @extend .grid-nogutter;
+    // @extend .gap-2;
+    @extend .p-2;
+
+    tr {
+        @extend .card;
+        @extend .m-2;
+
+        // min-width: ;
+        // @extend .col-4;
+        // @extend .p-2;
+        // @extend .mb-0;
+        // @extend .w-18rem;
+
+        td:last-child {
+            @extend .justify-content-center;
+            @extend .border-0;
+
+            p-button .p-button {
+                @extend .mb-2;
+            }
+
+        }
+    }
+}
+
+.p-datatable {
+    .table-layout-fixed {
+        table-layout: fixed;
+    }
+
+    .p-datatable-tbody>tr>td {
+        padding: 0.5rem 0.5rem;
+        text-overflow: ellipsis;
+        text-wrap: nowrap;
+    }
+}
+
+// card shadow-5 w-18rem flex flex-wrap p-1
+
+@mixin classExtend($class) {
+    @extend .#{$class};
+}
+
+
+.filterbar-height {
+    height: 46rem !important;
+}
+
+@media (max-width: 768px) {
+    button {
+        @extend .small-btn;
+    }
+}
+
+.box-layout {
+
+    .p-datatable-thead>tr>th,
+    .p-datatable-tfoot>tr>td {
+        display: none !important;
+    }
+
+    .p-datatable-tbody>tr>td {
+        display: flex;
+        width: 100% !important;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .p-datatable-tbody>tr>td:not(:last-child) {
+        border: 0 none;
+    }
+
+    .p-datatable-gridlines>.p-datatable-wrapper>.p-datatable-table>.p-datatable-tbody>tr>td:last-child {
+        border-top: 0;
+        border-right: 0;
+    }
+
+    .p-datatable .p-datatable-tbody {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem !important;
+        justify-content: center !important;
+
+        tr {
+            @include classExtend(card);
+            @include classExtend(shadow-5);
+            @include classExtend(flex);
+            @include classExtend(flex-wrap);
+            @include classExtend(p-1);
+            @include classExtend(w-18rem);
+
+            td {
+                border: 0;
+                justify-content: center;
+                align-items: center
+            }
+        }
+    }
 }

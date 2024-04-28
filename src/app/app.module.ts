@@ -1,18 +1,19 @@
+import 'tslib';
 import { NgModule } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppLayoutModule } from './layout/app.layout.module';
-import { NotfoundComponent } from './demo/components/notfound/notfound.component';
-import { ProductService } from './demo/service/product.service';
-import { CountryService } from './demo/service/country.service';
-import { CustomerService } from './demo/service/customer.service';
-import { EventService } from './demo/service/event.service';
-import { IconService } from './demo/service/icon.service';
-import { NodeService } from './demo/service/node.service';
-import { PhotoService } from './demo/service/photo.service';
+import { NotfoundComponent } from './context/components/notfound/notfound.component';
+import { ProductService } from './context/service/product.service';
+import { CountryService } from './context/service/country.service';
+import { CustomerService } from './context/service/customer.service';
+import { EventService } from './context/service/event.service';
+import { IconService } from './context/service/icon.service';
+import { NodeService } from './context/service/node.service';
+import { PhotoService } from './context/service/photo.service';
 import { JwtModule } from '@auth0/angular-jwt';
-import { LocalStorage } from './demo/shared/enum/local-storage.enum';
+import { LocalStorage } from './context/shared/enum/local-storage.enum';
 import { StoreModule } from '@ngrx/store';
 
 export function getToken() {

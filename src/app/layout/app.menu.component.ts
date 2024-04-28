@@ -1,13 +1,13 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { LayoutService } from './service/app.layout.service';
-import { ModuleService } from '../demo/service/module.service';
-import { ModuleModel } from '../demo/api/module/module.model';
-import { NavigationService } from '../demo/service/navigation.service';
+import { ModuleService } from '../context/service/module.service';
+import { ModuleModel } from '../context/api/module/module.model';
+import { NavigationService } from '../context/service/navigation.service';
 import { Router } from '@angular/router';
-import { IChildItem, IMenuItem } from '../demo/api/module/menu-item.model';
-import { MenuIconsEnum } from '../demo/shared/enum/menu-icons';
-import { BaseService } from '../demo/service/base.service';
+import { IChildItem, IMenuItem } from '../context/api/module/menu-item.model';
+import { MenuIconsEnum } from '../context/shared/enum/menu-icons';
+import { BaseService } from '../context/service/base.service';
 
 @Component({
     selector: 'app-menu',
