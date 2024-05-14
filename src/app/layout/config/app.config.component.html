@@ -3,223 +3,209 @@
 </button>
 
 <p-sidebar [(visible)]="visible" position="right" [transitionOptions]="'.3s cubic-bezier(0, 0, 0.2, 1)'"
-    styleClass="layout-config-sidebar w-20rem">
-    <h5>Scale</h5>
-    <div class="flex align-items-center">
-        <button icon="pi pi-minus" type="button" pButton (click)="decrementScale()"
-            class="p-button-text p-button-rounded w-2rem h-2rem mr-2" [disabled]="scale === scales[0]"></button>
-        <div class="flex gap-2 align-items-center">
-            <i class="pi pi-circle-fill text-300" *ngFor="let s of scales"
-                [ngClass]="{'text-primary-500': s === scale}"></i>
+    styleClass="layout-config-sidebar w-30rem">
+    <ng-template pTemplate="header">
+        <div class="sidebar-headersets">
+            <div class="text-xl font-bold">Customizer</div>
+            <div class="text-l font-normal">Customize your overview Page layout</div>
         </div>
-        <button icon="pi pi-plus" type="button" pButton (click)="incrementScale()"
-            class="p-button-text p-button-rounded w-2rem h-2rem ml-2"
-            [disabled]="scale === scales[scales.length - 1]"></button>
+    </ng-template>
+
+    <div class="py-4 flex align-items-center justify-content-between border-bottom-1 surface-border">
+        <div class="text-l font-semibold">Scale</div>
+        <div class="flex align-items-center">
+            <button icon="pi pi-minus" type="button" pButton (click)="decrementScale()"
+                class="p-button-text p-button-rounded w-2rem h-2rem mr-2" [disabled]="scale === scales[0]"></button>
+            <div class="flex gap-2 align-items-center">
+                <i class="pi pi-circle-fill text-300" *ngFor="let s of scales"
+                    [ngClass]="{'text-primary-500': s === scale}"></i>
+            </div>
+            <button icon="pi pi-plus" type="button" pButton (click)="incrementScale()"
+                class="p-button-text p-button-rounded w-2rem h-2rem ml-2"
+                [disabled]="scale === scales[scales.length - 1]"></button>
+        </div>
     </div>
 
-    <ng-container *ngIf="!minimal">
-        <h5>Color Scheme</h5>
-        <div class="flex">
-            <div class="field-radiobutton flex-1">
-                <p-radioButton name="inputStyle" value="light" [(ngModel)]="changeColorScheme"
-                    inputId="outlined_input"></p-radioButton>
-                <label for="outlined_input">Light</label>
-            </div>
-            <div class="field-radiobutton flex-1">
-                <p-radioButton name="inputStyle" value="dark" [(ngModel)]="changeColorScheme"
-                    inputId="filled_input"></p-radioButton>
-                <label for="filled_input">Dark</label>
-            </div>
-        </div>
-        <h5>Input Style</h5>
-        <div class="flex">
-            <div class="field-radiobutton flex-1">
-                <p-radioButton name="inputStyle" value="outlined" [(ngModel)]="inputStyle"
-                    inputId="outlined_input"></p-radioButton>
-                <label for="outlined_input">Outlined</label>
-            </div>
-            <div class="field-radiobutton flex-1">
-                <p-radioButton name="inputStyle" value="filled" [(ngModel)]="inputStyle"
-                    inputId="filled_input"></p-radioButton>
-                <label for="filled_input">Filled</label>
-            </div>
-        </div>
 
-        <h5>Ripple Effect</h5>
-        <p-inputSwitch [(ngModel)]="ripple"></p-inputSwitch>
+
+    <ng-container *ngIf="!minimal">
+        <div class="py-4 flex align-items-center justify-content-between border-bottom-1 surface-border">
+            <div class="text-l font-semibold">Color Scheme</div>
+            <div class="flex">
+                <p-selectButton styleClass="capitalize" [options]="['light', 'dark']" [(ngModel)]="colorScheme"
+                    [unselectable]="true"></p-selectButton>
+            </div>
+        </div>
+        <div class="py-4 flex align-items-center justify-content-between border-bottom-1 surface-border">
+            <div class="text-l font-semibold">Input Style</div>
+            <div class="flex gap-2">
+                <div class="field-radiobutton flex-1">
+                    <p-radioButton name="inputStyle" value="outlined" [(ngModel)]="inputStyle"
+                        inputId="outlined_input"></p-radioButton>
+                    <label for="outlined_input">Outlined</label>
+                </div>
+                <div class="field-radiobutton flex-1">
+                    <p-radioButton name="inputStyle" value="filled" [(ngModel)]="inputStyle"
+                        inputId="filled_input"></p-radioButton>
+                    <label for="filled_input">Filled</label>
+                </div>
+            </div>
+        </div>
+        <div class="py-4 flex align-items-center justify-content-between border-bottom-1 surface-border">
+            <div class="text-l font-semibold">Ripple Effect</div>
+            <p-inputSwitch [(ngModel)]="ripple"></p-inputSwitch>
+        </div>
     </ng-container>
 
     <ng-container *ngIf="!minimal">
-        <h5>Menu Type</h5>
-        <div class="flex flex-wrap row-gap-3">
-            <div class="flex align-items-center gap-2 w-6">
-                <p-radioButton name="menuMode" value="static" [(ngModel)]="menuMode" inputId="mode1"></p-radioButton>
-                <label for="mode1">Static</label>
-            </div>
-            <div class="flex align-items-center gap-2 w-6">
-                <p-radioButton name="menuMode" value="overlay" [(ngModel)]="menuMode" inputId="mode2"></p-radioButton>
-                <label for="mode2">Overlay</label>
-            </div>
-            <div class="flex align-items-center gap-2 w-6">
-                <p-radioButton name="menuMode" value="slim" [(ngModel)]="menuMode" inputId="mode1"></p-radioButton>
-                <label for="mode1">Slim</label>
-            </div>
-            <div class="flex align-items-center gap-2 w-6">
-                <p-radioButton name="menuMode" value="compact" [(ngModel)]="menuMode" inputId="mode2"></p-radioButton>
-                <label for="mode2">Compact</label>
-            </div>
-            <div class="flex align-items-center gap-2 w-6">
-                <p-radioButton name="menuMode" value="horizontal" [(ngModel)]="menuMode"
-                    inputId="mode1"></p-radioButton>
-                <label for="mode1">Horizontal</label>
-            </div>
-            <!-- <div class="flex align-items-center gap-2 w-6">
-                <p-radioButton name="menuMode" value="reveal" [(ngModel)]="menuMode" inputId="mode2"></p-radioButton>
-                <label for="mode2">Reveal</label>
-            </div> -->
-            <div class="flex align-items-center gap-2 w-6">
-                <p-radioButton name="menuMode" value="drawer" [(ngModel)]="menuMode" inputId="mode2"></p-radioButton>
-                <label for="mode2">Drawer</label>
+        <div class="py-4 flex align-items-start justify-content-between border-bottom-1 surface-border">
+            <div class="text-l font-semibold  w-15rem">Menu Type</div>
+            <div class="flex flex-wrap row-gap-3">
+                <div class="flex align-items-center gap-2 w-6">
+                    <p-radioButton name="menuMode" value="static" [(ngModel)]="menuMode"
+                        inputId="mode1"></p-radioButton>
+                    <label for="mode1">Static</label>
+                </div>
+                <div class="flex align-items-center gap-2 w-6">
+                    <p-radioButton name="menuMode" value="overlay" [(ngModel)]="menuMode"
+                        inputId="mode2"></p-radioButton>
+                    <label for="mode2">Overlay</label>
+                </div>
+                <div class="flex align-items-center gap-2 w-6">
+                    <p-radioButton name="menuMode" value="slim" [(ngModel)]="menuMode" inputId="mode1"></p-radioButton>
+                    <label for="mode1">Slim</label>
+                </div>
+                <div class="flex align-items-center gap-2 w-6">
+                    <p-radioButton name="menuMode" value="compact" [(ngModel)]="menuMode"
+                        inputId="mode2"></p-radioButton>
+                    <label for="mode2">Compact</label>
+                </div>
+                <div class="flex align-items-center gap-2 w-6">
+                    <p-radioButton name="menuMode" value="horizontal" [(ngModel)]="menuMode"
+                        inputId="mode1"></p-radioButton>
+                    <label for="mode1">Horizontal</label>
+                </div>
+                <!-- <div class="flex align-items-center gap-2 w-6">
+                            <p-radioButton name="menuMode" value="reveal" [(ngModel)]="menuMode" inputId="mode2"></p-radioButton>
+                            <label for="mode2">Reveal</label>
+                        </div> -->
+                <div class="flex align-items-center gap-2 w-6">
+                    <p-radioButton name="menuMode" value="drawer" [(ngModel)]="menuMode"
+                        inputId="mode2"></p-radioButton>
+                    <label for="mode2">Drawer</label>
+                </div>
             </div>
         </div>
-
     </ng-container>
 
-    <h5 class="ng-star-inserted">Menu Theme</h5>
-    <div class="flex flex-wrap gap-3 ng-star-inserted">
-        <a role="button" type="button" pripple (click)="changeMenuColor(color)" class="w-2rem h-2rem cursor-pointer hover:shadow-4 border-round transition-duration-150 
-            flex align-items-center justify-content-center ng-star-inserted"
-            style="background-color: rgb(255, 255, 255);" *ngFor="let color of menuColors">
-            <i class="pi pi-check text-white ng-star-inserted" *ngIf="color == menuColor"></i>
-        </a>
+    <div class="py-4 flex flex-column row-gap-2 align-items-start justify-content-start border-bottom-1 surface-border">
+        <div class="text-l font-semibold  w-15rem">Menu Theme</div>
+        <div class="flex flex-wrap gap-3 ng-star-inserted">
+            <a pButton pRipple (click)="changeMenuColor(color)" class="w-2rem h-2rem cursor-pointer shadow-2 hover:shadow-4 border-round transition-duration-150 
+                    flex align-items-center justify-content-center ng-star-inserted"
+                [style]="'background-color: ' +  color" *ngFor="let color of menuColors">
+                <i class="pi pi-check text-primary" [ngClass]="{'text-white': color != 'white' }"
+                    *ngIf="color == menuColor"></i>
+            </a>
+        </div>
     </div>
-
-    <h5>Bootstrap</h5>
-    <div class="grid">
-        <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('bootstrap4-light-blue', 'light')">
-                <img src="assets/layout/images/themes/bootstrap4-light-blue.svg" class="w-2rem h-2rem"
-                    alt="Bootstrap Light Blue">
+    <div class="py-4 flex flex-column row-gap-2 align-items-start justify-content-start border-bottom-1 surface-border">
+        <div class="flex align-items-center gap-2 mb-3 text-l font-semibold ">Layout Themes</div>
+        <div class="flex flex-wrap gap-3 ">
+            <button pButton pRipple (click)="changeTheme(item.value, 'light')"
+                class="bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200 hover:border-500 surface-border"
+                style="border-radius: 30px;" *ngFor="let item of themes">
+                <span class="block h-1rem w-full" style="border-radius: 30px; background-color: {{item.color}}">
+                </span>
             </button>
+
+            <!-- <button pButton pRipple class="bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200 hover:border-500 surface-border" >
+    <img src="assets/layout/images/themes/bootstrap4-light-blue.svg" class="w-2rem h-2rem" alt="Bootstrap Light Blue">
+</button> -->
+        </div>
+    </div>
+
+    <!-- <div class="flex align-items-center justify-content-between gap-3 mb-3">
+        <div class="col-3">
+
         </div>
         <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('bootstrap4-light-purple', 'light')">
+            <button pButton pRipple class="p-link w-2rem h-2rem"
+                (click)="changeTheme('bootstrap4-light-purple', 'light')">
                 <img src="assets/layout/images/themes/bootstrap4-light-purple.svg" class="w-2rem h-2rem"
                     alt="Bootstrap Light Purple">
             </button>
         </div>
-        <div class="col-3 hidden">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('bootstrap4-dark-blue', 'dark')">
-                <img src="assets/layout/images/themes/bootstrap4-dark-blue.svg" class="w-2rem h-2rem"
-                    alt="Bootstrap Dark Blue">
-            </button>
-        </div>
-        <div class="col-3 hidden">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('bootstrap4-dark-purple', 'dark')">
-                <img src="assets/layout/images/themes/bootstrap4-dark-purple.svg" class="w-2rem h-2rem"
-                    alt="Bootstrap Dark Purple">
-            </button>
-        </div>
-    </div>
-
-    <h5>Material Design</h5>
-    <div class="grid">
         <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('md-light-indigo', 'light')">
+            <button pButton pRipple class="p-link w-2rem h-2rem" (click)="changeTheme('mdc-light-indigo', 'light')">
                 <img src="assets/layout/images/themes/md-light-indigo.svg" class="w-2rem h-2rem"
                     alt="Material Light Indigo">
             </button>
         </div>
         <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('md-light-deeppurple', 'light')">
-                <img src="assets/layout/images/themes/md-light-deeppurple.svg" class="w-2rem h-2rem"
-                    alt="Material Light DeepPurple">
-            </button>
-        </div>
-        <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('md-dark-indigo', 'dark')">
-                <img src="assets/layout/images/themes/md-dark-indigo.svg" class="w-2rem h-2rem"
-                    alt="Material Dark Indigo">
-            </button>
-        </div>
-        <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('md-dark-deeppurple', 'dark')">
-                <img src="assets/layout/images/themes/md-dark-deeppurple.svg" class="w-2rem h-2rem"
-                    alt="Material Dark DeepPurple">
-            </button>
-        </div>
-    </div>
-
-    <h5>Material Design Compact</h5>
-    <div class="grid">
-        <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('mdc-light-indigo', 'light')">
-                <img src="assets/layout/images/themes/md-light-indigo.svg" class="w-2rem h-2rem"
-                    alt="Material Light Indigo">
-            </button>
-        </div>
-        <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('mdc-light-deeppurple', 'light')">
+            <button pButton pRipple class="p-link w-2rem h-2rem" (click)="changeTheme('mdc-light-deeppurple', 'light')">
                 <img src="assets/layout/images/themes/md-light-deeppurple.svg" class="w-2rem h-2rem"
                     alt="Material Light Deep Purple">
             </button>
         </div>
         <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('mdc-dark-indigo', 'dark')">
-                <img src="assets/layout/images/themes/md-dark-indigo.svg" class="w-2rem h-2rem"
-                    alt="Material Dark Indigo">
-            </button>
-        </div>
-        <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('mdc-dark-deeppurple', 'dark')">
-                <img src="assets/layout/images/themes/md-dark-deeppurple.svg" class="w-2rem h-2rem"
-                    alt="Material Dark Deep Purple">
-            </button>
-        </div>
-    </div>
-
-    <h5>Tailwind</h5>
-    <div class="grid">
-        <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('tailwind-light', 'light')">
+            <button pButton pRipple class="p-link w-2rem h-2rem" (click)="changeTheme('tailwind-light', 'light')">
                 <img src="assets/layout/images/themes/tailwind-light.png" class="w-2rem h-2rem" alt="Tailwind Light">
             </button>
         </div>
-    </div>
-
-    <h5>Fluent UI</h5>
-    <div class="grid">
         <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('fluent-light', 'light')">
+            <button pButton pRipple class="p-link w-2rem h-2rem" (click)="changeTheme('fluent-light', 'light')">
                 <img src="assets/layout/images/themes/fluent-light.png" class="w-2rem h-2rem" alt="Fluent Light">
             </button>
         </div>
-    </div>
-
-    <h5>PrimeOne Design - 2022</h5>
-    <div class="grid">
         <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('lara-light-indigo', 'light')">
+            <button pButton pRipple class="p-link w-2rem h-2rem" (click)="changeTheme('lara-light-indigo', 'light')">
                 <img src="assets/layout/images/themes/lara-light-indigo.png" class="w-2rem h-2rem"
                     alt="Lara Light Indigo">
             </button>
         </div>
         <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('lara-light-blue', 'light')">
+            <button pButton pRipple class="p-link w-2rem h-2rem" (click)="changeTheme('lara-light-blue', 'light')">
                 <img src="assets/layout/images/themes/lara-light-blue.png" class="w-2rem h-2rem" alt="Lara Light Blue">
             </button>
         </div>
         <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('lara-light-purple', 'light')">
+            <button pButton pRipple class="p-link w-2rem h-2rem" (click)="changeTheme('lara-light-purple', 'light')">
                 <img src="assets/layout/images/themes/lara-light-purple.png" class="w-2rem h-2rem"
                     alt="Lara Light Purple">
             </button>
         </div>
         <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('lara-light-teal', 'light')">
+            <button pButton pRipple class="p-link w-2rem h-2rem" (click)="changeTheme('lara-light-teal', 'light')">
                 <img src="assets/layout/images/themes/lara-light-teal.png" class="w-2rem h-2rem" alt="Lara Light Teal">
             </button>
         </div>
+        <div class="col-3">
+            <button pButton pRipple class="p-link w-2rem h-2rem" (click)="changeTheme('saga-light-blue', 'light')">
+                <img src="assets/layout/images/themes/saga-blue.png" class="w-2rem h-2rem" alt="Saga Blue">
+            </button>
+        </div>
+        <div class="col-3">
+            <button pButton pRipple class="p-link w-2rem h-2rem" (click)="changeTheme('saga-light-green', 'light')">
+                <img src="assets/layout/images/themes/saga-green.png" class="w-2rem h-2rem" alt="Saga Green">
+            </button>
+        </div>
+        <div class="col-3">
+            <button pButton pRipple class="p-link w-2rem h-2rem" (click)="changeTheme('saga-light-orange', 'light')">
+                <img src="assets/layout/images/themes/saga-orange.png" class="w-2rem h-2rem" alt="Saga Orange">
+            </button>
+        </div>
+        <div class="col-3">
+            <button pButton pRipple class="p-link w-2rem h-2rem" (click)="changeTheme('saga-light-purple', 'light')">
+                <img src="assets/layout/images/themes/saga-purple.png" class="w-2rem h-2rem" alt="Saga Purple">
+            </button>
+        </div>
+    </div> -->
+
+
+    <!-- <div class="text-l font-semibold">PrimeOne Design - 2022</div>
+    <div class="grid">
+        
         <div class="col-3">
             <button class="p-link w-2rem h-2rem" (click)="changeTheme('lara-dark-indigo', 'dark')">
                 <img src="assets/layout/images/themes/lara-dark-indigo.png" class="w-2rem h-2rem"
@@ -242,69 +228,50 @@
                 <img src="assets/layout/images/themes/lara-dark-teal.png" class="w-2rem h-2rem" alt="Lara Dark Teal">
             </button>
         </div>
-    </div>
+    </div> -->
 
-    <h5>PrimeOne Design - 2021</h5>
+    <!-- <div class="text-l font-semibold">PrimeOne Design - 2021</div>
     <div class="grid">
+        
         <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('saga-blue', 'light')">
-                <img src="assets/layout/images/themes/saga-blue.png" class="w-2rem h-2rem" alt="Saga Blue">
-            </button>
-        </div>
-        <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('saga-green', 'light')">
-                <img src="assets/layout/images/themes/saga-green.png" class="w-2rem h-2rem" alt="Saga Green">
-            </button>
-        </div>
-        <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('saga-orange', 'light')">
-                <img src="assets/layout/images/themes/saga-orange.png" class="w-2rem h-2rem" alt="Saga Orange">
-            </button>
-        </div>
-        <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('saga-purple', 'light')">
-                <img src="assets/layout/images/themes/saga-purple.png" class="w-2rem h-2rem" alt="Saga Purple">
-            </button>
-        </div>
-        <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('vela-blue', 'dark')">
+            <button class="p-link w-2rem h-2rem" (click)="changeTheme('saga-dim-blue', 'dark')">
                 <img src="assets/layout/images/themes/vela-blue.png" class="w-2rem h-2rem" alt="Vela Blue">
             </button>
         </div>
         <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('vela-green', 'dark')">
+            <button class="p-link w-2rem h-2rem" (click)="changeTheme('saga-dim-green', 'dark')">
                 <img src="assets/layout/images/themes/vela-green.png" class="w-2rem h-2rem" alt="Vela Green">
             </button>
         </div>
         <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('vela-orange', 'dark')">
+            <button class="p-link w-2rem h-2rem" (click)="changeTheme('saga-dim-orange', 'dark')">
                 <img src="assets/layout/images/themes/vela-orange.png" class="w-2rem h-2rem" alt="Vela Orange">
             </button>
         </div>
         <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('vela-purple', 'dark')">
+            <button class="p-link w-2rem h-2rem" (click)="changeTheme('saga-dim-purple', 'dark')">
                 <img src="assets/layout/images/themes/vela-purple.png" class="w-2rem h-2rem" alt="Vela Purple">
             </button>
         </div>
         <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('arya-blue', 'dark')">
+            <button class="p-link w-2rem h-2rem" (click)="changeTheme('saga-dark-blue', 'dark')">
                 <img src="assets/layout/images/themes/arya-blue.png" class="w-2rem h-2rem" alt="Arya Blue">
             </button>
         </div>
         <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('arya-green', 'dark')">
+            <button class="p-link w-2rem h-2rem" (click)="changeTheme('saga-dark-green', 'dark')">
                 <img src="assets/layout/images/themes/arya-green.png" class="w-2rem h-2rem" alt="Arya Green">
             </button>
         </div>
         <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('arya-orange', 'dark')">
+            <button class="p-link w-2rem h-2rem" (click)="changeTheme('saga-dark-orange', 'dark')">
                 <img src="assets/layout/images/themes/arya-orange.png" class="w-2rem h-2rem" alt="Arya Orange">
             </button>
         </div>
         <div class="col-3">
-            <button class="p-link w-2rem h-2rem" (click)="changeTheme('arya-purple', 'dark')">
+            <button class="p-link w-2rem h-2rem" (click)="changeTheme('saga-dark-purple', 'dark')">
                 <img src="assets/layout/images/themes/arya-purple.png" class="w-2rem h-2rem" alt="Arya Purple">
             </button>
         </div>
-    </div>
+    </div> -->
 </p-sidebar>

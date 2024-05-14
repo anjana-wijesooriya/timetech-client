@@ -135,12 +135,6 @@ $employeeTableWidth: calc(100% - 21rem);
     height: 46rem !important;
 }
 
-@media (max-width: 768px) {
-    button {
-        @extend .small-btn;
-    }
-}
-
 .box-layout {
 
     .p-datatable-thead>tr>th,
@@ -149,9 +143,9 @@ $employeeTableWidth: calc(100% - 21rem);
     }
 
     .p-datatable-tbody>tr>td {
-        display: flex;
+        display: flex !important;
         width: 100% !important;
-        align-items: center;
+        align-items: center !important;
         justify-content: space-between;
     }
 
@@ -162,13 +156,18 @@ $employeeTableWidth: calc(100% - 21rem);
     .p-datatable-gridlines>.p-datatable-wrapper>.p-datatable-table>.p-datatable-tbody>tr>td:last-child {
         border-top: 0;
         border-right: 0;
+        border-left: 0;
+    }
+
+    .p-datatable-tbody>tr>td>.p-column-title {
+        display: block;
     }
 
     .p-datatable .p-datatable-tbody {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem !important;
-        justify-content: center !important;
+        @include classExtend(flex);
+        @include classExtend(flex-wrap);
+        @include classExtend(gap-2);
+        @include classExtend(justify-content-center);
 
         tr {
             @include classExtend(card);
@@ -178,11 +177,91 @@ $employeeTableWidth: calc(100% - 21rem);
             @include classExtend(p-1);
             @include classExtend(w-18rem);
 
+            @include classExtend((m-0));
+
             td {
                 border: 0;
-                justify-content: center;
+                @include classExtend(justify-content-between);
                 align-items: center
             }
         }
     }
+}
+
+.tabview-custom i,
+.tabview-custom span {
+    vertical-align: middle
+}
+
+.tabview-custom span {
+    margin: 0 .5rem
+}
+
+.p-button {
+    margin-right: .25rem
+}
+
+.p-tabview p {
+    line-height: 1.5;
+    margin: 0
+}
+
+.p-tabmenu-nav {
+    .p-tabmenuitem {
+        .p-menuitem-link {
+            color: var(--text-color-secondary);
+        }
+    }
+
+    .p-tabmenuitem.p-highlight {
+        .p-menuitem-link {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+    }
+}
+
+.p-selectbutton .p-button {
+    margin: 0;
+}
+
+.w-40rem {
+    width: 40rem !important;
+}
+
+.field>label {
+    margin-bottom: 0.12rem;
+}
+
+// .employee-overview {
+.p-stepper-nav {
+    @extend .surface-ground;
+}
+
+.p-stepper-panels {
+    @extend .p-0;
+}
+
+.p-selectbutton .p-button.p-highlight {
+    background: var(--highlight-bg);
+    color: var(--highlight-text-color);
+    // border-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.p-inputSwitch-lg {
+    transform: scale(1.2);
+    margin-top: 0.2rem;
+    margin-left: 0.3rem;
+}
+
+// .ng-touched {
+//     @extend .ng-dirty !optional;
+//     @extend .ng-invalid !optional;
+// }
+
+p-password.ng-invalid.ng-touched .p-inputtext,
+p-dropdown.ng-invalid.ng-touched .p-dropdown,
+p-calendar.ng-invalid.ng-touched .p-calendar {
+    border-color: #f87171 !important;
 }

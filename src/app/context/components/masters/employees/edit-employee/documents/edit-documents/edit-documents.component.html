@@ -1,0 +1,241 @@
+<form #form="ngForm" (ngSubmit)="onSubmit(form)" novalidate autocomplete="off">
+    <div>
+        <div class="grid formgrid p-fluid p-2">
+            <div class="md:col-4 col-6 field">
+                <label for="float-label" class="font-medium text-900">Linked To</label>
+                <p-dropdown [options]="dependents" placeholder="Select Relation" optionLabel="dependentName"
+                    optionValue="code" inputId="float-label" name="dependentCode"
+                    [(ngModel)]="selectedDocument.dependentCode" [showClear]="true" [required]="true"
+                    (ngModelChange)="onChangeDependent()">
+                </p-dropdown>
+
+                <small class="p-error" id="username-help">Linked to required.</small>
+            </div>
+            <div class="md:col-4 col-6 field">
+                <label for="float-label" class="font-medium text-900">Doc Type</label>
+                <p-dropdown [options]="docTypes" placeholder="Select Doc type" optionLabel="name" optionValue="id"
+                    inputId="float-label" name="docTypeId" [(ngModel)]="selectedDocument.docTypeId" [showClear]="true"
+                    [required]="true" (ngModelChange)="onChangeDocType()">
+                </p-dropdown>
+
+                <small class="p-error" id="username-help">Document Type required.</small>
+            </div>
+            <div class="lg:col-4 col-12 field">
+                <label for="name" class="font-medium text-900">Document Name</label>
+                <input pInputText id="name" class="" [(ngModel)]="selectedDocument.name" name="name"
+                    [required]="true" />
+
+                <small class="p-error" id="username-help">Document Name required.</small>
+            </div>
+            <div class="lg:col-4 col-12 field">
+                <label for="name" class="font-medium text-900">Document No</label>
+                <input pInputText id="name" class="" [(ngModel)]="selectedDocument.docNo" name="docNo"
+                    [required]="true" />
+
+                <small class="p-error" id="username-help">Document No required.</small>
+            </div>
+
+
+            <div class="lg:col-4 col-12 field ">
+                <label for="name" class="font-medium text-900">Mark as Old</label>
+                <div class="flex align-items-center w-auto">
+                    <p-inputSwitch class="p-inputSwitch-lg" id="visa-cost" name="markAsOld"
+                        (ngModelChange)="onModelChange(form)" [(ngModel)]="selectedDocument.markAsOld"
+                        [pTooltip]="selectedDocument.markAsOld ? 'Active' : 'Inactive'"
+                        triggers="focus"></p-inputSwitch>
+                </div>
+            </div>
+            <div class="lg:col-4 col-12 field ">
+                <label for="birthdate" class="font-medium text-900">Mark as Old Date</label>
+                <p-calendar [iconDisplay]="'input'" [showIcon]="true" name="markAsOldDate"
+                    [(ngModel)]="selectedDocument.markAsOldDate"></p-calendar>
+                <small class="p-error" id="username-help">Mark as old date required.</small>
+            </div>
+            <div class="lg:col-4 col-12 field ">
+                <label for="birthdate" class="font-medium text-900">Issue Date</label>
+                <p-calendar [iconDisplay]="'input'" [showIcon]="true" name="issueDate"
+                    [(ngModel)]="selectedDocument.issueDate"></p-calendar>
+                <small class="p-error" id="username-help">Issue date required.</small>
+            </div>
+            <div class="lg:col-4 col-12 field ">
+                <label for="birthdate" class="font-medium text-900">Expiry Date</label>
+                <p-calendar [iconDisplay]="'input'" [showIcon]="true" name="expiryDate"
+                    [(ngModel)]="selectedDocument.expiryDate" (ngModelChange)="setReminderDate()"></p-calendar>
+
+                <small class="p-error" id="username-help">Expiry date required.</small>
+            </div>
+            <div class="lg:col-4 col-12 field">
+                <label for="name" class="font-medium text-900">Place of Issue</label>
+                <input pInputText id="name" class="" [(ngModel)]="selectedDocument.placeOfIssue" name="placeOfIssue"
+                    [required]="false" />
+
+                <small class="p-error" id="username-help">Place of issue required.</small>
+            </div>
+            <div class="lg:col-4 col-12 field col">
+                <label for="visa-cost" class="font-medium text-900">Remind Me</label>
+                <div class="flex align-items-center w-auto">
+                    <p-inputSwitch class="p-inputSwitch-lg" id="visa-cost" name="remindMe"
+                        [(ngModel)]="selectedDocument.remindMe" (ngModelChange)="onModelChange(form)">
+                    </p-inputSwitch>
+                </div>
+            </div>
+            <div class="lg:col-4 col-12 field">
+                <label for="name" class="font-medium text-900">Remind before</label>
+                <p-inputNumber [(ngModel)]="selectedDocument.remindBefore" inputId="expiry" class="" prefix=""
+                    suffix=" days" name="remindBefore" (ngModelChange)="setReminderDate()">
+                </p-inputNumber>
+                <!-- <input pInputText id="name" class="" [(ngModel)]="selectedDocument.remindBefore"
+                                name="remindBefore" [required]="false" /> -->
+
+                <small class="p-error" id="username-help">Remind me before required.</small>
+            </div>
+            <div class="lg:col-4 col-12 field">
+                <label for="name" class="font-medium text-900">Reminder on</label>
+                <input pInputText id="name" class="" [disabled]="true" [(ngModel)]="selectedDocument.remindOn"
+                    name="remindOn" />
+            </div>
+            <div class="lg:col-4 col-12 field">
+                <label for="name" class="font-medium text-900">Reminder on</label>
+                <input pInputText id="name" [disabled]="true" [(ngModel)]="selectedDocument.remindOn" name="remindOn" />
+            </div>
+            <div class="col-12">
+                <p-fileUpload name="file" mode="advanced" #fileUploader
+                    url="https://localhost:44319/api/employee/upload-file?attachmentType=2" [multiple]="true"
+                    accept="image/*, application/pdf" maxFileSize="1000000"
+                    (onSelect)="onSelectedFiles($event, fileUploader)" [auto]="true" (onUpload)="onUpload($event)"
+                    fileLimit="3" showUploadButton="false">
+                    <!-- <ng-template pTemplate="toolbar">
+                        <div>Upload 3 Files</div>
+                    </ng-template> -->
+                    <ng-template pTemplate="header" let-files let-chooseCallback="chooseCallback"
+                        let-clearCallback="clearCallback" let-uploadCallback="uploadCallback">
+                        <div class="flex flex-wrap justify-content-between align-items-center flex-1 gap-2">
+                            <div class="flex gap-2">
+                                <p-button (onClick)="choose($event, chooseCallback)" icon="pi pi-cloud-upload"
+                                    [rounded]="true" [outlined]="true" />
+                                <!-- <p-button (onClick)="uploadEvent(uploadCallback)" icon="pi pi-cloud-upload"
+                                    [rounded]="true" [outlined]="true" severity="success"
+                                    [disabled]="!files || files.length === 0" />
+                                <p-button (onClick)="clearCallback()" icon="pi pi-times" [rounded]="true"
+                                    [outlined]="true" severity="danger" [disabled]="!files || files.length === 0" /> -->
+                            </div>
+                            <p-progressBar [value]="totalSizePercent" [showValue]="true"
+                                styleClass="md:w-20rem h-1rem w-full md:ml-auto"
+                                [ngClass]="{ 'exceeded-progress-bar': totalSizePercent > 100 }">
+                                <span class="white-space-nowrap">{{ totalSize }}B / 1Mb</span>
+                            </p-progressBar>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="content" let-files let-uploadedFiles="uploadedFiles"
+                        let-removeFileCallback="removeFileCallback"
+                        let-removeUploadedFileCallback="removeUploadedFileCallback">
+                        <div class="flex align-items-center justify-content-center flex-column"
+                            *ngIf="!files?.length > 0">
+                            <i class="pi pi-cloud-upload border-2 border-circle p-5 text-5xl text-400 border-400"></i>
+                            <p class="mt-4 mb-0">Drag and drop files to here to upload.</p>
+                        </div>
+                        <div *ngIf="files?.length > 0">
+                            <h5>Pending</h5>
+                            <div class="flex flex-wrap p-0 sm:p-3 gap-3">
+                                <div *ngFor="let ufile of files; let i = index"
+                                    class="card m-0 px-3 flex flex-column border-1 surface-border align-items-center gap-1">
+                                    <div>
+                                        <img role="presentation" [alt]="ufile.name" [src]="ufile.objectURL" width="100"
+                                            height="50" />
+                                    </div>
+                                    <span class="font-semibold">{{ ufile.name }}</span>
+                                    <div>{{ formatSize(ufile.size) }}</div>
+                                    <p-badge value="Pending" severity="warning" />
+                                    <p-button icon="pi pi-times" styleClass="w-2rem h-2rem"
+                                        (onClick)="removeFileCallback(event, index);onRemoveTemplatingFile($event, ufile, removeUploadedFileCallback, index)"
+                                        [outlined]="true" [rounded]="true" severity="danger" />
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="isAttachmentsAvailable">
+                            <h5>Uploaded Documents</h5>
+                            <div class="flex flex-wrap p-0 sm:p-3 gap-3">
+                                <!-- <div *ngFor="let ufile of uploadedFiles; let i = index" -->
+                                <div *ngIf="selectedDocument.attachmentOne != ''"
+                                    class="card m-0 p-3 flex flex-column border-1 surface-border align-items-center gap-1">
+                                    <div>
+                                        <img role="presentation" [alt]="'Attachment 1'"
+                                            [src]="selectedDocument.attachmentOne" width="100" height="50" />
+                                    </div>
+                                    <span class="font-semibold">Attachment 1</span>
+                                    <!-- <div>{{ formatSize(file.size) }}</div> -->
+                                    <!-- <p-badge value="Completed" class="mt-3" severity="success" /> -->
+                                    <p-button icon="pi pi-times" (onClick)="removeAttachment(0)" [outlined]="true"
+                                        [rounded]="true" severity="danger" styleClass="w-2rem h-2rem" />
+                                </div>
+                                <div *ngIf="selectedDocument.attachmentTwo != ''"
+                                    class="card m-0 p-3 flex flex-column border-1 surface-border align-items-center gap-1">
+                                    <div>
+                                        <img role="presentation" [alt]="'Attachment 2'"
+                                            [src]="selectedDocument.attachmentTwo" width="100" height="50" />
+                                    </div>
+                                    <span class="font-semibold">Attachment 2</span>
+                                    <!-- <div>{{ formatSize(file.size) }}</div> -->
+                                    <!-- <p-badge value="Completed" class="mt-3" severity="success" /> -->
+                                    <p-button icon="pi pi-times" (onClick)="removeAttachment(1)" [outlined]="true"
+                                        [rounded]="true" severity="danger" styleClass="w-2rem h-2rem" />
+                                </div>
+                                <div *ngIf="selectedDocument.attachmentThree != ''"
+                                    class="card m-0 p-3 flex flex-column border-1 surface-border align-items-center gap-1">
+                                    <div>
+                                        <img role="presentation" [alt]="'Attachment 3'"
+                                            [src]="selectedDocument.attachmentThree" width="100" height="50" />
+                                    </div>
+                                    <span class="font-semibold">Attachment 3</span>
+                                    <!-- <div>{{ formatSize(file.size) }}</div> -->
+                                    <!-- <p-badge value="Completed" class="mt-3" severity="success" /> -->
+                                    <p-button icon="pi pi-times" (onClick)="removeAttachment(2)" [outlined]="true"
+                                        [rounded]="true" severity="danger" styleClass="w-2rem h-2rem" />
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="file"> </ng-template>
+                    <!-- <ng-template pTemplate="empty">
+                        <div class="flex align-items-center justify-content-center flex-column">
+                            <i class="pi pi-cloud-upload border-2 border-circle p-5 text-8xl text-400 border-400"></i>
+                            <p class="mt-4 mb-0">Drag and drop files to here to upload.</p>
+                        </div>
+                    </ng-template> -->
+                </p-fileUpload>
+            </div>
+            <!-- <div class="md:col-3 col-6">
+                <p-fileUpload mode="basic" name="file"
+                    url="https://localhost:44319/api/employee/upload-file?attachmentType=2" [maxFileSize]="1000000000"
+                    (onUpload)="onUpload($event, 2)" [auto]="true" [disabled]="selectedDocument.attachmentTwo != ''"
+                    chooseLabel="Attachment 2" [disabled]="selectedDocument.attachmentTwo != ''"
+                    class="w-100"></p-fileUpload>
+                <div class="col-md-12 mt-2 d-flex justify-content-center">
+                    <p-button pTooltip="View" *ngIf="selectedDocument.attachmentTwo != ''" icon="pi pi-eye"
+                        class="mt-2 mr-2" (onClick)="openAttachment(selectedDocument.attachmentTwo);" severity="info"
+                        [outlined]="true"></p-button>
+                    <p-button pTooltip="Remove" *ngIf="selectedDocument.attachmentTwo != ''" icon="pi pi-times"
+                        class="mt-2" (onClick)="removeAttachment(2);" severity="danger" [outlined]="true"></p-button>
+                </div>
+            </div>
+            <div class="md:col-3 col-6">
+                <p-fileUpload (onProgress)="onProgress($event)" mode="basic" name="file"
+                    url="https://localhost:44319/api/employee/upload-file?attachmentType=3" [maxFileSize]="1000000000"
+                    (onUpload)="onUpload($event, 3)" [auto]="true" class="w-100" chooseLabel="Attachment 3"
+                    [disabled]="selectedDocument.attachmentThree != ''"></p-fileUpload>
+                <div class="col-md-12 mt-2 d-flex justify-content-center">
+                    <p-button pTooltip="View" *ngIf="selectedDocument.attachmentThree != ''" icon="pi pi-eye"
+                        class="mt-2 mr-2" (onClick)="openAttachment(selectedDocument.attachmentThree);" severity="info"
+                        [outlined]="true"></p-button>
+                    <p-button pTooltip="Remove" *ngIf="selectedDocument.attachmentThree != ''" icon="pi pi-times"
+                        class="mt-2" (onClick)="removeAttachment(3);" severity="danger" [outlined]="true"></p-button>
+                </div>
+            </div> -->
+        </div>
+    </div>
+    <div class="flex flex-wrap justify-content-end align-items-center gap-1">
+        <p-button type="submit" label="Update" severity="primary" [outlined]="true" [loading]="isSaving"
+            icon="pi pi-check" class="ml-auto"></p-button>
+        <p-button label="Cancel" severity="primary" [outlined]="true" icon="pi pi-times"></p-button>
+    </div>
+</form>

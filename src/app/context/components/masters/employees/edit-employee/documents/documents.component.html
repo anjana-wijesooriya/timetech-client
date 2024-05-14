@@ -1,0 +1,257 @@
+<div class="p-0 surface-card shadow-3 border-round h-full">
+    <p-panel>
+        <ng-template pTemplate="header">
+            <div class="flex align-items-center gap-2">
+                <p-avatar icon="font-semibold text-lg ic i-Folders" shape="circle" />
+                <span class="font-bold">
+                    Documents
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="icons">
+            <button pButton pRipple icon="pi pi-plus" class="p-button-primary p-button-outlined"
+                [label]="'Add New Document'" [loading]="isSaving"
+                (click)="openDocumentModel(undefined); showDocumentSlide = true"></button>
+        </ng-template>
+        <div class="w-full">
+            <p-table [rowHover]="true" [value]="documents" #empTable [scrollable]="true"
+                scrollHeight="calc(100vh - 300px)" dataKey="id" [rows]="10" [loading]="false"
+                [globalFilterFields]="['active', 'dependentName', 'docNo', 'expiryDate', 'remindMe', 'docType', 'name']"
+                [paginator]="true" styleClass="p-datatable-gridlines p-datatable-sm" responsiveLayout="stack"
+                [breakpoint]="'960px'" [tableStyle]="{'min-width': '50rem'}">
+
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>
+                            <div class="flex justify-content-between align-items-center">
+                                Dependent
+                                <!-- <p-sortIcon field="empCd"></p-sortIcon> -->
+                                <p-columnFilter class="ml-auto" type="text" field="dependentName" display="menu"
+                                    placeholder="Search by Dependent Name"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-between align-items-center">
+                                Doc Type
+                                <!-- <p-sortIcon field="empCd"></p-sortIcon> -->
+                                <p-columnFilter class="ml-auto" field="docType" matchMode="in" display="menu"
+                                    [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                                    <ng-template pTemplate="header">
+                                        <div class="px-3 pt-3 pb-0">
+                                            <span class="font-bold">Doc Type Picker</span>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                        <p-multiSelect [ngModel]="value" [options]="docTypes" placeholder="Any"
+                                            (onChange)="filter($event.value)">
+                                            <ng-template let-option pTemplate="item">
+                                                <div class="inline-block vertical-align-middle">
+                                                    <span class="ml-1 mt-1">{{ option }}</span>
+                                                </div>
+                                            </ng-template>
+                                        </p-multiSelect>
+                                    </ng-template>
+                                </p-columnFilter>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-between align-items-center">
+                                Doc Name
+                                <!-- <p-sortIcon field="empCd"></p-sortIcon> -->
+                                <p-columnFilter class="ml-auto" type="text" field="name" display="menu"
+                                    placeholder="Search by Doc Name"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-between align-items-center">
+                                Doc No
+                                <!-- <p-sortIcon field="empCd"></p-sortIcon> -->
+                                <p-columnFilter class="ml-auto" type="text" field="docNo" display="menu"
+                                    placeholder="Search by Doc No"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-between align-items-center">
+                                <span>Reminder</span>
+                                <!-- <p-sortIcon field="empCd"></p-sortIcon> -->
+                                <p-columnFilter type="boolean" field="remindMe" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-between align-items-center">
+                                <span>Status</span>
+                                <!-- <p-sortIcon field="empCd"></p-sortIcon> -->
+                                <p-columnFilter type="boolean" field="active" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-between align-items-center">
+                                <span>Expiry Date</span>
+                                <!-- <p-sortIcon field="empCd"></p-sortIcon> -->
+                                <p-columnFilter type="date" field="expiryDate" display="menu" class="ml-auto" />
+                            </div>
+                        </th>
+                        <!-- <th> View </th> -->
+                        <th> Actions </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-doc>
+                    <tr>
+                        <td>
+                            <span *ngIf="doc.dependentName == null;else docName">--Employee--</span>
+                            <ng-template #docName>{{doc.dependentName}}</ng-template>
+                        </td>
+                        <td>
+                            <p-chip [label]="doc.docType"></p-chip>
+                        </td>
+                        <td>
+                            {{doc.name}}
+                        </td>
+                        <td>
+                            {{doc.docNo}}
+                        </td>
+                        <td>
+                            <p-avatar icon="pi pi-bell" styleClass="mr-2" size="normal"
+                                [style]="{ 'background-color': '#2196F3', color: '#ffffff' }" shape="circle"
+                                *ngIf="doc.remindMe"></p-avatar>
+                        </td>
+                        <td>
+                            <p-tag [value]="doc.active ? 'Active' : 'Inactive'"
+                                [severity]="doc.active ? 'success' : 'warning'">
+                            </p-tag>
+                        </td>
+                        <td>
+                            {{doc.expiryDate == null ? '' : doc.expiryDate | date : 'MM/dd/yyyy'}}
+                        </td>
+                        <td>
+                            <button pButton pRipple icon="pi pi-folder-open" pTooltip="View"
+                                class="p-button-rounded p-button-info p-button-outlined mr-2"
+                                (click)="sidebarVisible = true; selectedDoc = doc; getRemindMeDate(doc);"></button>
+                            <button pButton pRipple icon="pi pi-pencil" pTooltip="Edit"
+                                class="p-button-rounded p-button-success p-button-outlined mr-2"
+                                (click)="openDocumentModel(doc); showDocumentSlide = true"></button>
+                            <button pButton pRipple icon="pi pi-trash" pTooltip="Delete"
+                                class="p-button-rounded p-button-danger p-button-outlined"
+                                (click)="onDelete(doc)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </p-panel>
+    <p-sidebar [(visible)]="showDocumentSlide" position="right" styleClass="p-sidebar-lg">
+        <app-edit-documents *ngIf="selectedDoc && showDocumentSlide" [selectedDoc]="selectedDoc"
+            (loadDocs)="getDocuments($event)"></app-edit-documents>
+    </p-sidebar>
+    <p-sidebar [(visible)]="sidebarVisible" (onHide)="sidebarVisible = false">
+        <ng-template pTemplate="header">Document Info</ng-template>
+        <ng-template pTemplate="content">
+            <div class="grid" *ngIf="selectedDoc">
+                <div class="col-12">
+                    <ul class="list-none p-0 m-0">
+                        <li class="flex flex-row surface-100 text-sm text-700 font-medium p-2 border-round mb-1">
+                            Linked to:<p class="text-900 ml-auto">{{selectedDoc.dependentName}}</p>
+                        </li>
+                        <li class="flex flex-row surface-100 text-sm text-700 font-medium p-2 border-round mb-1">
+                            Type:
+                            <p class="text-900 ml-auto">{{selectedDoc.docType}}</p>
+                        </li>
+                        <li class="flex flex-row surface-100 text-sm text-700 font-medium p-2 border-round mb-1">
+                            Document Name:
+                            <p class="text-900 ml-auto">{{selectedDoc.name}}</p>
+                        </li>
+                        <li class="flex flex-row surface-100 text-sm text-700 font-medium p-2 border-round mb-1">
+                            Document No.:
+                            <p class="text-900 ml-auto">{{selectedDoc.docNo}}</p>
+                        </li>
+                        <li class="flex flex-row surface-100 text-sm text-700 font-medium p-2 border-round mb-1">
+                            Mark as old:
+                            <p class="text-900 ml-auto">
+                                <p-tag [value]="selectedDoc.markAsOld ? 'Active' : 'Inactive'"
+                                    [severity]="selectedDoc.markAsOld ? 'success' : 'warning'">
+                                </p-tag>
+                            </p>
+                        </li>
+                        <li *ngIf="selectedDoc.markAsOld"
+                            class="flex flex-row surface-100 text-sm text-700 font-medium p-2 border-round mb-1">
+                            Mark as old date:
+                            <p class="text-900 ml-auto">{{getDate(selectedDoc.markAsOldDate)| date : 'MM/dd/yyyy'}}</p>
+                        </li>
+                        <li class="flex flex-row surface-100 text-sm text-700 font-medium p-2 border-round mb-1">
+                            Issue date:
+                            <p class="text-900 ml-auto">{{getDate(selectedDoc.issueDate) | date : 'MM/dd/yyyy'}}</p>
+                        </li>
+                        <li class="flex flex-row surface-100 text-sm text-700 font-medium p-2 border-round mb-1">
+                            Expiry date:
+                            <p class="text-900 ml-auto">{{getDate(selectedDoc.expiryDate)| date : 'MM/dd/yyyy'}}</p>
+                        </li>
+                        <li class="flex flex-row surface-100 text-sm text-700 font-medium p-2 border-round mb-1">
+                            Place of issue:
+                            <p class="text-900 ml-auto">{{selectedDoc.placeOfIssue}}</p>
+                        </li>
+                        <li *ngIf="selectedDoc.remindMe"
+                            class="flex flex-row surface-100 text-sm text-700 font-medium p-2 border-round mb-1">
+                            Remind me on:
+                            <p class="text-900 ml-auto">{{selectedDoc.remindOn}}</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 md:col-4">
+                    <p-image [src]="selectedDoc.attachmentOne" alt="Image" [preview]="true"
+                        imageClass="w-full"></p-image>
+                </div>
+                <div class="col-12 md:col-4">
+                    <p-image [src]="selectedDoc.attachmentTwo" alt="Image" [preview]="true"
+                        imageClass="w-full"></p-image>
+                </div>
+                <div class="col-12 md:col-4">
+                    <p-image [src]="selectedDoc.attachmentThree" alt="Image" [preview]="true"
+                        imageClass="w-full"></p-image>
+                </div>
+            </div>
+        </ng-template>
+
+    </p-sidebar>
+    <p-dialog header="Delete Confirmation" [(visible)]="showDeleteDialog" [modal]="true" [style]="{ width: '25rem' }">
+        <div class="grid" *ngIf="selectedDoc">
+            <div class="col-12">
+                <div class="inline-flex align-items-center justify-content-center gap-2 ">
+                    <p-avatar icon="pi pi-exclamation-triangle" shape="circle"></p-avatar>
+                    <span class="font-bold white-space-nowrap">Do you want to delete this record?</span>
+                </div>
+            </div>
+            <div class="col-12">
+                <ul class="list-none p-0 m-0">
+                    <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-2">
+                        <span class="block text-900 font-medium mb-1">Dependent: </span>
+                        <p class="text-600">{{selectedDoc.dependentName}}</p>
+                    </li>
+                    <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-2">
+                        <span class="block text-900 font-medium mb-1">Doc Type: </span>
+                        <p class="text-600">{{selectedDoc.docType}}</p>
+                    </li>
+                    <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-2">
+                        <span class="block text-900 font-medium mb-1">Doc Name: </span>
+                        <p class="text-600">{{selectedDoc.name}}</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-12">
+                <div class="field p-fluid">
+                    <span class="p-float-label">
+                        <textarea id="address" rows="4" cols="30" pInputTextarea [(ngModel)]="deleteReason"
+                            name="notes"></textarea>
+                        <label for="address">Reason</label>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-times" (click)="showDeleteDialog = false" label="Cancel" [text]="true"></p-button>
+            <p-button icon="pi pi-check" label="Delete" severity="danger" (onClick)="onClickDelete()"></p-button>
+        </ng-template>
+    </p-dialog>
+    <p-confirmDialog></p-confirmDialog>
+    <p-toast></p-toast>
+</div>

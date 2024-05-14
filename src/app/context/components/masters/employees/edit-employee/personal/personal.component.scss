@@ -1,0 +1,12 @@
+.ng-touched.ng-invalid {
+    border-color: #f87171;
+    // border-color: var(--red-500);
+}
+
+.p-error {
+    display: none;
+}
+
+.ng-touched.ng-invalid~.p-error {
+    display: block;
+}

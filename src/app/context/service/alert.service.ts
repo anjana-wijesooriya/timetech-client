@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import { MessageService } from 'primeng/api';
 
 @Injectable({
@@ -7,28 +6,32 @@ import { MessageService } from 'primeng/api';
 })
 export class AlertService {
 
-  constructor(private toastrService: ToastrService, private messageService: MessageService) { }
+  constructor(private messageService: MessageService) { }
 
   showError(msg: string) {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: msg });
   }
 
-  showSuccess(msg: string) {
+  success(msg: string) {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: msg });
   }
 
-  success(msg: string) {
-    this.toastrService.success(msg, 'Success', { timeOut: 5000, closeButton: true, progressBar: true })
+  info(msg: string) {
+    this.messageService.add({ severity: 'info', summary: 'Success', detail: msg });
+  }
+
+  warn(msg: string) {
+    this.messageService.add({ severity: 'warning', summary: 'Warning', detail: msg });
   }
 
   error(msg: any) {
     if (typeof (msg) == 'string') {
-      this.toastrService.error(msg, 'Error', { timeOut: 5000, closeButton: true, progressBar: true })
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: msg });
     } else {
       if (msg.error.statusCode == 500) {
-        this.toastrService.error(msg.error.description, 'Error', { timeOut: 5000, closeButton: true, progressBar: true })
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: msg.error.description });
       } else {
-        this.toastrService.error(msg.error, 'Error', { timeOut: 5000, closeButton: true, progressBar: true })
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: msg.error });
       }
     }
   }

@@ -1,0 +1,76 @@
+<div class="p-0 surface-card shadow-3 border-round h-full" *ngIf="menuType == 'Tabs'" #tabmenu>
+    <p-tabMenu [model]="menuItemsTab" [activeItem]="activeItem" (activeItemChange)="onActiveItemChange($event)"
+        styleClass="border-round">
+        <ng-template pTemplate="item" let-item>
+            <a class="p-menuitem-link flex justify-content-between align-items-center p-3">
+                <div>
+                    <span [class]="'font-bold ' + item.icon"></span>
+                    <span> {{ item.label }}</span>
+                </div>
+                <div>
+                    <span *ngIf="item.shortcut" [class]="item.shortcutClass">{{ item.shortcut }}</span>
+                    <p-badge *ngIf="item.badge" [value]="item.badge" [severity]="item.badgeSeverity"></p-badge>
+                </div>
+            </a>
+        </ng-template>
+    </p-tabMenu>
+
+    <div class="p-4 scalein  animation-duration-300" *ngIf="this.activeItem.label == 'General'"
+        ngif="menuType == 'tabs'">
+        <app-general></app-general>
+    </div>
+    <div class="p-4 scalein  animation-duration-300" *ngIf="this.activeItem.label == 'Security'"
+        ngif="menuType == 'tabs'">
+        <app-security></app-security>
+    </div>
+    <div class="p-4 scalein  animation-duration-300" *ngIf="this.activeItem.label == 'Dependants'"
+        ngif="menuType == 'tabs'">
+        <app-dependents></app-dependents>
+    </div>
+    <div class="p-4 scalein  animation-duration-300" *ngIf="this.activeItem.label == 'Contact'"
+        ngif="menuType == 'tabs'">
+        <app-contact></app-contact>
+    </div>
+    <div class="p-4 scalein  animation-duration-300" *ngIf="this.activeItem.label == 'Personal'"
+        ngif="menuType == 'tabs'">
+        <app-employee-personal></app-employee-personal>
+    </div>
+</div>
+<div class=" surface-card shadow-3 border-round w-full h-full" *ngIf="menuType == 'Steps'">
+    <p-stepper [(activeStep)]="activeStep" styleClass="w-full employee-overview">
+        <p-stepperPanel *ngFor="let item of menuItems; let i=index" header="item.label" styleClass="border-bottom-1">
+            <ng-template pTemplate="header" let-index="index" let-onClick="onClick" let-active="active"
+                let-highlighted="highlighted">
+                <p-button [icon]="'font-bold ' + item.icon" [outlined]="true" [label]="item.label" [ripple]="true"
+                    (onClick)="onClick.emit()" [link]="false" *ngIf="highlighted && active == false else activeBlock"
+                    text="true">
+                </p-button>
+                <ng-template #activeBlock>
+                    <p-button [icon]="'font-bold ' + item.icon" [outlined]="true" [label]="item.label"
+                        (onClick)="onClick.emit()" *ngIf="active else plainBlock">
+                    </p-button>
+
+                    <ng-template #plainBlock>
+                        <p-button [label]="item.label" [text]="true" [plain]="true" (onClick)="onClick.emit()"
+                            [ripple]="true" *ngIf="!(highlighted && active)"
+                            [icon]="'font-bold ' + item.icon"></p-button>
+                    </ng-template>
+                </ng-template>
+            </ng-template>
+            <ng-template pTemplate="content" let-nextCallback="nextCallback">
+                <p-divider styleClass="mt-0"></p-divider>
+                <div class="flex flex-column scalein  animation-duration-300">
+                    <div class="flex-auto flex justify-content-center align-items-center">
+                        <div [ngSwitch]="activeStep" class="px-3 w-full">
+                            <app-employee-personal *ngSwitchCase="1"></app-employee-personal>
+                            <app-contact *ngSwitchCase="2"></app-contact>
+                            <app-dependents *ngSwitchCase="3"></app-dependents>
+                            <app-security *ngSwitchCase="4"></app-security>
+                            <app-general *ngSwitchDefault></app-general>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </p-stepperPanel>
+    </p-stepper>
+</div>

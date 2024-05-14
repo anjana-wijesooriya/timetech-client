@@ -1,65 +1,158 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { EmployeesComponent } from './employees.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TableModule } from 'primeng/table';
-import { SidebarModule } from 'primeng/sidebar';
-import { ImageModule } from 'primeng/image';
-import { FormsModule } from '@angular/forms';
+import { ConfirmationService, FilterService, MessageService } from 'primeng/api';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
 import { ButtonModule } from 'primeng/button';
+import { CalendarModule } from 'primeng/calendar';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DividerModule } from 'primeng/divider';
+import { DockModule } from 'primeng/dock';
 import { DropdownModule } from 'primeng/dropdown';
+import { FileUploadModule } from 'primeng/fileupload';
+import { IconFieldModule } from 'primeng/iconfield';
+import { ImageModule } from 'primeng/image';
+import { InputIconModule } from 'primeng/inputicon';
+import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { KeyFilterModule } from 'primeng/keyfilter';
+import { MessagesModule } from 'primeng/messages';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { PanelModule } from 'primeng/panel';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { RatingModule } from 'primeng/rating';
 import { RippleModule } from 'primeng/ripple';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { SidebarModule } from 'primeng/sidebar';
 import { SliderModule } from 'primeng/slider';
+import { SplitterModule } from 'primeng/splitter';
+import { StepperModule } from 'primeng/stepper';
+import { StepsModule } from 'primeng/steps';
+import { TableModule } from 'primeng/table';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { TabViewModule } from 'primeng/tabview';
+import { TagModule } from 'primeng/tag';
 import { ToastModule } from 'primeng/toast';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ToolbarModule } from 'primeng/toolbar';
-import { TableDemoRoutingModule } from '../../uikit/table/tabledemo-routing.module';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { MessagesModule } from 'primeng/messages';
-import { IconFieldModule } from 'primeng/iconfield';
-import { InputIconModule } from 'primeng/inputicon';
-import { TreeSelectModule } from 'primeng/treeselect';
 import { TreeModule } from 'primeng/tree';
-import { FilterService } from 'primeng/api';
+import { TreeSelectModule } from 'primeng/treeselect';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { AlertService } from 'src/app/context/service/alert.service';
+import { ContactComponent } from './edit-employee/contact/contact.component';
+import { DependentsComponent } from './edit-employee/dependents/dependents.component';
+import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
+import { GeneralComponent } from './edit-employee/general/general.component';
+import { PersonalComponent } from './edit-employee/personal/personal.component';
+import { SecurityComponent } from './edit-employee/security/security.component';
+import { EmployeesComponent } from './employees.component';
+import { MenuModule } from 'primeng/menu';
+import { GalleriaModule } from 'primeng/galleria';
+import { DialogModule } from 'primeng/dialog';
+import { TerminalModule, TerminalService } from 'primeng/terminal';
+import { PasswordModule } from 'primeng/password';
+import { FieldsetModule } from 'primeng/fieldset';
+import { CheckboxModule } from 'primeng/checkbox';
+import { TreeTableModule } from 'primeng/treetable';
+import { OverviewComponent } from './edit-employee/overview/overview.component';
+import { DepartmentRightsComponent } from './edit-employee/department-rights/department-rights.component';
+import { DocumentsComponent } from './edit-employee/documents/documents.component';
+import { ChipModule } from 'primeng/chip';
+import { EditDocumentsComponent } from './edit-employee/documents/edit-documents/edit-documents.component';
+import { TooltipModule } from 'primeng/tooltip';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @NgModule({
-    declarations: [EmployeesComponent],
+    declarations: [
+        EmployeesComponent,
+        EditEmployeeComponent,
+        PersonalComponent,
+        ContactComponent,
+        DependentsComponent,
+        SecurityComponent,
+        GeneralComponent,
+        OverviewComponent,
+        DepartmentRightsComponent,
+        DocumentsComponent,
+        EditDocumentsComponent],
     imports: [
         CommonModule,
         RouterModule.forChild([
-            { path: '', component: EmployeesComponent }
+            { path: '', component: EmployeesComponent, title: 'Employees' },
+            {
+                path: ':id', component: EditEmployeeComponent, title: 'Employee Details',
+                children: [
+                    { path: '', component: OverviewComponent, title: 'Employee Overview' },
+                    { path: 'department-rights', component: DepartmentRightsComponent, title: 'Department Rights' },
+                    { path: 'documents', component: DocumentsComponent, title: 'Documents' },
+                    { path: 'dependents', component: DependentsComponent, title: 'Dependents' },
+                    { path: 'security', component: SecurityComponent, title: 'Security' },
+                    // { path: 'general', redirectTo: '' }
+                ]
+            }
         ]),
         TableModule,
-        TableDemoRoutingModule,
         FormsModule,
-        TableModule,
+        ReactiveFormsModule,
         RatingModule,
         ButtonModule,
         SliderModule,
+        TreeTableModule,
         InputTextModule,
         ToggleButtonModule,
+        TerminalModule,
         RippleModule,
+        TooltipModule,
         MultiSelectModule,
+        ChipModule,
         DropdownModule,
+        InputNumberModule,
         ProgressBarModule,
         ToastModule,
+        MenuModule,
         SidebarModule,
+        GalleriaModule,
+        PasswordModule,
         ImageModule,
         ToolbarModule,
         MessagesModule,
         IconFieldModule,
+        FieldsetModule,
         InputIconModule,
         TreeModule,
+        OverlayPanelModule,
+        CheckboxModule,
         TreeSelectModule,
+        TabViewModule,
+        DialogModule,
+        AvatarModule,
+        AvatarGroupModule,
+        TabMenuModule,
+        InputSwitchModule,
+        PanelModule,
+        SelectButtonModule,
+        CalendarModule,
+        KeyFilterModule,
+        InputTextareaModule,
+        DividerModule,
+        SplitterModule,
+        FileUploadModule,
+        ConfirmDialogModule,
+        TagModule,
+        DockModule,
+        StepperModule,
+        StepsModule,
     ],
     providers: [
         MessageService,
         ConfirmationService,
-        FilterService
+        FilterService,
+        AlertService,
+        TerminalService,
+        DatePipe
     ]
 })
 export class EmployeesModule { }

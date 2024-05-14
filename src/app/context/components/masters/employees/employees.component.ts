@@ -14,6 +14,7 @@ import { CompanyService } from 'src/app/context/service/company.service';
 import { CompanyModel } from 'src/app/context/api/company/company.model';
 import { DepartmentModel } from 'src/app/context/api/company/department.model';
 import { EmployeeStateService } from 'src/app/context/service/sharedstate/employee.state.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-employees',
@@ -72,10 +73,14 @@ export class EmployeesComponent implements OnInit {
   companies: CompanyModel[] = [];
   departments: DepartmentModel[] = [];
   selectedComapny: number;
+  showProfile: boolean = false;
+  isBoxLayout: boolean = false;
+  showAddEmployeeSlide: boolean = false;
 
   constructor(private baseService: BaseService, private employeeService: EmployeeService,
     private breadcrumbState: BreadcrumbStateService, private filterService: FilterService,
-    private employeeState: EmployeeStateService, private companyService: CompanyService) {
+    private employeeState: EmployeeStateService, private companyService: CompanyService,
+    public router: Router, public route: ActivatedRoute) {
 
   }
 

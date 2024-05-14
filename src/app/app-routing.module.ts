@@ -16,7 +16,7 @@ import { IconTypes, Breadcrumb } from './context/service/sharedstate/breadcrumb.
                     },
                     { path: 'self-service', loadChildren: () => import('./context/components/selfservice/selfservice.module').then(m => m.SelfServiceModule) },
                     { path: 'masters', loadChildren: () => import('./context/components/masters/masters.module').then(m => m.MastersModule) },
-                    { path: 'uikit', loadChildren: () => import('./context/components/uikit/uikit.module').then(m => m.UIkitModule) },
+                    // { path: 'uikit', loadChildren: () => import('./context/components/uikit/uikit.module').then(m => m.UIkitModule) },
                     { path: 'utilities', loadChildren: () => import('./context/components/utilities/utilities.module').then(m => m.UtilitiesModule) },
                     { path: 'documentation', loadChildren: () => import('./context/components/documentation/documentation.module').then(m => m.DocumentationModule) },
                     { path: 'blocks', loadChildren: () => import('./context/components/primeblocks/primeblocks.module').then(m => m.PrimeBlocksModule) },
@@ -26,7 +26,7 @@ import { IconTypes, Breadcrumb } from './context/service/sharedstate/breadcrumb.
             },
             { path: 'auth', loadChildren: () => import('./context/components/auth/auth.module').then(m => m.AuthModule) },
             { path: 'landing', loadChildren: () => import('./context/components/landing/landing.module').then(m => m.LandingModule) },
-            { path: 'notfound', component: NotfoundComponent },
+            // { path: 'notfound', component: NotfoundComponent },
             { path: '**', redirectTo: '/notfound' },
         ], { scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled', onSameUrlNavigation: 'reload' })
     ],

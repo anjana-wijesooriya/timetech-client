@@ -20,7 +20,7 @@ import { DashboardService } from 'src/app/context/service/dashboard.service';
   imports: [
     CommonModule,
     RouterModule.forChild([
-      { path: '', component: DashboardComponent }
+      { path: '', component: DashboardComponent, title: 'Employee Dashboard' }
     ]),
     DropdownModule,
     MeterGroupModule,

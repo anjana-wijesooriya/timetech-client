@@ -13,6 +13,23 @@ export class AppConfigComponent {
     menuColors: string[] = ['white', 'darkgray', 'blue', 'bluegray', 'brown', 'cyan', 'green',
         'indigo', 'deeppurple', 'orange', 'pink', 'purple', 'teal']
 
+    themes: any[] = [
+        { name: 'Bootstrap-Blue', value: 'bootstrap4-light-blue', color: '#007bff' },
+        { name: 'Bootstrap-Purple', value: 'bootstrap4-light-purple', color: '#7a38a7' },
+        { name: 'Material-Indigo', value: 'mdc-light-indigo', color: '#3F51B5' },
+        { name: 'Material-Purple', value: 'mdc-light-deeppurple', color: '#673AB7' },
+        { name: 'Tailwind', value: 'tailwind-light', color: '#4f46e5' },
+        { name: 'Fluent', value: 'fluent-light', color: '#4f46e5' },
+        { name: 'Lara-Indigo', value: 'lara-light-indigo', color: '#6366F1' },
+        { name: 'Lara-Blue', value: 'lara-light-blue', color: '#6366F1' },
+        { name: 'Lara-Purple', value: 'lara-light-purple', color: '#8B5CF6' },
+        { name: 'Lara-Teal', value: 'lara-light-teal', color: '#14b8a6' },
+        { name: 'Saga-Blue', value: 'saga-light-blue', color: '#2196F3' },
+        { name: 'Saga-Green', value: 'saga-light-green', color: '#4CAF50' },
+        { name: 'Saga-Orange', value: 'saga-light-orange', color: '#fb7500' },
+        { name: 'Saga-Purple', value: 'saga-light-purple', color: '#9C27B0' },
+    ]
+
     constructor(
         public layoutService: LayoutService,
         public menuService: MenuService
@@ -76,7 +93,9 @@ export class AppConfigComponent {
         this.layoutService.config.update((config) => ({
             ...config,
             colorScheme: val,
+            theme: this.setTheme(this.theme, val)
         }));
+        ;
     }
     get colorScheme(): string {
         return this.layoutService.config().colorScheme;
@@ -101,37 +120,27 @@ export class AppConfigComponent {
         this.menuColor = color
     }
 
-    /*  set changeColorScheme(colorScheme: string) {
-        
-        this.theme = this.theme;
-        switch (colorScheme) {
-            case 'bootstrap4-light-blue':
-            case 'bootstrap4-light-purple':
-            case 'md-light-indigo':
-            case 'md-light-deeppurple':
-            case 'mdc-light-indigo':
-            case 'mdc-light-deeppurple':
-            case 'lara-light-indigo':
-            case 'mdc-light-deeppurple':
-            case 'mdc-light-deeppurple':
-            case 'mdc-light-deeppurple':
-            case 'mdc-light-deeppurple':
-            case 'mdc-light-deeppurple':
-            this.theme = 'saga-blue';
-            break;
-            case 'light':
-            this.theme = 'saga-blue';
-            break;
-        this.colorScheme = colorScheme;
-        
+    changeTheme(theme: string, colorScheme: string) {
+        // this.theme = theme;
+        // this.colorScheme = this.colorScheme;
+        this.theme = this.setTheme(theme, this.colorScheme);
     }
 
-    get changeColorScheme() {
-        return this.colorScheme;    }
-*/
-    changeTheme(theme: string, colorScheme: string) {
-        this.theme = theme;
-        this.colorScheme = this.colorScheme;
+    setTheme(_theme: string, _colorScheme: string) {
+        if (_theme == 'tailwind-light' || _theme == 'fluent-light') {
+            this.layoutService.config.update((config) => ({
+                ...config,
+                colorScheme: 'light',
+            }));
+            return _theme;
+        }
+        if (_theme.includes('light') && _colorScheme != 'light') {
+            return _theme.replace('light', 'dark');
+        }
+        if (_theme.includes('dark') && _colorScheme != 'dark') {
+            return _theme.replace('dark', 'light');
+        }
+        return _theme;
     }
 
     decrementScale() {

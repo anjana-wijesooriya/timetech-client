@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { EmployeesComponent } from './employees/employees.component';
 
 const routes: Routes = [
-    { path: '**', component: EmployeesComponent },
-    { path: 'hr-personal', loadChildren: () => import('./employees/employees.module').then(m => m.EmployeesModule) }
+    // { path: '**', redirectTo: '/masters/employees', pathMatch: 'prefix' },
+    { path: 'hr-personal', redirectTo: 'employees' },
+    { path: 'employees', loadChildren: () => import('./employees/employees.module').then(m => m.EmployeesModule) },
+
 ];
 
 @NgModule({

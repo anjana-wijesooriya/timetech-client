@@ -14,6 +14,7 @@ import { StateService } from 'src/app/context/service/sharedstate/state.service'
 // import { BreadcrumbState } from 'src/app/context/service/sharedstate/breadcrumb.state.service';
 import { IconService } from 'src/app/context/service/icon.service';
 import { IconTypes } from '../../../service/sharedstate/breadcrumb.state.service';
+// import '../../../../../assets/context/images/avatar/onyamalimba.png'
 
 @Component({
   selector: 'app-dashboard',
@@ -38,7 +39,7 @@ export class DashboardComponent implements OnInit {
       expanded: true,
       type: 'person',
       data: {
-        image: 'https://primefaces.org/cdn/primeng/images/context/avatar/amyelsner.png',
+        image: '.../../../../../assets/context/images/avatar/amyelsner.png',
         name: 'Amy Elsner',
         title: 'CEO'
       },
@@ -47,7 +48,7 @@ export class DashboardComponent implements OnInit {
           expanded: true,
           type: 'person',
           data: {
-            image: 'https://primefaces.org/cdn/primeng/images/context/avatar/annafali.png',
+            image: '.../../../../../assets/context/images/avatar/annafali.png',
             name: 'Anna Fali',
             title: 'CMO'
           },
@@ -57,7 +58,7 @@ export class DashboardComponent implements OnInit {
           expanded: true,
           type: 'person',
           data: {
-            image: 'https://primefaces.org/cdn/primeng/images/context/avatar/stephenshaw.png',
+            image: '.../../../../../assets/context/images/avatar/stephenshaw.png',
             name: 'Stephen Shaw',
             title: 'CTO'
           },

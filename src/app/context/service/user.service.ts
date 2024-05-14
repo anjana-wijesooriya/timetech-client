@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
-import { UserPermissionModel } from '../models/user/user-permission.model';
 import { NavigationService } from './navigation.service';
 import { Router } from '@angular/router';
-import { take, map, firstValueFrom } from 'rxjs';
-import { CommonDataModel } from '../models/shared/common-data.model';
+import { CommonDataModel } from '../api/shared/common-data.model';
+import { UserPermissionModel } from '../api/user/user-permission.model';
 
 @Injectable({
   providedIn: 'root'

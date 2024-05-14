@@ -39,7 +39,7 @@
     <ul class="layout-menu" *ngIf="!isLoading">
         <ng-container *ngFor="let item of model; let i = index;">
             <li app-menuitem *ngIf="!item.separator" [item]="item" [index]="i" [root]="true"></li>
-            <li  class="menu-separator"></li>
+            <li class="menu-separator"></li>
         </ng-container>
         <li class="hidden">
             <a href="https://www.primefaces.org/primeblocks-ng/#/">
@@ -49,4 +49,3 @@
         </li>
     </ul>
 </ng-template>
-

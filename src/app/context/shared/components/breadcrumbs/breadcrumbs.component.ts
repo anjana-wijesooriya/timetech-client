@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, NgZone, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { distinctUntilChanged, filter, map } from 'rxjs';
 import { Breadcrumb, BreadcrumbStateService } from 'src/app/context/service/sharedstate/breadcrumb.state.service';
 
@@ -9,10 +10,15 @@ import { Breadcrumb, BreadcrumbStateService } from 'src/app/context/service/shar
   styleUrl: './breadcrumbs.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BreadcrumbsComponent implements OnInit {
+export class BreadcrumbsComponent implements OnInit, DoCheck {
   breadcrumbs: any[];
+  pageTitle: string;
+  isShowDatePicker: boolean;
+  isShowDropDown: boolean;
 
-  constructor(private route: ActivatedRoute, private router: Router, private breadcrumbState: BreadcrumbStateService) {
+  constructor(private route: ActivatedRoute, private router: Router, private breadcrumbState: BreadcrumbStateService,
+    public titleService: Title, public zone: NgZone, private ref: ChangeDetectorRef
+  ) {
     // this.router;
     // debugger
 
@@ -25,6 +31,15 @@ export class BreadcrumbsComponent implements OnInit {
     // });
 
   }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   this.pageTitle = this.titleService.getTitle();
+  // }
+
+  // this.zone.run(() => this.donations = donations)
+
+  ngDoCheck(): void {
+    this.showWidgets();
+  }
 
   ngOnInit() {
     // this.route.data.subscribe((data) => {
@@ -32,15 +47,51 @@ export class BreadcrumbsComponent implements OnInit {
     // });
     this.breadcrumbState.getBreadCrumbState().subscribe(res => {
       this.breadcrumbs = res.breadcrumbs as Breadcrumb[];
+
+      // setTimeout(() => {
+      //   this.showWidgets();
+      // }, 1000);
     })
-    // console.log(this.breadcrumbState.breadcrumbs)
-    // this.router.events.pipe(
-    //   filter((event) => event instanceof NavigationEnd),
-    //   distinctUntilChanged(),
-    // ).subscribe(() => {
-    //   this.breadcrumbs = this.buildBreadCrumb(this.route.root);
-    //   console.log(this.breadcrumbs);
-    // })
+
+    this.router.events.subscribe((event: any): void => {
+      // this.pageTitle = '';
+      if (event instanceof NavigationStart) {
+        // Show loading indicator
+      }
+
+      if (event instanceof NavigationEnd) {
+        // Hide loading indicator
+        // this.pageTitle = this.titleService.getTitle();
+        setTimeout(() => {
+          this.showWidgets()
+        }, 1000);
+      }
+
+      if (event instanceof NavigationError) {
+        // Hide loading indicator
+        let errorEvent = event as NavigationError;
+
+        // Present error to user
+        console.log(errorEvent.error);
+      }
+    });
+  }
+
+  showWidgets() {
+    this.isShowDatePicker = false;
+    this.isShowDatePicker = false;
+    switch (this.titleService.getTitle()) {
+      case 'Employee Dashboard':
+        this.isShowDatePicker = true;
+        break;
+      case 'Employee Details':
+        this.isShowDropDown = true;
+        break;
+      default:
+        break;
+
+    }
+    this.ref.detectChanges();
   }
 
   private createBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: Array<{ label: any, url: string }> = []): Array<{ label: string, url: string }> {

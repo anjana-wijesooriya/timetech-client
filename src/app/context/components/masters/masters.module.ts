@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 import { MastersRoutingModule } from './masters-routing.module';
 import { MessageService } from 'primeng/api';
 
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 @NgModule({
     imports: [CommonModule, MastersRoutingModule],
     providers: [
-        MessageService
+        MessageService,
+        OverlayPanelModule
     ]
 })
 export class MastersModule { }

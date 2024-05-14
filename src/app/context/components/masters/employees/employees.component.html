@@ -1,4 +1,4 @@
-<div class="grid surface-ground employees-layout-wrapper">
+<div class="grid employees-layout-wrapper">
     <div class="col-12 surface-ground p-2 mb-3">
         <div class="card surface-card  p-3 m-0">
             <h5 class="mb-0">Employees</h5>
@@ -8,9 +8,12 @@
                 <ng-template pTemplate="left">
                     <div class="flex flex-wrap gap-2">
                         <button pButton pRipple [label]="'Filter'" [outlined]="true" icon="pi pi-filter-slash"
-                            class="p-button-danger" (click)="showFilterMenu();" [disabled]="false"></button>
-                        <button pButton pRipple label="New" [outlined]="true" icon="pi pi-plus"
-                            class="p-button-success mr-2" (click)="allDepartments = allDepartments"></button>
+                            class="p-button-primary" (click)="showFilterMenu();" [disabled]="false"></button>
+                        <button pButton pRipple label="Add New Employee" [outlined]="true" icon="pi pi-user-plus"
+                            class="p-button-primary mr-2" (click)="showAddEmployeeSlide = true"></button>
+                        <button pButton pRipple label="Change Table Layout" [outlined]="true" icon="pi pi-th-large"
+                            class="p-button-primary mr-2" (click)="isBoxLayout = !isBoxLayout"></button>
+
                     </div>
                     <!-- <div class="flex flex-wrap gap-2">
                         <button pButton pRipple [label]="'check All'" [outlined]="true" icon="pi pi-filter-slash" class="p-button-danger"
@@ -88,15 +91,17 @@
                     </p-sidebar>
                 </div>
                 <!-- <div class="col"> -->
-                <div class="grid-container employees-table transition-all transition-duration-300 box-layout">
+                <div class="grid-container employees-table transition-all transition-duration-300"
+                    [ngClass]="{'box-layout': isBoxLayout}">
                     <p-table #empTable [columns]="selectedColumns" [value]="_employees" dataKey="id" [rowHover]="true"
-                        styleClass="p-datatable-sm p-datatable-gridlines" [paginator]="true" [rows]="10"
-                        [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 25, 50, 100]"
-                        [virtualScrollItemSize]="5" [loading]="isLoading" scrollHeight="36rem"
+                        styleClass="p-datatable-sm p-datatable-gridlines" [paginator]="true" [rows]="25"
+                        [showCurrentPageReport]="true" [rowsPerPageOptions]="[25, 50, 100, 200]"
+                        [virtualScrollItemSize]="5" [loading]="isLoading" [scrollable]="true"
+                        scrollHeight="calc(100vh - 300px)"
                         [globalFilterFields]="['empCd', 'empName', 'userProfileObj.name', 'designationObj.name', 'email', 'nationalID']"
-                        responsiveLayout="stack" [breakpoint]="'1360px'" tableStyleClass="table-layout-fixed"
-                        [resizableColumns]="true" columnResizeMode="fit" [autoLayout]="true">
-                        <ng-template pTemplate="caption" layout>
+                        responsiveLayout="stack" tableStyleClass="table-layout-fixed" [resizableColumns]="true"
+                        columnResizeMode="fit" [autoLayout]="true">
+                        <ng-template pTemplate="caption" (onRowSelect)="showProfile = true">
 
                             <div class="flex flex-wrap justify-content-between">
                                 <!-- <p-multiSelect class="" [options]="columns" [(ngModel)]="selectedColumns" optionLabel="header"
@@ -210,7 +215,8 @@
                                             placeholder="Search by ID No." class="ml-auto"></p-columnFilter>
                                     </div>
                                 </th>
-                                <th pSortableColumn="active" [hidden]="!isShowColumn('active')" pResizableColumn>
+                                <th pSortableColumn="active" [hidden]="!isShowColumn('active')"
+                                    style="width:10rem !important;">
                                     <div class="flex justify-content-between align-items-center">
                                         Status
                                         <p-sortIcon field="active"></p-sortIcon>
@@ -218,22 +224,25 @@
                                             class="ml-auto"></p-columnFilter>
                                     </div>
                                 </th>
-                                <th pFrozenColumn alignFrozen="right" style="width:7rem !important;">
+                                <th pFrozenColumn alignFrozen="right" style="width:3rem !important;">
                                     <div class="flex justify-content-between align-items-center">
-                                        Actions
+                                        Edit
                                     </div>
                                 </th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
-                            <tr class="card shadow-5 w-18rem flex flex-wrap p-1">
+                            <tr [pSelectableRow]="employee">
+
                                 <td pFrozenColumn>
                                     <span class="p-column-title font-bold mr-3">Employee Code:</span>
                                     {{employee.empCd}}
                                 </td>
                                 <td [hidden]="!isShowColumn('empName')">
                                     <span class="p-column-title font-bold mr-3">Employee Name:</span>
-                                    {{employee.empName}}
+                                    <p-avatar [label]="employee.empName.substring(0, 1)" styleClass="mr-2"
+                                        [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }" shape="circle" />
+                                    <span class="ml-1 vertical-align-middle">{{ employee.empName }}</span>
                                 </td>
                                 <td [hidden]="!isShowColumn('userProfileObj.name')">
                                     <span class="p-column-title font-bold mr-3">User Profile:</span>
@@ -261,15 +270,10 @@
                                     </p-tag>
                                 </td>
                                 <td pFrozenColumn alignFrozen="right">
-                                    <span class="p-column-title font-bold mr-3">Actions:</span>
-                                    <p-button pRipple icon="pi pi-pencil" [text]="true" size="small" severity="success"
+                                    <p-button pRipple icon="pi pi-pencil" [text]="true" size="small" severity="primary"
                                         [rounded]="true" [raised]="true" styleClass="mr-2"
-                                        (click)="router.navigate(['../employee/' + employee.empId], { relativeTo: this.route })"
-                                        [outlined]="true">
-                                    </p-button>
-                                    <p-button icon="pi pi-trash" size="small" [text]="true" severity="warning"
-                                        [rounded]="true" (click)="onMailToClick(employee.email)" [outlined]="true"
-                                        [raised]="true">
+                                        [routerLink]="'/masters/employees/' + employee.empId" [outlined]="true"
+                                        pTooltip="Edit Employee">
                                     </p-button>
                                     <!-- <button pButton pRipple icon="pi pi-pencil" size="small" 
                                                             class="p-button-rounded p-button-success p-button-outlined mr-2"
@@ -315,3 +319,58 @@
         </div>
     </div>
 </div>
+<p-sidebar [(visible)]="showAddEmployeeSlide" position="right">
+    <ng-template pTemplate="header">
+        <div class="font-bold text-xl">Add New Employee</div>
+    </ng-template>
+    <ng-template pTemplate="content">
+
+    </ng-template>
+</p-sidebar>
+<p-sidebar [(visible)]="showProfile" position="right">
+    <ng-template pTemplate="header">
+        <div class="font-bold text-xl">User Profile</div>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <div class="flex-auto overflow-y-auto">
+            <div class="text-center mb-4">
+                <img src="../../../../../assets/context/images/avatar/onyamalimba.png"
+                    style="width: 70px; height: 70px;">
+                <div class="text-900 mt-3 mb-2 text-xl font-medium">John Doe</div>
+                <span class="text-700">Sales Manager</span>
+            </div>
+            <div class="flex align-items-center mb-5">
+                <a class="flex flex-column flex-grow-1 align-items-center gap-2">
+                    <div pripple
+                        class="p-ripple p-element cursor-pointer border-round surface-100 hover:surface-200 transition-colors transition-duration-150 p-3 border-round-2xl">
+                        <i class="pi pi-phone text-xl text-600"></i>
+                        <span class="p-ink"></span>
+                    </div>
+                    <span class="text-sm font-medium text-700">33991113</span>
+                </a>
+                <a class="flex flex-column flex-grow-1 align-items-center gap-2">
+                    <div pripple
+                        class="p-ripple p-element cursor-pointer border-round surface-100 hover:surface-200 transition-colors transition-duration-150 p-3 border-round-2xl">
+                        <i class="pi pi-envelope text-xl text-600"></i>
+                        <span class="p-ink"></span>
+                    </div>
+                    <span class="text-sm font-medium text-700">abc&#64;gamail.com</span>
+                </a>
+            </div>
+            <ul class="list-none p-0 m-0">
+                <li class="surface-100 text-sm text-700 font-medium p-2 border-round mb-1">NAME</li>
+                <li class="text-900 p-2">John Doe</li>
+                <li class="surface-100 text-sm text-700 font-medium p-2 border-round mt-4 mb-1">MEMBER SINCE</li>
+                <li class="text-900 p-2">1st Jan 2013</li>
+                <li class="surface-100 text-sm text-700 font-medium p-2 border-round mt-4 mb-1">Department</li>
+                <li class="text-900 p-2">UI/UX Design Team</li>
+                <li class="surface-100 text-sm text-700 font-medium p-2 border-round mt-4 mb-1">Designation</li>
+                <li class="text-900 p-2">Full-Stack Developer</li>
+                <li class="surface-100 text-sm text-700 font-medium p-2 border-round mt-4 mb-1">Company</li>
+                <li class="text-900 p-2">TimeTech Bahrain Company</li>
+                <li class="surface-100 text-sm text-700 font-medium p-2 border-round mt-4 mb-1">Nationality</li>
+                <li class="text-900 p-2">Sri Lankan</li>
+            </ul>
+        </div>
+    </ng-template>
+</p-sidebar>

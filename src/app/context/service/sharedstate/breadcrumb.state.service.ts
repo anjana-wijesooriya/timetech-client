@@ -4,7 +4,7 @@ import { StateService } from './state.service';
 
 const initialState: BreadcrumbState = {
     breadcrumbs: [],
-    activeBreadcrumb: undefined
+    title: ''
 };
 
 @Injectable({
@@ -31,13 +31,14 @@ export class BreadcrumbStateService extends StateService<BreadcrumbState> {
     get breadcrumbState() {
         return this.state.breadcrumbs;
     }
+
 }
 
 
 
 export interface BreadcrumbState {
     breadcrumbs: Breadcrumb[],
-    activeBreadcrumb: Breadcrumb
+    title: string;
 }
 
 export class Breadcrumb {

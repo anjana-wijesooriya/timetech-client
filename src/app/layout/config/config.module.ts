@@ -5,6 +5,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { ButtonModule } from 'primeng/button';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { SelectButtonModule } from 'primeng/selectbutton';
 import { AppConfigComponent } from './app.config.component';
 
 @NgModule({
@@ -14,7 +15,8 @@ import { AppConfigComponent } from './app.config.component';
         SidebarModule,
         RadioButtonModule,
         ButtonModule,
-        InputSwitchModule
+        InputSwitchModule,
+        SelectButtonModule
     ],
     declarations: [
         AppConfigComponent

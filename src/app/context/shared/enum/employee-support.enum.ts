@@ -1,4 +1,5 @@
-import { PairValue } from "../models/dashboard/attendance-details.model";
+import { PairValue } from "../../api/dashboard/attendance-details.model";
+
 
 export class EmployeeSupport {
     public static BLOOD_GROUPS: PairValue[] = [

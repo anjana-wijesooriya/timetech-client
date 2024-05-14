@@ -1,0 +1,60 @@
+<div class="p-0 surface-card shadow-3 border-round h-full">
+    <p-panel>
+        <ng-template pTemplate="header">
+            <div class="flex align-items-center gap-2">
+                <p-avatar icon="font-medium ic i-Building" shape="circle" />
+                <span class="font-bold">
+                    Department Rights
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="icons">
+            <p-confirmDialog></p-confirmDialog>
+            <p-toast></p-toast>
+            <button pButton pRipple icon="pi pi-save" class="p-button-primary p-button-outlined" [label]="'Update'"
+                [loading]="isSaving" (click)="onUpdateRights()"></button>
+        </ng-template>
+        <div class="w-full">
+            <p-treeTable [value]="departmentTree" [columns]="cols" selectionMode="multiple"
+                [(selection)]="selectedNodes" [scrollable]="true" [tableStyle]="{'min-width':'50rem'}"
+                [styleClass]="'p-treetable-sm'">
+                <ng-template pTemplate="caption">
+                    <div class="flex">
+                        <div class="flex ">
+                            <p-checkbox [binary]="true" inputId="binary" class="mr-auto mt-auto mb-auto"
+                                (onChange)="onChangeToggler($event)"></p-checkbox>
+                            <span class="mr-auto mt-auto mb-auto pl-2">Toggle All</span>
+                        </div>
+                        <div class="flex ml-auto mt-auto mb-auto">
+                            <span class="ml-auto mt-auto mb-auto">Company</span>
+                            <p-dropdown [options]="companies" placeholder="Select Option" [(ngModel)]="selectedComapny"
+                                (onChange)="onChangeCompany($event.value)" optionLabel="name" optionValue="compId"
+                                class="ml-2"></p-dropdown>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th *ngFor="let col of columns">
+                            <b>{{ col.header }}</b>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+                    <tr [ttRow]="rowNode" [ttSelectableRow]="rowNode">
+                        <td>
+                            <div class="flex">
+                                <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                                <p-checkbox [(ngModel)]="rowData.checked" [binary]="true" inputId="binary" class="pr-2"
+                                    (onChange)="onActiveDepartment($event, rowData.type)"></p-checkbox>
+                                <!-- <p-treeTableCheckbox [value]="rowNode" class="my-auto"></p-treeTableCheckbox> -->
+                                <b class="my-auto">{{ rowData.type }}</b>
+                            </div>
+                        </td>
+                        <td>{{ rowData.label }}</td>
+                    </tr>
+                </ng-template>
+            </p-treeTable>
+        </div>
+    </p-panel>
+</div>
