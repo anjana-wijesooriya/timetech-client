@@ -90,7 +90,7 @@ export class OverviewComponent {
       { path: undefined, label: 'Master Modules', key: '1', icon: 'pi pi-share-alt' },
       { path: '/masters/hr-personal', label: 'Employees', key: '2', icon: 'pi pi-chart-bar' },
       // { path: `/masters/employee/${this.route.snapshot.paramMap.get('id')}`, label: 'Edit Employee', key: '3', icon: 'pi pi-user-edit' },
-      { path: `/masters/employee/${this.route.snapshot.paramMap.get('id')}`, label: 'Edit Employee', key: '3', icon: 'font-semibold ic i-Add-UserStar' },
+      { path: `/masters/employees/${this.route.parent.snapshot.paramMap.get('id')}`, label: 'Edit Employee', key: '3', icon: 'font-semibold ic i-Add-UserStar' },
       // { path: `/masters/employee/${this.route.snapshot.paramMap.get('id')}`, label: 'Edit Employee', key: '3', icon: 'font-semibold ic pi-Add-edit' },
     ]);
   }

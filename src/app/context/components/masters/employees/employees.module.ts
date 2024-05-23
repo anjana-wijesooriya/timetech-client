@@ -42,12 +42,12 @@ import { TreeModule } from 'primeng/tree';
 import { TreeSelectModule } from 'primeng/treeselect';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { AlertService } from 'src/app/context/service/alert.service';
-import { ContactComponent } from './edit-employee/contact/contact.component';
-import { DependentsComponent } from './edit-employee/dependents/dependents.component';
+import { ContactComponent } from './edit-employee/overview/contact/contact.component';
+import { DependentsComponent } from './edit-employee/overview/dependents/dependents.component';
 import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
-import { GeneralComponent } from './edit-employee/general/general.component';
-import { PersonalComponent } from './edit-employee/personal/personal.component';
-import { SecurityComponent } from './edit-employee/security/security.component';
+import { GeneralComponent } from './edit-employee/overview/general/general.component';
+import { PersonalComponent } from './edit-employee/overview/personal/personal.component';
+import { SecurityComponent } from './edit-employee/overview/security/security.component';
 import { EmployeesComponent } from './employees.component';
 import { MenuModule } from 'primeng/menu';
 import { GalleriaModule } from 'primeng/galleria';
@@ -64,6 +64,10 @@ import { ChipModule } from 'primeng/chip';
 import { EditDocumentsComponent } from './edit-employee/documents/edit-documents/edit-documents.component';
 import { TooltipModule } from 'primeng/tooltip';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { AddEmployeeComponent } from './add-employee/add-employee.component';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @NgModule({
     declarations: [
@@ -77,7 +81,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
         OverviewComponent,
         DepartmentRightsComponent,
         DocumentsComponent,
-        EditDocumentsComponent],
+        EditDocumentsComponent,
+        AddEmployeeComponent],
     imports: [
         CommonModule,
         RouterModule.forChild([
@@ -85,14 +90,15 @@ import { InputNumberModule } from 'primeng/inputnumber';
             {
                 path: ':id', component: EditEmployeeComponent, title: 'Employee Details',
                 children: [
-                    { path: '', component: OverviewComponent, title: 'Employee Overview' },
+                    { path: 'employee-overview', component: OverviewComponent, title: 'Employee Overview' },
                     { path: 'department-rights', component: DepartmentRightsComponent, title: 'Department Rights' },
                     { path: 'documents', component: DocumentsComponent, title: 'Documents' },
-                    { path: 'dependents', component: DependentsComponent, title: 'Dependents' },
-                    { path: 'security', component: SecurityComponent, title: 'Security' },
-                    // { path: 'general', redirectTo: '' }
+                    // { path: 'dependents', component: DependentsComponent, title: 'Dependents' },
+                    // { path: 'security', component: SecurityComponent, title: 'Security' },
+                    { path: '', redirectTo: 'employee-overview', pathMatch: 'full' }
                 ]
-            }
+            },
+            { path: '**', redirectTo: '', pathMatch: 'prefix' },
         ]),
         TableModule,
         FormsModule,
@@ -104,10 +110,13 @@ import { InputNumberModule } from 'primeng/inputnumber';
         InputTextModule,
         ToggleButtonModule,
         TerminalModule,
+        SkeletonModule,
         RippleModule,
         TooltipModule,
         MultiSelectModule,
         ChipModule,
+        InputGroupModule,
+        InputGroupAddonModule,
         DropdownModule,
         InputNumberModule,
         ProgressBarModule,

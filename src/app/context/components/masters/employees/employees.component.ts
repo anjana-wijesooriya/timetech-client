@@ -1,5 +1,5 @@
 import { NodeService } from 'src/app/context/service/node.service';
-import { Component, Input, OnInit, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { FilterService, TreeNode } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { PairValue } from 'src/app/context/api/dashboard/attendance-details.model';
@@ -15,6 +15,8 @@ import { CompanyModel } from 'src/app/context/api/company/company.model';
 import { DepartmentModel } from 'src/app/context/api/company/department.model';
 import { EmployeeStateService } from 'src/app/context/service/sharedstate/employee.state.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AddEmployeeComponent } from './add-employee/add-employee.component';
+import { Utils } from 'src/app/context/shared/utils';
 
 @Component({
   selector: 'app-employees',
@@ -43,7 +45,8 @@ export class EmployeesComponent implements OnInit {
     });
     this.filteredEmployees = value;
     this.userProfiles = Object.keys(this.groupBy(value, 'userProfile')).map((e => { return { name: e, value: e, key: '' } }));
-    this.designations = Object.keys(this.groupBy(value, 'designation')).map((e => { return { name: e, value: e, key: '' } }));
+    this.designations = Object.keys(this.groupBy(value, 'designation')).map((e => { return { name: e == null ? 'Not Assigned' : e, value: e, key: '' } }));
+    this.deps = Object.keys(this.groupBy(value, 'deptDs')).map((e => { return { name: e, value: e, key: '' } }));
   }
   @Input() allEmployees: EmployeeGridModel[] = [];
   @Input() headerText: string = '';
@@ -56,6 +59,8 @@ export class EmployeesComponent implements OnInit {
 
   userProfiles: PairValue[] = []
   designations: PairValue[] = []
+  deps: PairValue[] = []
+
 
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
   page = 1;
@@ -74,8 +79,9 @@ export class EmployeesComponent implements OnInit {
   departments: DepartmentModel[] = [];
   selectedComapny: number;
   showProfile: boolean = false;
+  showAddSlide: boolean = false;
   isBoxLayout: boolean = false;
-  showAddEmployeeSlide: boolean = false;
+  @ViewChild(AddEmployeeComponent) addEmployeeComponent!: AddEmployeeComponent;
 
   constructor(private baseService: BaseService, private employeeService: EmployeeService,
     private breadcrumbState: BreadcrumbStateService, private filterService: FilterService,
@@ -91,6 +97,7 @@ export class EmployeesComponent implements OnInit {
       { field: "empName", header: "Name" },
       { field: "userProfileObj.name", header: "User Profile" },
       { field: "designationObj.name", header: "Designation" },
+      { field: "deptDs", header: "Department" },
       { field: "nationalID", header: "National Id" },
       { field: "email", header: "Email" },
       { field: "active", header: "Status" },
@@ -101,6 +108,13 @@ export class EmployeesComponent implements OnInit {
 
   get resolution() {
     return window.innerWidth < 993;
+  }
+
+  showAddEmployeeSlide() {
+    this.showAddSlide = true;
+    setTimeout(() => {
+      this.addEmployeeComponent.showSlide = true;
+    }, 100);
   }
 
   initBreadcrumbs() {
@@ -164,29 +178,47 @@ export class EmployeesComponent implements OnInit {
   }
 
   checkAllDepartments(departmentList: TreeNode[], isChecked: boolean) {
-    return departmentList.forEach(element => {
-      element.checked = true;
-      this.selectedDepartments.push(element);
-      if (element.children && element.children.length > 0) {
-        this.checkAllDepartments(element.children, isChecked);
-        // element.children = children;
-      }
-      return element;
-    });
+    if (isChecked) {
+      departmentList.forEach(node => {
+        this.selectedDepartments.push(node);
+        if (node.children) {
+          this.checkAllDepartments(node.children, isChecked);
+        }
+      });
+    }
+    else {
+      this.selectedDepartments = [];
+    }
   }
 
   getEmployees() {
     const userdetails = this.baseService.userDetails$.getValue();
+    this.showAddSlide = false;
     this.isLoading = true;
     this.employeeService.getEmployees(userdetails.id, this.selectedComapny).subscribe({
       next: res => {
-        this.employees = res;
+        this.employees = res.map(a => {
+          if (a.imagePath == null || a.imagePath == undefined || a.imagePath == '') {
+            a.imagePath = '';
+            return a;
+          }
+          a.imagePath = ((a.imagePath.includes('.png') || a.imagePath.includes('.jpg'))
+            && (a.imageStream == null || a.imageStream == '')) ? this.baseService.apiEndpoint + a.imagePath
+            : this.byteArrayToImage(a.imageStream);
+          return a;
+        });
         this.employeeState.setEmployees(this.employees);
         this.isLoading = false;
         // this.filteredEmployeesEmitter.emit(res);
         // this.allEmployeesEmitter.emit(res);
       }
     });
+  }
+
+  byteArrayToImage(imageString: any) {
+    // const blob = new Blob([bytes], { type: 'image/jpg' }); // Replace 'image/png' with the actual MIME type
+    // const imageUrl = URL.createObjectURL(blob);
+    return "data:image/png;base64," + imageString;
   }
 
   nest(items: DepartmentModel[], id = 0, link = 'parentDepartmentId'): TreeNode[] {
@@ -310,6 +342,7 @@ export class EmployeesComponent implements OnInit {
       this._employees = this.allEmployees.map(a => {
         a.designationObj = { value: a.designation, key: '', name: a.designation };
         a.userProfileObj = { value: a.userProfile, key: '', name: a.userProfile };
+        // a.userProfileObj = { value: a.userProfile, key: '', name: a.userProfile };
         a.isActive = a.active.indexOf('forestgreen') > -1
         return a;
       });
@@ -317,6 +350,8 @@ export class EmployeesComponent implements OnInit {
       this._employees = this.allEmployees.filter(emp => emp.deptCd == this.departmentCode).map(a => {
         a.designationObj = { value: a.designation, key: '', name: a.designation };
         a.userProfileObj = { value: a.userProfile, key: '', name: a.userProfile };
+        // a.userProfileObj = { value: a.userProfile, key: '', name: a.userProfile };
+
         a.isActive = a.active.indexOf('forestgreen') > -1
         return a;
       });

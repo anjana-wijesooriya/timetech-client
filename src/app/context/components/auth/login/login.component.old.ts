@@ -16,11 +16,11 @@ export class LoginComponent implements OnInit {
 
   loading: boolean = false;
   loadingText: string = 'Login in...';
-  signinForm: FormGroup ;
+  signinForm: FormGroup;
   errorMsg: string = '';
 
   constructor(private router: Router, private fb: FormBuilder,
-    private authService: AuthService){
+    private authService: AuthService) {
 
   }
 
@@ -39,21 +39,21 @@ export class LoginComponent implements OnInit {
       localStorage.setItem(LocalStorage.BaseModules, JSON.stringify(response.baseModules));
       response.baseModules = [];
       localStorage.setItem(LocalStorage.UserDetails, JSON.stringify(response));
-      
+
       setTimeout(() => {
-        if(response.isValidLogin) {
+        if (response.isValidLogin) {
           this.router.navigate(['/self-service/dashboard']);
         } else {
           this.errorMsg = response.errorMsg;
         }
         this.loading = false;
-      }, 1500);
+      }, 100);
     });
   }
 
-  onSubmitLogin(){
+  onSubmitLogin() {
     this.errorMsg = '';
-    if(!this.signinForm.invalid){
+    if (!this.signinForm.invalid) {
       this.login();
     }
   }

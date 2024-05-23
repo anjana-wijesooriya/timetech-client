@@ -23,7 +23,7 @@
                 <div class="flex flex-wrap align-content-center align-items-center justify-content-between">
                     <div class="flex flex-column flex-wrap">
                         <span class="block text-500 font-medium mb-3">Total Hours</span>
-                        <div class="text-900 font-medium text-xl">15:00H</div>
+                        <div class="text-900 font-medium text-xl">{{attendanceDetails.totalHours}}H</div>
                     </div>
                     <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
                         style="width: 4rem;height: 4rem;">
@@ -56,7 +56,7 @@
                 <div class="flex flex-wrap align-content-center align-items-center  justify-content-between ">
                     <div class="flex flex-column flex-wrap">
                         <span class="block text-500 font-medium mb-3">Extra Hours</span>
-                        <div class="text-900 font-medium text-xl">21:00H</div>
+                        <div class="text-900 font-medium text-xl">{{attendanceDetails.overtimeHours}}H</div>
                     </div>
                     <div class="flex align-items-center justify-content-center bg-orange-100 border-round"
                         style="width: 4rem; height: 4rem;">
@@ -74,7 +74,7 @@
                 <div class="flex flex-wrap align-content-center align-items-center  justify-content-between ">
                     <div class="flex flex-column flex-wrap">
                         <span class="block text-500 font-medium mb-3">Late Entry</span>
-                        <div class="text-900 font-medium text-xl">28:44H</div>
+                        <div class="text-900 font-medium text-xl">{{attendanceDetails.lateEntryHours}}H</div>
                     </div>
                     <div class="flex align-items-center justify-content-center bg-cyan-100 border-round"
                         style="width: 4rem; height: 4rem;">
@@ -92,7 +92,7 @@
                 <div class="flex flex-wrap align-content-center align-items-center  justify-content-between ">
                     <div class="flex flex-column flex-wrap">
                         <span class="block text-500 font-medium mb-3">Early Exit</span>
-                        <div class="text-900 font-medium text-xl">15:20H</div>
+                        <div class="text-900 font-medium text-xl">{{attendanceDetails.lateEntryHours}}H</div>
                     </div>
                     <div class="flex align-items-center justify-content-center bg-purple-100 border-round"
                         style="width: 4rem; height: 4rem;">
@@ -152,16 +152,6 @@
                         class="flex flex-column align-content-between  align-content-center h-4rem  font-bold border-round m-2">
                         <p class="flex my-auto">Work Time</p>
                         <h4 class="flex  my-auto">6 Hrs : 54 Min</h4>
-                    </div>
-                    <div class="flex align-items-center justify-content-center h-4rem font-bold border-round m-2">
-                        <button pbutton pripple type="button" label="Primary"
-                            class="p-element p-ripple p-button p-button-raised p-component">
-                            <span class="p-button-icon p-button-icon-left pi pi-play" aria-hidden="true"></span>
-                            <span class="p-button-label">
-                                Check-in
-                            </span>
-                            <span class="p-ink" aria-hidden="true" role="presentation"></span>
-                        </button>
                     </div>
                 </div>
             </div>
@@ -249,7 +239,7 @@
                         <div class=" flex align-items-center justify-content-center mb-3 mx-auto">
                             <h4 class="text-pink-500">5.5</h4>
                         </div>
-                        <span class="text-900 font-medium">Leaves Taken</span>
+                        <span class="text-900 font-medium">Total Annual Leaves</span>
                     </div>
                 </div>
                 <div class="col-12 sm:col-6 lg:col-4 p-3">
@@ -257,7 +247,7 @@
                         <div class=" flex align-items-center justify-content-center mb-3 mx-auto">
                             <h4 class="text-teal-500">9</h4>
                         </div>
-                        <span class="text-900 font-medium">Leaves Absent</span>
+                        <span class="text-900 font-medium"> Sick leaves </span>
                     </div>
                 </div>
                 <div class="col-12 sm:col-6 lg:col-4 p-3">
@@ -265,7 +255,7 @@
                         <div class=" flex align-items-center justify-content-center mb-3 mx-auto">
                             <h4 class="text-purple-500">0</h4>
                         </div>
-                        <span class="text-900 font-medium">Pending Approval</span>
+                        <span class="text-900 font-medium">Leave Loss of pay</span>
                     </div>
                 </div>
                 <div class="col-12 sm:col-6 lg:col-4 p-3">
@@ -273,7 +263,7 @@
                         <div class=" flex align-items-center justify-content-center mb-3 mx-auto">
                             <h4 class="text-cyan-500">214</h4>
                         </div>
-                        <span class="text-900 font-medium">Pending Approval</span>
+                        <span class="text-900 font-medium">Absent Leaves</span>
                     </div>
                 </div>
                 <div class="col-12 sm:col-6 lg:col-4 p-3">
@@ -281,10 +271,72 @@
                         <div class=" flex align-items-center justify-content-center mb-3 mx-auto">
                             <h4 class="text-red-600">2</h4>
                         </div>
-                        <span class="text-900 font-medium">Loss of Pay</span>
+                        <span class="text-900 font-medium">Short Hours</span>
                     </div>
                 </div>
 
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 lg:col-6 xl:col-4 flex flex-column surface-ground p-2">
+        <div class="shadow-2 b  border-round surface-card p-4  h-full">
+            <div class="flex align-items-center justify-content-between mb-4">
+                <span class="text-xl font-medium text-900">Leaves Information</span>
+            </div>
+            <div class="align-items-center justify-content-center row-gap-2">
+                <div class="w-full">
+                    <p-meterGroup [value]="annualLeavesInfo" labelPosition="start" [max]="getAllAnnualLeavesCount">
+                        <ng-template pTemplate="label">
+                        </ng-template>
+                        <ng-template pTemplate="start" let-totalPercent="totalPercent">
+                            <div class="flex justify-content-start align-items-center mt-1 mb-1 ml-2 relative gap-2">
+                                <div class="flex flex-row gap-1">
+                                    <span class=" text-md font-medium">Total Annual Leaves:</span>
+                                    <span
+                                        class="text-secondary font-bold text-lg text-center">{{getAllAnnualLeavesCount}}</span>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="end" let-totalPercent="totalPercent">
+                            <div class="flex justify-content-start align-items-center mt-0 ml-2 relative gap-2">
+                                <ng-container *ngFor="let meterItem of annualLeavesInfo; let index = index">
+                                    <div class="flex flex-wrap  align-items-center">
+                                        <i class="pi pi-circle-fill mr-1" [style]="{ color: meterItem.color }"></i>
+                                        <span class="text-secondary text-md">{{meterItem.label}}</span>
+                                        <span class="font-medium ml-2">({{meterItem.value}})</span>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </ng-template>
+                    </p-meterGroup>
+                </div>
+                <div class="w-full mt-3">
+                    <p-meterGroup [value]="sickLeavesInfo" labelPosition="start" [max]="getAllSickLeavesCount">
+                        <ng-template pTemplate="label">
+                        </ng-template>
+                        <ng-template pTemplate="start" let-totalPercent="totalPercent">
+                            <div class="flex justify-content-end align-items-center mt-1 mb-0 ml-2 relative gap-2">
+                                <div class="flex flex-row gap-1">
+                                    <span class=" text-md font-medium">Total Sick Leaves:</span>
+                                    <span
+                                        class="text-secondary font-bold text-lg text-center">{{getAllSickLeavesCount}}</span>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="end" let-totalPercent="totalPercent">
+                            <div class="flex justify-content-end align-items-center mt-0 ml-2 relative gap-2">
+                                <ng-container *ngFor="let meterItem of sickLeavesInfo; let index = index">
+                                    <div class="flex flex-wrap  align-items-center">
+                                        <i class="pi pi-circle-fill mr-1" [style]="{ color: meterItem.color }"></i>
+                                        <span class="text-secondary text-md">{{meterItem.label}}</span>
+                                        <span class="font-medium ml-2">({{meterItem.value}})</span>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </ng-template>
+                    </p-meterGroup>
+                </div>
             </div>
         </div>
     </div>
@@ -353,14 +405,15 @@
                         <span class="font-semibold">Absent</span>
                         <div class="flex">
                             <span
-                                class="font-semibold text-color-secondary pr-2 border-right-2 surface-border text-sm">79%</span>
-                            <span class="font-semibold ml-2 text-sm">24/30</span>
+                                class="font-semibold text-color-secondary pr-2 border-right-2 surface-border text-sm">{{getPrecentage(attendanceDetails.absent)}}</span>
+                            <span class="font-semibold ml-2 text-sm">{{attendanceDetails.absent}}/30</span>
                         </div>
                     </div>
                     <div class="border-round w-full overflow-hidden mt-2"
                         style="height: 7px; background-color: var(--surface-border);">
                         <div class="border-left-round h-full"
-                            style="background: linear-gradient(-120deg, rgb(198, 55, 55), rgba(198, 55, 55, 0.3) 70%); width: 79%;">
+                            style="background: linear-gradient(-120deg, rgb(198, 55, 55), rgba(198, 55, 55, 0.3) 70%); width: 79%;"
+                            [ngStyle]="{width: getPrecentage(attendanceDetails.absent)}">
                         </div>
                     </div>
                 </div>
@@ -371,12 +424,13 @@
                     <div class="flex flex-wrap w-full justify-content-between align-items-center"><span
                             class="font-semibold">Missing Swipe</span>
                         <div class="flex"><span
-                                class="font-semibold text-color-secondary pr-2 border-right-2 surface-border text-sm">45%</span><span
-                                class="font-semibold ml-2 text-sm">13/30</span></div>
+                                class="font-semibold text-color-secondary pr-2 border-right-2 surface-border text-sm">{{getPrecentage(attendanceDetails.missingSwipe)}}</span><span
+                                class="font-semibold ml-2 text-sm">{{attendanceDetails.missingSwipe}}/30</span></div>
                     </div>
                     <div class="border-round w-full overflow-hidden mt-2"
                         style="height: 7px; background-color: var(--surface-border);">
                         <div class="border-left-round h-full"
+                            [ngStyle]="{'width': getPrecentage(attendanceDetails.missingSwipe)}"
                             style="background: linear-gradient(-120deg, rgb(250, 183, 16), rgba(250, 183, 16, 0.3) 70%); width: 45%;">
                         </div>
                     </div>
@@ -388,12 +442,13 @@
                     <div class="flex flex-wrap w-full justify-content-between align-items-center"><span
                             class="font-semibold">Late Entry</span>
                         <div class="flex"><span
-                                class="font-semibold text-color-secondary pr-2 border-right-2 surface-border text-sm">35%</span><span
-                                class="font-semibold ml-2 text-sm">10/30</span></div>
+                                class="font-semibold text-color-secondary pr-2 border-right-2 surface-border text-sm">{{getPrecentage(attendanceDetails.lateEntry)}}</span><span
+                                class="font-semibold ml-2 text-sm">{{attendanceDetails.lateEntry}}/30</span></div>
                     </div>
                     <div class="border-round w-full overflow-hidden mt-2"
                         style="height: 7px; background-color: var(--surface-border);">
                         <div class="border-left-round h-full"
+                            [ngStyle]="{'width': getPrecentage(attendanceDetails.lateEntry)}"
                             style="background: linear-gradient(-120deg, rgb(77, 182, 172), rgba(77, 182, 172, 0.3) 70%); width: 35%;">
                         </div>
                     </div>
@@ -405,12 +460,13 @@
                     <div class="flex flex-wrap w-full justify-content-between align-items-center"><span
                             class="font-semibold">Early Exit</span>
                         <div class="flex"><span
-                                class="font-semibold text-color-secondary pr-2 border-right-2 surface-border text-sm">10%</span><span
-                                class="font-semibold ml-2 text-sm">3/30</span></div>
+                                class="font-semibold text-color-secondary pr-2 border-right-2 surface-border text-sm">{{getPrecentage(attendanceDetails.earlyEntry)}}</span><span
+                                class="font-semibold ml-2 text-sm">{{attendanceDetails.earlyEntry}}/30</span></div>
                     </div>
                     <div class="border-round w-full overflow-hidden mt-2"
                         style="height: 7px; background-color: var(--surface-border);">
                         <div class="border-left-round h-full"
+                            [ngStyle]="{'width': getPrecentage(attendanceDetails.earlyEntry)}"
                             style="background: linear-gradient(-120deg, rgb(77, 182, 172), rgba(77, 182, 172, 0.3) 70%); width: 10%;">
                         </div>
                     </div>
@@ -419,7 +475,7 @@
         </div>
     </div>
 
-    <div class="col-12 lg:col-6 p-2 surface-ground">
+    <div class="col-12 lg:col-4 p-2 surface-ground">
         <ng-template #attendance>
             <div class="shadow-2 border-round surface-card p-4 h-full">
                 <div class="mb-4">
@@ -472,20 +528,6 @@
                     <!-- <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [labels]="chartOptions.labels"
                         [fill]="chartOptions.fill" [dataLabels]="chartOptions.dataLabels"
                         [responsive]="chartOptions.responsive"></apx-chart> -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-12 lg:col-6 flex flex-column surface-ground p-2">
-        <div class="shadow-2 border-round surface-card p-4 h-full">
-            <div class="flex align-items-center justify-content-between mb-2">
-                <span class="text-xl font-medium text-900">Working Hours</span>
-                <p-dropdown [options]="years"></p-dropdown>
-            </div>
-            <div class="p-1 border-round flex flex-row justify-content-center flex-wrap">
-                <div class="w-full m-auto h-auto">
-                    <p-chart [type]="WorkingHoursChartOptions.type" [data]="WorkingHoursChartOptions.data"
-                        [options]="WorkingHoursChartOptions.options" [responsive]="true"></p-chart>
                 </div>
             </div>
         </div>
@@ -593,6 +635,21 @@
                         </div>
                     </ng-template>
                 </p-organizationChart>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 lg:col-8 flex flex-column surface-ground p-2" style="display:none;">
+        <div class="shadow-2 border-round surface-card p-4 h-full">
+            <div class="flex align-items-center justify-content-between mb-2">
+                <span class="text-xl font-medium text-900">Working Hours</span>
+                <p-dropdown [options]="weeks"></p-dropdown>
+            </div>
+            <div class="p-1 border-round flex flex-row justify-content-center flex-wrap">
+                <div class="w-full m-auto h-auto">
+                    <p-chart [type]="WorkingHoursChartOptions.type" [data]="WorkingHoursChartOptions.data"
+                        [options]="WorkingHoursChartOptions.options" [responsive]="true"></p-chart>
+                </div>
             </div>
         </div>
     </div>

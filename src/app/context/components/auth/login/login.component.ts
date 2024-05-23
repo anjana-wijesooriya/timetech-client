@@ -56,16 +56,13 @@ export class LoginComponent {
             // this.state.setState(response);
             // this.state.setState(response.baseModules);
             // this.state.setState(response.token as any);
-
-            setTimeout(() => {
-                if (response.isValidLogin) {
-                    this.router.navigate(['']);
-                } else {
-                    this.msgService.add({ severity: 'error', summary: 'Login fail', detail: response.errorMsg });
-                    this.errorMsg = response.errorMsg;
-                }
-                this.loading = false;
-            }, 1500);
+            if (response.isValidLogin) {
+                this.router.navigate(['']);
+            } else {
+                this.msgService.add({ severity: 'error', summary: 'Login fail', detail: response.errorMsg });
+                this.errorMsg = response.errorMsg;
+            }
+            this.loading = false;
         });
     }
 

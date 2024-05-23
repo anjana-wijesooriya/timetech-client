@@ -11,7 +11,7 @@
         </div>
     </ng-template>
 
-    <div class="py-4 flex align-items-center justify-content-between border-bottom-1 surface-border">
+    <div class="py-2 flex align-items-center justify-content-between border-bottom-1 surface-border">
         <div class="text-l font-semibold">Scale</div>
         <div class="flex align-items-center">
             <button icon="pi pi-minus" type="button" pButton (click)="decrementScale()"
@@ -29,36 +29,36 @@
 
 
     <ng-container *ngIf="!minimal">
-        <div class="py-4 flex align-items-center justify-content-between border-bottom-1 surface-border">
+        <div class="py-2 flex align-items-center justify-content-between border-bottom-1 surface-border">
             <div class="text-l font-semibold">Color Scheme</div>
             <div class="flex">
                 <p-selectButton styleClass="capitalize" [options]="['light', 'dark']" [(ngModel)]="colorScheme"
                     [unselectable]="true"></p-selectButton>
             </div>
         </div>
-        <div class="py-4 flex align-items-center justify-content-between border-bottom-1 surface-border">
+        <div class="py-3 flex align-items-center justify-content-between border-bottom-1 surface-border">
             <div class="text-l font-semibold">Input Style</div>
             <div class="flex gap-2">
-                <div class="field-radiobutton flex-1">
+                <div class="field-radiobutton flex-1 mb-0">
                     <p-radioButton name="inputStyle" value="outlined" [(ngModel)]="inputStyle"
                         inputId="outlined_input"></p-radioButton>
                     <label for="outlined_input">Outlined</label>
                 </div>
-                <div class="field-radiobutton flex-1">
+                <div class="field-radiobutton flex-1 mb-0">
                     <p-radioButton name="inputStyle" value="filled" [(ngModel)]="inputStyle"
                         inputId="filled_input"></p-radioButton>
                     <label for="filled_input">Filled</label>
                 </div>
             </div>
         </div>
-        <div class="py-4 flex align-items-center justify-content-between border-bottom-1 surface-border">
+        <div class="py-4 flex align-items-center justify-content-between border-bottom-1 surface-border" *ngIf="false">
             <div class="text-l font-semibold">Ripple Effect</div>
             <p-inputSwitch [(ngModel)]="ripple"></p-inputSwitch>
         </div>
     </ng-container>
 
     <ng-container *ngIf="!minimal">
-        <div class="py-4 flex align-items-start justify-content-between border-bottom-1 surface-border">
+        <div class="py-2 flex align-items-start justify-content-between border-bottom-1 surface-border">
             <div class="text-l font-semibold  w-15rem">Menu Type</div>
             <div class="flex flex-wrap row-gap-3">
                 <div class="flex align-items-center gap-2 w-6">
@@ -98,7 +98,7 @@
         </div>
     </ng-container>
 
-    <div class="py-4 flex flex-column row-gap-2 align-items-start justify-content-start border-bottom-1 surface-border">
+    <div class="py-2 flex flex-column row-gap-2 align-items-start justify-content-start border-bottom-1 surface-border">
         <div class="text-l font-semibold  w-15rem">Menu Theme</div>
         <div class="flex flex-wrap gap-3 ng-star-inserted">
             <a pButton pRipple (click)="changeMenuColor(color)" class="w-2rem h-2rem cursor-pointer shadow-2 hover:shadow-4 border-round transition-duration-150 
@@ -109,7 +109,7 @@
             </a>
         </div>
     </div>
-    <div class="py-4 flex flex-column row-gap-2 align-items-start justify-content-start border-bottom-1 surface-border">
+    <div class="py-2 flex flex-column row-gap-2 align-items-start justify-content-start border-bottom-1 surface-border">
         <div class="flex align-items-center gap-2 mb-3 text-l font-semibold ">Layout Themes</div>
         <div class="flex flex-wrap gap-3 ">
             <button pButton pRipple (click)="changeTheme(item.value, 'light')"

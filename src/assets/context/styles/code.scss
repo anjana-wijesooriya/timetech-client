@@ -261,7 +261,107 @@ $employeeTableWidth: calc(100% - 21rem);
 // }
 
 p-password.ng-invalid.ng-touched .p-inputtext,
+p-inputtext.ng-invalid.ng-touched .p-inputtext,
+.p-inputtext.ng-invalid.ng-touched,
 p-dropdown.ng-invalid.ng-touched .p-dropdown,
-p-calendar.ng-invalid.ng-touched .p-calendar {
+p-treeselect.ng-invalid.ng-touched .p-treeselect,
+p-calendar.ng-invalid.ng-touched .p-inputtext {
     border-color: #f87171 !important;
+}
+
+.ng-touched.ng-invalid~.p-error {
+    display: block !important;
+}
+
+.p-error {
+    display: none;
+}
+
+.custom-input-group {
+    .p-inputgroup-addon {
+        padding-top: 0.3rem;
+        padding-bottom: 0.1rem;
+    }
+
+    p-dropdown {
+        .p-dropdown {
+            width: auto;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-left-color: var(--surface-300) !important;
+
+            .p-dropdown-filter {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+        }
+    }
+}
+
+.p-inputgroup:has(> p-dropdown.ng-invalid.ng-touched)~.p-error {
+    display: block;
+}
+
+.p-inputgroup:has(> p-dropdown.ng-invalid.ng-touched) {
+
+    .p-inputgroup-addon {
+        border-color: #f87171 !important;
+        border-right-color: var(--surface-300) !important;
+    }
+
+}
+
+.page-content-wrapper {
+    height: calc(100vh - 15rem);
+}
+
+.dashboard-month-picker {
+
+    .p-yearpicker,
+    .p-monthpicker {
+        position: absolute;
+        background-color: var(--surface-card) !important;
+        border: 1px solid var(--surface-border);
+        padding: 0.5rem;
+        width: 15rem;
+        left: -7rem;
+
+        .p-monthpicker-month,
+        .p-yearpicker-year {
+            padding: 1rem;
+            width: 3rem;
+        }
+
+    }
+
+    .p-yearpicker {
+        left: -4rem;
+    }
+
+    .p-datepicker-month,
+    .p-datepicker-year {
+        // pointer-events: none;
+    }
+}
+
+// Support master
+
+.support-wrapper {
+    .p-listbox {
+        .p-listbox-header {
+            padding: 0.5rem;
+        }
+
+    }
+
+    .p-datatable {
+        .p-datatable-tbody>tr>td {
+            padding: 0.5rem;
+        }
+
+        .p-datatable-thead>tr>th {
+            padding: 0.8rem;
+        }
+    }
+
 }

@@ -184,9 +184,7 @@ export class AppMenuComponent implements OnInit {
         this.moduleService.getModules(userDetails.id, 2, 'en').subscribe(response => {
             // this.subModules = response;
             // this.groupBy(response, 'groupName')
-            setTimeout(() => {
-                this.isLoading = false;
-            }, 2000);
+            this.isLoading = false;
             this.moduleService.setActiveModules(response);
             localStorage.setItem('Personal', JSON.stringify(response));
         })

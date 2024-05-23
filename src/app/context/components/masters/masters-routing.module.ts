@@ -6,6 +6,7 @@ const routes: Routes = [
     // { path: '**', redirectTo: '/masters/employees', pathMatch: 'prefix' },
     { path: 'hr-personal', redirectTo: 'employees' },
     { path: 'employees', loadChildren: () => import('./employees/employees.module').then(m => m.EmployeesModule) },
+    { path: 'support', loadChildren: () => import('./support/support.module').then(m => m.SupportModule) },
 
 ];
 

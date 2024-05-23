@@ -99,11 +99,26 @@
                     <div class="field col-12 md:col-6">
                         <label for="name" class="font-medium text-900">Profile Picture</label>
                         <div class="flex align-items-center">
-                            <img src="https://blocks.primeng.org/assets/images/blocks/avatars/circle/avatar-f-4.png"
-                                class="mr-4">
-                            <p-fileUpload mode="basic" chooseLabel="Upload Image" name="demo[]"
-                                chooseIcon="pi pi-upload" url="https://www.primefaces.org/cdn/api/upload.php"
-                                accept="image/*" maxFileSize="1000000" (onUpload)="onUpload($event)"></p-fileUpload>
+                            <p-avatar [icon]="'pi pi-user'" styleClass="flex-shrink-0 mr-4" size="xlarge" shape="circle"
+                                *ngIf="employee.imagePath == undefined || employee.imagePath == '' || employee.imagePath == null ; else empImg"></p-avatar>
+                            <ng-template #empImg>
+                                <p-avatar [icon]="'pi pi-sync pi-spinner'" styleClass="flex-shrink-0 mr-4" size="xlarge"
+                                    shape="circle" (onImageError)="employee.imagePath = ''"
+                                    *ngIf="employee.imagePath == 'spinner'; else picBlock">
+                                </p-avatar>
+                                <ng-template #picBlock>
+                                    <p-avatar [image]="employee?.imagePath" styleClass="flex-shrink-0 mr-4"
+                                        size="xlarge" shape="circle" (onImageError)="employee.imagePath = ''">
+                                    </p-avatar>
+                                </ng-template>
+
+
+                            </ng-template>
+                            <!-- <img [src]="employee.imagePath" class="mr-4"> -->
+                            <p-fileUpload mode="basic" chooseLabel="Upload Image" name="file" chooseIcon="pi pi-upload"
+                                [url]="'https://localhost:44319/api/employee/upload-profile-picture?customerId=' + employee.empID"
+                                accept="image/*" [auto]="true" maxFileSize="1000000" (onUpload)="onUploadImage($event)"
+                                (onSelect)="onBeforeUpload($event)"></p-fileUpload>
                         </div>
                     </div>
                 </div>

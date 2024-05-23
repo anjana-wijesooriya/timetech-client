@@ -7,6 +7,7 @@ import { AlertService } from 'src/app/context/service/alert.service';
 import { BaseService } from 'src/app/context/service/base.service';
 import { CompanyService } from 'src/app/context/service/company.service';
 import { EmployeeService } from 'src/app/context/service/employee.service';
+import { BreadcrumbStateService } from 'src/app/context/service/sharedstate/breadcrumb.state.service';
 
 @Component({
   selector: 'app-documents',
@@ -23,14 +24,25 @@ export class DocumentsComponent implements OnInit {
   showDocumentSlide: boolean = false;
   deleteReason: string = '';
 
-  constructor(private companyService: CompanyService, private baseService: BaseService, private alert: AlertService,
+  constructor(private breadcrumbState: BreadcrumbStateService, private baseService: BaseService, private alert: AlertService,
     private employeeService: EmployeeService, private route: ActivatedRoute,
     private confirm: ConfirmationService, private datePipe: DatePipe) {
 
   }
 
   ngOnInit(): void {
+    this.initBreadcrumbs();
     this.getDocuments();
+  }
+
+  initBreadcrumbs() {
+    this.breadcrumbState.setBreadcrumbState([
+      { path: undefined, label: 'Master Modules', key: '1', icon: 'pi pi-share-alt' },
+      { path: '/masters/employees', label: 'Employees', key: '2', icon: 'pi pi-chart-bar' },
+      // { path: `/masters/employee/${this.route.snapshot.paramMap.get('id')}`, label: 'Edit Employee', key: '3', icon: 'pi pi-user-edit' },
+      { path: `/masters/employees/${this.route.parent.snapshot.paramMap.get('id')}`, label: 'Edit Employee', key: '3', icon: 'font-semibold ic i-Add-UserStar' },
+      { path: `/masters/employees/${this.route.parent.snapshot.paramMap.get('id')}/documents`, label: 'Documents', key: '4', icon: 'font-semibold ic i-Folders' },
+    ]);
   }
 
   getDate(date: Date) {

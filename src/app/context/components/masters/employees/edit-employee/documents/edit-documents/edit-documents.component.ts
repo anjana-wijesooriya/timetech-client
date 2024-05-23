@@ -85,10 +85,21 @@ export class EditDocumentsComponent implements OnInit {
 
   onSelectedFiles(event, uploader: FileUpload) {
     this.files = event.currentFiles;
+    let availableSlots = 0;
+
+    if (this.selectedDocument.attachmentOne == '') {
+      availableSlots = availableSlots + 1;
+    }
+    if (this.selectedDocument.attachmentTwo == '') {
+      availableSlots = availableSlots + 1;
+    }
+    if (this.selectedDocument.attachmentThree == '') {
+      availableSlots = availableSlots + 1;
+    }
     this.files.forEach((file, index) => {
-      if (index > 2) {
+      if ((index + 1) > availableSlots) {
         uploader.remove(event, index);
-        this.alert.warn('Only 3 files can be selected');
+        this.alert.warn('Only 3 files can be attach to a document. Please delete one of the files and try again.');
         return;
       }
       this.totalSize += parseInt(this.formatSize(file.size));
@@ -180,7 +191,7 @@ export class EditDocumentsComponent implements OnInit {
       // form.control.get('remindBefore')?.removeValidators(Validators.required);
       this.selectedDocument.expiryDate = null;
     }
-    if (this.selectedDocument.markAsOld) {
+    if (form.control.get('markAsOld').value) {
       form.control.get('markAsOldDate')?.addValidators([Validators.required]);
     } else {
       form.control.get('markAsOldDate')?.removeValidators(Validators.required);
@@ -192,6 +203,10 @@ export class EditDocumentsComponent implements OnInit {
     form.control.get('markAsOldDate')?.markAsTouched();
     // form.control.get('remindBefore')?.updateValueAndValidity();
     // form.control.get('remindBefore')?.markAsTouched();
+  }
+
+  getDocumentIconByUrl(url: string) {
+    return url.includes('.pdf') ? 'pi pi-file-pdf' : 'pi pi-image';
   }
 
   onChangeDocType() {
@@ -220,28 +235,53 @@ export class EditDocumentsComponent implements OnInit {
   }
 
   onUpload(event: UploadEvent, type: number = 0) {
-    this.alert.info('File uploaded');
+
     const ev = event.originalEvent as any;
-    let link = this.baseService.apiEndpoint + ev.body.response.toString();
+    const urlList = ev.body.imgUrlList;
+    urlList.forEach((url, index) => {
+      let link = this.baseService.apiEndpoint + url;
+      if (this.selectedDocument?.attachmentOne == '') {
+        this.selectedDocument.attachmentOne = link;
+        this.alert.info('Attachment uploaded');
+      } else if (this.selectedDocument?.attachmentTwo == '') {
+        this.selectedDocument.attachmentTwo = link;
+        this.alert.info('Attachment uploaded');
+      } else if (this.selectedDocument?.attachmentThree == '') {
+        this.selectedDocument.attachmentThree = link;
+        this.alert.info('Attachment uploaded');
+      } else {
+        this.alert.warn('Only 3 attachments are allowed. Please Delete one of the attachments and try again.' + index);
+      }
+    });
+  }
 
-    // event.files.forEach((file, index) => {
+  downloadAttachment(path: string) {
+    this.employeeService.downloadFile(path.replace(this.baseService.apiEndpoint, '')).subscribe(res => {
 
-    // })
+      const b64Data = res.base64String;
+      const contentType = res.extention;
 
-    if (this.selectedDocument?.attachmentOne == '') {
-      this.selectedDocument.attachmentOne = link;
-    } else if (this.selectedDocument?.attachmentOne == '') {
-      this.selectedDocument.attachmentTwo = link;
-    } else if (this.selectedDocument?.attachmentThree == '') {
-      this.selectedDocument.attachmentThree = link;
-    } else {
-      this.alert.warn('Only 3 attachments are allowed. Please Delete one of the attachments and try again.');
-    }
-    // switch (type) {
-    //   case 1: this.selectedDocument.attachmentOne = link; break;
-    //   case 2: this.selectedDocument.attachmentTwo = link; break;
-    //   case 3: this.selectedDocument.attachmentThree = link; break;
-    // }
+      // Decode the Base64 string
+      const byteCharacters = atob(b64Data);
+
+      // Create an array of byte values
+      const byteNumbers = new Array(byteCharacters.length);
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+
+      // Convert the array of byte values to a Uint8Array
+      const byteArray = new Uint8Array(byteNumbers);
+
+      // Create a Blob from the Uint8Array
+      const blob = new Blob([byteArray], { type: contentType });
+
+      // Now you can use the blob as needed (e.g., display it to the user)
+      const blobUrl = URL.createObjectURL(blob);
+      window.open(blobUrl, '_blank');
+    });
+
+
   }
 
   customUpload(event) {

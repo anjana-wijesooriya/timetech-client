@@ -9,6 +9,7 @@ import { AlertService } from 'src/app/context/service/alert.service';
 import { BaseService } from 'src/app/context/service/base.service';
 import { CompanyService } from 'src/app/context/service/company.service';
 import { EmployeeService } from 'src/app/context/service/employee.service';
+import { BreadcrumbStateService } from 'src/app/context/service/sharedstate/breadcrumb.state.service';
 
 interface Column {
   field: string;
@@ -31,7 +32,8 @@ export class DepartmentRightsComponent implements OnInit {
   isSaving: boolean;
 
   constructor(private companyService: CompanyService, private baseService: BaseService, private alert: AlertService,
-    private employeeService: EmployeeService, private route: ActivatedRoute, private confirm: ConfirmationService) { }
+    private employeeService: EmployeeService, private route: ActivatedRoute, private confirm: ConfirmationService,
+    private breadcrumbState: BreadcrumbStateService) { }
 
   ngOnInit(): void {
     this.getCompanies();
@@ -39,6 +41,17 @@ export class DepartmentRightsComponent implements OnInit {
       { field: 'type', header: 'Depatment Code' },
       { field: 'name', header: 'Department Name' }
     ];
+    this.initBreadcrumbs();
+  }
+
+  initBreadcrumbs() {
+    this.breadcrumbState.setBreadcrumbState([
+      { path: undefined, label: 'Master Modules', key: '1', icon: 'pi pi-share-alt' },
+      { path: '/masters/employees', label: 'Employees', key: '2', icon: 'pi pi-chart-bar' },
+      // { path: `/masters/employee/${this.route.snapshot.paramMap.get('id')}`, label: 'Edit Employee', key: '3', icon: 'pi pi-user-edit' },
+      { path: `/masters/employees/${this.route.parent.snapshot.paramMap.get('id')}`, label: 'Edit Employee', key: '3', icon: 'font-semibold ic i-Add-UserStar' },
+      { path: `/masters/employees/${this.route.parent.snapshot.paramMap.get('id')}/department-rights`, label: 'Documents', key: '4', icon: 'font-semibold ic i-Building' },
+    ]);
   }
 
   getCompanies() {

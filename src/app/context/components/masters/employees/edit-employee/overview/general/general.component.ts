@@ -228,6 +228,7 @@ export class GeneralComponent implements OnInit {
         next: res => {
           this.alert.success('Employee General data updated.');
           // this.spinner.hide();
+          // this.employeeState.setEmployeeDetails(generalData);
           this.isSaving = false;
         },
         error: err => {

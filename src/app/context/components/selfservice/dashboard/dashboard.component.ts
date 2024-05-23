@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit {
 
   years: any[] = ['2024', '2025', '2026'];
   options: any[] = ['Today', 'Month', 'Year'];
+  weeks: any[] = ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5'];
   value = [
     { label: 'Apps', color1: '#34d399', color2: '#fbbf24', value: 25, icon: 'pi pi-table' },
     { label: 'Messages', color1: '#fbbf24', color2: '#60a5fa', value: 15, icon: 'pi pi-inbox' },
@@ -82,14 +83,36 @@ export class DashboardComponent implements OnInit {
   overviewCharts: any = 'attendances'
   attendenceChartOptions: IChartConfig;
   WorkingHoursChartOptions: IChartConfig;
+  utils: Utils = new Utils();
 
   attendanceDetails: AttendanceDetailsModel = new AttendanceDetailsModel();
+
+  annualLeavesInfo = [
+    { label: 'Taken', color: '#34d399', color2: '#fbbf24', value: 25, icon: 'pi pi-sort-amount-up' },
+    { label: 'Remaining', color: '#fbbf24', color2: '#60a5fa', value: 15, icon: 'pi pi-sort-amount-down' },
+  ]
+  sickLeavesInfo = [
+    { label: 'Taken', color: '#60a5fa', color2: '#c084fc', value: 20, icon: 'pi pi-sort-amount-up' },
+    { label: 'Remaining', color: '#c084fc', color2: '#c084fc', value: 10, icon: 'pi pi-sort-amount-down' }
+  ]
 
   // @Inject('StateService') public state: StateService<BreadcrumbState>;
 
   constructor(private baseService: BaseService, private dashboardService: DashboardService,
     private breadcrumbState: BreadcrumbStateService
   ) {
+  }
+
+  get getAllAnnualLeavesCount() {
+    let max = this.annualLeavesInfo.map((item) => item.value)
+      .reduce((acc, curr) => acc + curr, 0);
+    return max
+  }
+
+  get getAllSickLeavesCount() {
+    let max = this.sickLeavesInfo.map((item) => item.value)
+      .reduce((acc, curr) => acc + curr, 0);
+    return max
   }
 
 
@@ -108,9 +131,16 @@ export class DashboardComponent implements OnInit {
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue('--text-color');
 
-    this.initAttendanceChart();
+    this.initAttendanceChart([]);
     this.initWorkingHoursChart();
-    this.getAttendanceSummery();
+    this.getAttendanceSummery(new Date('08-01-2023'));
+
+    this.breadcrumbState.getBreadCrumbState().subscribe(res => {
+
+      if (res?.date != null) {
+        this.getAttendanceSummery(res?.date);
+      }
+    })
 
   }
 
@@ -118,54 +148,55 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  getAttendanceSummery() {
-    {
-      let date = new Date();
-      let fromdate = new Date(date.getFullYear(), date.getMonth(), 1);
-      let todate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-      var user = this.baseService.userDetails$.getValue();
-      this.dashboardService.getAttendanceSummery(user.empId, fromdate.toISOString(), todate.toISOString()).subscribe(response => {
+  getAttendanceSummery(date: Date) {
+    let fromdate = new Date(date.getFullYear(), date.getMonth(), 1);
+    let todate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    var user = this.baseService.userDetails$.getValue();
+    this.loadingCards.exceptions = true;
+    this.loadingCards.leaves = true;
+    this.loadingCards.leavesChart = true;
+    this.loadingCards.stats = true;
+    this.dashboardService.getAttendanceSummery(user.empId, fromdate.toISOString(), todate.toISOString()).subscribe(response => {
 
-        this.attendanceDetails = response;
-        this.attendanceDetails.attendanceSummery = this.attendanceDetails.attendanceSummery.map(a => ({ ...a, name: a.key }))
-        // this.attendanceDetailsComponent.updateCharts(this.attendanceDetails);
-      })
-    }
+      this.attendanceDetails = response;
+      this.attendanceDetails.attendanceSummery = this.attendanceDetails.attendanceSummery.map(a => ({ ...a, name: a.key }))
+      // this.attendanceDetailsComponent.updateCharts(this.attendanceDetails);
+      var data = this.attendanceDetails?.attendanceSummery?.map(a => a.value);
+      this.initAttendanceChart(data)
+
+      this.loadingCards.exceptions = false;
+      this.loadingCards.leaves = false;
+      this.loadingCards.leavesChart = false;
+      this.loadingCards.stats = false;
+    })
+  }
+
+  getPrecentage(value: number) {
+    return (Math.round((value * 100) / 30)).toString() + '%';
   }
 
   initLoadingStatuses() {
     setTimeout(() => {
-      this.loadingCards.stats = false;
-    }, 5000);
-    setTimeout(() => {
       this.loadingCards.statistics = false;
-    }, 9000);
+    }, 90);
     setTimeout(() => {
       this.loadingCards.attendanceChart = false;
-    }, 6000);
-    setTimeout(() => {
-      this.loadingCards.leaves = false;
-    }, 8000);
-    setTimeout(() => {
-      this.loadingCards.leavesChart = false;
-    }, 10000);
+    }, 60);
     setTimeout(() => {
       this.loadingCards.orgChart = false;
-    }, 7000);
-    setTimeout(() => {
-      this.loadingCards.exceptions = false;
-    }, 11000);
+    }, 70);
   }
 
-  initAttendanceChart() {
+  initAttendanceChart(data: number[]) {
+
     this.attendenceChartOptions = {
       type: 'doughnut',
       data: {
         labels: ['Present', 'Absent', 'Off', 'Holiday', 'Leave'],
         datasets: [{
-          backgroundColor: Utils.COLORS,
+          backgroundColor: this.utils.COLORS,
           label: 'Present',
-          data: [13, 2, 5, 8, 3],
+          data: data,
           datalabels: {
             display: true,
             anchor: 'end',
@@ -230,40 +261,57 @@ export class DashboardComponent implements OnInit {
       data: {
         labels: ['Sun', 'Mon', 'Tue', 'Thu', 'Fri', 'Sat'],
         datasets: [
-          {
-            data: [8, 9.5, 7, 6, 10, 8.5, 9],
-            borderColor: Utils.CHART_COLORS.blue,
-            backgroundColor: Utils.transparentize(Utils.CHART_COLORS.blue, 0.5),
-            order: 1,
-            pointStyle: 'circle',
-            pointRadius: 10,
-            pointHoverRadius: 15
-          },
+
           {
             label: 'Working Hours',
             data: [8, 9.5, 7, 6, 10, 8.5, 9],
-            borderColor: Utils.CHART_COLORS.blue,
-            backgroundColor: Utils.transparentize(Utils.CHART_COLORS.blue, 0.5),
+            borderColor: this.utils.CHART_COLORS.blue,
+            backgroundColor: this.utils.transparentize(this.utils.CHART_COLORS.blue, 0.5),
             order: 1,
             type: 'bar',
           },
           {
+            label: 'Short Hours',
             data: [-0.5, -1, -0, -0.5, -2, -2.5 - 0.5,],
-            borderColor: Utils.CHART_COLORS.red,
-            backgroundColor: Utils.transparentize(Utils.CHART_COLORS.red, 0.5),
-            order: 0,
-            pointStyle: 'circle',
-            pointRadius: 10,
-            pointHoverRadius: 15
-          },
-          {
-            label: 'Break Time',
-            data: [-0.5, -1, -0, -0.5, -2, -2.5 - 0.5,],
-            borderColor: Utils.CHART_COLORS.red,
-            backgroundColor: Utils.transparentize(Utils.CHART_COLORS.red, 0.5),
+            borderColor: this.utils.CHART_COLORS.red,
+            backgroundColor: this.utils.transparentize(this.utils.CHART_COLORS.red, 0.5),
             type: 'bar',
             order: 0
-          }
+          },
+          {
+            label: 'Overtime 1',
+            data: [1.5, 2, 0.7, 2.5, 0.5, 1.8, 1],
+            borderColor: this.utils.CHART_COLORS.green,
+            backgroundColor: this.utils.transparentize(this.utils.CHART_COLORS.green, 0.5),
+            type: 'bar',
+            order: 2
+          },
+          {
+            label: 'Overtime 2',
+            data: [1, 0.5, 0.3, 1.2, 0.7, 2, 1.5],
+            borderColor: this.utils.CHART_COLORS.purple,
+            backgroundColor: this.utils.transparentize(this.utils.CHART_COLORS.purple, 0.5),
+            type: 'bar',
+            order: 3
+          },
+          // {
+          //   data: [8, 9.5, 7, 6, 10, 8.5, 9],
+          //   borderColor: this.utils.CHART_COLORS.blue,
+          //   backgroundColor: this.utils.transparentize(this.utils.CHART_COLORS.blue, 0.5),
+          //   order: 1,
+          //   pointStyle: 'circle',
+          //   pointRadius: 10,
+          //   pointHoverRadius: 15,
+          // },
+          // {
+          //   data: [-0.5, -1, -0, -0.5, -2, -2.5 - 0.5,],
+          //   borderColor: this.utils.CHART_COLORS.red,
+          //   backgroundColor: this.utils.transparentize(this.utils.CHART_COLORS.red, 0.5),
+          //   order: 0,
+          //   pointStyle: 'circle',
+          //   pointRadius: 10,
+          //   pointHoverRadius: 15
+          // },
         ]
       },
       options: {

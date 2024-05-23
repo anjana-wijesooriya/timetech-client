@@ -1,6 +1,6 @@
 <div class="grid employees-layout-wrapper">
     <div class="col-12 surface-ground p-2 mb-3">
-        <div class="card surface-card  p-3 m-0">
+        <div class="card surface-card  p-3 m-0  page-content-wrapper">
             <h5 class="mb-0">Employees</h5>
             <p> Add, Edit, Delete or Search by Creating custom search criterieas. </p>
             <p-toast></p-toast>
@@ -10,7 +10,8 @@
                         <button pButton pRipple [label]="'Filter'" [outlined]="true" icon="pi pi-filter-slash"
                             class="p-button-primary" (click)="showFilterMenu();" [disabled]="false"></button>
                         <button pButton pRipple label="Add New Employee" [outlined]="true" icon="pi pi-user-plus"
-                            class="p-button-primary mr-2" (click)="showAddEmployeeSlide = true"></button>
+                            class="p-button-primary mr-2"
+                            (click)="showAddSlide = true; addEmployeeComponent.showSlide = true; "></button>
                         <button pButton pRipple label="Change Table Layout" [outlined]="true" icon="pi pi-th-large"
                             class="p-button-primary mr-2" (click)="isBoxLayout = !isBoxLayout"></button>
 
@@ -30,10 +31,10 @@
                                         <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button> -->
                 </ng-template>
             </p-toolbar>
-            <div #tableContent class="flex flex-wrap align-items-start justify-content-start w-full"
+            <div #tableContent class="flex flex-row align-items-start justify-content-start w-full"
                 [ngClass]="{'table-sidebar-active': showDepartments}">
-                <div class="filterbar-container">
-                    <p-sidebar styleClass="absolute top-auto left-auto bottom-auto h-auto z-1"
+                <div class="filterbar-container h-full">
+                    <p-sidebar styleClass="absolute top-auto left-auto bottom-auto h-auto z-3"
                         [appendTo]="'#tableContent'" [modal]="false" [(visible)]="showDepartments" position="left">
                         <ng-template pTemplate="header">
                             <div class="flex flex-column align-items-center justify-content-start">
@@ -43,15 +44,15 @@
                                     (ngModelChange)="onChangeCompany($event); this.getEmployees();">
                                     <ng-template let-selectedValue pTemplate="selectedItem">
                                         <div class="flex align-items-center gap-2" *ngIf="selectedValue">
-                                            <img src="https://primefaces.org/cdn/primeng/images/context/flag/flag_placeholder.png"
-                                                [class]="'flag flag-' + selectedValue.logo" style="width: 18px" />
+                                            <img src="assets/context/images/flag/flag_placeholder.png"
+                                                [class]="'flag flag-' + selectedValue.logo" style="width: 21px" />
                                             <div>{{ selectedValue.name }}</div>
                                         </div>
                                     </ng-template>
                                     <ng-template let-company pTemplate="item">
                                         <div class="flex align-items-center gap-2">
-                                            <img src="https://primefaces.org/cdn/primeng/images/context/flag/flag_placeholder.png"
-                                                [class]="'flag flag-' + company.logo" style="width: 18px" />
+                                            <img src="assets/context/images/flag/flag_placeholder.png"
+                                                [class]="'flag flag-' + company.logo" style="width: 21px" />
                                             <div>{{ company.name }}</div>
                                         </div>
                                     </ng-template>
@@ -61,7 +62,7 @@
                         </ng-template>
                         <ng-template pTemplate="content">
                             <div class="flex flex-column align-items-start justify-content-center">
-                                <div class="flex flex-column  w-full row-gap-3 h-37rem">
+                                <div class="flex flex-column  w-full row-gap-3">
                                     <div class="mb-0">
                                         <button pButton type="button" *ngIf="isExpand" size="small" label="Expand all"
                                             (click)="expandAll()" class="mr-2" icon="pi pi-plus"></button>
@@ -73,7 +74,8 @@
                                         [(selection)]="selectedDepartments" [filter]="true" filterMode="strict"
                                         selectionMode="checkbox" filterPlaceholder="Search Departments"
                                         (onNodeSelect)="onDepartmentSelected($event)"
-                                        (onNodeUnselect)="onDepartmentSelected($event)">
+                                        (onNodeUnselect)="onDepartmentSelected($event)"
+                                        scrollHeight="calc(100vh - 39rem)">
                                         <ng-template let-node pTemplate="url">
                                             <a [href]="node.data" target="_blank" rel="noopener noreferrer"
                                                 class="text-700 hover:text-primary">{{
@@ -91,17 +93,18 @@
                     </p-sidebar>
                 </div>
                 <!-- <div class="col"> -->
-                <div class="grid-container employees-table transition-all transition-duration-300"
+                <div class="grid-container employees-table transition-all transition-duration-300 h-full"
                     [ngClass]="{'box-layout': isBoxLayout}">
                     <p-table #empTable [columns]="selectedColumns" [value]="_employees" dataKey="id" [rowHover]="true"
                         styleClass="p-datatable-sm p-datatable-gridlines" [paginator]="true" [rows]="25"
                         [showCurrentPageReport]="true" [rowsPerPageOptions]="[25, 50, 100, 200]"
                         [virtualScrollItemSize]="5" [loading]="isLoading" [scrollable]="true"
-                        scrollHeight="calc(100vh - 300px)"
-                        [globalFilterFields]="['empCd', 'empName', 'userProfileObj.name', 'designationObj.name', 'email', 'nationalID']"
+                        scrollHeight="calc(100vh - 33rem)"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        [globalFilterFields]="['empCd', 'empName', 'userProfileObj.name', 'deptDs', 'designationObj.name', 'email', 'nationalID']"
                         responsiveLayout="stack" tableStyleClass="table-layout-fixed" [resizableColumns]="true"
-                        columnResizeMode="fit" [autoLayout]="true">
-                        <ng-template pTemplate="caption" (onRowSelect)="showProfile = true">
+                        columnResizeMode="fit" [autoLayout]="true" (onRowSelect)="showProfile = true">
+                        <ng-template pTemplate="caption">
 
                             <div class="flex flex-wrap justify-content-between">
                                 <!-- <p-multiSelect class="" [options]="columns" [(ngModel)]="selectedColumns" optionLabel="header"
@@ -171,6 +174,32 @@
                                         </p-columnFilter>
                                     </div>
                                 </th>
+                                <th pSortableColumn="deptDs" pResizableColumn [hidden]="!isShowColumn('deptDs')">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Department
+                                        <p-sortIcon field="deptDs"></p-sortIcon>
+                                        <p-columnFilter field="deptDs" matchMode="in" display="menu"
+                                            [showMatchModes]="false" [showOperator]="false" class="ml-auto"
+                                            [showAddButton]="false">
+                                            <ng-template pTemplate="header">
+                                                <div class="px-3 pt-3 pb-0">
+                                                    <span class="font-bold">Department Picker</span>
+                                                </div>
+                                            </ng-template>
+                                            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                                <p-multiSelect [ngModel]="value" [options]="departments"
+                                                    placeholder="Any" (onChange)="filter($event.value)"
+                                                    optionLabel="departmentName" optionValue="departmentName">
+                                                    <ng-template let-option pTemplate="item">
+                                                        <div class="inline-block vertical-align-middle">
+                                                            <span class="ml-1 mt-1">{{ option.departmentName }}</span>
+                                                        </div>
+                                                    </ng-template>
+                                                </p-multiSelect>
+                                            </ng-template>
+                                        </p-columnFilter>
+                                    </div>
+                                </th>
                                 <th pSortableColumn="designationObj.name" pResizableColumn
                                     [hidden]="!isShowColumn('designationObj.name')">
                                     <div class="flex justify-content-between align-items-center">
@@ -216,15 +245,14 @@
                                     </div>
                                 </th>
                                 <th pSortableColumn="active" [hidden]="!isShowColumn('active')"
-                                    style="width:10rem !important;">
+                                    style="width:5.2rem !important;" class="px-1">
                                     <div class="flex justify-content-between align-items-center">
                                         Status
-                                        <p-sortIcon field="active"></p-sortIcon>
-                                        <p-columnFilter type="boolean" field="isActive"
-                                            class="ml-auto"></p-columnFilter>
+                                        <!-- <p-sortIcon field="active"></p-sortIcon> -->
+                                        <p-columnFilter type="boolean" field="isActive" class="ml-1"></p-columnFilter>
                                     </div>
                                 </th>
-                                <th pFrozenColumn alignFrozen="right" style="width:3rem !important;">
+                                <th pFrozenColumn alignFrozen="right" style="width:3.5rem !important;">
                                     <div class="flex justify-content-between align-items-center">
                                         Edit
                                     </div>
@@ -240,34 +268,55 @@
                                 </td>
                                 <td [hidden]="!isShowColumn('empName')">
                                     <span class="p-column-title font-bold mr-3">Employee Name:</span>
-                                    <p-avatar [label]="employee.empName.substring(0, 1)" styleClass="mr-2"
-                                        [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }" shape="circle" />
-                                    <span class="ml-1 vertical-align-middle">{{ employee.empName }}</span>
+                                    <div class="flex justify-content-start align-items-center">
+
+                                        <p-avatar [image]="employee?.imagePath" styleClass="mr-2" shape="circle"
+                                            *ngIf="!(employee?.imagePath == ''); else empImage"
+                                            (onImageError)="employee.imagePath ==''">
+                                        </p-avatar>
+                                        <ng-template #empImage>
+                                            <p-avatar [label]="employee.empName.substring(0, 1)" styleClass="mr-2"
+                                                [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }"
+                                                shape="circle" />
+
+                                        </ng-template>
+
+                                        <span class="ml-1 vertical-align-middle">{{ employee.empName }}</span>
+                                    </div>
                                 </td>
                                 <td [hidden]="!isShowColumn('userProfileObj.name')">
                                     <span class="p-column-title font-bold mr-3">User Profile:</span>
                                     {{employee.userProfileObj.name}}
                                 </td>
+                                <td [hidden]="!isShowColumn('deptDs')" class="white-space-normal">
+                                    <span class="p-column-title font-bold mr-3">Department:</span>
+                                    {{employee.deptDs}}
+                                </td>
                                 <td [hidden]="!isShowColumn('designationObj.name')">
                                     <span class="p-column-title font-bold mr-3">Designation:</span>
-                                    {{employee.designation}}
+                                    {{employee.designationObj.name}}
                                 </td>
                                 <td [hidden]="!isShowColumn('nationalID')">
                                     <span class="p-column-title font-bold mr-3">Natinal Id:</span>
                                     {{employee.nationalID}}
                                 </td>
-                                <td [hidden]="!isShowColumn('email')">
+                                <td [hidden]="!isShowColumn('email')" class="">
                                     <span class="p-column-title font-bold mr-3">Email:</span>
+
                                     <p-button [raised]="true" [label]="employee.email.replace('mailto:', '')"
                                         [link]="true" styleClass="py-1 px-2" *ngIf="employee.email != ''"
                                         (onClick)="onMailToClick(employee.email)">
                                     </p-button>
+
                                 </td>
                                 <td [hidden]="!isShowColumn('active')">
                                     <span class="p-column-title font-bold mr-3">Status:</span>
-                                    <p-tag [value]="employee.isActive ? 'Active' : 'Inactive'"
-                                        [severity]="!employee.isActive ? 'success' : 'warning'">
-                                    </p-tag>
+                                    <div class="flex text-center justify-content-center">
+                                        <p-tag [value]="employee.isActive ? 'Active' : 'Inactive'"
+                                            [severity]="employee.isActive ? 'success' : 'danger'" styleClass="mx-auto">
+                                        </p-tag>
+                                    </div>
+
                                 </td>
                                 <td pFrozenColumn alignFrozen="right">
                                     <p-button pRipple icon="pi pi-pencil" [text]="true" size="small" severity="primary"
@@ -319,14 +368,33 @@
         </div>
     </div>
 </div>
-<p-sidebar [(visible)]="showAddEmployeeSlide" position="right">
+
+<p-sidebar [(visible)]="showAddSlide" position="right" styleClass="p-sidebar-lg">
     <ng-template pTemplate="header">
         <div class="font-bold text-xl">Add New Employee</div>
     </ng-template>
-    <ng-template pTemplate="content">
 
+    <ng-template pTemplate="content">
+        <app-add-employee (loadEmployees)="getEmployees()" *ngIf="showAddSlide"></app-add-employee>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <div class="flex align-items-center justify-content-end">
+            <p-button label="Save" severity="primary" [outlined]="true" [loading]="isSaving" icon="pi pi-check"
+                (onClick)="addEmployeeComponent.onSubmit()"></p-button>
+        </div>
     </ng-template>
 </p-sidebar>
+
+<p-sidebar [(visible)]="showProfile" position="right">
+    <ng-template pTemplate="header">
+        <div class="font-bold text-xl">Table Customizer</div>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <app-employee-profile *ngIf="showProfile" [employeeId]="employeeId"></app-employee-profile>
+    </ng-template>
+</p-sidebar>
+
 <p-sidebar [(visible)]="showProfile" position="right">
     <ng-template pTemplate="header">
         <div class="font-bold text-xl">User Profile</div>

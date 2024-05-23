@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, NgZone, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
+import { CalendarMonthChangeEvent } from 'primeng/calendar';
 import { distinctUntilChanged, filter, map } from 'rxjs';
 import { Breadcrumb, BreadcrumbStateService } from 'src/app/context/service/sharedstate/breadcrumb.state.service';
 
@@ -15,6 +16,9 @@ export class BreadcrumbsComponent implements OnInit, DoCheck {
   pageTitle: string;
   isShowDatePicker: boolean;
   isShowDropDown: boolean;
+  dashboardDate: Date = new Date('08-01-2023');
+  dashboardMonth: Date = new Date()
+  dashboardYear: Date = new Date()
 
   constructor(private route: ActivatedRoute, private router: Router, private breadcrumbState: BreadcrumbStateService,
     public titleService: Title, public zone: NgZone, private ref: ChangeDetectorRef
@@ -39,6 +43,16 @@ export class BreadcrumbsComponent implements OnInit, DoCheck {
 
   ngDoCheck(): void {
     this.showWidgets();
+  }
+
+  onSelectDate(event: Date) {
+    // let date = new Date(`${event.year}/${event.month}`);
+    this.breadcrumbState.setDashboardDate(event);
+  }
+
+  onSelectYear(event: CalendarMonthChangeEvent) {
+    let date = new Date(`${event.year}/${event.month}`);
+    this.breadcrumbState.setDashboardDate(date);
   }
 
   ngOnInit() {

@@ -93,7 +93,7 @@ export class AppLayoutComponent implements OnDestroy, OnInit {
     }
 
     setLoggedUserDetails() {
-        let user = Utils.getLocalStorage(LocalStorage.UserDetails);
+        let user = new Utils().getLocalStorage(LocalStorage.UserDetails);
         this.baseService.setLoginDetails(user);
     }
 

@@ -65,6 +65,7 @@ export class SecurityComponent implements OnInit {
           webLogin.companyCode = user.companyCode;
           webLogin.companyId = user.companyId;
           webLogin.employeeId = this.employeeData.empID;
+          webLogin.customerId = user.customerId;
           this.employeeService.updateWebLogin(webLogin).subscribe({
             next: res => {
               this.alert.success('Web Login details updated.');

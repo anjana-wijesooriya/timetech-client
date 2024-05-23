@@ -1,3 +1,4 @@
+import { HttpEvent, HttpResponseBase } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
@@ -10,6 +11,7 @@ import { BaseService } from 'src/app/context/service/base.service';
 import { EmployeeService } from 'src/app/context/service/employee.service';
 import { EmployeeStateService } from 'src/app/context/service/sharedstate/employee.state.service';
 import { EmployeeSupport } from 'src/app/context/shared/enum/employee-support.enum';
+import { Utils } from 'src/app/context/shared/utils';
 
 @Component({
   selector: 'app-employee-personal',
@@ -76,8 +78,21 @@ export class PersonalComponent implements OnInit {
     })
   }
 
-  onUpload(event: UploadEvent) {
-    this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
+  onUploadImage(event: UploadEvent) {
+    console.log(event)
+    let response = event.originalEvent as any;
+    if (response?.body?.success && response?.body?.url != '') {
+      this.employee.imagePath = '';
+      this.employee.imagePath = new Utils().getImageBlobUrl(response?.body?.url);
+      this.employeeState.setEmployeeDetails(this.employee);
+    }
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Profile picture updated.' });
+  }
+
+  onBeforeUpload(event: UploadEvent) {
+    this.employee.imagePath = 'spinner'
+    this.employeeState.setEmployeeDetails(this.employee);
+    // this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File ' });
   }
 
   onSubmit() {

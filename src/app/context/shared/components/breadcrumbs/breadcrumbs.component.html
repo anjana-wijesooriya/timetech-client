@@ -11,18 +11,24 @@
                     <div class="absolute left-0 top-0 z-1"
                         style="border-left: 20px solid var(--surface-card); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0;">
                     </div>
-                    <a class="pl-4 white-space-nowrap" [ngClass]="{'cursor-pointer': item.path != undefined }"
-                        [routerLink]="item.path">
-                        <i [class]="item.icon" class="text-lg"></i>
-                        {{item.label}}
+                    <a class="flex align-items-center justify-content-center gap-2 pl-4 white-space-nowrap"
+                        [ngClass]="{'cursor-pointer': item.path != undefined }" [routerLink]="item.path">
+                        <i [class]="item.icon" class="flex text-lg"></i>
+                        <span class="flex">{{item.label}}</span>
                     </a>
                     <div class="absolute top-0"
                         style="left: 1px; border-left: 20px solid var(--surface-border); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0;">
                     </div>
                 </li>
             </ul>
-            <p-calendar *ngIf="isShowDatePicker" class="max-w-full dashboard-month-picker" [inline]="true"
-                [showWeek]="true"></p-calendar>
+            <div class="flex">
+                <p-calendar *ngIf="isShowDatePicker" class="max-w-full dashboard-month-picker border"
+                    [readonlyInput]="true" inline="true" [showWeek]="true" dateFormat="M-yy" [(ngModel)]="dashboardDate"
+                    (onMonthChange)="onSelectYear($event)" [defaultDate]="dashboardDate"></p-calendar>
+                <!-- <p-calendar *ngIf="isShowDatePicker" class="max-w-full dashboard-month-picker" [readonlyInput]="true"
+                    [showWeek]="true" view="year" dateFormat="yy" [(ngModel)]="dashboardDate"
+                    (onMonthChange)="onSelectYear($event)"></p-calendar> -->
+            </div>
 
 
         </div>

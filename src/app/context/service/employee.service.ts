@@ -90,6 +90,15 @@ export class EmployeeService extends BaseService {
     return this.http.put<AddEmployeeModel>(`${this.employeeUrl}/personal?loggedUserId=${loggedEmpId}`, employee);
   }
 
+  downloadFile(filePath: string) {
+    let data: CommonDataModel = new CommonDataModel();
+    data.id = 0;
+    data.code = filePath;
+    data.name = filePath;
+    data.active = true;
+    return this.http.post<any>(`${this.employeeUrl}/download-file`, data);
+  }
+
   saveEmployee(employee: AddEmployeeModel) {
     return this.http.post<AddEmployeeModel>(`${this.employeeUrl}`, employee);
   }
@@ -102,6 +111,9 @@ export class EmployeeService extends BaseService {
     return this.http.delete(`${this.employeeUrl}/contact?contactId=${contactId}&employeeId=${employeeId}`);
   }
 
+  deleteDependent(contactId: number, employeeId: number) {
+    return this.http.delete(`${this.employeeUrl}/dependent?contactId=${contactId}&employeeId=${employeeId}`);
+  }
   saveDependent(contact: DependentModel) {
     return this.http.post(`${this.employeeUrl}/dependent`, contact);
   }

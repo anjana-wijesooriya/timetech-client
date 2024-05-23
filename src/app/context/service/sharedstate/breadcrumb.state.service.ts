@@ -4,7 +4,8 @@ import { StateService } from './state.service';
 
 const initialState: BreadcrumbState = {
     breadcrumbs: [],
-    title: ''
+    title: '',
+    date: new Date()
 };
 
 @Injectable({
@@ -24,6 +25,10 @@ export class BreadcrumbStateService extends StateService<BreadcrumbState> {
         this.setState({ breadcrumbs: paths })
     }
 
+    public setDashboardDate(date: Date) {
+        this.setState({ date: date })
+    }
+
     public getBreadCrumbState() {
         return this.state$.asObservable();
     }
@@ -39,6 +44,7 @@ export class BreadcrumbStateService extends StateService<BreadcrumbState> {
 export interface BreadcrumbState {
     breadcrumbs: Breadcrumb[],
     title: string;
+    date: Date;
 }
 
 export class Breadcrumb {

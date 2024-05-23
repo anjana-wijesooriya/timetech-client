@@ -123,7 +123,7 @@ export class DependentsComponent implements OnInit {
       rejectButtonStyleClass: "p-button-text",
       accept: () => {
         // this.spinner.show()
-        this.employeeService.deleteContact(contactId, this.employeeId).subscribe({
+        this.employeeService.deleteDependent(contactId, this.employeeId).subscribe({
           next: res => {
             this.dependents = this.dependents.filter(a => a.code != contactId);
             this.alert.success('Dependent deleted.');

@@ -1,56 +1,4 @@
 <div class="grid  nested-grid surface-ground">
-
-    <div class="surface-section px-3 py-3 mx-2 m shadow-8" *ngIf="false">
-        <div class="flex align-items-start flex-column lg:flex-row lg:justify-content-between">
-            <div class="flex align-items-start flex-column md:flex-row">
-                <p-avatar image="../../../../../../assets/context/images/avatar/asiyajavayant.png"
-                    styleClass="mr-5 mb-3 lg:mb-0" size="xlarge" shape="circle">
-                </p-avatar>
-                <!-- <img src="../../../../../../assets/context/images/avatar/asiyajavayant.png" class="mr-5 mb-3 lg:mb-0" style="width: 90px; height: 90px" /> -->
-                <div>
-                    <span class="text-900 font-medium text-3xl">Kathryn Murphy</span>
-                    <i class="pi pi-star text-2xl ml-4 text-yellow-500"></i>
-                    <div class="flex align-items-center flex-wrap text-md">
-                        <div class="mr-5 mt-3">
-                            <span class="font-medium text-500 uppercase">Company</span>
-                            <div class="text-700 mt-2">TimeTech Bahrain Company</div>
-                        </div>
-                        <div class="mr-5 mt-3">
-                            <span class="font-medium text-500 uppercase">Department</span>
-                            <div class="text-700 mt-2">Administration - Finance</div>
-                        </div>
-                        <div class="mr-5 mt-3">
-                            <span class="font-medium text-500 uppercase">Employee Code</span>
-                            <div class="text-700 mt-2">1122</div>
-                        </div>
-                        <div class="mr-5 mt-3">
-                            <span class="font-medium text-500 uppercase">Mobile</span>
-                            <div class="text-700 mt-2">33911704</div>
-                        </div>
-                        <div class="mt-3">
-                            <span class="font-medium text-500 uppercase">User Profile</span>
-                            <div class="text-700 mt-2">Admin</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-3 lg:mt-0">
-                <button pButton pRipple icon="pi pi-bookmark"
-                    class="p-element p-ripple p-button-rounded mr-2 p-button p-component p-button-icon-only">
-                    <span class="p-button-icon pi pi-bookmark" aria-hidden="true"></span><span class="p-ink"></span>
-                </button>
-                <button pButton pRipple icon="pi pi-heart"
-                    class="p-element p-ripple p-button-rounded p-button-success mr-2 p-button p-component p-button-icon-only">
-                    <span class="p-button-icon pi pi-heart" aria-hidden="true"></span><span class="p-ink"></span>
-                </button>
-                <button pButton pRipple icon="pi pi-list"
-                    class="p-element p-ripple p-button-rounded p-button-help p-button p-component p-button-icon-only">
-                    <span class="p-button-icon pi pi-list" aria-hidden="true"></span><span class="p-ink"></span>
-                </button>
-            </div>
-        </div>
-
-    </div>
     <div class="col-12 pb-0">
         <div class="flex flex-column sm:flex-row align-items-center gap-4">
 
@@ -58,8 +6,24 @@
                 <!-- <img
                     src="../../../../../../assets/context/images/avatar/asiyajavayant.png"
                     class="w-3rem h-3rem flex-shrink-0"> -->
-                <p-avatar icon="pi pi-user" styleClass="flex-shrink-0 ">
+
+
+                <p-avatar icon="pi pi-user" *ngIf="employee == undefined || employee?.imagePath == ''; else empImage"
+                    styleClass="flex-shrink-0 ">
                 </p-avatar>
+                <ng-template #empImage>
+                    <p-avatar [icon]="'pi pi-sync pi-spinner'" styleClass="flex-shrink-0 mr-4" size="xlarge"
+                        shape="circle" (onImageError)="employee.imagePath = ''"
+                        *ngIf="employee.imagePath == 'spinner'; else picBlock">
+                    </p-avatar>
+                    <ng-template #picBlock>
+                        <p-avatar [image]="employee?.imagePath" styleClass="flex-shrink-0 " shape="circle"
+                            (onImageError)="employee.imagePath = ''">
+                        </p-avatar>
+                    </ng-template>
+                </ng-template>
+
+
                 <div class="flex flex-column align-items-center sm:align-items-start">
                     <h4 class="text-800 font-medium m-0 mb-1">{{employeeBasic?.empName}} has 2 unapproved leave requests
                     </h4>
@@ -90,12 +54,29 @@
     <div class="col-12">
         <div class="grid">
             <div class="col-3 pr-0">
-                <div class="surface-card shadow-2 border-round p-3 h-full">
+                <div styleClass="surface-card shadow-2 border-round p-3 h-full" *ngIf="false">
+                    <p-skeleton width="100%" height="100%" styleClass="w-full h-full" />
+                </div>
+                <div class="shadow-2 border-round p-3 h-full">
                     <div class="flex flex-column justify-content-center align-items-center mb-3">
                         <div>
-                            <p-avatar icon="text-7xl pi pi-user" styleClass="mr-5 mb-3 lg:mb-0"
+                            <p-avatar icon="text-7xl pi pi-user"
+                                *ngIf="employee == undefined || employee?.imagePath == ''; else empImageL"
                                 styleClass="w-12rem h-12rem flex-shrink-0 ">
                             </p-avatar>
+                            <ng-template #empImageL>
+                                <p-avatar [icon]="'pi pi-sync pi-spinner'" styleClass="w-12rem h-12rem flex-shrink-0"
+                                    shape="circle" (onImageError)="employee.imagePath = ''"
+                                    *ngIf="employee.imagePath == 'spinner'; else picBlockL">
+                                </p-avatar>
+                                <ng-template #picBlockL>
+                                    <p-avatar [image]="employee?.imagePath" styleClass="w-12rem h-12rem flex-shrink-0"
+                                        (onImageError)="employee.imagePath =''">
+                                    </p-avatar>
+                                </ng-template>
+
+
+                            </ng-template>
                         </div>
                         <div class="flex flex-column justify-content-center align-items-center row-gap-2 ">
                             <div class="text-900 font-medium text-xl text-center" [title]="employeeBasic?.empName">
@@ -182,16 +163,16 @@
         </div>
 
     </div>
-    <div class="dock-window dock-advanced">
-        <p-dock [model]="dockItems" [position]="'top'">
+    <!-- <div class="dock-window dock-advanced"> -->
+    <!-- <p-dock [model]="dockItems" [position]="'top'">
             <ng-template pTemplate="item" let-item>
                 <img [src]="item.icon" [alt]="item.label" width="100%" />
             </ng-template>
-        </p-dock>
+        </p-dock> -->
 
-        <!-- <p-toast /> -->
+    <!-- <p-toast /> -->
 
-        <p-dialog [(visible)]="displayFinder" [breakpoints]="{ '960px': '50vw' }"
+    <!-- <p-dialog [(visible)]="displayFinder" [breakpoints]="{ '960px': '50vw' }"
             [style]="{ width: '30vw', height: '18rem' }" [draggable]="false" [resizable]="false">
             <p-tree [value]="[]" />
         </p-dialog>
@@ -208,6 +189,6 @@
             <ng-template pTemplate="item" let-item>
                 <img [src]="item.previewImageSrc" style="width: 100%; display: block;" />
             </ng-template>
-        </p-galleria>
-    </div>
+        </p-galleria> -->
+    <!-- </div> -->
 </div>

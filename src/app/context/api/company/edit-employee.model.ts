@@ -108,6 +108,7 @@ export class EditEmployeeModel {
   empLastName: string = '';
   hasMobilePunching: boolean;
   isVisitorsAllowed: boolean;
+  imageString: string;
 }
 
 export interface IEmployeeBasic {

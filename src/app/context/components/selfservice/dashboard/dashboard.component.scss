@@ -1,8 +1,11 @@
 .stats-cards {
-    span.text-green-500, span.text-500{
+
+    span.text-green-500,
+    span.text-500 {
         display: none;
     }
 }
+
 .p-datepicker-calendar-container {
     display: none;
 }
@@ -96,3 +99,8 @@ apx-chart {
     }
 }
 
+
+// p-calendar,
+// p-dropdown {
+//     display: none !important
+// }

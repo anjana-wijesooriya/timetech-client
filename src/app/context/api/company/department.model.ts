@@ -5,6 +5,7 @@ export class DepartmentModel {
     departmentCode: string;
     departmentName: string;
     parentDepartmentId: number;
+    active: boolean;
 }
 
 export class DepartmentRightsRequest {

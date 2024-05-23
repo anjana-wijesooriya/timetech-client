@@ -1,35 +1,63 @@
 import colorLib from '@kurkle/color';
 import { DateTime } from 'luxon';
 import 'chartjs-adapter-luxon';
-import { valueOrDefault } from './helpers/helpers.core';
+// import { valueOrDefault } from './helpers/helpers.core';
 
 // Adapted from http://indiegamr.com/generate-repeatable-random-numbers-in-js/
 var _seed = Date.now();
 
+export function valueOrDefault<T>(value: T | undefined, defaultValue: T) {
+    return typeof value === 'undefined' ? defaultValue : value;
+}
+
 export class Utils {
-    static isMobile() {
+    isMobile() {
         return window && window.matchMedia('(max-width: 767px)').matches;
     }
-    static ngbDateToDate(ngbDate: { month: any, day: any, year: any }) {
+    ngbDateToDate(ngbDate: { month: any, day: any, year: any }) {
         if (!ngbDate) {
             return null;
         }
         return new Date(`${ngbDate.month}/${ngbDate.day}/${ngbDate.year}`);
     }
-    static dateToNgbDate(date: Date) {
+    dateToNgbDate(date: Date) {
         if (!date) {
             return null;
         }
         date = new Date(date);
         return { month: date.getMonth() + 1, day: date.getDate(), year: date.getFullYear() };
     }
-    static scrollToTop(selector: string) {
+    scrollToTop(selector: string) {
         if (document) {
             const element = <HTMLElement>document.querySelector(selector);
             element.scrollTop = 0;
         }
     }
-    static genId() {
+
+    getImageBlobUrl(imgString: string) {
+        const b64Data = imgString;
+        const contentType = 'image/jpg';
+
+        // Decode the Base64 string
+        const byteCharacters = atob(b64Data);
+
+        // Create an array of byte values
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+            byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+
+        // Convert the array of byte values to a Uint8Array
+        const byteArray = new Uint8Array(byteNumbers);
+
+        // Create a Blob from the Uint8Array
+        const blob = new Blob([byteArray], { type: contentType });
+
+        // Now you can use the blob as needed (e.g., display it to the user)
+        const blobUrl = URL.createObjectURL(blob);
+        return blobUrl;
+    }
+    genId() {
         let text = '';
         const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         for (let i = 0; i < 5; i++) {
@@ -38,18 +66,18 @@ export class Utils {
         return text;
     }
 
-    static srand(seed) {
+    srand(seed) {
         _seed = seed;
     }
 
-    static rand(min = undefined, max = undefined) {
+    rand(min = undefined, max = undefined) {
         min = valueOrDefault(min, 0);
         max = valueOrDefault(max, 0);
         _seed = (_seed * 9301 + 49297) % 233280;
         return min + (_seed / 233280) * (max - min);
     }
 
-    static numbers(config) {
+    numbers(config) {
         var cfg = config || {};
         var min = valueOrDefault(cfg.min, 0);
         var max = valueOrDefault(cfg.max, 100);
@@ -73,20 +101,20 @@ export class Utils {
         return data;
     }
 
-    static points(config) {
+    points(config) {
         const xs = this.numbers(config);
         const ys = this.numbers(config);
         return xs.map((x, i) => ({ x, y: ys[i], r: undefined }));
     }
 
-    static bubbles(config) {
+    bubbles(config) {
         return this.points(config).map(pt => {
             pt.r = this.rand(config.rmin, config.rmax);
             return pt;
         });
     }
 
-    static labels(config) {
+    labels(config) {
         var cfg = config || {};
         var min = cfg.min || 0;
         var max = cfg.max || 100;
@@ -105,7 +133,7 @@ export class Utils {
         return values;
     }
 
-    static MONTHS = [
+    MONTHS = [
         'January',
         'February',
         'March',
@@ -120,7 +148,7 @@ export class Utils {
         'December'
     ];
 
-    static months(config) {
+    months(config) {
         var cfg = config || {};
         var count = cfg.count || 12;
         var section = cfg.section;
@@ -135,7 +163,7 @@ export class Utils {
         return values;
     }
 
-    static COLORS = [
+    COLORS = [
         '#4dc9f6',
         '#f67019',
         '#f53794',
@@ -147,16 +175,16 @@ export class Utils {
         '#8549ba'
     ];
 
-    static color(index) {
+    color(index) {
         return this.COLORS[index % this.COLORS.length];
     }
 
-    static transparentize(value, opacity) {
+    transparentize(value, opacity) {
         var alpha = opacity === undefined ? 0.5 : 1 - opacity;
         return colorLib(value).alpha(alpha).rgbString();
     }
 
-    static CHART_COLORS = {
+    CHART_COLORS = {
         red: 'rgb(255, 99, 132)',
         orange: 'rgb(255, 159, 64)',
         yellow: 'rgb(255, 205, 86)',
@@ -166,7 +194,7 @@ export class Utils {
         grey: 'rgb(201, 203, 207)'
     };
 
-    static NAMED_COLORS = [
+    NAMED_COLORS = [
         this.CHART_COLORS.red,
         this.CHART_COLORS.orange,
         this.CHART_COLORS.yellow,
@@ -176,27 +204,27 @@ export class Utils {
         this.CHART_COLORS.grey,
     ];
 
-    static namedColor(index) {
+    namedColor(index) {
         return this.NAMED_COLORS[index % this.NAMED_COLORS.length];
     }
 
-    static newDate(days) {
+    newDate(days) {
         return DateTime.now().plus({ days }).toJSDate();
     }
 
-    static newDateString(days) {
+    newDateString(days) {
         return DateTime.now().plus({ days }).toISO();
     }
 
-    static parseISODate(str) {
+    parseISODate(str) {
         return DateTime.fromISO(str);
     }
 
-    static getLocalStorage(key: string) {
+    getLocalStorage(key: string) {
         return JSON.parse(window.localStorage.getItem(key))
     }
 
-    static setLocalStorage(key, string, obj: any) {
+    setLocalStorage(key, string, obj: any) {
         return window.localStorage.setItem(key, JSON.stringify(obj));
     }
 }
