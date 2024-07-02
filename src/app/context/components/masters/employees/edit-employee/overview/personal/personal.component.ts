@@ -84,14 +84,18 @@ export class PersonalComponent implements OnInit {
     if (response?.body?.success && response?.body?.url != '') {
       this.employee.imagePath = '';
       this.employee.imagePath = new Utils().getImageBlobUrl(response?.body?.url);
-      this.employeeState.setEmployeeDetails(this.employee);
+      let empState = this.employeeState.employeeDetails;
+      empState.imagePath = this.employee.imagePath;
+      this.employeeState.setEmployeeDetails(empState);
     }
     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Profile picture updated.' });
   }
 
   onBeforeUpload(event: UploadEvent) {
     this.employee.imagePath = 'spinner'
-    this.employeeState.setEmployeeDetails(this.employee);
+    let empState = this.employeeState.employeeDetails;
+    empState.imagePath = this.employee.imagePath;
+    this.employeeState.setEmployeeDetails(empState);
     // this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File ' });
   }
 

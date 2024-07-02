@@ -110,12 +110,12 @@
                         <td>
                             {{doc.docNo}}
                         </td>
-                        <td>
+                        <td class="text-center">
                             <p-avatar icon="pi pi-bell" styleClass="mr-2" size="normal"
                                 [style]="{ 'background-color': '#2196F3', color: '#ffffff' }" shape="circle"
                                 *ngIf="doc.remindMe"></p-avatar>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <p-tag [value]="doc.active ? 'Active' : 'Inactive'"
                                 [severity]="doc.active ? 'success' : 'warning'">
                             </p-tag>

@@ -32,14 +32,36 @@
             </div>
             <div class="flex flex-wrap gap-2 sm:ml-auto justify-content-center">
                 <div class="flex">
-                    <p-menu #dpOne [model]="employeeMenuItems" [popup]="true" />
-                    <div (click)="dpOne.toggle($event)"
+
+                    <div (click)="employeeMenu.toggle($event)"
                         class=" shadow-4 flex align-items-center p-2 cursor-pointer hover:surface-0 border-round transition-duration-200">
                         <i [class]="selectedMenuItem.icon"></i>
                         <span class="font-semibold ml-2">{{selectedMenuItem.label}}</span>
                         <i class="pi pi-angle-down ml-auto"></i>
                     </div>
+
                 </div>
+                <p-overlayPanel #employeeMenu appendTo="body" styleClass="w-auto employee-menu">
+                    <div class="flex flex-column">
+                        <p-menu #dpOne [model]="employeeMenuItems" styleClass="w-auto">
+                            <ng-template pTemplate="submenuheader" let-item>
+                                <span class="text-primary font-bold" style="color: var(--primary-color) !important;">{{
+                                    item.label }}</span>
+                            </ng-template>
+                            <ng-template pTemplate="item" let-item>
+                                <a pRipple class="flex align-items-center p-menuitem-link hover:underline text-primary"
+                                    style="color: var(--text-color) !important;">
+                                    <span [class]="item.icon"></span>
+                                    <span class="ml-2">{{ item.label }}</span>
+                                    <!-- <p-badge *ngIf="item.badge" class="ml-auto" [value]="item.badge" />
+                                    <span *ngIf="item.shortcut" class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">
+                                        {{ item.shortcut }}
+                                    </span> -->
+                                </a>
+                            </ng-template>
+                        </p-menu>
+                    </div>
+                </p-overlayPanel>
                 <!-- <div class="flex gap-2 align-items-center justify-content-center">
                     <button type="button" pbutton="" ptooltip="Exchange" tooltipposition="bottom" icon="pi pi-arrows-h"
                         class="p-element p-button-rounded p-button-outlined flex-shrink-0 p-button p-component p-button-icon-only">
@@ -49,6 +71,7 @@
                     </p-selectButton>
                 </div> -->
             </div>
+
         </div>
     </div>
     <div class="col-12">

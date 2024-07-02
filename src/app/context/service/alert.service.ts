@@ -33,7 +33,7 @@ export class AlertService {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: msg?.itle });
       } else if (typeof (msg.error) == 'string') {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: msg.error });
-      } if (msg.statusCode == 500) {
+      } else if (msg.statusCode == 500) {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: msg.description });
       } else if (msg.error.statusCode == 500) {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: msg.error.description });

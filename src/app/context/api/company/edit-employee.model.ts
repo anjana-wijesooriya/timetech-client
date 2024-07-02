@@ -109,6 +109,8 @@ export class EditEmployeeModel {
   hasMobilePunching: boolean;
   isVisitorsAllowed: boolean;
   imageString: string;
+  isMachineAdmin: boolean = false;
+  imageStream: string = '';
 }
 
 export interface IEmployeeBasic {

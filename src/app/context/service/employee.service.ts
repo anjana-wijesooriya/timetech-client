@@ -8,6 +8,9 @@ import { EditEmployeeModel, IEmployeeBasic, IContact, IDependent, DepatmentRight
 import { EmployeeSupportDataModel, WorkRuleModel, DiscontinuedEmployeeModel } from '../api/company/employee-support-data.model';
 import { EmployeeGridModel } from '../api/master/employee-grid.model';
 import { CommonDataModel } from '../api/shared/common-data.model';
+import { LeaveType } from '../api/company/leave.model';
+import { EmployeeAttachment } from '../api/company/employee-attachment.model';
+import { AirTicket, AirTicketDetails, AirTicketHistory, IAirSectorSummery } from '../api/company/air-ticket.model';
 
 @Injectable({
   providedIn: 'root'
@@ -70,6 +73,9 @@ export class EmployeeService extends BaseService {
     return this.http.get<DocumentModel[]>(`${this.employeeUrl}/documents?employeeId=${employeeId}`);
   }
 
+  getLeaveTypes(companyId: number) {
+    return this.http.get<any[]>(`${this.employeeUrl}/leaves-types?companyId=${companyId}`);
+  }
   saveOrUpdateDocuments(doc: DocumentModel) {
     return this.http.post<DocumentModel[]>(`${this.employeeUrl}/document`, doc);
   }
@@ -88,6 +94,10 @@ export class EmployeeService extends BaseService {
 
   updatePersonalData(employee: EditEmployeeModel, loggedEmpId: number) {
     return this.http.put<AddEmployeeModel>(`${this.employeeUrl}/personal?loggedUserId=${loggedEmpId}`, employee);
+  }
+
+  updateTimeAttendanceDetails(employee: EditEmployeeModel, loggedEmpId: number) {
+    return this.http.put<string>(`${this.employeeUrl}/time-attendance?loggedUserId=${loggedEmpId}`, employee);
   }
 
   downloadFile(filePath: string) {
@@ -135,7 +145,78 @@ export class EmployeeService extends BaseService {
     return this.http.get<WorkRuleModel[]>(`${this.employeeUrl}/work-rules?companyId=${companyId}`);
   }
 
+  getWorkRuleReport(companyId: number, ruleId: number) {
+    return this.http.get<any[]>(`${this.employeeUrl}/work-rule-report?companyId=${companyId}&&workruleId=${ruleId}`);
+  }
+
   getDiscontinuedEmployee(companyId: number) {
     return this.http.get<DiscontinuedEmployeeModel[]>(`${this.employeeUrl}/discontinued-employees?companyId=${companyId}`);
   }
+
+  getLeaves(employeeId: number) {
+    return this.http.get<any[]>(`${this.employeeUrl}/leave-type?employeeId=${employeeId}`);
+  }
+
+  getLeaveBreakup(employeeId: number, leaveType: number) {
+    return this.http.get<any[]>(`${this.employeeUrl}/leaves-breakup?employeeId=${employeeId}&leaveType=${leaveType}`);
+  }
+
+  getLeaveHistory(employeeId: number, leaveType: number) {
+    return this.http.get<any[]>(`${this.employeeUrl}/leaves-history?employeeId=${employeeId}&leaveType=${leaveType}`);
+  }
+
+  getLeaveTypeDetails(employeeId: number, leaveType: number) {
+    return this.http.get<any>(`${this.employeeUrl}/leaves-type-detail?empId=${employeeId}&leaveType=${leaveType}`);
+  }
+
+  saveLeaveType(userId: number, leaveTypeDetails: LeaveType) {
+    return this.http.post<any>(`${this.employeeUrl}/leaves-type?userId=${userId}`, leaveTypeDetails);
+  }
+
+  deleteLeaveType(employeeId: number, leaveType: number) {
+    return this.http.delete<any>(`${this.employeeUrl}/leaves-type?employeeId=${employeeId}&leaveType=${leaveType}`);
+  }
+
+  getEmployeeAttachments(employeeId: number) {
+    return this.http.get<EmployeeAttachment[]>(`${this.employeeUrl}/attachments?employeeId=${employeeId}`);
+  }
+  getEmployeeAttachmentTypes(customerId: number) {
+    return this.http.get<any[]>(`${this.employeeUrl}/attachment-types?customerId=${customerId}`);
+  }
+  saveEmployeeAttachment(userId: number, attachment: any) {
+    return this.http.post<any>(`${this.employeeUrl}/attachments?userId=${userId}`, attachment);
+  }
+
+  deleteEmployeeAttachment(employeeId: number, code: number) {
+    return this.http.delete<any>(`${this.employeeUrl}/attachments?employeeId=${employeeId}&code=${code}`);
+  }
+
+  getTicketHistory(employeeId: number) {
+    return this.http.get<AirTicketHistory[]>(`${this.employeeUrl}/air-ticket-history?employeeId=${employeeId}`);
+  }
+
+  getTicketDetails(employeeId: number, ticketId: number, dependentId: number) {
+    return this.http.get<AirTicketDetails>(`${this.employeeUrl}/air-ticket-details?employeeId=${employeeId}&ticketId=${ticketId}&dependentId=${dependentId}`);
+  }
+
+  getAirTickets(employeeId: number, fromDate: string, companyId: number) {
+    return this.http.get<AirTicket[]>(`${this.employeeUrl}/air-tickets?employeeId=${employeeId}&fromDate=${fromDate}&companyId=${companyId}`);
+  }
+
+  getAirSectorDetails(employeeId: number) {
+    return this.http.get<any>(`${this.employeeUrl}/air-ticket-sector?employeeId=${employeeId}`);
+  }
+
+  getAirSectorSummery(employeeId: number, companyId: number, fromDate: string) {
+    return this.http.get<IAirSectorSummery>(`${this.employeeUrl}/air-sector-summery?employeeId=${employeeId}&fromDate=${fromDate}&companyId=${companyId}`);
+  }
+
+  getMastersData(id: number) {
+    return this.http.get<DynamicDataModel[]>(`${this.apiEndpoint}api/masters?mastersId=` + id);
+  }
+}
+
+
+export type DynamicDataModel = {
+  [id: string]: any
 }

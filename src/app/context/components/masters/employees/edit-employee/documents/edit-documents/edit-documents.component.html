@@ -100,8 +100,8 @@
             </div>
             <div class="col-12">
                 <p-fileUpload name="file" mode="advanced" #fileUploader
-                    url="https://localhost:44319/api/employee/upload-file?attachmentType=2" [multiple]="true"
-                    accept="image/*, application/pdf" maxFileSize="1000000"
+                    url="https://localhost:44319/api/employee/upload-file?attachmentType=2&&folderPathId"
+                    [multiple]="true" accept="image/*, application/pdf" maxFileSize="1000000"
                     (onSelect)="onSelectedFiles($event, fileUploader)" [auto]="true" (onUpload)="onUpload($event)"
                     fileLimit="3" showUploadButton="false" be>
                     <!-- <ng-template pTemplate="toolbar">

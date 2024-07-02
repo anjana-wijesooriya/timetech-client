@@ -24,4 +24,5 @@ export class BaseService {
   public getUser() {
     return this.userDetails$.asObservable();
   }
+
 }

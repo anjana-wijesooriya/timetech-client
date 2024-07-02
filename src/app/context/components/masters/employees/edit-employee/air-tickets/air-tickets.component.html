@@ -1,0 +1,740 @@
+<div class="p-0 surface-card shadow-3 border-round h-full">
+
+    <p-tabMenu [model]="menuItemsTab" [activeItem]="activeItem" (activeItemChange)="onActiveItemChange($event)"
+        styleClass="border-round">
+        <ng-template pTemplate="item" let-item>
+            <a class="p-menuitem-link flex justify-content-between align-items-center p-3">
+                <div>
+                    <span [class]="'font-bold ' + item.icon"></span>
+                    <span> {{ item.label }}</span>
+                </div>
+                <div>
+                    <span *ngIf="item.shortcut" [class]="item.shortcutClass">{{ item.shortcut }}</span>
+                    <p-badge *ngIf="item.badge" [value]="item.badge" [severity]="item.badgeSeverity"></p-badge>
+                </div>
+            </a>
+        </ng-template>
+    </p-tabMenu>
+
+    <p-panel>
+        <p-header>
+            <div class="flex align-items-center gap-2">
+                <span class="font-bold">
+                    Ticket History
+                </span>
+            </div>
+        </p-header>
+        <ng-template pTemplate="icons">
+            <button pButton pRipple icon="pi pi-plus" class="p-button-primary p-button-outlined"
+                [label]="'New Air Ticket'" [loading]="isSaving" (click)="onEdit(undefined);"></button>
+        </ng-template>
+        <div class="w-full">
+            <p-table [rowHover]="true" [value]="airTicketHistory" #empTable [scrollable]="true"
+                scrollHeight="calc(100vh - 20rem)" dataKey="code" [rows]="10" [loading]="isLoading"
+                [globalFilterFields]="['code', 'airLine', 'ticketNo', 'travelDate', 'returnDate', 'noTickets', 'amount', 'canBeDeleted', 'dependentName', 'relation', 'dependentId', 'settlementCode', 'leaveRefNo', 'type', 'referenceNo']"
+                [paginator]="true" styleClass="p-datatable-gridlines p-datatable-sm" responsiveLayout="scroll"
+                [breakpoint]="'960px'" [tableStyle]="{'min-width': '50rem'}">
+
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width:3.5rem !important;">
+                            <div class="flex justify-content-center align-items-center">
+                                #
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-center align-items-center">
+                                Name
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-center align-items-center">
+                                Relation
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-center align-items-center">
+                                AirLine
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-center align-items-center">
+                                Ticket No
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-center align-items-center">
+                                Travel Date
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-center align-items-center">
+                                Return Date
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-center align-items-center">
+                                Tickets
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-center align-items-center">
+                                Amount
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-center align-items-center">
+                                Type
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-center align-items-center">
+                                Ref. No
+                            </div>
+                        </th>
+                        <th style="width:5rem !important;">
+                            <div class="flex justify-content-center align-items-center">
+                                Actions
+                            </div>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
+                    <tr>
+                        <td class="text-center">{{rowIndex +1}}</td>
+                        <td class="text-center">
+                            {{item.dependentName}}
+                        </td>
+                        <td class="text-center">
+                            {{item.relation}}
+                        </td>
+                        <td class="text-center">
+                            <p-chip [label]="item.airLine"></p-chip>
+                        </td>
+                        <td class="text-center">
+                            {{item.ticketNo}}
+                        </td>
+                        <td class="text-center">
+                            {{item.travelDate == null ? '' : item.travelDate | date : 'MM/dd/yyyy'}}
+                        </td>
+                        <td class="text-center">
+                            {{item.returnDate == null ? '' : item.returnDate | date : 'MM/dd/yyyy'}}
+                        </td>
+                        <td class="text-center">
+                            {{item.noTickets}}
+                        </td>
+                        <td class="text-center">
+                            {{item.amount | currency: 'BHD':'code':'.2-2'}}
+                        </td>
+                        <td class="text-center">
+                            {{item.type}}
+                        </td>
+                        <td class="text-center">
+                            {{item.referenceNo}}
+                        </td>
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil" pTooltip="Edit"
+                                class="p-button-rounded p-button-success p-button-outlined mr-2"
+                                (click)="onEdit(item);"></button>
+                            <button pButton pRipple icon="pi pi-trash" pTooltip="Delete"
+                                class="p-button-rounded p-button-danger p-button-outlined"
+                                (click)="deleteConfirm($event, item)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+            <p-sidebar [(visible)]="showAddSlide" position="right" styleClass="p-sidebar-lg">
+                <ng-template pTemplate="header">
+                    <div class="font-bold text-xl">
+                        Ticket Infomation
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="content">
+                    <form (ngSubmit)="onSubmitDetails()" novalidate autocomplete="off" [formGroup]="ticket">
+                        <div
+                            class="flex p-2 border-round justify-content-between align-items-center transition-colors transition-duration-150">
+                            <span class="flex flex-column row-gap-1">
+                                <span class="font-semibold">Ticket For</span>
+                                <span class="text-color-secondary">
+                                    <p-chip styleClass="pl-3 pr-0">
+                                        <span class="mr-2 font-medium">
+                                            {{selectedTicket.empName}}
+                                        </span>
+                                        <img src="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+                                            alt=""
+                                            class="bg-primary border-circle w-2rem h-2rem flex align-items-center justify-content-center m-0">
+                                    </p-chip>
+                                    <!-- You have <strong>3</strong> new
+                                                        orders. -->
+                                </span>
+                            </span>
+                            <span class="flex flex-column row-gap-1">
+                                <span class="font-semibold">Airline</span>
+                                <span class="text-color-secondary text-center">
+                                    <p-iconField iconPosition="right">
+                                        <p-inputIcon styleClass="pi pi-send" />
+                                        <input type="text" pInputText formControlName="issuedBy" required />
+                                    </p-iconField>
+                                </span>
+                            </span>
+                            <span class="flex flex-column row-gap-1">
+                                <span class="font-semibold">No. of tickets</span>
+                                <span class="text-color-secondary text-center">
+                                    <p-inputNumber [showButtons]="true" buttonLayout="horizontal" inputId="horizontal"
+                                        allowEmpty="false" spinnerMode="horizontal" incrementButtonIcon="pi pi-plus"
+                                        decrementButtonIcon="pi pi-minus" size="1"
+                                        [inputStyle]="{ 'background-color': '#dee9fc', color: '#1a2551' }"
+                                        inputStyleClass="p-inputtext-sm text-center" [min]="1"
+                                        formControlName="noTickets" required />
+                                    <!-- <p-avatar [inputStyle]="{ 'background-color': '#dee9fc', color: '#1a2551' }">
+                                    <span class="font-medium">
+                                        12
+                                    </span>
+                                </p-avatar> -->
+                                    <!-- You have <strong>3</strong> new
+                                orders. -->
+                                </span>
+                            </span>
+                        </div>
+                        <div class="grid grid-nogutter flex-wrap gap-3 p-fluid">
+                            <div class="col-12 lg:col-12">
+                                <div class="grid formgrid">
+                                    <div class="col-12 lg:col-4 field">
+                                        <label for="float-label" class="font-medium text-900">Currency</label>
+                                        <p-dropdown [options]="currencies" placeholder="Select Currency"
+                                            optionLabel="name" optionValue="curid" inputId="float-label"
+                                            [checkmark]="true" formControlName="currency" [showClear]="true"
+                                            [required]="true">
+                                            <ng-template pTemplate="selectedItem" let-selectedCurrency>
+                                                <div class="flex align-items-center gap-2">
+                                                    <p-badge badgeSize="small" [value]="selectedCurrency.curcode" />
+                                                    <div>{{ selectedCurrency.name }}</div>
+                                                </div>
+                                            </ng-template>
+                                            <ng-template let-currency pTemplate="item">
+                                                <div class="flex align-items-center gap-2">
+                                                    <p-badge [value]="currency.curcode" />
+                                                    <div>{{ currency.name }}</div>
+                                                </div>
+                                            </ng-template>
+                                        </p-dropdown>
+                                        <small class="p-error" id="username-help">Currency required.</small>
+                                    </div>
+                                    <div class="col-12 lg:col-6 field">
+                                        <label for="float-label" class="font-medium text-900">Amount</label>
+                                        <p-inputNumber mode="currency" value="0" allowEmpty="false" currency="BHD"
+                                            inputId="stacked" [min]="1" [step]="1.0" [showButtons]="true"
+                                            buttonLayout="horizontal" inputId="horizontal" formControlName="amount"
+                                            incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
+                                        <small class="p-error" id="username-help">Currency required.</small>
+                                    </div>
+                                    <div class="col-12 lg:col-2 field">
+                                        <label for="float-label" class="font-medium text-900">Ticket No.</label>
+                                        <input pInputText id="name" class="" formControlName="ticketNo"
+                                            [required]="true" />
+                                        <small class="p-error" id="username-help">Currency required.</small>
+                                    </div>
+                                    <div class="col-12 lg:col-4 field">
+                                        <label for="float-label" class="font-medium text-900">Favour Of</label>
+                                        <input pInputText id="name" class="" formControlName="favourOf"
+                                            [required]="true" />
+                                        <small class="p-error" id="username-help">Currency required.</small>
+                                    </div>
+
+                                    <div class="col-12 lg:col-4 field">
+                                        <label for="float-label" class="font-medium text-900">Issue Date</label>
+                                        <p-calendar [iconDisplay]="'input'" [showIcon]="true"
+                                            formControlName="ticketTakenDt"></p-calendar>
+                                        <small class="p-error" id="username-help">Currency required.</small>
+                                    </div>
+                                    <div class="col-12 lg:col-4 field">
+                                        <label for="float-label" class="font-medium text-900 w-full">Air Ticket
+                                            Period</label>
+                                        <p-chip styleClass="py-1 pl-3 pr-0 w-full">
+                                            <span class="text-md font-medium">
+                                                {{transformDate(selectedTicket.contractStartDt)}} to
+                                                {{transformDate(selectedTicket.contractEndDt)}}
+                                            </span>
+                                            <span
+                                                class="bg-primary border-circle w-2rem h-2rem flex align-items-center justify-content-center ml-auto mr-1">
+                                                <i class="pi pi-calendar-clock"></i>
+                                            </span>
+                                        </p-chip>
+                                    </div>
+                                    <div class="col-12 lg:col-4 field">
+                                        <label for="float-label" class="font-medium text-900">Air Sector</label>
+                                        <p-dropdown [options]="sectors" placeholder="Select Air Sector"
+                                            optionLabel="name" optionValue="code" inputId="float-label"
+                                            [checkmark]="true" formControlName="airSector" [showClear]="true"
+                                            [required]="true">
+                                        </p-dropdown>
+                                        <small class="p-error" id="username-help">Currency required.</small>
+                                    </div>
+
+                                    <div class="col-12 lg:col-3 field">
+                                        <label for="float-label" class="font-medium text-900">Attention</label>
+                                        <input pInputText id="name" class="" formControlName="attn" [required]="true" />
+                                        <small class="p-error" id="username-help">Currency required.</small>
+                                    </div>
+                                    <div class="col-12 lg:col-3 field">
+                                        <label for="float-label" class="font-medium text-900">Doc Date</label>
+                                        <p-calendar [iconDisplay]="'input'" [showIcon]="true" name="joinDate"
+                                            formControlName="docDate"></p-calendar>
+                                        <small class="p-error" id="username-help">Currency required.</small>
+                                    </div>
+                                    <div class="col-12 lg:col-2 field">
+                                        <label for="float-label" class="font-medium text-900">Reimbursement</label>
+                                        <div class="flex align-items-center w-auto">
+                                            <p-inputSwitch class="p-inputSwitch-lg" id="visa-cost" triggers="focus"
+                                                formControlName="isReImbursement"></p-inputSwitch>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 lg:col-12">
+                                <p-panel>
+                                    <ng-template pTemplate="header">
+                                        <div class="font-bold text-xl">
+                                            Trip Infomation
+                                        </div>
+                                    </ng-template>
+                                    <ng-template pTemplate="icons">
+                                        <div class="flex align-items-center gap-2">
+                                            <p-inputSwitch id="base-on" name="discontinued"
+                                                formControlName="ticketReturn"></p-inputSwitch>
+                                            <label for="ny" class="p-panel-title">Return
+                                                Ticket</label>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template pTemplate="content">
+                                        <div class="flex flex-column md:flex-row gap-2">
+                                            <div class="w-12">
+                                                <p-divider [align]="'left'" type="solid">
+                                                    <b>Depart</b>
+                                                </p-divider>
+                                                <div class="grid formgrid">
+                                                    <div class="col-12 lg:col-4 field">
+                                                        <label for="float-label" class="font-medium text-900">Departure
+                                                            Date</label>
+                                                        <p-calendar [iconDisplay]="'input'" [showIcon]="true"
+                                                            formControlName="trip1Date"></p-calendar>
+
+                                                        <small class="p-error" id="username-help">Departure Date
+                                                            required.</small>
+                                                    </div>
+                                                    <div class="col-12 lg:col-4 field">
+                                                        <label for="float-label"
+                                                            class="font-medium text-900">Route</label>
+                                                        <input pInputText id="name" formControlName="trip1Route" />
+                                                        <small class="p-error" id="username-help">Route
+                                                            required.</small>
+                                                    </div>
+                                                    <div class="col-12 lg:col-4 field">
+                                                        <label for="float-label" class="font-medium text-900">Flight
+                                                            Number</label>
+                                                        <input pInputText id="name" formControlName="ticketNo" />
+                                                        <small class="p-error" id="username-help">Flight Number
+                                                            required.</small>
+                                                    </div>
+                                                </div>
+                                                <p-divider [align]="'left'" type="solid">
+                                                    <b>Arrive</b>
+                                                </p-divider>
+                                                <div class="grid formgrid">
+                                                    <div class="col-12 lg:col-4 field">
+                                                        <label for="float-label" class="font-medium text-900">Arrival
+                                                            Date</label>
+                                                        <p-calendar [iconDisplay]="'input'" [showIcon]="true"
+                                                            formControlName="trip2Date"></p-calendar>
+                                                        <small class="p-error" id="username-help">Departure Date
+                                                            required.</small>
+                                                    </div>
+                                                    <div class="col-12 lg:col-4 field">
+                                                        <label for="float-label"
+                                                            class="font-medium text-900">Route</label>
+                                                        <input pInputText id="name" formControlName="trip2Route" />
+                                                        <small class="p-error" id="username-help">Route
+                                                            required.</small>
+                                                    </div>
+                                                    <div class="col-12 lg:col-4 field">
+                                                        <label for="float-label" class="font-medium text-900">Flight
+                                                            Number</label>
+                                                        <input pInputText id="name" formControlName="trip2FlightNo" />
+                                                        <small class="p-error" id="username-help">Flight Number
+                                                            required.</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="w-4" *ngIf="false">
+                                                <div class="flex flex-column align-items-start w-auto">
+                                                    <p-fileUpload mode="advanced" chooseLabel="Choose Attachment"
+                                                        name="file" ngDefaultControl [formControl]="uploadControl"
+                                                        chooseIcon="pi pi-upload" multiple="true"
+                                                        [url]="'https://localhost:44319/api/employee/upload-attachment?attachmentType=2&folderPathId=2'"
+                                                        accept="image/*, application/pdf" [auto]="true"
+                                                        maxFileSize="1000000" (onUpload)="onUploadImage($event)"
+                                                        (onSelect)="onBeforeUpload($event)" #fileUploader fileLimit="2">
+                                                        <ng-template pTemplate="content" let-files
+                                                            let-uploadedFiles="uploadedFiles"
+                                                            let-removeFileCallback="removeFileCallback"
+                                                            let-removeUploadedFileCallback="removeUploadedFileCallback">
+                                                            <div *ngIf="files?.length > 100">
+                                                                <h5>Pending</h5>
+                                                                <div class="flex flex-wrap p-0 sm:p-5 gap-5">
+                                                                    <div *ngFor="let file of files; let i = index"
+                                                                        class="card m-0 px-6 flex flex-column border-1 surface-border align-items-center gap-3">
+                                                                        <div>
+                                                                            <img role="presentation" [alt]="file.name"
+                                                                                [src]="file.objectURL" width="100"
+                                                                                height="50" />
+                                                                        </div>
+                                                                        <span class="font-semibold">{{ file.name
+                                                                            }}</span>
+                                                                        <div>{{ formatSize(file.size) }}</div>
+                                                                        <p-badge value="Pending" severity="warning" />
+                                                                        <p-button icon="pi pi-times"
+                                                                            (click)="onRemoveTemplatingFile($event, file, removeFileCallback, index)"
+                                                                            [outlined]="true" [rounded]="true"
+                                                                            severity="danger" />
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div *ngIf="selectedTicket.attachment1 != ''">
+                                                                <div class="flex flex-wrap justify-content-center p-0">
+                                                                    <div
+                                                                        class="card m-0 p-2 flex flex-column border-1 surface-border align-items-center w-full row-gap-2">
+                                                                        <div>
+                                                                            <p-avatar
+                                                                                [icon]="getDocumentIconByUrl(selectedTicket.attachment1)"
+                                                                                styleClass="w-12rem h-8rem"> </p-avatar>
+                                                                        </div>
+                                                                        <div class="flex flex-row gap-2">
+                                                                            <p-button icon="pi pi-times"
+                                                                                (onClick)="removeAttachment(0)"
+                                                                                [outlined]="true" [rounded]="true"
+                                                                                severity="danger"
+                                                                                styleClass="w-2rem h-2rem" />
+                                                                            <p-button icon="pi pi-download"
+                                                                                (onClick)="downloadAttachment(selectedTicket.attachment1)"
+                                                                                [outlined]="true" [rounded]="true"
+                                                                                severity="info"
+                                                                                styleClass="w-2rem h-2rem" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </ng-template>
+                                                        <ng-template pTemplate="file"> </ng-template>
+                                                    </p-fileUpload>
+                                                    <small class="p-error" id="username-help">Attachment
+                                                        required.</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="w-12">
+                                            <p-divider [align]="'left'" type="solid">
+                                                <b>Tickets</b>
+                                            </p-divider>
+                                            <p-table [rowHover]="true" [value]="empAirTickets" #empTable
+                                                [scrollable]="true" scrollHeight="calc(100vh - 20rem)" dataKey="code"
+                                                [rows]="10" [loading]="isLoading" [paginator]="true"
+                                                styleClass="p-datatable-gridlines p-datatable-sm"
+                                                responsiveLayout="scroll" [breakpoint]="'960px'"
+                                                [tableStyle]="{'min-width': '50rem'}" [(selection)]="selectedRows"
+                                                dataKey="code">
+
+                                                <ng-template pTemplate="header">
+                                                    <tr>
+
+                                                        <th *ngFor="let item of ticketTableColumns">
+                                                            <div class="flex justify-content-center align-items-center">
+                                                                {{item.header}}
+                                                            </div>
+                                                        </th>
+                                                        <th style="width:3rem !important;" class="text-center">
+                                                            <p-tableHeaderCheckbox />
+                                                        </th>
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="body" let-item let-rowIndex="rowIndex"
+                                                    let-editing="editing">
+                                                    <tr>
+
+                                                        <td class="text-center">{{rowIndex +1}}</td>
+                                                        <td class="text-center">
+                                                            {{item.name}}
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <p-chip [label]="item.eligibleTicket"></p-chip>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            {{item.dueOn == null ? '' : item.dueOn | date :
+                                                            'MM/dd/yyyy'}}
+                                                        </td>
+                                                        <td class="text-center">
+
+                                                            <p-inputNumber [value]="item.requestTicket"
+                                                                [showButtons]="true" buttonLayout="horizontal"
+                                                                inputId="horizontal" incrementButtonIcon="pi pi-plus"
+                                                                decrementButtonIcon="pi pi-minus" mode="decimal"
+                                                                [useGrouping]="false" size="1" min="1" />
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <p-inputNumber [value]="item.amount" onchan
+                                                                [showButtons]="true" inputId="stacked" mode="currency"
+                                                                currency="BHD" min="0" />
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <p-tableCheckbox [value]="item" />
+                                                        </td>
+                                                    </tr>
+                                                </ng-template>
+                                            </p-table>
+                                        </div>
+                                    </ng-template>
+                                </p-panel>
+                            </div>
+                        </div>
+                    </form>
+                </ng-template>
+                <ng-template pTemplate="footer">
+                    <div class="flex justify-content-end gap-2">
+                        <p-button type="submit" label="Update" severity="primary" [outlined]="true" [loading]="isSaving"
+                            icon="pi pi-check" class="ml-auto" (onClick)="onSubmitDetails()"></p-button>
+                        <p-button label="Cancel" severity="primary" [outlined]="true" text="true" icon="pi pi-times"
+                            (onClick)="onCancel()"></p-button>
+                    </div>
+                </ng-template>
+            </p-sidebar>
+        </div>
+
+    </p-panel>
+
+    <p-panel>
+        <ng-template pTemplate="header">
+            <div class="col-12 flex p-0">
+                <div class="p-0 flex-auto text-center md:text-left">
+                    <span class="text-700 block">Service start date</span>
+                    <span class="text-900 font-medium block mt-2">06/13/2024</span>
+                </div>
+                <p-divider [align]="'center'" layout="vertical"
+                    styleclass="h-full mx-0 lg:mx-3 surface-border"></p-divider>
+                <div class="p-0 flex-auto text-center md:text-left">
+                    <div class="flex flex-row justify-content-between align-items-center">
+                        <div class="p-0 flex-auto text-center md:text-left">
+                            <span class="text-700 block">As on Date</span>
+                            <span class="text-900 font-medium block mt-2" #cal>
+                                06/13/2024
+                            </span>
+
+
+                        </div>
+                        <p-calendar #calendar [iconDisplay]="'input'" [showIcon]="true" [text]="true"
+                            inputId="templatedisplay" [readonlyInput]="true" touchUI="false"
+                            inputStyleClass="max-w-0 p-0 shadow-0 opacity-0" [showOnFocus]="false">
+                            <ng-template let-clickCallBack="clickCallBack" pTemplate="inputicon">
+                                <p-button icon="pi pi-calendar" size="small" [rounded]="true" [text]="true"
+                                    raised="true" (click)="clickCallBack($event)" />
+                            </ng-template>
+
+                        </p-calendar>
+                    </div>
+                </div>
+
+                <p-divider [align]="'center'" layout="vertical"
+                    styleclass="h-full mx-0 lg:mx-3 surface-border"></p-divider>
+                <div class="p-0 flex-auto text-center md:text-left">
+                    <span class="text-700 block">Total Air tickets</span>
+                    <p-badge [value]="20" severity="info" />
+                </div>
+                <p-divider [align]="'center'" layout="vertical"
+                    styleclass="h-full mx-0 lg:mx-3 surface-border"></p-divider>
+                <div class="p-0 flex-auto text-center md:text-left">
+                    <span class="text-700 block">Air ticket taken</span>
+                    <p-badge [value]="9" severity="primary" />
+                </div>
+                <p-divider [align]="'center'" layout="vertical"
+                    styleclass="h-full mx-0 lg:mx-3 surface-border"></p-divider>
+                <div class="p-0 flex-auto text-center md:text-left">
+                    <span class="text-700 block">Air tickets allowed</span>
+                    <p-badge [value]="3" severity="warning" />
+                </div>
+            </div>
+
+            <ul class="list-none flex flex-row w-full justify-content-between p-0 m-0 gap-5" *ngIf="false">
+                <li class="flex">
+                    <div class="flex align-items-center p-0 border-round w-full hover:surface-hover transition-colors transition-duration-150"
+                        style="border-radius: '10px';">
+                        <span class="flex flex-column">
+                            <span class="font-bold mb-1">Service start date</span>
+                            <span class="m-0 text-secondary">01-Apr-2018</span>
+                        </span>
+                    </div>
+                </li>
+                <li class="flex">
+                    <div class="flex align-items-center p-0 border-round w-full hover:surface-hover transition-colors transition-duration-150 cursor-pointer"
+                        style="border-radius: '1px';">
+                        <span class="flex flex-column">
+                            <span class="font-bold mb-1">As on Date</span>
+                            <span class="m-0 text-secondary">2024/06/10</span>
+                        </span>
+                        <p-badge value="3" class="p-element ml-auto">
+                            <span class="p-badge p-component p-badge-no-gutter ng-star-inserted">3</span><!---->
+                        </p-badge>
+                    </div>
+                </li>
+                <li class="flex">
+                    <div class="flex align-items-center p-0 border-round w-full hover:surface-hover transition-colors transition-duration-150"
+                        style="border-radius: '10px';">
+                        <span class="flex flex-column">
+                            <span class="font-bold mb-1">Total Air tickets</span>
+                            <span class="m-0 text-secondary">14.140</span>
+                        </span>
+                    </div>
+                </li>
+                <li class="flex">
+                    <div class="flex align-items-center p-0 border-round w-full hover:surface-hover transition-colors transition-duration-150 "
+                        style="border-radius: '10px';">
+                        <span class="flex flex-column">
+                            <span class="font-bold mb-1">Air ticket taken</span>
+                            <span class="m-0 text-secondary">2.0000</span>
+                        </span>
+                    </div>
+                </li>
+                <li class="flex">
+                    <div class="flex align-items-center p-0 border-round w-full hover:surface-hover transition-colors transition-duration-150 "
+                        style="border-radius: '10px';">
+                        <span class="flex flex-column">
+                            <span class="font-bold mb-1">Air tickets allowed</span>
+                            <span class="m-0 text-secondary">12.1400</span>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </ng-template>
+        <form (ngSubmit)="onSubmit()" #form="ngForm" novalidate autocomplete="off">
+
+            <div class="flex flex-column md:flex-row justify-content-center gap-2 air-ticket-info">
+                <div class="flex-1 ">
+                    <p-panel>
+                        <ng-template pTemplate="header">
+                            <div class="flex align-items-center gap-2">
+                                <p-inputSwitch id="base-on" name="discontinued"></p-inputSwitch>
+                                <label for="ny" class="p-panel-title">Air Ticket </label>
+                            </div>
+                        </ng-template>
+                        <div class="p-fluid">
+                            <div class="field grid">
+                                <label for="float-label" class="font-medium text-900 col-12 mb-2 md:col-4 md:mb-0">Air
+                                    Sector</label>
+                                <p-dropdown [options]="sectors" placeholder="Select Month" optionLabel="name"
+                                    optionValue="code" inputId="float-label" name="documentType" [showClear]="true"
+                                    [required]="true" class="col-12 md:col-8">
+                                </p-dropdown>
+                                <small class="p-error" id="username-help">Attachment Type required.</small>
+                            </div>
+                            <div class="field grid">
+                                <p-inputGroup class="col-12">
+                                    <p-inputNumber inputId="expiry" prefix="" suffix=" Tickets" value="0"
+                                        inputStyleClass="border-noround-right border-right-none" allowEmpty="false" />
+                                    <p-inputGroupAddon>IN</p-inputGroupAddon>
+                                    <p-inputNumber inputId="months" prefix="" suffix=" Months" value="0"
+                                        allowEmpty="false" inputStyleClass="border-noround-left" />
+                                </p-inputGroup>
+                            </div>
+                        </div>
+                        <div class="field  p-fluid">
+                            <label for="float-label" class="font-medium text-900">Budgeted Amount</label>
+                            <p-inputNumber inputId="minmaxfraction" mode="currency" value="0" allowEmpty="false"
+                                [minFractionDigits]="2" currency="BHD" [showButtons]="true" [min]="0" />
+                            <small class="p-error" id="username-help">Budgeted Amount required.</small>
+                        </div>
+                        <div class="field p-fluid">
+                            <label for="nickname2" class="font-medium text-900">Notes</label>
+                            <textarea id="address" rows="3" cols="30" pInputTextarea name="notes"></textarea>
+                            <small class="p-error" id="username-help">Discontinue Reason required.</small>
+                        </div>
+                    </p-panel>
+                </div>
+                <div class="flex-1 flex-column row-gap-2">
+                    <div class="pb-2">
+                        <p-panel>
+                            <ng-template pTemplate="header">
+                                <div class="flex align-items-center gap-2">
+                                    <p-inputSwitch id="base-on" name="discontinued"></p-inputSwitch>
+                                    <label for="ny" class="p-panel-title">Yearly Ticket Allowance</label>
+                                </div>
+                            </ng-template>
+                            <div class="fromgrid grid">
+                                <div class="col-12 md:col-6  p-fluid">
+                                    <label for="float-label" class="font-medium text-900">Month</label>
+                                    <p-dropdown [options]="attachmentTypes" placeholder="Select Month"
+                                        optionLabel="name" optionValue="code" inputId="float-label" name="documentType"
+                                        [showClear]="true" [required]="true">
+                                    </p-dropdown>
+                                    <small class="p-error" id="username-help">Budgeted Amount required.</small>
+                                </div>
+                                <div class="col-12 md:col-6  p-fluid">
+                                    <label for="float-label" class="font-medium text-900">Amount</label>
+                                    <p-inputNumber inputId="minmaxfraction" mode="currency" value="0" allowEmpty="false"
+                                        [minFractionDigits]="2" currency="BHD" [showButtons]="false" [min]="0"
+                                        size="1" />
+                                    <small class="p-error" id="username-help">Budgeted Amount required.</small>
+                                </div>
+                            </div>
+                        </p-panel>
+                    </div>
+                    <div class="pb-2">
+                        <p-panel>
+                            <ng-template pTemplate="header">
+                                <div class="flex align-items-center gap-2">
+                                    <p-inputSwitch id="base-on" name="discontinued"></p-inputSwitch>
+                                    <label for="ny" class="p-panel-title">Yearly Ticket Allowance</label>
+                                </div>
+                            </ng-template>
+                            <div
+                                class="flex flex-column md:flex-row align-items-center gap-2 md:justify-content-between">
+                                <label for="float-label" class="font-medium text-900">Validity</label>
+                                <div class="flex  flex-column">
+                                    <p-inputNumber inputId="minmaxfraction" value="0" suffix=" Months"
+                                        allowEmpty="false" [min]="0" />
+                                    <small class="p-error" id="username-help">Budgeted Amount required.</small>
+                                </div>
+                            </div>
+                        </p-panel>
+                    </div>
+                    <div class="pb-2">
+                        <p-panel>
+                            <ng-template pTemplate="header">
+                                <div class="flex align-items-center gap-2">
+                                    <p-inputSwitch id="base-on" name="discontinued"></p-inputSwitch>
+                                    <label for="ny" class="p-panel-title">Has Opening Tickets</label>
+                                </div>
+                            </ng-template>
+                            <div class="fromgrid grid">
+                                <div class="col-12 md:col-6  p-fluid">
+                                    <label for="float-label" class="font-medium text-900">Effective Date</label>
+                                    <p-calendar [iconDisplay]="'input'" [showIcon]="true" name="joinDate"></p-calendar>
+                                    <small class="p-error" id="username-help">Budgeted Amount required.</small>
+                                </div>
+                                <div class="col-12 md:col-6  p-fluid">
+                                    <label for="float-label" class="font-medium text-900">Opening Tickets</label>
+                                    <p-inputNumber inputId="integeronly" value="0" allowEmpty="false"
+                                        [showButtons]="false" [min]="0" />
+                                    <small class="p-error" id="username-help">Budgeted Amount required.</small>
+                                </div>
+                            </div>
+                        </p-panel>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <p-footer>
+            <div class="flex justify-content-end gap-2">
+                <p-button type="submit" label="Update" severity="primary" [outlined]="true" [loading]="isSaving"
+                    icon="pi pi-check" class="ml-auto" (onClick)="onSubmit()"></p-button>
+            </div>
+        </p-footer>
+    </p-panel>
+</div>
