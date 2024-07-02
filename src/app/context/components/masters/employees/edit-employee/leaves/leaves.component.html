@@ -1,0 +1,277 @@
+<div class="p-0 surface-card shadow-3 border-round h-full">
+    <p-panel>
+        <ng-template pTemplate="header">
+            <div class="flex align-items-center gap-2">
+                <p-avatar icon="font-semibold text-lg ic i-Home-4" shape="circle" />
+                <span class="font-bold">
+                    Leaves
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="icons">
+            <button pButton pRipple icon="pi pi-plus" class="p-button-primary p-button-outlined"
+                [label]="'New Leave Type'" [loading]="isSaving" (click)="onOpenSlide()"></button>
+        </ng-template>
+        <div class="w-full">
+            <p-table [rowHover]="true" [value]="leaves" #empTable [scrollable]="true" scrollHeight="calc(100vh - 24rem)"
+                dataKey="id" [rows]="10" [loading]="isLoading"
+                styleClass="p-datatable-gridlines p-datatable-sm p-datatable-striped" responsiveLayout="stack"
+                [breakpoint]="'960px'" [tableStyle]="{'min-width': '50rem'}" dataKey="leaveCd"
+                (onRowExpand)="onRowExpand($event)" (onRowCollapse)="onRowCollapse($event)" [frozenValue]="frozenRows"
+                [expandedRowKeys]="expandedRows">
+
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem"></th>
+                        <th> Leave Type </th>
+                        <th> Yearly Days I</th>
+                        <th> Yearly Days II</th>
+                        <th> Op: Leave </th>
+                        <th> Opening Leave</th>
+                        <th> Has Carry forward</th>
+                        <th> Leave Eligible</th>
+                        <th> Leave Taken</th>
+                        <th> Leave Balance</th>
+                        <th> Total Days</th>
+                        <th> For Calculation</th>
+                        <th> Actions</th>
+                    </tr>
+                </ng-template>
+                <!-- <ng-template pTemplate="frozenbody" let-leave let-expanded="expanded" let-index="rowIndex">
+                    <tr>
+                        <td>
+                            <p-button type="button" pTooltip="Leave Breakup" pRipple [pRowToggler]="leave" [text]="true"
+                                [rounded]="true" [plain]="true"
+                                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" />
+                        </td>
+                        <td>{{ leave.leaveName }}</td>
+                        <td class="text-center font-medium">{{ leave.yearlyDays }}</td>
+                        <td class="text-center font-medium">{{ leave.yearlyDaysII }}</td>
+                        <td class="text-center">
+                            <i class="pi text-green-500 pi-check-circle" *ngIf="leave.hasOpenLv === 'Yes'"></i>
+                            <i class="pi text-red-500 pi-times-circle" *ngIf="leave.hasOpenLv === 'No'"></i>
+                        </td>
+                        <td class="text-center font-medium">{{ leave.openingLeave }}</td>
+                        <td class="text-center">
+                            <i class="pi text-green-500 pi-check-circle" *ngIf="leave.leaveCarryForward === 'Yes'"></i>
+                            <i class="pi text-red-500 pi-times-circle" *ngIf="leave.leaveCarryForward === 'No'"></i>
+                        </td>
+                        <td class="text-center font-medium">{{ leave.leaveEligible }}</td>
+                        <td class="text-center font-medium">{{ leave.leaveTaken }}</td>
+                        <td class="text-center font-medium">{{ leave.leaveEarned }}</td>
+                        <td class="text-center font-medium">{{ leave.totalWorkingDays }}</td>
+                        <td class="text-center font-medium">{{ leave.totalWorkingDaysForLeaveCalc }}</td>
+                        <td class="text-center">
+                            <p-button pRipple pTooltip="Edit" icon="pi pi-pencil" class="mr-2" [rounded]="true"
+                                [outlined]="true" severity="success" (click)="editProduct(product)" />
+                            <p-button pRipple pTooltip="Delete" icon="pi pi-trash" severity="danger" [rounded]="true"
+                                [outlined]="true" (click)="deleteProduct(product)" />
+                            <p-button pRipple pTooltip="Leave History" icon="pi pi-history" severity="info"
+                                [rounded]="true" [outlined]="true" (click)="getHistory(leave,false,index)" />
+                        </td>
+                </ng-template> -->
+                <ng-template pTemplate="body" let-leave let-expanded="expanded" let-index="rowIndex">
+                    <tr>
+                        <td>
+                            <p-button type="button" pTooltip="Leave Breakup" pRipple [pRowToggler]="leave" [text]="true"
+                                [rounded]="true" [plain]="true"
+                                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" />
+                        </td>
+                        <td>{{ leave.leaveName }}</td>
+                        <td class="text-center font-medium">{{ leave.yearlyDays }}</td>
+                        <td class="text-center font-medium">{{ leave.yearlyDaysII }}</td>
+                        <td class="text-center">
+                            <i class="pi text-green-500 pi-check-circle" *ngIf="leave.hasOpenLv === 'Yes'"></i>
+                            <i class="pi text-red-500 pi-times-circle" *ngIf="leave.hasOpenLv === 'No'"></i>
+                        </td>
+                        <td class="text-center font-medium">{{ leave.openingLeave }}</td>
+                        <td class="text-center">
+                            <i class="pi text-green-500 pi-check-circle" *ngIf="leave.leaveCarryForward === 'Yes'"></i>
+                            <i class="pi text-red-500 pi-times-circle" *ngIf="leave.leaveCarryForward === 'No'"></i>
+                        </td>
+                        <td class="text-center font-medium">{{ leave.leaveEligible }}</td>
+                        <td class="text-center font-medium">{{ leave.leaveTaken }}</td>
+                        <td class="text-center font-medium">{{ leave.leaveEarned }}</td>
+                        <td class="text-center font-medium">{{ leave.totalWorkingDays }}</td>
+                        <td class="text-center font-medium">{{ leave.totalWorkingDaysForLeaveCalc }}</td>
+                        <td class="text-center">
+                            <p-button pRipple pTooltip="Edit" icon="pi pi-pencil" [rounded]="true" [outlined]="true"
+                                severity="success" (click)="editLeaveOption(leave)" />
+                            <p-button pRipple pTooltip="Delete" icon="pi pi-trash" severity="danger" [rounded]="true"
+                                [outlined]="true" (click)="deleteConfirm($event, leave.leaveCd)" />
+                            <p-button pRipple pTooltip="Leave History" icon="pi pi-history" severity="info"
+                                [rounded]="true" [outlined]="true" (click)="getHistory(leave.leaveCd)" />
+
+                        </td>
+                </ng-template>
+                <ng-template pTemplate="rowexpansion" let-leave>
+                    <tr>
+                        <td colspan="13">
+                            <div class="px-3 py-2">
+                                <p-table [value]="breakups" dataKey="leaveCd" [loading]="isLoadingBreakups">
+                                    <ng-template pTemplate="header">
+                    <tr>
+                        <th *ngFor="let item of leaveBreakUpColumns" class="text-center font-medium"> {{item}}</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-breakup>
+                    <tr>
+                        <td class="text-center">{{ breakup.lv_Year }}</td>
+                        <td class="text-center ">{{ breakup.lv_StartDate }}</td>
+                        <td class="text-center ">{{ breakup.lv_EndDate }}</td>
+                        <td class="text-center ">{{ breakup.lv_TotalWorkingDays }}</td>
+                        <td class="text-center ">{{ breakup.totalLvsOpening }}</td>
+                        <td class="text-center ">{{ breakup.totalLeaves }}</td>
+                        <td class="text-center ">{{ breakup.totalLvsTaken }}</td>
+                        <td class="text-center ">{{ breakup.totalLvsCarryForwarded }}</td>
+
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        </td>
+        </tr>
+
+
+        </ng-template>
+        </p-table>
+
+</div>
+<p-toast></p-toast>
+<p-dialog [(visible)]="showHistroy" header="Leave Type History" [resizable]="false" [modal]="true" [maximizable]="true"
+    appendTo="body" [style]="{width: '75vw'}" [contentStyle]="{height: '300px'}">
+    <p-table [value]="history" [loading]="isLoadingHistory">
+        <ng-template pTemplate="header">
+            <tr>
+                <th *ngFor="let item of leaveHistoryColumns" class="font-medium"
+                    [ngClass]="{'text-center': item != 'Remarks'}"> {{item}}</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-histroy>
+            <tr>
+                <td class="text-center">{{ histroy.leaveStartDt | date: 'dd/MM/yyyy' }}</td>
+                <td class="text-center ">{{ histroy.leaveEndDt | date: 'dd/MM/yyyy' }}</td>
+                <td class="text-center ">{{ histroy.leaveDays }}</td>
+                <td>{{ histroy.remarks }}</td>
+
+            </tr>
+        </ng-template>
+    </p-table>
+</p-dialog>
+<p-confirmDialog />
+<p-sidebar [(visible)]="showAddLeave" position="right" styleClass="w-30rem">
+    <ng-template pTemplate="header">
+        <div class="font-bold text-xl">
+            Update Leave Type
+        </div>
+    </ng-template>
+    <ng-template pTemplate="body">
+        <form (ngSubmit)="onSubmit()" #form="ngForm" novalidate autocomplete="off" *ngIf="showAddLeave">
+            <div class="grid p-fluid row-gap-1">
+                <div class="col-12 field mb-0 py-12">
+                    <label for="float-label" class="font-medium text-900">Leave Type</label>
+                    <p-dropdown [options]="leaveTypes" placeholder="Select a Leave type" optionLabel="reasonName"
+                        optionValue="code" inputId="float-label" name="leaveCd" [(ngModel)]="selectedType.leaveCd"
+                        [showClear]="true" [required]="true" (ngModelChange)="onChangeType($event)">
+                    </p-dropdown>
+                    <small class="p-error" id="username-help">Linked to required.</small>
+                </div>
+                <div class="col-12 field mb-0 py-1">
+                    <label for="float-label" class="font-medium text-900">Yearly leaves</label>
+                    <p-inputNumber [(ngModel)]="selectedType.yearlyDays" suffix=" days" [showButtons]="true"
+                        buttonLayout="horizontal" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"
+                        inputId="integeronly" name="yearlyDays" />
+                    <small class="p-error" id="username-help">Linked to required.</small>
+                </div>
+                <div class="col-12 field-checkbox justify-content-between mb-1 py-1">
+                    <label for="float-label" class="font-medium text-900 ml-0">Leave carry forward</label>
+                    <div class="flex align-items-center w-auto">
+                        <p-inputSwitch class="p-inputSwitch-lg" id="visa-cost" name="leaveCarryForward"
+                            (ngModelChange)="onModelChange(form)" [(ngModel)]="selectedType.leaveCarryForward"
+                            [pTooltip]="selectedType.leaveCarryForward ? 'Active' : 'Inactive'"
+                            triggers="focus"></p-inputSwitch>
+                    </div>
+                    <small class="p-error" id="username-help">Linked to required.</small>
+                </div>
+                <div class="col-12 field-checkbox justify-content-between mb-1 py-1">
+                    <label for="float-label" class="font-medium text-900 ml-0">Leave carry forward limit</label>
+                    <div class="flex align-items-center w-auto">
+                        <p-inputSwitch class="p-inputSwitch-lg" id="visa-cost" name="leaveCarryForwardLimit"
+                            (ngModelChange)="onModelChange(form)" [(ngModel)]="selectedType.leaveCarryForwardLimit"
+                            [pTooltip]="selectedType.leaveCarryForwardLimit ? 'Active' : 'Inactive'"
+                            triggers="focus"></p-inputSwitch>
+                    </div>
+                    <small class="p-error" id="username-help">Linked to required.</small>
+                </div>
+                <div class="col-12 field mb-0 py-1">
+                    <label for="float-label" class="font-medium text-900">Leave carry forward limit upto</label>
+                    <p-inputNumber [(ngModel)]="selectedType.leaveCarryForwardLimitUpTo" suffix=" days"
+                        [showButtons]="true" buttonLayout="horizontal" incrementButtonIcon="pi pi-plus"
+                        decrementButtonIcon="pi pi-minus" inputId="integeronly" name="leaveCarryForwardLimitUpTo" />
+                    <small class="p-error" id="username-help">Linked to required.</small>
+                </div>
+                <div class="col-12 field-checkbox justify-content-between mb-1 py-1">
+                    <label for="float-label" class="font-medium text-900 ml-0">Leave eligible for full year</label>
+                    <div class="flex align-items-center w-auto">
+                        <p-inputSwitch class="p-inputSwitch-lg" id="visa-cost" name="leaveEligibleForFullYear"
+                            (ngModelChange)="onModelChange(form)" [(ngModel)]="selectedType.leaveEligibleForFullYear"
+                            [pTooltip]="selectedType.leaveEligibleForFullYear ? 'Active' : 'Inactive'"
+                            triggers="focus"></p-inputSwitch>
+                    </div>
+                    <small class="p-error" id="username-help">Linked to required.</small>
+                </div>
+                <div class="col-12 field-checkbox justify-content-between mb-1 py-1">
+                    <label for="float-label" class="font-medium text-900 ml-0">Calendar Days</label>
+                    <div class="flex align-items-center w-auto">
+                        <p-inputSwitch class="p-inputSwitch-lg" id="visa-cost" name="isCalenderDays"
+                            (ngModelChange)="onModelChange(form)" [(ngModel)]="selectedType.isCalenderDays"
+                            [pTooltip]="selectedType.isCalenderDays ? 'Active' : 'Inactive'"
+                            triggers="focus"></p-inputSwitch>
+                    </div>
+                    <small class="p-error" id="username-help">Linked to required.</small>
+                </div>
+                <div class="col-12 field-checkbox justify-content-between mb-1 py-1">
+                    <label for="float-label" class="font-medium text-900 ml-0">Leave eligible for full service
+                        year</label>
+                    <div class="flex align-items-center w-auto">
+                        <p-inputSwitch class="p-inputSwitch-lg" id="visa-cost" name="leaveEligibleForFullServiceYear"
+                            (ngModelChange)="onModelChange(form)"
+                            [(ngModel)]="selectedType.leaveEligibleForFullServiceYear"
+                            [pTooltip]="selectedType.leaveEligibleForFullServiceYear ? 'Active' : 'Inactive'"
+                            triggers="focus"></p-inputSwitch>
+                    </div>
+                </div>
+                <div class="col-12 field-checkbox justify-content-between mb-1 py-1">
+                    <label for="float-label" class="font-medium text-900 ml-0">Opening Leaves</label>
+                    <div class="flex align-items-center w-auto">
+                        <p-inputSwitch class="p-inputSwitch-lg" id="visa-cost" name="hasOpeningLeave"
+                            (ngModelChange)="onModelChange(form)" [(ngModel)]="selectedType.hasOpeningLeave"
+                            [pTooltip]="selectedType.hasOpeningLeave ? 'Active' : 'Inactive'"
+                            triggers="focus"></p-inputSwitch>
+                    </div>
+                </div>
+                <div class="col-12 field mb-0 py-1">
+                    <label for="float-label" class="font-medium text-900">Opening Leaves Days</label>
+                    <p-inputNumber [(ngModel)]="selectedType.openLeaveDays" suffix=" days" [showButtons]="true"
+                        buttonLayout="horizontal" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"
+                        inputId="integeronly" name="openLeaveDays" />
+                </div>
+                <div class="col-12 field mb-0 py-1">
+                    <label for="float-label" class="font-medium text-900">Opening Leaves Effective Date</label>
+                    <p-calendar [iconDisplay]="'input'" [showIcon]="true" name="openLeaveEffectiveDate"
+                        [(ngModel)]="selectedType.openLeaveEffectiveDate"></p-calendar>
+                </div>
+            </div>
+        </form>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <div class="flex justify-content-end gap-2">
+            <p-button label="Save" severity="primary" [outlined]="true" text="true" icon="pi pi-check"
+                (onClick)="onSubmit()" [loading]="isSaving"></p-button>
+            <p-button label="Close" severity="primary" [outlined]="true" text="false" icon="pi pi-times"
+                (onClick)="showAddLeave = !showAddLeave"></p-button>
+        </div>
+    </ng-template>
+</p-sidebar>
+</p-panel>
+</div>

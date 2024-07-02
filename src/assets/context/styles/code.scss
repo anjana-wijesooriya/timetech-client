@@ -251,7 +251,7 @@ $employeeTableWidth: calc(100% - 21rem);
 
 .p-inputSwitch-lg {
     transform: scale(1.2);
-    margin-top: 0.2rem;
+    margin-top: 0.6rem;
     margin-left: 0.3rem;
 }
 
@@ -267,6 +267,12 @@ p-dropdown.ng-invalid.ng-touched .p-dropdown,
 p-treeselect.ng-invalid.ng-touched .p-treeselect,
 p-calendar.ng-invalid.ng-touched .p-inputtext {
     border-color: #f87171 !important;
+}
+
+p-fileupload.ng-invalid.ng-touched .p-fileupload-advanced {
+    border-color: #f87171 !important;
+    @extend .border-1;
+    @extend .border-round;
 }
 
 .ng-touched.ng-invalid~.p-error {
@@ -298,6 +304,26 @@ p-calendar.ng-invalid.ng-touched .p-inputtext {
     }
 }
 
+.custom-input-group-right {
+    .p-inputgroup-addon {
+        cursor: pointer;
+    }
+
+    p-dropdown {
+        .p-dropdown {
+            width: auto;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-left-color: var(--surface-300) !important;
+
+            .p-dropdown-filter {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+        }
+    }
+}
+
 .p-inputgroup:has(> p-dropdown.ng-invalid.ng-touched)~.p-error {
     display: block;
 }
@@ -312,7 +338,7 @@ p-calendar.ng-invalid.ng-touched .p-inputtext {
 }
 
 .page-content-wrapper {
-    height: calc(100vh - 15rem);
+    height: calc(100vh - 10.5rem);
 }
 
 .dashboard-month-picker {
@@ -363,5 +389,27 @@ p-calendar.ng-invalid.ng-touched .p-inputtext {
             padding: 0.8rem;
         }
     }
+}
 
+p-inputnumber {
+    .p-button {
+        margin-right: 0;
+    }
+}
+
+.right-2rem {
+    right: 2rem;
+}
+
+.employee-menu.p-overlaypanel .p-overlaypanel-content {
+    padding: 0;
+}
+
+app-attachments .p-fileupload .p-fileupload-content {
+    padding: 0.5rem;
+}
+
+app-air-tickets .p-panel .p-panel-header {
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
 }

@@ -1,0 +1,258 @@
+<div class="p-0 surface-card shadow-3 border-round h-full">
+    <p-toast></p-toast>
+    <p-confirmDialog></p-confirmDialog>
+    <p-panel>
+        <ng-template pTemplate="header">
+            <div class="flex align-items-center gap-2">
+                <p-avatar icon="font-semibold text-lg pi pi-paperclip" shape="circle" />
+                <span class="font-bold">
+                    Attachments
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="icons">
+            <button pButton pRipple icon="pi pi-plus" class="p-button-primary p-button-outlined"
+                [label]="'Add New Attachment'" [loading]="isSaving" (click)="onClickAddNew(undefined);"></button>
+        </ng-template>
+        <div class="w-full">
+            <p-table [rowHover]="true" [value]="attachments" #empTable [scrollable]="true"
+                scrollHeight="calc(100vh - 300px)" dataKey="id" [rows]="10" [loading]="isLoading"
+                [globalFilterFields]="['code', 'attachedDt', 'documentName', 'documentPath', 'documentType']"
+                [paginator]="true" styleClass="p-datatable-gridlines p-datatable-sm" responsiveLayout="scroll"
+                [breakpoint]="'960px'" [tableStyle]="{'min-width': '50rem'}">
+
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width:3.5rem !important;">
+                            <div class="flex justify-content-center align-items-center">
+                                #
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-center align-items-center">
+                                Date
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-center align-items-center">
+                                Type
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-center align-items-center">
+                                Doc Name
+                            </div>
+                        </th>
+                        <th style="width:5rem !important;">
+                            <div class="flex justify-content-center align-items-center">
+                                Actions
+                            </div>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-doc let-rowIndex="rowIndex">
+                    <tr>
+                        <td class="text-center">{{rowIndex +1}}</td>
+                        <td class="text-center">
+                            {{doc.attachedDt == null ? '' : doc.attachedDt | date : 'MM/dd/yyyy'}}
+                        </td>
+                        <td class="text-center">
+                            <p-chip [label]="getDocType(doc.documentType)"></p-chip>
+                        </td>
+                        <td class="text-center">
+                            {{doc.documentName}}
+                        </td>
+
+                        <td>
+                            <button pButton pRipple icon="pi pi-folder-open" pTooltip="View"
+                                class="p-button-rounded p-button-info p-button-outlined mr-2"
+                                (click)="showInfoPane = !showInfoPane; selectedAttachment = doc; imageError = false; onClickImage(doc)"></button>
+                            <button pButton pRipple icon="pi pi-pencil" pTooltip="Edit"
+                                class="p-button-rounded p-button-success p-button-outlined mr-2"
+                                (click)="onEdit(doc);"></button>
+                            <button pButton pRipple icon="pi pi-trash" pTooltip="Delete"
+                                class="p-button-rounded p-button-danger p-button-outlined"
+                                (click)="deleteConfirm($event, doc)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </p-panel>
+    <p-sidebar [(visible)]="showAddSlide" position="right" (onHide)="onCloseAddPane()">
+        <ng-template pTemplate="header">
+            <div class="font-bold text-xl">
+                Attachment Info
+            </div>
+        </ng-template>
+        <ng-template pTemplate="content">
+            <form #form="ngForm" (ngSubmit)="onSubmitAttachmentDetails(form)" novalidate autocomplete="off"
+                *ngIf="showAddSlide">
+                <div class="grid formgrid p-fluid p-2">
+                    <div class="col-12 field">
+                        <label for="float-label" class="font-medium text-900">Attachment Name</label>
+                        <input pInputText id="name" class="" [(ngModel)]="selectedAttachment.documentName"
+                            name="documentName" [required]="true" />
+                        <small class="p-error" id="username-help">Attachment Name required.</small>
+                    </div>
+                    <div class="col-12 field">
+                        <label for="float-label" class="font-medium text-900">Attachment Type</label>
+                        <p-dropdown [options]="attachmentTypes" placeholder="Select Type" optionLabel="name"
+                            optionValue="code" inputId="float-label" name="documentType"
+                            [(ngModel)]="selectedAttachment.documentType" [showClear]="true" [required]="true">
+                        </p-dropdown>
+                        <small class="p-error" id="username-help">Attachment Type required.</small>
+                    </div>
+                    <div class="col-12 field">
+                        <label for="float-label" class="font-medium text-900">Remarks</label>
+                        <textarea id="address" rows="4" cols="30" pInputTextarea name="remarks"
+                            [(ngModel)]="selectedAttachment.remarks"></textarea>
+                        <small class="p-error" id="username-help">Sequence required.</small>
+                    </div>
+                    <div class=" col-12 field ">
+                        <div class="flex flex-column align-items-start w-auto">
+                            <p-fileUpload mode="advanced" chooseLabel="Choose Attachment" name="file" ngDefaultControl
+                                [formControl]="uploadControl" chooseIcon="pi pi-upload" multiple="false"
+                                [url]="'https://localhost:44319/api/employee/upload-attachment?attachmentType=2&folderPathId=2'"
+                                accept="image/*, application/pdf" [auto]="true" maxFileSize="1000000"
+                                (onUpload)="onUploadImage($event)" (onSelect)="onBeforeUpload($event)" #fileUploader>
+                                <ng-template pTemplate="content" let-files let-uploadedFiles="uploadedFiles"
+                                    let-removeFileCallback="removeFileCallback"
+                                    let-removeUploadedFileCallback="removeUploadedFileCallback">
+                                    <div *ngIf="files?.length > 100">
+                                        <h5>Pending</h5>
+                                        <div class="flex flex-wrap p-0 sm:p-5 gap-5">
+                                            <div *ngFor="let file of files; let i = index"
+                                                class="card m-0 px-6 flex flex-column border-1 surface-border align-items-center gap-3">
+                                                <div>
+                                                    <img role="presentation" [alt]="file.name" [src]="file.objectURL"
+                                                        width="100" height="50" />
+                                                </div>
+                                                <span class="font-semibold">{{ file.name }}</span>
+                                                <div>{{ formatSize(file.size) }}</div>
+                                                <p-badge value="Pending" severity="warning" />
+                                                <p-button icon="pi pi-times"
+                                                    (click)="onRemoveTemplatingFile($event, file, removeFileCallback, index)"
+                                                    [outlined]="true" [rounded]="true" severity="danger" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div *ngIf="selectedAttachment?.documentPath != ''">
+                                        <div class="flex flex-wrap justify-content-center p-0">
+                                            <div
+                                                class="card m-0 p-2 flex flex-column border-1 surface-border align-items-center w-full row-gap-2">
+                                                <div>
+                                                    <p-avatar
+                                                        [icon]="getDocumentIconByUrl(selectedAttachment.documentPath)"
+                                                        styleClass="w-12rem h-8rem"> </p-avatar>
+                                                </div>
+                                                <div class="flex flex-row gap-2">
+                                                    <!-- <p-button icon="pi pi-times" (onClick)="removeAttachment(0)"
+                                                        [outlined]="true" [rounded]="true" severity="danger"
+                                                        styleClass="w-2rem h-2rem" /> -->
+                                                    <p-button icon="pi pi-download"
+                                                        (onClick)="downloadAttachment(selectedAttachment.documentPath)"
+                                                        [outlined]="true" [rounded]="true" severity="info"
+                                                        styleClass="w-2rem h-2rem" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="file"> </ng-template>
+                            </p-fileUpload>
+                            <small class="p-error" id="username-help">Attachment required.</small>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <div class="flex justify-content-end gap-2">
+                <p-button type="submit" label="Update" severity="primary" [outlined]="true" [loading]="isSaving"
+                    icon="pi pi-check" class="ml-auto" (onClick)="onSubmitAttachmentDetails()"></p-button>
+                <p-button label="Cancel" severity="primary" [outlined]="true" text="true" icon="pi pi-times"
+                    (onClick)="onCancel()"></p-button>
+            </div>
+        </ng-template>
+    </p-sidebar>
+
+    <p-sidebar [(visible)]="showInfoPane" position="right">
+        <ng-template pTemplate="header">
+            <div class="font-bold text-xl">
+                Attachment Info
+            </div>
+        </ng-template>
+        <ng-template pTemplate="content">
+            <ul class="list-none p-0 m-0">
+                <li class="text-900 p-2">ATTACHMENT NAME</li>
+                <li class="surface-100 text-sm text-700 font-medium p-2 border-round mb-1">
+                    {{selectedAttachment.documentName}}</li>
+                <li class="text-900 p-2">ATTACHMENT TYPE</li>
+                <li class="surface-100 text-sm text-700 font-medium p-2 border-round mb-1">
+                    {{getDocType(selectedAttachment.documentType)}}</li>
+                <li class="text-900 p-2">REMARKS</li>
+                <li class="surface-100 text-sm text-700 h-3rem font-medium p-2 border-round mb-1">
+                    {{selectedAttachment.remarks}}</li>
+                <li class="text-900 p-2">
+                    ATTACHMENTS
+                </li>
+                <li>
+                    <div class="text-center mb-4">
+                        <!-- <p-image src="../../../../../assets/context/images/error/asset-error.svg" [preview]="true"
+                            alt="Attachment" imageClass="w-17rem w-max-17rem" *ngIf="false" #image>
+                            <ng-template pTemplate="indicator">
+                                <div>Attachment Not found</div>
+
+                            </ng-template>
+                            <ng-template pTemplate="toolbar">
+                                <button pButton type="button" label="Download Image"
+                                    (click)="downloadAttachment(image.src)"></button>
+                            </ng-template>
+                        </p-image> -->
+                        <div
+                            class="card m-0 p-2 flex flex-column border-1 surface-border align-items-center w-full row-gap-2">
+                            <div>
+                                <p-avatar [icon]="getDocumentIconByUrl(selectedAttachment.documentPath)"
+                                    styleClass="w-12rem h-8rem">
+                                </p-avatar>
+                            </div>
+                            <div class="flex flex-row gap-2">
+                                <!-- <p-button icon="pi pi-times" (onClick)="removeAttachment(0)"
+                                                                                [outlined]="true" [rounded]="true" severity="danger"
+                                                                                styleClass="w-2rem h-2rem" /> -->
+                                <p-button icon="pi pi-download"
+                                    (onClick)="downloadAttachment(selectedAttachment.documentPath)" [outlined]="true"
+                                    [rounded]="true" severity="info" styleClass="w-2rem h-2rem" />
+                            </div>
+                        </div>
+                        <!-- <p-image [src]="selectedAttachment.documentPath" [preview]="false" #attachment alt="Attachment"
+                            imageClass="w-17rem w-max-17rem"
+                            (onImageError)="image.src = '../../../../../assets/context/images/error/asset-error.svg'">
+                            <ng-template pTemplate="toolbar">
+                                <button pButton type="button" label="Download Image"
+                                    (click)="downloadAttachment(selectedAttachment.documentPath)"></button>
+                            </ng-template>
+                            <ng-template pTemplate="indicator">
+                                <i class="pi pi-download"></i>
+                            </ng-template>
+                        </p-image> -->
+                        <!-- <img src="../../../../../assets/context/images/avatar/onyamalimba.png"
+                                            style="width: 70px; height: 70px;">
+                                        <div class="text-900 mt-3 mb-2 text-xl font-medium">John Doe</div>
+                                        <span class="text-700">Sales Manager</span> -->
+                    </div>
+                </li>
+            </ul>
+
+
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <div class="flex justify-content-end gap-2">
+                <p-button label="Cancel" severity="primary" [outlined]="true" text="true" icon="pi pi-times"
+                    (onClick)="onCancel()"></p-button>
+            </div>
+        </ng-template>
+    </p-sidebar>
+</div>

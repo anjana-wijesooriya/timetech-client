@@ -206,7 +206,7 @@ export class EditDocumentsComponent implements OnInit {
   }
 
   getDocumentIconByUrl(url: string) {
-    return url.includes('.pdf') ? 'pi pi-file-pdf' : 'pi pi-image';
+    return url.includes('.pdf') ? 'pi pi-file-pdf text-5xl' : 'pi pi-image text-5xl';
   }
 
   onChangeDocType() {
@@ -293,7 +293,7 @@ export class EditDocumentsComponent implements OnInit {
       formData.append('file', file, file.name);
 
       // Create a new HttpRequest object for the file upload
-      const req = new HttpRequest('POST', 'https://localhost:44319/api/employee/upload-file?attachmentType=2', formData, {
+      const req = new HttpRequest('POST', 'https://localhost:44319/api/employee/upload-file?attachmentType=2&folderPathId=1', formData, {
         reportProgress: true
       });
 

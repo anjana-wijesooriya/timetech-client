@@ -1,0 +1,223 @@
+<div class="p-0 surface-card shadow-3 border-round h-full">
+    <p-panel>
+        <ng-template pTemplate="header">
+            <div class="flex align-items-center gap-2">
+                <p-avatar icon="font-medium ic i-Time-Window" shape="circle" />
+                <span class="font-bold">
+                    Time Attendance Details
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="icons">
+            <p-confirmDialog></p-confirmDialog>
+            <p-toast></p-toast>
+            <button pButton pRipple icon="pi pi-save" class="p-button-primary p-button-outlined" [label]="'Update'"
+                [loading]="isSaving" (click)="onSubmit(form)"></button>
+        </ng-template>
+
+        <form #form="ngForm" (ngSubmit)="onSubmit(form)" novalidate autocomplete="off">
+            <div class="grid nested-grid">
+                <div class="col-12 md:col-4">
+                    <div class="grid formgrid p-fluid p-2">
+                        <div class="col-12 field">
+                            <label for="float-label" class="font-medium text-900">Card Number</label>
+                            <input pInputText id="cardNo" class="" [(ngModel)]="employee.cardNo" name="cardNo"
+                                [required]="false" />
+                            <small class="p-error" id="username-help">Linked to required.</small>
+                        </div>
+                        <div class="col-12 field">
+                            <label for="name" class="font-medium text-900">Work Rule</label>
+                            <p-inputGroup styleClass="custom-input-group-right">
+                                <p-dropdown [options]="workRules" placeholder="Select Option" name="wrkRulCd"
+                                    [(ngModel)]="employee.wrkRulCd" optionLabel="name" optionValue="code"
+                                    [showClear]="true" (ngModelChange)="onModelChange(form)"
+                                    styleClass="W-full"></p-dropdown>
+                                <p-inputGroupAddon>
+                                    <i class="pi pi-user"
+                                        (click)="getWorkRuleReport(); showWorkRuleReport = !showWorkRuleReport"></i>
+                                </p-inputGroupAddon>
+
+                            </p-inputGroup>
+
+                        </div>
+                        <div class="col-12 field">
+                            <label for="name" class="font-medium text-900">Work Rule Start Date</label>
+                            <p-calendar [iconDisplay]="'input'" [showIcon]="true" [(ngModel)]="employee.workRuleStartDt"
+                                name="workRuleStartDt"></p-calendar>
+                            <small class="p-error" id="username-help">Work Rule Start Date is required.</small>
+                        </div>
+                        <div class="col-12 field">
+                            <label for="float-label" class="font-medium text-900">Enroll Id</label>
+                            <input pInputText id="cardNo" class="" [(ngModel)]="employee.enrollID" name="enrollID"
+                                [required]="true" />
+                            <small class="p-error" id="username-help">Linked to required.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 md:col-8">
+                    <div class="grid formgrid p-fluid p-2">
+                        <div class="col-fixed w-20rem  field">
+                            <label for="name" class="font-medium text-900">FPU verification</label>
+                            <div class="flex align-items-center">
+                                <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on" [(ngModel)]="employee.fpUflag"
+                                    name="fpUflag"></p-inputSwitch>
+                            </div>
+                        </div>
+                        <div class="col-fixed w-20rem field">
+                            <label for="name" class="font-medium text-900">Permanent Off</label>
+                            <div class="flex align-items-center">
+                                <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on"
+                                    [(ngModel)]="employee.isPermanentOff" name="isPermanentOff"></p-inputSwitch>
+                            </div>
+                        </div>
+                        <div class="col-fixed w-20rem field">
+                            <label for="name" class="font-medium text-900">Machine Admin</label>
+                            <div class="flex align-items-center">
+                                <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on" [(ngModel)]="employee.kjAdmin"
+                                    name="kjAdmin" [trueValue]="1" [falseValue]="0"></p-inputSwitch>
+                            </div>
+                        </div>
+                        <div class="col-fixed w-20rem  field">
+                            <label for="name" class="font-medium text-900">Project Employee</label>
+                            <div class="flex align-items-center">
+                                <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on"
+                                    [(ngModel)]="employee.isProjectEmployee" name="isProjectEmployee"></p-inputSwitch>
+                            </div>
+                        </div>
+                        <div class="col-fixed w-20rem field">
+                            <label for="name" class="font-medium text-900">Non Swiper</label>
+                            <div class="flex align-items-center">
+                                <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on" [trueValue]="1"
+                                    [falseValue]="0" [(ngModel)]="employee.nonSwiper" name="nonSwiper"></p-inputSwitch>
+                            </div>
+                        </div>
+                        <div class="col-fixed w-20rem field">
+                            <label for="name" class="font-medium text-900">Notify</label>
+                            <div class="flex align-items-center">
+                                <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on"
+                                    [(ngModel)]="employee.isNotificationRequired"
+                                    name="isNotificationRequired"></p-inputSwitch>
+                            </div>
+                        </div>
+                        <div class="col-fixed w-20rem field">
+                            <label for="name" class="font-medium text-900">Shift Employee</label>
+                            <div class="flex align-items-center">
+                                <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on"
+                                    [(ngModel)]="employee.isShiftEmployee" name="isShiftEmployee"></p-inputSwitch>
+                            </div>
+                        </div>
+                        <div class="col-fixed w-20rem  field">
+                            <label for="name" class="font-medium text-900">Project / Block selection on mobile</label>
+                            <div class="flex align-items-center">
+                                <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on"
+                                    [(ngModel)]="employee.isSelectBlockOnMobile"
+                                    name="isSelectBlockOnMobile"></p-inputSwitch>
+                            </div>
+                        </div>
+                        <div class="col-fixed w-20rem field">
+                            <label for="name" class="font-medium text-900">Overtime Eligible</label>
+                            <div class="flex align-items-center">
+                                <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on"
+                                    [(ngModel)]="employee.isOTEligible" name="isOTEligible"></p-inputSwitch>
+                            </div>
+                        </div>
+                        <div class="col-fixed w-20rem field">
+                            <label for="name" class="font-medium text-900">Mobile punching</label>
+                            <div class="flex align-items-center">
+                                <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on"
+                                    [(ngModel)]="employee.hasMobilePunching" name="hasMobilePunching"></p-inputSwitch>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </p-panel>
+    <p-sidebar [(visible)]="showWorkRuleReport" position="right" styleClass="p-sidebar-lg">
+        <ng-template pTemplate="header">
+            <div class="font-bold text-xl">
+                Work Rule Info
+            </div>
+        </ng-template>
+        <ng-template pTemplate="content">
+            <p-table [value]="workRuleDetails" [scrollable]="true" sch rowGroupMode="subheader" groupRowsBy="daySeq"
+                sortField="daySeq" sortMode="single" styleClass="p-datatable-gridlines" [rowHover]="true"
+                scrollHeight="calc(100vh - 10rem)">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="display: none;">Seq</th>
+                        <th>Name</th>
+                        <th>Code</th>
+                        <th>Start Range</th>
+                        <th>In Time</th>
+                        <th>Out Time</th>
+                        <th>End Range</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="groupheader" let-data>
+                    <tr pRowGroupHeader>
+                        <td style="display: none;">{{data.daySeq}}</td>
+                        <td colspan="6">
+                            <span class="font-bold ml-2">DAY: {{data.nameOfDay}}</span>
+                        </td>
+                    </tr>
+                </ng-template>
+                <!-- <ng-template pTemplate="groupfooter" let-data>
+                    <tr>
+                        <td colspan="5" class="text-right font-bold pr-6">
+                            {{data.shiftName}}
+                        </td>
+                    </tr>
+                </ng-template> -->
+                <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+                    <tr>
+
+                        <td class="text-center">
+                            {{data.shiftName}}
+                        </td>
+                        <td class="text-center">
+                            <!-- <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                                [class]="'flag-' + customer.country.code" style="width: 20px"> -->
+                            <span class="ml-1 vertical-align-middle">{{data.shiftCode}}</span>
+                        </td>
+                        <td class="text-center">
+                            {{data.startRange}}
+                        </td>
+                        <td class="text-center">
+                            <p-chip styleClass="pl-0 pr-3" *ngIf="data.inTime">
+                                <span
+                                    class="bg-green-600 text-white border-circle w-2rem h-2rem flex align-items-center justify-content-center">
+                                    <i class="pi pi-sort-numeric-up"></i>
+                                </span>
+                                <span class="ml-2 font-medium">
+                                    {{data.inTime}}
+                                </span>
+                            </p-chip>
+                            <!-- <p-tag [value]="customer.status" [severity]="getSeverity(customer.status)" /> -->
+                        </td>
+                        <td class="text-center">
+                            <p-chip styleClass="pl-0 pr-3" *ngIf="data.outTime">
+                                <span
+                                    class="bg-red-600 text-white border-circle w-2rem h-2rem flex align-items-center justify-content-center">
+                                    <i class="pi pi-sort-numeric-down"></i>
+                                </span>
+                                <span class="ml-2 font-medium">
+                                    {{data.outTime}}
+                                </span>
+                            </p-chip>
+                        </td>
+                        <td class="text-center">
+                            {{data.startRange}}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <div class="flex justify-content-end gap-2">
+                <p-button label="Close" severity="primary" [outlined]="true" text="true" icon="pi pi-times"
+                    (onClick)="showWorkRuleReport = !showWorkRuleReport"></p-button>
+            </div>
+        </ng-template>
+    </p-sidebar>
+</div>

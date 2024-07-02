@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, viewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FilterService, MenuItem, MenuItemCommandEvent, MessageService } from 'primeng/api';
@@ -12,6 +12,8 @@ import { EmployeeStateService } from 'src/app/context/service/sharedstate/employ
 import { UserService } from 'src/app/context/service/user.service';
 import { Utils } from 'src/app/context/shared/utils';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { state } from '@angular/animations';
+import { Menu } from 'primeng/menu';
 
 @Component({
   selector: 'app-edit-employee',
@@ -21,14 +23,24 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 export class EditEmployeeComponent implements OnInit {
 
   employeeMenuItems: MenuItem[] = [
-    { label: 'Employee Overview', icon: 'font-semibold text-lg ic i-Add-UserStar', id: '', command: this.onClickEmployeeMenu.bind(this) },
-    { label: 'Department Rights', icon: 'font-semibold text-lg ic i-Building', id: '/department-rights', command: this.onClickEmployeeMenu.bind(this) },
-    { label: 'Documents', icon: 'font-semibold text-lg ic i-Folders', id: '/documents', command: this.onClickEmployeeMenu.bind(this) },
-    { label: 'Leaves', icon: 'font-semibold text-lg ic i-Home-4', id: '/', command: this.onClickEmployeeMenu.bind(this) },
-    { label: 'Discipline/Achievement', icon: 'font-semibold text-lg ic i-File-Zip', id: '/', command: this.onClickEmployeeMenu.bind(this) },
-    { label: 'Attachments', icon: 'font-semibold text-lg ic i-Home-4', id: '/', command: this.onClickEmployeeMenu.bind(this) },
-    { label: 'Time Attendance', icon: 'font-semibold text-lg ic i-Time-Window', id: '/', command: this.onClickEmployeeMenu.bind(this) }
+    {
+      label: 'Navigate To', styleClass: 'text-primary font-bold',
+      items: [
+        { separator: true },
+        { label: 'Employee Overview', icon: 'font-semibold text-lg ic i-Add-UserStar', id: '', command: this.onClickEmployeeMenu.bind(this) },
+        { label: 'Department Rights', icon: 'font-semibold text-lg ic i-Building', id: '/department-rights', command: this.onClickEmployeeMenu.bind(this) },
+        { label: 'Documents', icon: 'font-semibold text-lg ic i-Folders', id: '/documents', command: this.onClickEmployeeMenu.bind(this) },
+        { label: 'Leaves', icon: 'font-semibold text-lg ic i-Home-4', id: '/leaves', command: this.onClickEmployeeMenu.bind(this) },
+        { label: 'Discipline/Achievement', icon: 'font-semibold text-lg ic i-File-Zip', id: '/', command: this.onClickEmployeeMenu.bind(this) },
+        { label: 'Attachments', icon: 'font-semibold text-lg pi pi-paperclip', id: '/attachments', command: this.onClickEmployeeMenu.bind(this) },
+        { label: 'Time Attendance', icon: 'font-semibold text-lg ic i-Time-Window', id: '/time-attendance', command: this.onClickEmployeeMenu.bind(this) },
+        { label: 'Salary/Bank', icon: 'font-medium text-lg pi pi-dollar', id: '/salary-bank', command: this.onClickEmployeeMenu.bind(this) },
+        { label: 'Air Tickets', icon: 'font-medium text-lg pi pi-send', id: '/air-ticket', command: this.onClickEmployeeMenu.bind(this) },
+      ]
+    }
   ];
+
+
 
   responsiveOptions = [
     {
@@ -52,7 +64,9 @@ export class EditEmployeeComponent implements OnInit {
   displayFinder: boolean = false;
   displayTerminal: boolean = false;
   images: any[] | undefined;
-  selectedMenuItem: MenuItem | undefined = this.employeeMenuItems[0];
+  selectedMenuItem: MenuItem | undefined = this.employeeMenuItems[0].items[1];
+
+  @ViewChild('employeeMenu', { static: true }) employeeMenu: Menu;
 
   menuTypeOptions: any[] = [
     { icon: 'Tabs', value: "value" },
@@ -83,7 +97,7 @@ export class EditEmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.initBreadcrumbs();
-    this.getEmployeeData()
+    this.getEmployeeData();
     this.menuItems = [
       { label: 'General', icon: 'ic i-ID-Card', routerLink: 'general', title: 'General' },
       { label: 'Personal', tooltip: 'Personal', routerLink: 'personal', icon: 'ic i-Male', title: 'hello' },
@@ -140,6 +154,7 @@ export class EditEmployeeComponent implements OnInit {
   onClickEmployeeMenu(event: MenuItemCommandEvent) {
     this.selectedMenuItem = event.item;
     const empId = (this.route.snapshot?.paramMap.get('id'));
+    this.employeeMenu.hide();
     this.router.navigateByUrl('masters/employees/' + empId + event.item.id);
   }
 
@@ -156,8 +171,9 @@ export class EditEmployeeComponent implements OnInit {
     const result = this.employeeService.getEmployee(empId).subscribe({
       next: res => {
         result.unsubscribe();
-
-        res.imagePath = res?.imagePath == '' ? '' : new Utils().getImageBlobUrl(res.imageString);
+        res.imagePath = res?.imagePath == '' ? '' :
+          (res.imagePath.includes('.png') || res.imagePath.includes('.jpg'))
+            ? this.baseService.apiEndpoint + res.imagePath : new Utils().getImageBlobUrl(res.imageString);
         this.employee = res;
         this.employeeService.setEmployeeObservable(res);
         this.employeeState.setEmployeeDetails(res)

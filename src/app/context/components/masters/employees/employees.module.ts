@@ -68,6 +68,13 @@ import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { SkeletonModule } from 'primeng/skeleton';
+import { TimeAttendanceDetailsComponent } from './edit-employee/time-attendance-details/time-attendance-details.component';
+import { LeavesComponent } from './edit-employee/leaves/leaves.component';
+import { SalaryBankComponent } from './edit-employee/salary-bank/salary-bank.component';
+import { AttachmentsComponent } from './edit-employee/attachments/attachments.component';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { BadgeModule } from 'primeng/badge';
+import { AirTicketsComponent } from './edit-employee/air-tickets/air-tickets.component';
 
 @NgModule({
     declarations: [
@@ -82,7 +89,13 @@ import { SkeletonModule } from 'primeng/skeleton';
         DepartmentRightsComponent,
         DocumentsComponent,
         EditDocumentsComponent,
-        AddEmployeeComponent],
+        AddEmployeeComponent,
+        TimeAttendanceDetailsComponent,
+        LeavesComponent,
+        SalaryBankComponent,
+        AttachmentsComponent,
+        AirTicketsComponent
+    ],
     imports: [
         CommonModule,
         RouterModule.forChild([
@@ -93,8 +106,12 @@ import { SkeletonModule } from 'primeng/skeleton';
                     { path: 'employee-overview', component: OverviewComponent, title: 'Employee Overview' },
                     { path: 'department-rights', component: DepartmentRightsComponent, title: 'Department Rights' },
                     { path: 'documents', component: DocumentsComponent, title: 'Documents' },
-                    // { path: 'dependents', component: DependentsComponent, title: 'Dependents' },
-                    // { path: 'security', component: SecurityComponent, title: 'Security' },
+                    { path: 'leaves', component: LeavesComponent, title: 'Leaves' },
+                    { path: 'time-attendance', component: TimeAttendanceDetailsComponent, title: 'Time Attendance' },
+                    { path: 'salary-bank', component: SalaryBankComponent, title: 'Salary/Bank' },
+                    { path: 'attachments', component: AttachmentsComponent, title: 'Attachments' },
+                    { path: 'air-ticket', component: AirTicketsComponent, title: 'Air Tickets' },
+
                     { path: '', redirectTo: 'employee-overview', pathMatch: 'full' }
                 ]
             },
@@ -107,6 +124,7 @@ import { SkeletonModule } from 'primeng/skeleton';
         ButtonModule,
         SliderModule,
         TreeTableModule,
+        FloatLabelModule,
         InputTextModule,
         ToggleButtonModule,
         TerminalModule,
@@ -121,6 +139,7 @@ import { SkeletonModule } from 'primeng/skeleton';
         InputNumberModule,
         ProgressBarModule,
         ToastModule,
+        BadgeModule,
         MenuModule,
         SidebarModule,
         GalleriaModule,

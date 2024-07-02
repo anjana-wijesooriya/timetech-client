@@ -82,6 +82,7 @@ export class EmployeesComponent implements OnInit {
   showAddSlide: boolean = false;
   isBoxLayout: boolean = false;
   @ViewChild(AddEmployeeComponent) addEmployeeComponent!: AddEmployeeComponent;
+  @ViewChild('empTable') empTable: Table;
 
   constructor(private baseService: BaseService, private employeeService: EmployeeService,
     private breadcrumbState: BreadcrumbStateService, private filterService: FilterService,
@@ -115,6 +116,10 @@ export class EmployeesComponent implements OnInit {
     setTimeout(() => {
       this.addEmployeeComponent.showSlide = true;
     }, 100);
+  }
+
+  onFIlterKeyUp(event) {
+    this.empTable.filterGlobal(event.target.value, 'contains');
   }
 
   initBreadcrumbs() {

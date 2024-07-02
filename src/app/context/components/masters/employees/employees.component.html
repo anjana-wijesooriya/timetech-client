@@ -1,36 +1,10 @@
 <div class="grid employees-layout-wrapper">
-    <div class="col-12 surface-ground p-2 mb-3">
+    <div class="col-12 surface-ground p-2 mb-0">
         <div class="card surface-card  p-3 m-0  page-content-wrapper">
-            <h5 class="mb-0">Employees</h5>
-            <p> Add, Edit, Delete or Search by Creating custom search criterieas. </p>
+            <h5 class="mb-1">Employees</h5>
+            <!-- <p> Add, Edit, Delete or Search by Creating custom search criterieas. </p> -->
             <p-toast></p-toast>
-            <p-toolbar styleClass="mb-2 gap-2">
-                <ng-template pTemplate="left">
-                    <div class="flex flex-wrap gap-2">
-                        <button pButton pRipple [label]="'Filter'" [outlined]="true" icon="pi pi-filter-slash"
-                            class="p-button-primary" (click)="showFilterMenu();" [disabled]="false"></button>
-                        <button pButton pRipple label="Add New Employee" [outlined]="true" icon="pi pi-user-plus"
-                            class="p-button-primary mr-2"
-                            (click)="showAddSlide = true; addEmployeeComponent.showSlide = true; "></button>
-                        <button pButton pRipple label="Change Table Layout" [outlined]="true" icon="pi pi-th-large"
-                            class="p-button-primary mr-2" (click)="isBoxLayout = !isBoxLayout"></button>
 
-                    </div>
-                    <!-- <div class="flex flex-wrap gap-2">
-                        <button pButton pRipple [label]="'check All'" [outlined]="true" icon="pi pi-filter-slash" class="p-button-danger"
-                            (click)="showFilterMenu();" [disabled]="false"></button>
-                        <button pButton pRipple label="New" [outlined]="true" icon="pi pi-plus" class="p-button-success mr-2"
-                            (click)="allDepartments = allDepartments"></button>
-                    </div> -->
-
-                </ng-template>
-
-                <ng-template pTemplate="right">
-                    <!-- <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import"
-                                            class="mr-2 inline-block"></p-fileUpload>
-                                        <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button> -->
-                </ng-template>
-            </p-toolbar>
             <div #tableContent class="flex flex-row align-items-start justify-content-start w-full"
                 [ngClass]="{'table-sidebar-active': showDepartments}">
                 <div class="filterbar-container h-full">
@@ -75,7 +49,7 @@
                                         selectionMode="checkbox" filterPlaceholder="Search Departments"
                                         (onNodeSelect)="onDepartmentSelected($event)"
                                         (onNodeUnselect)="onDepartmentSelected($event)"
-                                        scrollHeight="calc(100vh - 39rem)">
+                                        scrollHeight="calc(100vh - 27rem)">
                                         <ng-template let-node pTemplate="url">
                                             <a [href]="node.data" target="_blank" rel="noopener noreferrer"
                                                 class="text-700 hover:text-primary">{{
@@ -99,7 +73,7 @@
                         styleClass="p-datatable-sm p-datatable-gridlines" [paginator]="true" [rows]="25"
                         [showCurrentPageReport]="true" [rowsPerPageOptions]="[25, 50, 100, 200]"
                         [virtualScrollItemSize]="5" [loading]="isLoading" [scrollable]="true"
-                        scrollHeight="calc(100vh - 33rem)"
+                        scrollHeight="calc(100vh - 21rem)"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                         [globalFilterFields]="['empCd', 'empName', 'userProfileObj.name', 'deptDs', 'designationObj.name', 'email', 'nationalID']"
                         responsiveLayout="stack" tableStyleClass="table-layout-fixed" [resizableColumns]="true"
@@ -107,22 +81,33 @@
                         <ng-template pTemplate="caption">
 
                             <div class="flex flex-wrap justify-content-between">
+                                <div class="flex flex-wrap gap-2">
+                                    <button pButton pRipple [label]="'Filter'" [outlined]="true"
+                                        icon="pi pi-filter-slash" class="p-button-primary" (click)="showFilterMenu();"
+                                        [disabled]="false"></button>
+                                    <button pButton pRipple label="Add New Employee" [outlined]="true"
+                                        icon="pi pi-user-plus" class="p-button-primary mr-2"
+                                        (click)="showAddSlide = true; addEmployeeComponent.showSlide = true; "></button>
+                                    <button pButton pRipple label="Switch Layout" [outlined]="true"
+                                        icon="pi pi-th-large" class="p-button-primary mr-2"
+                                        (click)="isBoxLayout = !isBoxLayout"></button>
+
+                                </div>
                                 <!-- <p-multiSelect class="" [options]="columns" [(ngModel)]="selectedColumns" optionLabel="header"
                                                                 placeholder="Please select columns" display="chip">
                                                             </p-multiSelect> -->
 
-                                <div class="flex flex-wrap">
+
+                                <div class="flex flex-wrap gap-2">
                                     <p-iconField iconPosition="left">
                                         <p-inputIcon styleClass="pi pi-search" />
                                         <input type="text" pInputText placeholder="Global Search" #filter
                                             (input)="empTable.filterGlobal($event.target.value, 'contains')" />
                                     </p-iconField>
-                                </div>
-                                <div class="flex flex-wrap gap-2">
-                                    <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
-                                        (click)="empTable.clear(empTable);"></button>
-                                    <button pButton label="Settings" class="p-button-outlined" icon="pi pi-cog"
-                                        (click)="empTable.clear(empTable); "></button>
+                                    <!-- <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                                        (click)="empTable.clear(empTable);"></button> -->
+                                    <!-- <button pButton label="Settings" class="p-button-outlined" icon="pi pi-cog"
+                                        (click)="empTable.clear(empTable); "></button> -->
                                 </div>
                             </div>
                         </ng-template>

@@ -6,6 +6,14 @@
     "axe/name-role-value": "off",
     "axe/text-alternatives": "off",
     "no-inline-styles": "off",
-    "axe/forms": "off"
+    "axe/forms": "off",
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "@layer"
+        ]
+      }
+    ]
   }
 }
