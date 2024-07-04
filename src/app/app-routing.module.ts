@@ -23,7 +23,9 @@ import { IconTypes, Breadcrumb } from './context/service/sharedstate/breadcrumb.
                     { path: 'pages', loadChildren: () => import('./context/components/pages/pages.module').then(m => m.PagesModule) },
                     { path: '', redirectTo: '/self-service/dashboard', pathMatch: 'full' },
                     { path: 'TimeTechCore/pages/Personal/EmployeeMaster.aspx', redirectTo: '/masters/employees', pathMatch: 'full' },
-                    { path: 'TimeTechCore/pages/Masters/supportMaster.aspx', redirectTo: '/masters/support', pathMatch: 'full' }
+                    { path: 'TimeTechCore/pages/Masters/supportMaster.aspx', redirectTo: '/masters/support', pathMatch: 'full' },
+                    { path: 'TimeTechCore/pages/TA/Holiday.aspx', redirectTo: 'time-attendance/holidays', pathMatch: 'full' },
+
                 ]
             },
             { path: 'auth', loadChildren: () => import('./context/components/auth/auth.module').then(m => m.AuthModule) },

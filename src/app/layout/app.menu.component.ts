@@ -185,6 +185,17 @@ export class AppMenuComponent implements OnInit {
             // this.subModules = response;
             // this.groupBy(response, 'groupName')
             this.isLoading = false;
+            const attendanceMenu = {
+                "btnId": "Holidays",
+                "btnTag": "/TimeTechCore/pages/TA/Holiday.aspx",
+                "btnPicture": "pi-calendar-times",
+                "sequence": 1,
+                "btnSeq": 3,
+                "btnToolTip": "Holdays",
+                "btnDisplay": "Holdays",
+                "groupName": "Masters"
+            };
+            response.push(attendanceMenu);
             this.moduleService.setActiveModules(response);
             localStorage.setItem('Personal', JSON.stringify(response));
         })

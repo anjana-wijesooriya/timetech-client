@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputTextModule } from 'primeng/inputtext';
 import { SidebarModule } from 'primeng/sidebar';
@@ -19,6 +19,9 @@ import { AppSidebarComponent } from "./app.sidebar.component";
 import { AppLayoutComponent } from "./app.layout.component";
 import { SkeletonModule } from 'primeng/skeleton';
 import { SharedComponentsModule } from '../context/shared/components/shared-components.module';
+import { SpeedDialModule } from 'primeng/speeddial';
+import { ButtonModule } from 'primeng/button';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
     declarations: [
@@ -29,22 +32,24 @@ import { SharedComponentsModule } from '../context/shared/components/shared-comp
         AppSidebarComponent,
         AppLayoutComponent,
     ],
-    imports: [
-        BrowserModule,
+    exports: [AppLayoutComponent], imports: [BrowserModule,
         FormsModule,
-        HttpClientModule,
         BrowserAnimationsModule,
         InputTextModule,
         SidebarModule,
         BadgeModule,
         RadioButtonModule,
         InputSwitchModule,
+        SpeedDialModule,
         SkeletonModule,
+        ButtonModule,
         RippleModule,
         RouterModule,
         AppConfigModule,
-        SharedComponentsModule,
-    ],
-    exports: [AppLayoutComponent],
+        SharedComponentsModule],
+    providers: [
+        provideHttpClient(withInterceptorsFromDi()),
+        MessageService
+    ]
 })
 export class AppLayoutModule { }

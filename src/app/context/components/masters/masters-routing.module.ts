@@ -7,6 +7,7 @@ const routes: Routes = [
     { path: 'hr-personal', redirectTo: 'employees' },
     { path: 'employees', loadChildren: () => import('./employees/employees.module').then(m => m.EmployeesModule) },
     { path: 'support', loadChildren: () => import('./support/support.module').then(m => m.SupportModule) },
+    { path: 'time-attendance', loadChildren: () => import('./support/support.module').then(m => m.SupportModule) },
 
 ];
 

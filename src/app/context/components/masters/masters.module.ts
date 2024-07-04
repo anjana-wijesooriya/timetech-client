@@ -9,7 +9,9 @@ import { InputTextModule } from 'primeng/inputtext';
   imports: [CommonModule, MastersRoutingModule],
   providers: [
     MessageService,
-    OverlayPanelModule
+    OverlayPanelModule,
+    InputTextModule,
+    ListboxModule
   ],
   declarations: [
 

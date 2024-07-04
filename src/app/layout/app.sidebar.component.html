@@ -9,6 +9,10 @@
         </a>
         <button type="button" class="layout-sidebar-anchor p-link"></button>
     </div>
+    <div class="flex w-full flex-col border-opacity-50">
+        <p-speedDial [model]="items" radius="120" direction="down-right" type="quarter-circle"
+            buttonClassName="p-button-success" />
+    </div>
     <div class="layout-menu-container">
         <app-menu></app-menu>
     </div>
