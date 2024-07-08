@@ -22,6 +22,7 @@ import { SharedComponentsModule } from '../context/shared/components/shared-comp
 import { SpeedDialModule } from 'primeng/speeddial';
 import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
+import { ChipModule } from 'primeng/chip';
 
 @NgModule({
     declarations: [
@@ -32,10 +33,13 @@ import { MessageService } from 'primeng/api';
         AppSidebarComponent,
         AppLayoutComponent,
     ],
-    exports: [AppLayoutComponent], imports: [BrowserModule,
+    exports: [AppLayoutComponent],
+    imports: [
+        BrowserModule,
         FormsModule,
         BrowserAnimationsModule,
         InputTextModule,
+        SpeedDialModule,
         SidebarModule,
         BadgeModule,
         RadioButtonModule,
@@ -44,6 +48,7 @@ import { MessageService } from 'primeng/api';
         SkeletonModule,
         ButtonModule,
         RippleModule,
+        ChipModule,
         RouterModule,
         AppConfigModule,
         SharedComponentsModule],

@@ -17,6 +17,9 @@ import { PhotoService } from './context/service/photo.service';
 import { ProductService } from './context/service/product.service';
 import { LocalStorage } from './context/shared/enum/local-storage.enum';
 import { AppLayoutModule } from './layout/app.layout.module';
+import { FormlyModule } from '@ngx-formly/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormlyPrimeNGModule } from '@ngx-formly/primeng';
 
 export function getToken() {
     return localStorage.getItem(LocalStorage.JWT);
@@ -38,6 +41,9 @@ export function getToken() {
             }
         }),
         StoreModule.forRoot({}, {}),
+        FormlyModule.forRoot(),
+        ReactiveFormsModule,
+        FormlyPrimeNGModule,
     ],
     providers: [
         provideAnimations(),

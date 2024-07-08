@@ -14,7 +14,6 @@ import { InputTextModule } from 'primeng/inputtext';
     ListboxModule
   ],
   declarations: [
-
   ]
 })
 export class MastersModule { }

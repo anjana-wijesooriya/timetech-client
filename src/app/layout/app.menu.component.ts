@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { IChildItem, IMenuItem } from '../context/api/module/menu-item.model';
 import { MenuIconsEnum } from '../context/shared/enum/menu-icons';
 import { BaseService } from '../context/service/base.service';
+import { MenuItem } from 'primeng/api';
 
 @Component({
     selector: 'app-menu',
@@ -19,6 +20,7 @@ export class AppMenuComponent implements OnInit {
     activeModules: ModuleModel[] = [];
     selectedItem: any[] = [];
     menuItems: IMenuItem[] = [];
+    items: MenuItem[] = [];
     isLoading: boolean = false;
 
     constructor(public layoutService: LayoutService, private moduleService: ModuleService,
@@ -176,6 +178,70 @@ export class AppMenuComponent implements OnInit {
         ];
         this.getMenuItemsByBaseMenu()
         this.getMenuItems();
+
+        this.items = [
+            {
+                tooltipOptions: {
+                    tooltipLabel: 'Personal'
+                },
+                icon: 'pi pi-pencil',
+                label: 'Personal',
+                command: () => {
+                    // this.messageService.add({ severity: 'info', summary: 'Add', detail: 'Data Added' });
+                }
+            },
+            {
+                tooltipOptions: {
+                    tooltipLabel: 'Payroll'
+                },
+                label: 'Personal',
+                icon: 'pi pi-refresh',
+                command: () => {
+                    // this.messageService.add({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
+                }
+            },
+            {
+                label: 'Personal',
+                tooltipOptions: {
+                    tooltipLabel: 'Time Attendance'
+                },
+                icon: 'pi pi-trash',
+                command: () => {
+                    // this.messageService.add({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
+                }
+            },
+            {
+                label: 'Personal',
+                tooltipOptions: {
+                    tooltipLabel: 'Self Service'
+                },
+                icon: 'pi pi-upload'
+            },
+            {
+                label: 'Personal',
+                tooltipOptions: {
+                    tooltipLabel: 'Appraisal'
+                },
+                icon: 'pi pi-external-link',
+                url: 'http://angular.io'
+            },
+            {
+                label: 'Personal',
+                tooltipOptions: {
+                    tooltipLabel: 'Planning and Recruitment'
+                },
+                icon: 'pi pi-external-link',
+                url: 'http://angular.io'
+            },
+            {
+                label: 'Personal',
+                tooltipOptions: {
+                    tooltipLabel: 'Visitor Management'
+                },
+                icon: 'pi pi-external-link',
+                url: 'http://angular.io'
+            },
+        ];
     }
 
     getMenuItemsByBaseMenu() {
@@ -191,8 +257,8 @@ export class AppMenuComponent implements OnInit {
                 "btnPicture": "pi-calendar-times",
                 "sequence": 1,
                 "btnSeq": 3,
-                "btnToolTip": "Holdays",
-                "btnDisplay": "Holdays",
+                "btnToolTip": "Holidays",
+                "btnDisplay": "Holidays",
                 "groupName": "Masters"
             };
             response.push(attendanceMenu);

@@ -45,13 +45,16 @@
     "quill": "^2.0.0",
     "rxjs": "~7.8.1",
     "tslib": "^2.6.2",
-    "zone.js": "~0.14.0"
+    "zone.js": "~0.14.0",
+    "@ngx-formly/core": "^6.0.0",
+    "@ngx-formly/primeng": "^6.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.0.7",
     "@angular/cli": "^18.0.7",
     "@angular/compiler-cli": "^18.0.6",
     "@headlessui/tailwindcss": "^0.2.1",
+    "@ngx-formly/schematics": "^6.3.5",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "latest",
     "@tailwindcss/line-clamp": "latest",
