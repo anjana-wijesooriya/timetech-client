@@ -1,6 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
 import { AppConfig, LayoutService } from './layout/service/app.layout.service';
+import { Router, Event, NavigationEnd } from '@angular/router';
+import Alpine from 'alpinejs';
+import { initTWE, Ripple } from 'tw-elements';
+
+import { IStaticMethods } from 'preline/preline';
+declare global {
+  interface Window {
+    HSStaticMethods: IStaticMethods;
+    Alpine: IStaticMethods;
+  }
+}
 
 @Component({
   selector: 'app-root',
@@ -8,7 +19,7 @@ import { AppConfig, LayoutService } from './layout/service/app.layout.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private primengConfig: PrimeNGConfig, private layoutService: LayoutService) { }
+  constructor(private primengConfig: PrimeNGConfig, private layoutService: LayoutService, private router: Router) { }
 
   ngOnInit() {
     this.primengConfig.ripple = true;
@@ -26,6 +37,20 @@ export class AppComponent implements OnInit {
       scale: 13                           //size of the body font size to scale the whole application
     };
     this.layoutService.config.set(config);
+
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        setTimeout(() => {
+          window.HSStaticMethods.autoInit();
+        }, 100);
+      }
+    });
+
+    window.Alpine = Alpine;
+
+    initTWE({ Ripple });
+
+    Alpine.start();
   }
 }
 

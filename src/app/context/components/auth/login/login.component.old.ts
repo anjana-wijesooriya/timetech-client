@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, type OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LocalStorage } from 'src/app/enum/local-storage.enum';
-import { LoginModel } from 'src/app/models/user/login.model';
-import { AuthService } from 'src/app/services/auth.service';
+import { LoginModel } from 'src/app/context/api/user/login.model';
+import { AuthService } from 'src/app/context/service/auth.service';
+import { LocalStorage } from 'src/app/context/shared/enum/local-storage.enum';
 
 
 @Component({

@@ -22,6 +22,7 @@ export class WorkRuleModel {
     active: boolean;
     empoyeeId: string;
     empoyeeCode: string;
+    isUpdateMode: boolean;
 }
 
 export class DiscontinuedEmployeeModel {

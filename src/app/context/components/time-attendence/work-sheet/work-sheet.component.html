@@ -1,0 +1,394 @@
+<div class="grid support-wrapper woraksheet-wrapper">
+
+    <div class="flex p-2 mb-3 justify-content-center col-12 surface-ground">
+
+        <p-confirmDialog></p-confirmDialog>
+        <p-toast></p-toast>
+        <div class="flex flex-col items-center justify-center w-full h-full">
+
+            <div
+                class="block w-full p-3 m-0 rounded-lg bg-gray-2 card surface-card page-content-wrapper shadow-secondary-1 dark:bg-surface-dark dark:text-white text-surface animate-fade-right">
+                <div class="flex w-full pb-3 mb-3 card-header border-bottom-1 surface-border justify-content-between">
+                    <div class="flex flex-wrap gap-3 align-items-center">
+                        <!-- <p-button icon="pi pi-arrow-left text-xl" [rounded]="true" [outlined]="true" severity="primary"
+                                                /> -->
+                        <h5 class="m-0">Edit Attendance</h5>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                    </div>
+                </div>
+                <div class="border-t-2 border-teal-400 w-Full">
+                    <div class="flex flex-wrap justify-around gap-2">
+                        <div
+                            class="relative items-center w-1/6 p-2 transition duration-500 border rounded-md shadow-sm hover:shadow-md hover:shadow-teal-400">
+                            <input type="text" id="floating_outlined"
+                                class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                placeholder=" " readonly />
+                            <label for="floating_outlined"
+                                class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
+                                Employee Code
+                            </label>
+                        </div>
+                        <div
+                            class="relative items-center w-1/6 p-2 transition duration-500 border rounded-md shadow-sm hover:shadow-md hover:shadow-teal-400">
+                            <input type="text" id="floating_outlined"
+                                class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                placeholder=" " readonly />
+                            <label for="floating_outlined"
+                                class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
+                                Employee Name
+                            </label>
+                        </div>
+                        <div
+                            class="relative items-center w-1/6 p-2 transition duration-500 border rounded-md shadow-sm hover:shadow-md hover:shadow-teal-400">
+                            <input type="text" id="floating_outlined"
+                                class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                placeholder=" " readonly />
+                            <label for="floating_outlined"
+                                class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
+                                Department
+                            </label>
+                        </div>
+                        <div
+                            class="relative items-center w-1/6 p-2 transition duration-500 border rounded-md shadow-sm hover:shadow-md hover:shadow-teal-400">
+                            <input type="text" id="floating_outlined"
+                                class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                placeholder=" " readonly />
+                            <label for="floating_outlined"
+                                class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
+                                Date
+                            </label>
+                        </div>
+                        <div
+                            class="relative items-center w-1/6 p-2 transition duration-500 border rounded-md shadow-sm hover:shadow-md hover:shadow-teal-400">
+
+
+                            <p-dropdown [options]="reasons" [(ngModel)]="selectedReason" [checkmark]="true"
+                                optionLabel="reasonName" optionValue="code" [showClear]="true"
+                                placeholder="Select a Reason"
+                                class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" />
+                            <label for="floating_outlined"
+                                class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
+                                Reason
+                            </label>
+                        </div>
+
+                    </div>
+                    <div class="grid grid-cols-2 grid-rows-5 gap-2 mt-3">
+                        <div>
+                            <p-panel header="In-Out">
+                                <div class="grid grid-cols-2 gap-4 formgrid">
+                                    <div class="w-full col-12 md:col-6 p-fluid">
+                                        <label for="float-label" class="font-medium text-900">Shift IN</label>
+                                        <p-calendar [showIcon]="true" [iconDisplay]="'input'" [showTime]="true"
+                                            [timeOnly]="true" ariaLabel="Date" disabled="true"></p-calendar>
+                                        <small class="p-error" id="username-help"></small>
+                                    </div>
+                                    <div class="w-full col-12 md:col-6 p-fluid">
+                                        <label for="float-label" class="font-medium text-900">Shift OUT</label>
+                                        <p-inputGroup>
+                                            <p-calendar [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
+                                                [iconDisplay]="'input'" inputStyleClass="border-noround-right"
+                                                disabled="true"></p-calendar>
+                                            <p-inputGroupAddon>
+                                                <p-checkbox [binary]="true" pTooltip="Next Day" /></p-inputGroupAddon>
+                                        </p-inputGroup>
+                                        <small class="p-error" id="username-help"></small>
+                                    </div>
+                                    <div class="w-full col-12 md:col-6 p-fluid">
+                                        <label for="float-label" class="font-medium text-900">IN</label>
+                                        <!-- <p-calendar [showIcon]="true" [iconDisplay]="'input'" [showTime]="true"
+                                            [timeOnly]="true" ariaLabel="Date"></p-calendar> -->
+                                        <div class="relative">
+                                            <div
+                                                class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+                                                <i class="pi pi-clock"></i>
+                                            </div>
+                                            <!-- <input pInputText class="w-full" [ngxTimepicker]="picker" />
+                                            <ngx-material-timepicker #picker></ngx-material-timepicker> -->
+                                        </div>
+                                    </div>
+                                    <div class="w-full col-12 md:col-6 p-fluid">
+                                        <label for="float-label" class="font-medium text-900">Out</label>
+                                        <p-inputGroup>
+                                            <p-calendar [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
+                                                [iconDisplay]="'input'" [icon]="'pi pi-clock'" inputId="icondisplay"
+                                                inputStyleClass="border-noround-right">
+                                                <ng-template pTemplate="inputicon" let-clickCallBack="clickCallBack">
+                                                    <i class="pointer-events-none pi pi-clock"
+                                                        (click)="clickCallBack($event)"></i>
+                                                </ng-template>
+                                            </p-calendar>
+                                            <p-inputGroupAddon>
+                                                <p-checkbox [binary]="true" pTooltip="Next Day" /></p-inputGroupAddon>
+                                        </p-inputGroup>
+                                        <small class="p-error" id="username-help"></small>
+                                    </div>
+
+                                </div>
+                            </p-panel>
+                        </div>
+                        <div>
+                            <p-panel header="Results">
+                                <p>
+                                    Lorem ipsum dolor sit amet...
+                                </p>
+                            </p-panel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="block w-full p-3 m-0 rounded-lg bg-gray-2 card surface-card page-content-wrapper shadow-secondary-1 dark:bg-surface-dark dark:text-white text-surface animate-fade-right">
+                <div class="flex w-full pb-3 mb-3 card-header border-bottom-1 surface-border justify-content-between">
+                    <div class="flex flex-wrap gap-3 align-items-center">
+                        <!-- <p-button icon="pi pi-arrow-left text-xl" [rounded]="true" [outlined]="true" severity="primary"
+                                /> -->
+                        <h5 class="m-0">Daily Worksheet</h5>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                    </div>
+                </div>
+                <div class="flex w-full justify-content-center ">
+                    <div
+                        class="block p-6 bg-white rounded-lg text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
+                        <div class="grid grid-cols-3 gap-2">
+
+                            <div class="field p-fluid">
+                                <p-calendar [iconDisplay]="'input'" [showIcon]="true" placeholder="Select From Date"
+                                    [(ngModel)]="fromDate"></p-calendar>
+                            </div>
+                            <div class="field p-fluid">
+                                <p-dropdown [options]="companies" [showClear]="false" placeholder="Filter by Company"
+                                    [(ngModel)]="selectedCompany" (onChange)="onChangeCompany()">
+                                    <ng-template let-selectedValue pTemplate="selectedItem">
+                                        <div class="flex gap-2 align-items-center" *ngIf="selectedValue">
+                                            <img src="assets/context/images/flag/flag_placeholder.png"
+                                                [class]="'flag flag-' + selectedValue.logo" style="width: 21px" />
+                                            <div>{{ selectedValue.name }}</div>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template let-company pTemplate="item">
+                                        <div class="flex gap-2 align-items-center">
+                                            <img src="assets/context/images/flag/flag_placeholder.png"
+                                                [class]="'flag flag-' + company.logo" style="width: 21px" />
+                                            <div>{{ company.name }}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-dropdown>
+                            </div>
+                            <div class="field p-fluid">
+                                <p-dropdown [options]="reasons" [(ngModel)]="selectedReason" [checkmark]="true"
+                                    optionLabel="reasonName" optionValue="code" [showClear]="true"
+                                    placeholder="Select a Reason" />
+                            </div>
+                            <div class="field p-fluid">
+                                <p-calendar [iconDisplay]="'input'" [showIcon]="true" placeholder="Select To Date"
+                                    [(ngModel)]="toDate"></p-calendar>
+                            </div>
+                            <div class="field p-fluid">
+                                <p-treeSelect class="w-full" containerStyleClass="w-full" [options]="departmentTree"
+                                    placeholder="Select a Department" selectionMode="checkbox" display="chip"
+                                    [(ngModel)]="selectedDepartments" metaKeySelection="true"
+                                    (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="nodeUnselect($event)">
+                                </p-treeSelect>
+
+                            </div>
+                            <div class="field p-fluid">
+                                <p-multiSelect [options]="employees" [(ngModel)]="selectedEmployees"
+                                    placeholder="Select Employees" optionLabel="empName" optionValue="empID"
+                                    display="chip" [showClear]="true">
+                                    <ng-template let-employee pTemplate="item">
+                                        <div class="flex gap-2 align-items-center">
+                                            <b>[{{ employee.empCd }}] - </b>
+                                            <div>{{ employee.empName }}</div>
+                                        </div>
+                                    </ng-template>
+                                    <!-- <ng-template let-value pTemplate="selectedItems">
+                                            <div class="inline-flex gap-2 px-1 align-items-center" *ngFor="let option of value">
+                                                <div>{{ option.empName }},</div>
+                                            </div>
+                                            <div *ngIf="!value || value.length === 0">Select Employees</div>
+                                        </ng-template> -->
+                                </p-multiSelect>
+                            </div>
+                            <div class="col-start-1 col-end-4 field p-fluid">
+                                <p-inputGroup styleClass="grow gap-2">
+                                    <input type="text" [(ngModel)]="empCode" pInputText
+                                        placeholder="Search by Employee Code..." />
+                                    <input type="text" [(ngModel)]="empName" pInputText
+                                        placeholder="Search by Employee Name..." />
+                                    <button type="button" pButton pRipple label="Search" icon="pi pi-search"
+                                        class="bg-orange-500 rounded-none shadow-lg p-button-primary shadow-orange-500/50"
+                                        (click)="onGetTableEntries()"></button>
+                                    <button type="button" pButton pRipple label="Process Data" icon="pi pi-sync"
+                                        class="bg-blue-500 rounded-none shadow-lg p-button-info shadow-blue-500/50"
+                                        (click)="onGetTableEntries()"></button>
+
+                                </p-inputGroup>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full mt-2">
+                    <p-table #supportTable [rowHover]="true" [value]="virtualWorksheets" [scrollable]="true"
+                        scrollHeight="calc(100vh - 25rem)"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        [rows]="rowsPerPage" [showCurrentPageReport]="true" (onPage)="pageChange($event)"
+                        [rowsPerPageOptions]="[25, 50, 100]" dataKey="code" [first]="first" [paginator]="true"
+                        styleClass="p-datatable-gridlines p-datatable-sm p-datatable-striped w-full" tableStyleClass=""
+                        [resizableColumns]="true" columnResizeMode="fit" [autoLayout]="true" class="border-round"
+                        responsive="true">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="width:3.5rem !important;">
+                                    <div class="flex justify-content-center align-items-center">
+                                        #
+                                    </div>
+                                </th>
+                                <th pSortableColumn="code">
+                                    <div class="flex justify-content-center align-items-center">
+                                        Code
+                                    </div>
+                                </th>
+                                <th pSortableColumn="name">
+                                    <div class="flex justify-content-center align-items-center">
+                                        Employee
+                                    </div>
+                                </th>
+                                <th pSortableColumn="shiftStartRange">
+                                    <div class="flex justify-content-center align-items-center">
+                                        Department
+                                    </div>
+                                </th>
+                                <th pSortableColumn="nhinTime">
+                                    <div class="flex justify-content-center align-items-center">
+                                        Date
+                                    </div>
+                                </th>
+                                <th pSortableColumn="latestAllowed">
+                                    <div class="flex justify-content-center align-items-center">
+                                        Day
+                                    </div>
+                                </th>
+                                <th pSortableColumn="earliestAllowed">
+                                    <div class="flex justify-content-center align-items-center">
+                                        IN
+                                    </div>
+                                </th>
+                                <th pSortableColumn="nhoutTime">
+                                    <div class="flex justify-content-center align-items-center">
+                                        OUT
+                                    </div>
+                                </th>
+                                <th pSortableColumn="shiftEndRange">
+                                    <div class="flex justify-content-center align-items-center">
+                                        NH
+                                    </div>
+                                </th>
+                                <th pSortableColumn="nh">
+                                    <div class="flex justify-content-center align-items-center">
+                                        Miss
+                                    </div>
+                                </th>
+                                <th pSortableColumn="dgv_Active">
+                                    <div class="flex justify-content-center align-items-center">
+                                        Late
+                                    </div>
+                                </th>
+                                <th pSortableColumn="isRotaShift">
+                                    <div class="flex justify-content-center align-items-center">
+                                        Early
+                                    </div>
+                                </th>
+                                <th pSortableColumn="isRotaShift">
+                                    <div class="flex justify-content-center align-items-center">
+                                        OT1
+                                    </div>
+                                </th>
+                                <th pSortableColumn="isRotaShift">
+                                    <div class="flex justify-content-center align-items-center">
+                                        OT2
+                                    </div>
+                                </th>
+                                <th pSortableColumn="isRotaShift">
+                                    <div class="flex justify-content-center align-items-center">
+                                        Break
+                                    </div>
+                                </th>
+                                <th pSortableColumn="isRotaShift">
+                                    <div class="flex justify-content-center align-items-center">
+                                        Reason
+                                    </div>
+                                </th>
+                                <th pSortableColumn="isRotaShift">
+                                    <div class="flex justify-content-center align-items-center">
+                                        Edit
+                                    </div>
+                                </th>
+                                <th pSortableColumn="isRotaShift">
+                                    <div class="flex justify-content-center align-items-center">
+                                        Shift
+                                    </div>
+                                </th>
+                                <th pSortableColumn="isRotaShift">
+                                    <div class="flex justify-content-center align-items-center">
+                                        Spcl Lv.
+                                    </div>
+                                </th>
+                                <th class="text-center" class="w-4rem">Edit</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-row ndex="rowIndex" let-data>
+                            <tr class="">
+                                <td class="text-center text-900">{{rowIndex + 1}}</td>
+                                <td>{{ data.empCd }}</td>
+                                <td>{{ data.empName }}</td>
+                                <td>{{ data.deptDs }}</td>
+                                <td>{{ data.trnDate | date: 'dd/MM/yyyy'}}</td>
+                                <td>{{ data.trnDate | date: 'EEEE'}}</td>
+                                <td>{{ data.timeIn | date: 'hh:mm a'}}</td>
+                                <td>{{ data.timeOut | date: 'hh:mm a'}}</td>
+                                <td>{{ transform(data.nh) }}</td>
+                                <td>{{ transform(data.missTime) }}</td>
+                                <td> {{ transform(data.lateEntryHrs) }}</td>
+                                <td> {{ transform(data.earlyExitHrs) }}</td>
+                                <td> {{ transform(data.oT1) }}</td>
+                                <td> {{ transform(data.oT2) }}</td>
+                                <td> {{ transform(data.brkHrs) }}</td>
+                                <td> {{ data.multipleReason }}</td>
+                                <td class="text-center text-900">
+                                    <i class="pi"
+                                        [ngClass]="data.edited ? 'text-green-500 pi-check-circle' : 'text-red-500 pi-times-circle'"></i>
+                                </td>
+                                <td> {{ data.wrName }}</td>
+                                <td> {{ data.specialLeaveHrType }}</td>
+                                <td class="text-center text-900">
+                                    <button pButton pRipple icon="pi pi-pencil" pTooltip="View"
+                                        class="mr-2 p-button-rounded p-button-info p-button-outlined"
+                                        (click)="onEdit(data)"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="loadingbody" let-columns="columns">
+                            <tr style="height:30px">
+                                <td *ngFor="let col of columns; let even = even">
+                                    <p-skeleton
+                                        [ngStyle]="{'width': even ? (col.field === 'year' ? '30%' : '40%') : '60%'}" />
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+</div>

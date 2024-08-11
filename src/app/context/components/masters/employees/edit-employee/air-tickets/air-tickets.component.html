@@ -473,17 +473,35 @@
                                                             'MM/dd/yyyy'}}
                                                         </td>
                                                         <td class="text-center">
+                                                            <p-cellEditor>
+                                                                <ng-template pTemplate="input">
+                                                                    <p-inputNumber [value]="item.requestTicket"
+                                                                        [showButtons]="true" buttonLayout="horizontal"
+                                                                        inputId="horizontal"
+                                                                        incrementButtonIcon="pi pi-plus"
+                                                                        decrementButtonIcon="pi pi-minus" mode="decimal"
+                                                                        [useGrouping]="false" size="1" min="1" />
+                                                                </ng-template>
+                                                                <ng-template pTemplate="output">
+                                                                    <p-chip [label]="item.requestTicket"
+                                                                        icon="pi pi-pencil" />
+                                                                </ng-template>
+                                                            </p-cellEditor>
 
-                                                            <p-inputNumber [value]="item.requestTicket"
-                                                                [showButtons]="true" buttonLayout="horizontal"
-                                                                inputId="horizontal" incrementButtonIcon="pi pi-plus"
-                                                                decrementButtonIcon="pi pi-minus" mode="decimal"
-                                                                [useGrouping]="false" size="1" min="1" />
+
                                                         </td>
                                                         <td class="text-center">
-                                                            <p-inputNumber [value]="item.amount" onchan
-                                                                [showButtons]="true" inputId="stacked" mode="currency"
-                                                                currency="BHD" min="0" />
+                                                            <p-cellEditor>
+                                                                <ng-template pTemplate="input">
+                                                                    <p-inputNumber [value]="item.amount" onchan
+                                                                        [showButtons]="true" inputId="stacked"
+                                                                        mode="currency" currency="BHD" min="0" />
+                                                                </ng-template>
+                                                                <ng-template pTemplate="output">
+                                                                    <p-chip [label]="item.amount" icon="pi pi-pencil" />
+                                                                </ng-template>
+                                                            </p-cellEditor>
+
                                                         </td>
                                                         <td class="text-center">
                                                             <p-tableCheckbox [value]="item" />

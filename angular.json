@@ -31,13 +31,11 @@
             ],
             "styles": [
               "src/styles.scss",
-              { 
-                "input": "src/assets/presets/core.scss", 
-                "bundleName": "tailwind", 
-                "inject": false
-              }
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeflex/primeflex.css"
             ],
             "scripts": [
+              "node_modules/preline/preline.js",
               "node_modules/chart.js/dist/Chart.js",
               "node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.js"
             ]
@@ -99,13 +97,11 @@
             ],
             "styles": [
               "src/styles.scss",
-              { 
-                "input": "src/assets/presets/core.scss", 
-                "bundleName": "tailwind", 
-                "inject": false
-              }
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeflex/primeflex.css"
             ],
             "scripts": [
+              "node_modules/preline/preline.js",
               "node_modules/apexcharts/dist/apexcharts.min.js",
               "node_modules/chart.js/dist/Chart.js",
               "node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.js"

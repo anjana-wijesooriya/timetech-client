@@ -148,6 +148,12 @@ export class Utils {
         'December'
     ];
 
+    DAYS = [
+        'Sunday', 'Monday', 'Tuesday', 'WednesDay', 'Thursday', 'Friday', 'Saturday'
+    ]
+
+    WORKINGDAYS = [...this.DAYS, 'HOLIDAY'];
+
     months(config) {
         var cfg = config || {};
         var count = cfg.count || 12;
@@ -227,4 +233,67 @@ export class Utils {
     setLocalStorage(key, string, obj: any) {
         return window.localStorage.setItem(key, JSON.stringify(obj));
     }
+
+    SHIFT_GENERAL: IShiftField[] = [
+        { label: 'Normal Hours', keyValue: 'nh', next: '', prev: '', isDate: true, isHours: true },
+        { label: 'Break Hours', keyValue: 'breakHrs', next: '', prev: '', isDate: true, isHours: true },
+        { label: 'Minimum Swipe', keyValue: 'minSwipe', next: '', prev: '' },
+        // { label: 'Shift IN', keyValue: 'nhinTime', labelAlt: 'Shift OUT', keyValueAlt: 'nhoutTime', next: '', prev: '', isDate: true },
+        { label: 'Shift IN', keyValue: 'nhinTime', next: '', prev: '', isDate: true },
+        { label: 'Shift OUT', keyValue: 'nhoutTime', next: 'nhoutNextDay', prev: '', isDate: true },
+        { label: 'Special Overtime', keyValue: 'specialOt', next: '', prev: '' },
+        { label: 'Shift Starts', keyValue: 'shiftStartRange', next: '', prev: 'shiftStartRangePrevDay', isDate: true },
+        { label: 'Shift Ends', keyValue: 'shiftEndRange', next: 'shiftEndRangeNexDay', prev: '', isDate: true },
+        { label: 'Special OT hours', keyValue: 'specialOthrs', next: '', prev: '', isDate: true, isHours: true },
+    ]
+
+    SHIFT_TIMERANGE = [
+        { label: 'OT-1 IN', keyValue: 'ot1inTime', next: 'ot1innextDay', prev: '', isDate: true },
+        { label: 'OT-1 OUT', keyValue: 'ot1outTime', next: 'ot1outNextDay', prev: '', isDate: true },
+        { label: 'OT-2 IN', keyValue: 'ot2inTime', next: 'ot2innextDay', prev: '', isDate: true },
+        { label: 'OT-2 OUT', keyValue: 'ot2outTime', next: 'ot2outNextDay', prev: '', isDate: true },
+    ]
+
+    SHIFT_EARLYINOUT = [
+        { label: 'Early-1 : IN Time', keyValue: 'earlyInTime', next: '', prev: 'earlyPrevDay', isDate: true },
+        { label: 'Out Time', keyValue: 'earlyOutTime', next: '', prev: 'earlyPrevDayOutTime', isDate: true },
+        { label: 'Overtime', keyValue: 'earlyOt', next: '', prev: '', value: 'OT-' },
+        { label: 'Early-2 : IN Time', keyValue: 'earlyIntime2', next: '', prev: 'earlyPrevDayIn2', isDate: true },
+        { label: 'Out Time', keyValue: 'earlyOutTime2', next: '', prev: 'earlyPrevDayOut2', isDate: true },
+        { label: 'Overtime', keyValue: 'earlyOt2', next: '', prev: '', value: 'OT-' },
+    ]
+
+    SHIFT_PARAAMETERS = [
+        { label: 'Late Grace', keyValue: 'latestAllowed', next: '', prev: '', isDate: true },
+        { label: 'Early Grace', keyValue: 'earliestAllowed', next: '', prev: '', isDate: true },
+        { label: 'Minimum OT', keyValue: 'minOt', next: '', prev: '', isDate: true, isHours: true },
+        { label: 'Round OFF OT', keyValue: 'roundOt', next: '', prev: '', isDate: true, isHours: true },
+    ]
+
+    SHIFT_CONDITIONS = [
+        { label: '1st Punch between', labelAlt: 'And', keyValue: 'firstPunchStart', keyValueAlt: 'firstPunchEnd', next: 'firstPunchNextDay', prev: '', isDate: true },
+        { label: '2st Punch between', labelAlt: 'And', keyValue: 'secondPunchStart', keyValueAlt: 'secondPunchEnd', next: '', prev: '', isDate: true },
+    ]
+
+    SHIFT_SPLIT = [
+        { label: 'Break IN', keyValue: 'breakIn', next: 'breakInnextDay', prev: '', isDate: true },
+        { label: 'Break OUT', keyValue: 'breakOut', next: 'breakOutNextDay', prev: '', isDate: true },
+        { label: 'Overtime', keyValue: 'breakOt', next: '', prev: '' },
+    ]
+
+    REASON_EXCUSE_TYPES = [
+        { value: 0, label: 'No Excuse' }, { value: 1, label: 'Personal' }, { value: 2, label: 'Official' }
+    ]
+}
+
+export type IShiftField = {
+    label: string;
+    keyValue: string;
+    next: string;
+    prev: string;
+    isDate?: boolean;
+    isHours?: boolean;
+    value?: string;
+    keyValueAlt?: string;
+    labelAlt?: string;
 }

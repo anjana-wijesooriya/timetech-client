@@ -1,7 +1,4 @@
-:host {
-  display: block;
-}
-.auth-text{
+.auth-text {
   display: inline-block;
   font-family: auto;
   margin-top: 10px;
@@ -9,9 +6,11 @@
   bottom: -38px;
   padding: 10px;
 }
-.width-auto{
+
+.width-auto {
   width: auto;
 }
+
 .invalid-tooltip {
   display: block;
   position: relative;

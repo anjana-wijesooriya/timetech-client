@@ -5,7 +5,7 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { RouterModule } from '@angular/router';
 
 const components = [
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
 ];
 
 @NgModule({

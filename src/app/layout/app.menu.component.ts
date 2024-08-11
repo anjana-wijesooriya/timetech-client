@@ -261,7 +261,18 @@ export class AppMenuComponent implements OnInit {
                 "btnDisplay": "Holidays",
                 "groupName": "Masters"
             };
+            const reasonsMenu = {
+                "btnId": "Reasons",
+                "btnTag": "/TimeTechCore/pages/Masters/reasonMaster.aspx",
+                "btnPicture": "pi pi-question-circle pi",
+                "sequence": 4,
+                "btnSeq": 4,
+                "btnToolTip": "Reasons",
+                "btnDisplay": "Reasons",
+                "groupName": "Time Attendance"
+            };
             response.push(attendanceMenu);
+            response.push(reasonsMenu);
             this.moduleService.setActiveModules(response);
             localStorage.setItem('Personal', JSON.stringify(response));
         })

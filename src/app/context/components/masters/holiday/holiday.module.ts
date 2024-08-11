@@ -17,7 +17,15 @@ import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
 import { HolidayComponent } from './holiday.component';
 import { Dropdown, DropdownModule } from 'primeng/dropdown';
-
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyPrimeNGModule } from '@ngx-formly/primeng';
+import { CalendarModule } from 'primeng/calendar';
+import { FormlyDatepickerModule } from '@ngx-formly/primeng/datepicker';
+import { FormlyCheckboxModule } from '@ngx-formly/primeng/checkbox';
+import { ConfirmationService, FilterService, MessageService } from 'primeng/api';
+import { AlertService } from 'src/app/context/service/alert.service';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { FloatLabelModule } from 'primeng/floatlabel';
 
 @NgModule({
   declarations: [HolidayComponent],
@@ -25,23 +33,36 @@ import { Dropdown, DropdownModule } from 'primeng/dropdown';
     CommonModule,
     HolidayRoutingModule,
     FormsModule,
+    CalendarModule,
     ReactiveFormsModule,
+    FormlyPrimeNGModule,
+    FormlyModule.forRoot({
+      validationMessages: [{ name: 'required', message: 'This field is required' }],
+    }),
+    FormlyDatepickerModule,
+    FormlyCheckboxModule,
     ToastModule,
     ScrollerModule,
     ListboxModule,
     TableModule,
     InputTextModule,
     ButtonModule,
+    FloatLabelModule,
     TagModule,
     BadgeModule,
     TooltipModule,
     SidebarModule,
     InputNumberModule,
     InputSwitchModule,
-    DropdownModule
+    DropdownModule,
+    ConfirmDialogModule
   ],
   providers: [
-    DatePipe
+    DatePipe,
+    MessageService,
+    ConfirmationService,
+    FilterService,
+    AlertService,
   ]
 })
 export class HolidayModule { }

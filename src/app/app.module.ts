@@ -20,6 +20,7 @@ import { AppLayoutModule } from './layout/app.layout.module';
 import { FormlyModule } from '@ngx-formly/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyPrimeNGModule } from '@ngx-formly/primeng';
+import { FormlyDatepickerModule } from '@ngx-formly/primeng/datepicker';
 
 export function getToken() {
     return localStorage.getItem(LocalStorage.JWT);
@@ -32,7 +33,7 @@ export function getToken() {
         BrowserAnimationsModule,
         AppRoutingModule,
         AppLayoutModule,
-        
+
         JwtModule.forRoot({
             config: {
                 tokenGetter: getToken,
@@ -41,9 +42,11 @@ export function getToken() {
             }
         }),
         StoreModule.forRoot({}, {}),
-        FormlyModule.forRoot(),
+
         ReactiveFormsModule,
-        FormlyPrimeNGModule,
+        // FormlyPrimeNGModule,
+        // FormlyModule.forRoot(),
+        // FormlyDatepickerModule,
     ],
     providers: [
         provideAnimations(),

@@ -338,7 +338,7 @@ p-fileupload.ng-invalid.ng-touched .p-fileupload-advanced {
 }
 
 .page-content-wrapper {
-    height: calc(100vh - 10.5rem);
+    // height: calc(100vh - 10.5rem);
 }
 
 .dashboard-month-picker {
@@ -417,5 +417,52 @@ app-air-tickets .p-panel .p-panel-header {
 .p-speeddial-list {
     .p-speeddial-list {
         .p-speeddial-item {}
+    }
+}
+
+formly-wrapper-primeng-form-field {
+    .p-field {
+        @extend .py-2
+    }
+}
+
+.p-field {
+    .p-error {
+        display: block;
+    }
+}
+
+.list-box {
+    .text-900.mb-3 {
+        @extend .my-2;
+        @extend .text-blue-500;
+    }
+}
+
+.p-colorpicker {
+    .p-colorpicker-preview {
+        width: 100%;
+    }
+}
+
+.p-datatable-table .pi.text-green-500.pi-check-circle,
+.p-datatable-table .pi.text-red-500.pi-times-circle {
+    @extend .text-3xl;
+}
+
+.workrule-wrapper {
+    .p-tabmenu-nav {
+
+        @extend .gap-1;
+
+        .p-tabmenuitem.p-highlight .p-menuitem-link {
+            @extend .border-primary;
+            @extend .shadow-6;
+            @extend .bg-primary-100;
+        }
+
+        .p-tabmenuitem .p-menuitem-link {
+            @extend .bg-gray-200;
+        }
     }
 }

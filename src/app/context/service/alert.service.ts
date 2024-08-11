@@ -29,8 +29,8 @@ export class AlertService {
     if (typeof (msg) == 'string') {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: msg });
     } else {
-      if (msg?.title == undefined) {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: msg?.itle });
+      if (msg?.title != undefined) {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: msg?.title });
       } else if (typeof (msg.error) == 'string') {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: msg.error });
       } else if (msg.statusCode == 500) {

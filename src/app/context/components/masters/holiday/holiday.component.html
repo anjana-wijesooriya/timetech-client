@@ -1,54 +1,72 @@
 <div class="grid support-wrapper">
 
-    <div class="col-12 surface-ground p-2 mb-3">
-        <div class="card surface-card  p-3 m-0 page-content-wrapper">
+    <div class="p-2 mb-3 col-12 surface-ground">
+        <div class="p-3 m-0 card surface-card page-content-wrapper">
 
-            <h5 class="mb-0">Holidays</h5>
+            <h5 class="mb-3">Holidays</h5>
 
-            <div class="flex w-full gap-4">
+            <div class="flex w-full">
 
+                <p-confirmDialog></p-confirmDialog>
+                <p-toast></p-toast>
 
                 <p-table #supportTable [rowHover]="true" [value]="holidays" [scrollable]="true"
                     scrollHeight="calc(100vh - 28rem)" [rows]="25" [showCurrentPageReport]="true"
-                    [rowsPerPageOptions]="[25, 50, 100]" [loading]="false" dataKey="code"
+                    [rowsPerPageOptions]="[25, 50, 100]" [loading]="isLoading" dataKey="code"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                    [globalFilterFields]="['holiday', 'holidayName', 'createdOn', 'isCompensationRequiered']"
+                    [globalFilterFields]="['compId', 'holidayName', 'year', 'isCompensationRequiered']"
                     [paginator]="true" styleClass="p-datatable-gridlines p-datatable-sm"
                     tableStyleClass="table-layout-fixed" columnResizeMode="fit" [autoLayout]="true" class="border-round"
                     responsive="true">
                     <ng-template pTemplate="caption">
                         <div class="flex flex-wrap justify-content-between">
-                            <div class="flex flex-row align-items-center justify-content-start gap-2">
-                                <p-dropdown [options]="companies" [(ngModel)]="selectedComapny" optionValue="compId"
-                                    optionLabel="name" [showClear]="false" placeholder="Select a Company"
-                                    (ngModelChange)="supportTable.filterService.filter(holidays, ['compId'], $event, 'equals')">
-                                    <ng-template let-selectedValue pTemplate="selectedItem">
-                                        <div class="flex align-items-center gap-2" *ngIf="selectedValue">
-                                            <img src="assets/context/images/flag/flag_placeholder.png"
-                                                [class]="'flag flag-' + selectedValue.logo" style="width: 21px" />
-                                            <div>{{ selectedValue.name }}</div>
-                                        </div>
-                                    </ng-template>
-                                    <ng-template let-company pTemplate="item">
-                                        <div class="flex align-items-center gap-2">
-                                            <img src="assets/context/images/flag/flag_placeholder.png"
-                                                [class]="'flag flag-' + company.logo" style="width: 21px" />
-                                            <div>{{ company.name }}</div>
-                                        </div>
-                                    </ng-template>
-                                </p-dropdown>
+                            <div class="flex flex-row gap-2 align-items-center justify-content-start">
+                                <span class="p-float-label">
+                                    <p-dropdown [options]="companies" [showClear]="false"
+                                        placeholder="Filter by Company"
+                                        (onChange)="supportTable.filterGlobal($event.value.compId, 'equals')"
+                                        [(ngModel)]="selectedCompany">
+                                        <ng-template let-selectedValue pTemplate="selectedItem">
+                                            <div class="flex gap-2 align-items-center" *ngIf="selectedValue">
+                                                <img src="assets/context/images/flag/flag_placeholder.png"
+                                                    [class]="'flag flag-' + selectedValue.logo" style="width: 21px" />
+                                                <div>{{ selectedValue.name }}</div>
+                                            </div>
+                                        </ng-template>
+                                        <ng-template let-company pTemplate="item">
+                                            <div class="flex gap-2 align-items-center">
+                                                <img src="assets/context/images/flag/flag_placeholder.png"
+                                                    [class]="'flag flag-' + company.logo" style="width: 21px" />
+                                                <div>{{ company.name }}</div>
+                                            </div>
+                                        </ng-template>
+                                    </p-dropdown>
+                                    <label for="username">Company</label>
+                                </span>
+                                <span class="p-float-label">
+                                    <p-dropdown [options]="years" [showClear]="false" placeholder="Filter by Year"
+                                        (onChange)="supportTable.filterGlobal($event.value, 'equals')">
+                                    </p-dropdown>
+                                    <label for="username">Year</label>
+                                </span>
+
                                 <div class="flex flex-wrap">
                                     <p-iconField iconPosition="left">
-                                        <p-inputIcon styleClass="pi pi-search" />
-                                        <input type="text" pInputText placeholder="Search by holiday Name" #filter
-                                            (input)="supportTable.filterGlobal($event.target.value, 'contains')" />
+                                        <span class="p-float-label">
+                                            <p-inputIcon styleClass="pi pi-search" />
+                                            <input type="text" pInputText placeholder="Search by holiday Name" #filter
+                                                (input)="supportTable.filterGlobal($event.target.value, 'contains')" />
+                                            <label for="username">Name</label>
+                                        </span>
                                     </p-iconField>
+
+
                                 </div>
                             </div>
 
                             <div class="flex flex-wrap gap-2">
                                 <button pButton label="Add New Holiday" class="p-button-outlined" icon="pi pi-plus"
-                                    (click)="openFieldOptionSlide(undefined, form)"></button>
+                                    (click)="openAddOrEditPanel(undefined)"></button>
                             </div>
                         </div>
                     </ng-template>
@@ -56,14 +74,16 @@
                         <tr>
                             <th pSortableColumn="code" class="w-5rem">
                                 <div class="flex justify-content-between align-items-center">
+                                    <div></div>
                                     #
                                     <p-sortIcon field="code"></p-sortIcon>
                                     <!-- <p-columnFilter class="ml-auto" type="text" field="otherCode" display="menu" placeholder="Search by Code">
                                         </p-columnFilter> -->
                                 </div>
                             </th>
-                            <th pSortableColumn="holidayName">
+                            <th pSortableColumn="holidayName" class="w-12rem">
                                 <div class="flex justify-content-between align-items-center">
+                                    <div></div>
                                     Holiday Name
                                     <p-sortIcon field="holidayName"></p-sortIcon>
                                     <!-- <p-columnFilter class="ml-auto" type="text" field="otherCode" display="menu"
@@ -73,14 +93,16 @@
                             </th>
                             <th pSortableColumn="holiday" class="w-12rem">
                                 <div class="flex justify-content-between align-items-center">
+                                    <div></div>
                                     Day
                                     <p-sortIcon field="holiday"></p-sortIcon>
                                     <!-- <p-columnFilter class="ml-auto" type="boolean" field="active" display="menu">
                                                                         </p-columnFilter> -->
                                 </div>
                             </th>
-                            <th pSortableColumn="holiday" class="w-14rem">
+                            <th pSortableColumn="holiday" class="w-10rem">
                                 <div class="flex justify-content-between align-items-center">
+                                    <div></div>
                                     Holiday
                                     <p-sortIcon field="holiday"></p-sortIcon>
                                     <!-- <p-columnFilter class="ml-auto" type="text" field="name" display="menu"
@@ -88,8 +110,9 @@
                                         </p-columnFilter> -->
                                 </div>
                             </th>
-                            <th pSortableColumn="holiday" class="w-12rem">
+                            <th pSortableColumn="holiday" class="w-6rem">
                                 <div class="flex justify-content-between align-items-center">
+                                    <div></div>
                                     Year
                                     <p-sortIcon field="holiday"></p-sortIcon>
                                     <!-- <p-columnFilter class="ml-auto" type="boolean" field="active" display="menu">
@@ -99,28 +122,30 @@
 
                             <th pSortableColumn="isCompensationRequiered" class="w-10rem">
                                 <div class="flex justify-content-between align-items-center">
+                                    <div></div>
                                     Compensation
                                     <p-sortIcon field="isCompensationRequiered" />
                                     <!-- <p-columnFilter class="ml-auto" type="text" field="sequence" display="menu" /> -->
                                 </div>
                             </th>
-                            <th pSortableColumn="createdOn" class="w-14rem">
+                            <th pSortableColumn="createdOn" class="w-10rem">
                                 <div class="flex justify-content-between align-items-center">
+                                    <div></div>
                                     Created Date
                                     <p-sortIcon field="createdOn" />
                                     <!-- <p-columnFilter class="ml-auto" type="text" field="sequence" display="menu" /> -->
                                 </div>
                             </th>
-                            <th class="w-8rem">Actions</th>
+                            <th class="text-center w-6rem">Actions</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-data>
                         <tr>
-                            <td class="text-900 text-center">{{data.code}}</td>
-                            <td class="text-900 text-center">{{data.holidayName}}</td>
-                            <td class="text-900 text-center"> {{data.holiday | date :'EEEE'}}</td>
-                            <td class="text-900 text-center"> {{data.holiday | date :'mediumDate'}}</td>
-                            <td class="text-900 text-center"> {{data.holiday | date :'yyyy'}}</td>
+                            <td class="text-left text-900">{{data.code}}</td>
+                            <td class="text-center text-900">{{data.holidayName}}</td>
+                            <td class="text-center text-900"> {{data.holiday | date :'EEEE'}}</td>
+                            <td class="text-center text-900"> {{data.holiday | date :'mediumDate'}}</td>
+                            <td class="text-center text-900"> {{data.holiday | date :'yyyy'}}</td>
                             <td class="text-center">
                                 <div class="flex text-center justify-content-center">
                                     <i class="pi"
@@ -128,15 +153,15 @@
 
                                 </div>
                             </td>
-                            <td class="text-900 text-center">{{data.createdOn | date :'mediumDate'}}</td>
+                            <td class="text-center text-900">{{data.createdOn | date :'mediumDate'}}</td>
                             <td class="text-center">
-                                <button pButton pRipple icon="pi pi-pencil" (click)="openFieldOptionSlide(data, form)"
+                                <button pButton pRipple icon="pi pi-pencil" (click)="openAddOrEditPanel(data)"
                                     class="p-button-rounded p-button-success p-button-outlined" pTooltip="Edit">
                                 </button>
 
                                 <button pButton pRipple icon=" pi pi-trash" pTooltip="Delete"
                                     class="p-button-rounded p-button-outlined p-button-warning "
-                                    (click)="console.log()">
+                                    (click)="deleteConfirm($event, data)">
                                 </button>
                             </td>
                         </tr>
@@ -144,50 +169,32 @@
                 </p-table>
                 <p-sidebar [(visible)]="showAddPanel" position="right">
                     <ng-template pTemplate="header">
-                        <div class="font-bold text-xl">
+                        <div class="text-xl font-bold">
                             Holiday Info
                         </div>
                     </ng-template>
                     <ng-template pTemplate="content">
-                        <form #form="ngForm" novalidate autocomplete="off">
-                            <div class="grid formgrid p-fluid p-2" [formGroup]="validationForm">
-                                <div class="col-12 field">
-                                    <label for="float-label" class="font-medium text-900">Option Name</label>
-                                    <input pInputText id="name" class="" [(ngModel)]="selectedDetails.name"
-                                        formControlName="name" [required]="true" />
-                                    <small class="p-error" id="username-help">Option Name required.</small>
+                        <form [formGroup]="form">
+                            <formly-form [model]="model" [fields]="fields" [options]="formOptions"
+                                [form]="form"></formly-form>
+
+                            <!-- <div class="w-full py-2">
+                                <label for="float-label" class="font-medium text-900">Reimbursement</label>
+                                <div class="flex w-auto align-items-center">
+                                    <p-inputSwitch class="p-inputSwitch-lg" id="visa-cost"
+                                        triggers="focus"></p-inputSwitch>
                                 </div>
-                                <div class="col-12 field">
-                                    <label for="float-label" class="font-medium text-900">Code</label>
-                                    <input pInputText id="otherCode" class="" [(ngModel)]="selectedDetails.otherCode"
-                                        formControlName="otherCode" [required]="true" />
-                                    <small class="p-error" id="username-help">Code required.</small>
-                                </div>
-                                <div class="col-12 field">
-                                    <label for="float-label" class="font-medium text-900">Sequence</label>
-                                    <p-inputNumber [(ngModel)]="selectedDetails.sequence" mode="decimal"
-                                        inputId="withoutgrouping" [useGrouping]="false" formControlName="sequence" />
-                                    <small class="p-error" id="username-help">Sequence required.</small>
-                                </div>
-                                <div class=" col-12 field ">
-                                    <label for="name" class="font-medium text-900">Active Status</label>
-                                    <div class="flex align-items-center w-auto">
-                                        <p-inputSwitch class="p-inputSwitch-lg" id="visa-cost" formControlName="active"
-                                            [(ngModel)]="selectedDetails.active"
-                                            [pTooltip]="selectedDetails.active ? 'Active' : 'Inactive'"
-                                            triggers="focus"></p-inputSwitch>
-                                    </div>
-                                </div>
-                            </div>
+                            </div> -->
                         </form>
+
                     </ng-template>
                     <ng-template pTemplate="footer">
-                        <div class="flex justify-content-end gap-2">
+                        <div class="flex gap-2 justify-content-end">
                             <p-button type="submit" label="Update" severity="primary" [outlined]="true"
-                                [loading]="isSaving" icon="pi pi-check" class="ml-auto"
-                                (onClick)="onSubmit()"></p-button>
+                                [loading]="isLoading" icon="pi pi-check" class="ml-auto"
+                                (onClick)="submit()"></p-button>
                             <p-button label="Cancel" severity="primary" [outlined]="true" text="true" icon="pi pi-times"
-                                (onClick)="onCancel()"></p-button>
+                                (onClick)="showAddPanel = !showAddPanel"></p-button>
                         </div>
                     </ng-template>
                 </p-sidebar>
