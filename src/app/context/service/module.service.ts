@@ -28,4 +28,13 @@ export class ModuleService extends BaseService {
     return this.$activeModules.asObservable();
   }
 
+  public getBaseModules() {
+    return JSON.parse(localStorage.getItem('base-modules'))
+  }
+
+  public getBaseModuleFromUser(companyId: number) {
+    const endpoint = `api/module/base-modules?companyId=${companyId}`;
+    return this.http.get<any[]>(`${this.apiEndpoint}${endpoint}`);
+  }
+
 }

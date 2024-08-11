@@ -96,8 +96,8 @@
                             <div class="grid w-full fromgrid">
                                 <div class="col-12 md:col-6 lg:col-4 xl:col-3 p-fluid">
                                     <label for="float-label" class="font-medium text-900">Normal Hours</label>
-                                    <p-calendar [showIcon]="true" [iconDisplay]="'input'" [(ngModel)]="sh.nh"
-                                        [showTime]="true" [timeOnly]="true" ariaLabel="Date"
+                                    <p-calendar dataType="string" [showIcon]="true" [iconDisplay]="'input'"
+                                        [(ngModel)]="sh.nh" [showTime]="true" [timeOnly]="true" ariaLabel="Date"
                                         dataType="string"></p-calendar>
                                     <small class="p-error" id="username-help"></small>
                                 </div>
@@ -109,15 +109,15 @@
                                 </div>
                                 <div class="col-12 md:col-6 lg:col-4 xl:col-3 p-fluid">
                                     <label for="float-label" class="font-medium text-900">Shift In</label>
-                                    <p-calendar [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
+                                    <p-calendar dataType="string" [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
                                         [iconDisplay]="'input'" [(ngModel)]="sh.nhinTime"></p-calendar>
                                     <small class="p-error" id="username-help"></small>
                                 </div>
                                 <div class="col-12 md:col-6 lg:col-4 xl:col-3 p-fluid">
                                     <label for="float-label" class="font-medium text-900">Shift Out</label>
                                     <p-inputGroup>
-                                        <p-calendar [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
-                                            [(ngModel)]="sh.nhoutTime" [iconDisplay]="'input'"
+                                        <p-calendar dataType="string" [timeOnly]="true" [hourFormat]="12"
+                                            [showIcon]="true" [(ngModel)]="sh.nhoutTime" [iconDisplay]="'input'"
                                             inputStyleClass="border-noround-right"></p-calendar>
                                         <p-inputGroupAddon>
                                             <p-checkbox [binary]="true" pTooltip="Next Day"
@@ -129,8 +129,8 @@
                                 <div class="col-12 md:col-6 lg:col-4 xl:col-3 p-fluid">
                                     <label for="float-label" class="font-medium text-900">Shift Start Range</label>
                                     <p-inputGroup>
-                                        <p-calendar [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
-                                            [(ngModel)]="sh.shiftStartRange" [iconDisplay]="'input'"
+                                        <p-calendar dataType="string" [timeOnly]="true" [hourFormat]="12"
+                                            [showIcon]="true" [(ngModel)]="sh.shiftStartRange" [iconDisplay]="'input'"
                                             inputStyleClass="border-noround-right" datatype="string"></p-calendar>
                                         <p-inputGroupAddon>
                                             <p-checkbox [binary]="true" pTooltip="Previous Day"
@@ -141,8 +141,8 @@
                                 <div class="col-12 md:col-6 lg:col-4 xl:col-3 p-fluid">
                                     <label for="float-label" class="font-medium text-900">Shift End Range</label>
                                     <p-inputGroup>
-                                        <p-calendar [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
-                                            [(ngModel)]="sh.shiftEndRange" [iconDisplay]="'input'"
+                                        <p-calendar dataType="string" [timeOnly]="true" [hourFormat]="12"
+                                            [showIcon]="true" [(ngModel)]="sh.shiftEndRange" [iconDisplay]="'input'"
                                             inputStyleClass="border-noround-right"></p-calendar>
                                         <p-inputGroupAddon>
                                             <p-checkbox [binary]="true" pTooltip="Next Day"
@@ -152,8 +152,8 @@
                                 </div>
                                 <div class="col-12 md:col-6 lg:col-4 xl:col-3 p-fluid">
                                     <label for="float-label" class="font-medium text-900">Break Hours</label>
-                                    <p-calendar [timeOnly]="true" [showIcon]="true" [(ngModel)]="sh.breakHrs"
-                                        [iconDisplay]="'input'"></p-calendar>
+                                    <p-calendar dataType="string" [timeOnly]="true" [showIcon]="true"
+                                        [(ngModel)]="sh.breakHrs" [iconDisplay]="'input'"></p-calendar>
                                     <small class="p-error" id="username-help"></small>
                                 </div>
                                 <div class="grid w-full px-3">
@@ -220,8 +220,8 @@
                                 <div class="col-12 md:col-6 xl p-fluid">
                                     <label for="float-label" class="font-medium text-900">OT-1 In</label>
                                     <p-inputGroup>
-                                        <p-calendar [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
-                                            [(ngModel)]="sh.ot1inTime" [iconDisplay]="'input'"
+                                        <p-calendar dataType="string" [timeOnly]="true" [hourFormat]="12"
+                                            [showIcon]="true" [(ngModel)]="sh.ot1inTime" [iconDisplay]="'input'"
                                             inputStyleClass="border-noround-right"></p-calendar>
                                         <p-inputGroupAddon>
                                             <p-checkbox [binary]="true" pTooltip="Next Day"
@@ -232,8 +232,8 @@
                                 <div class="col-12 md:col-6 xl p-fluid">
                                     <label for="float-label" class="font-medium text-900">OT-1 Out</label>
                                     <p-inputGroup>
-                                        <p-calendar [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
-                                            [(ngModel)]="sh.ot1outTime" [iconDisplay]="'input'"
+                                        <p-calendar dataType="string" [timeOnly]="true" [hourFormat]="12"
+                                            [showIcon]="true" [(ngModel)]="sh.ot1outTime" [iconDisplay]="'input'"
                                             inputStyleClass="border-noround-right"></p-calendar>
                                         <p-inputGroupAddon>
                                             <p-checkbox [binary]="true" pTooltip="Next Day"
@@ -244,8 +244,8 @@
                                 <div class="col-12 md:col-6 xl p-fluid">
                                     <label for="float-label" class="font-medium text-900">OT-2 In</label>
                                     <p-inputGroup>
-                                        <p-calendar [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
-                                            [(ngModel)]="sh.ot2inTime" [iconDisplay]="'input'"
+                                        <p-calendar dataType="string" [timeOnly]="true" [hourFormat]="12"
+                                            [showIcon]="true" [(ngModel)]="sh.ot2inTime" [iconDisplay]="'input'"
                                             inputStyleClass="border-noround-right"></p-calendar>
                                         <p-inputGroupAddon>
                                             <p-checkbox [binary]="true" pTooltip="Next Day"
@@ -256,8 +256,8 @@
                                 <div class="col-12 md:col-6 xl p-fluid">
                                     <label for="float-label" class="font-medium text-900">OT-2 Out</label>
                                     <p-inputGroup>
-                                        <p-calendar [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
-                                            [(ngModel)]="sh.ot2outTime" [iconDisplay]="'input'"
+                                        <p-calendar dataType="string" [timeOnly]="true" [hourFormat]="12"
+                                            [showIcon]="true" [(ngModel)]="sh.ot2outTime" [iconDisplay]="'input'"
                                             inputStyleClass="border-noround-right"></p-calendar>
                                         <p-inputGroupAddon>
                                             <p-checkbox [binary]="true" pTooltip="Next Day"
@@ -276,8 +276,8 @@
                                 <div class="col-12 md:col-6 xl p-fluid">
                                     <label for="float-label" class="font-medium text-900">Early-1 In</label>
                                     <p-inputGroup>
-                                        <p-calendar [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
-                                            [(ngModel)]="sh.earlyInTime" [iconDisplay]="'input'"
+                                        <p-calendar dataType="string" [timeOnly]="true" [hourFormat]="12"
+                                            [showIcon]="true" [(ngModel)]="sh.earlyInTime" [iconDisplay]="'input'"
                                             inputStyleClass="border-noround-right"></p-calendar>
                                         <p-inputGroupAddon>
                                             <p-checkbox [binary]="true" pTooltip="Next Day"
@@ -288,8 +288,8 @@
                                 <div class="col-12 md:col-6 xl p-fluid">
                                     <label for="float-label" class="font-medium text-900">Early-1 Out</label>
                                     <p-inputGroup>
-                                        <p-calendar [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
-                                            [(ngModel)]="sh.earlyOutTime" [iconDisplay]="'input'"
+                                        <p-calendar dataType="string" [timeOnly]="true" [hourFormat]="12"
+                                            [showIcon]="true" [(ngModel)]="sh.earlyOutTime" [iconDisplay]="'input'"
                                             inputStyleClass="border-noround-right"></p-calendar>
                                         <p-inputGroupAddon>
                                             <p-checkbox [binary]="true" pTooltip="Next Day"
@@ -306,8 +306,8 @@
                                 <div class="col-12 md:col-6 xl p-fluid">
                                     <label for="float-label" class="font-medium text-900">Early-2 In</label>
                                     <p-inputGroup>
-                                        <p-calendar [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
-                                            [(ngModel)]="sh.earlyIntime2" [iconDisplay]="'input'"
+                                        <p-calendar dataType="string" [timeOnly]="true" [hourFormat]="12"
+                                            [showIcon]="true" [(ngModel)]="sh.earlyIntime2" [iconDisplay]="'input'"
                                             inputStyleClass="border-noround-right"></p-calendar>
                                         <p-inputGroupAddon>
                                             <p-checkbox [binary]="true" pTooltip="Next Day"
@@ -318,8 +318,8 @@
                                 <div class="col-12 md:col-6 xl p-fluid">
                                     <label for="float-label" class="font-medium text-900">Early-2 Out</label>
                                     <p-inputGroup>
-                                        <p-calendar [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
-                                            [(ngModel)]="sh.earlyOutTime2" [iconDisplay]="'input'"
+                                        <p-calendar dataType="string" [timeOnly]="true" [hourFormat]="12"
+                                            [showIcon]="true" [(ngModel)]="sh.earlyOutTime2" [iconDisplay]="'input'"
                                             inputStyleClass="border-noround-right"></p-calendar>
                                         <p-inputGroupAddon>
                                             <p-checkbox [binary]="true" pTooltip="Next Day"
@@ -343,15 +343,16 @@
                             <div class="grid w-full fromgrid">
                                 <div class="col-12 md:col-6 xl p-fluid">
                                     <label for="float-label" class="font-medium text-900">Late Grace</label>
-                                    <p-calendar [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
+                                    <p-calendar dataType="string" [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
                                         [iconDisplay]="'input'" [(ngModel)]="sh.latestAllowed"></p-calendar>
                                     <small class="p-error" id="username-help"></small>
                                 </div>
                                 <div class="col-12 md:col-6 xl p-fluid">
                                     <label for="float-label" class="font-medium text-900">Early Grace</label>
                                     <p-inputGroup>
-                                        <p-calendar [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
-                                            [iconDisplay]="'input'" inputStyleClass="border-noround-right"
+                                        <p-calendar dataType="string" [timeOnly]="true" [hourFormat]="12"
+                                            [showIcon]="true" [iconDisplay]="'input'"
+                                            inputStyleClass="border-noround-right"
                                             [(ngModel)]="sh.earliestAllowed"></p-calendar>
                                         <p-inputGroupAddon>
                                             <p-checkbox [binary]="true" pTooltip="Next Day" [(ngModel)]="sh.eenextDay"
@@ -361,14 +362,14 @@
                                 </div>
                                 <div class="col-12 md:col-6 xl p-fluid">
                                     <label for="float-label" class="font-medium text-900">Minimum OT</label>
-                                    <p-calendar [timeOnly]="true" [showIcon]="true" [(ngModel)]="sh.minOt"
-                                        [iconDisplay]="'input'"></p-calendar>
+                                    <p-calendar dataType="string" [timeOnly]="true" [showIcon]="true"
+                                        [(ngModel)]="sh.minOt" [iconDisplay]="'input'"></p-calendar>
                                     <small class="p-error" id="username-help"></small>
                                 </div>
                                 <div class="col-12 md:col-6 xl p-fluid">
                                     <label for="float-label" class="font-medium text-900">Round Off OT</label>
-                                    <p-calendar [timeOnly]="true" [showIcon]="true" [iconDisplay]="'input'"
-                                        [(ngModel)]="sh.roundOt"></p-calendar>
+                                    <p-calendar dataType="string" [timeOnly]="true" [showIcon]="true"
+                                        [iconDisplay]="'input'" [(ngModel)]="sh.roundOt"></p-calendar>
                                     <small class="p-error" id="username-help"></small>
                                 </div>
                             </div>
@@ -389,8 +390,8 @@
                                 <div class="col-12 md:col-6 xl p-fluid">
                                     <label for="float-label" class="font-medium text-900">Break In</label>
                                     <p-inputGroup>
-                                        <p-calendar [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
-                                            [(ngModel)]="sh.breakIn" [iconDisplay]="'input'"
+                                        <p-calendar dataType="string" [timeOnly]="true" [hourFormat]="12"
+                                            [showIcon]="true" [(ngModel)]="sh.breakIn" [iconDisplay]="'input'"
                                             inputStyleClass="border-noround-right"
                                             [disabled]="!sh.isSplitShift"></p-calendar>
                                         <p-inputGroupAddon>
@@ -403,8 +404,8 @@
                                 <div class="col-12 md:col-6 xl p-fluid">
                                     <label for="float-label" class="font-medium text-900">Break Out</label>
                                     <p-inputGroup>
-                                        <p-calendar [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
-                                            [(ngModel)]="sh.breakOut" [iconDisplay]="'input'"
+                                        <p-calendar dataType="string" [timeOnly]="true" [hourFormat]="12"
+                                            [showIcon]="true" [(ngModel)]="sh.breakOut" [iconDisplay]="'input'"
                                             [disabled]="!sh.isSplitShift"
                                             inputStyleClass="border-noround-right"></p-calendar>
                                         <p-inputGroupAddon>
@@ -441,15 +442,15 @@
                                 <div class="col-12 md:col-6 xl p-fluid">
                                     <label for="float-label" class="font-medium text-900">First Punch </label>
                                     <p-inputGroup>
-                                        <p-calendar [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
-                                            [(ngModel)]="sh.firstPunchStart" [iconDisplay]="'input'"
+                                        <p-calendar dataType="string" [timeOnly]="true" [hourFormat]="12"
+                                            [showIcon]="true" [(ngModel)]="sh.firstPunchStart" [iconDisplay]="'input'"
                                             inputStyleClass="border-noround-right"
                                             [disabled]="sh.shiftSelection == 0"></p-calendar>
                                         <p-inputGroupAddon>
                                             {{'Between'}}
                                         </p-inputGroupAddon>
-                                        <p-calendar [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
-                                            [iconDisplay]="'input'" [(ngModel)]="sh.firstPunchEnd"
+                                        <p-calendar dataType="string" [timeOnly]="true" [hourFormat]="12"
+                                            [showIcon]="true" [iconDisplay]="'input'" [(ngModel)]="sh.firstPunchEnd"
                                             inputStyleClass="border-noround-left border-noround-right"
                                             [disabled]="sh.shiftSelection == 0"></p-calendar>
                                         <p-inputGroupAddon>
@@ -464,8 +465,8 @@
                                 <div class="col-12 md:col-6 xl p-fluid">
                                     <label for="float-label" class="font-medium text-900">Second Punch </label>
                                     <p-inputGroup>
-                                        <p-calendar [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
-                                            [(ngModel)]="sh.secondPunchStart" [iconDisplay]="'input'"
+                                        <p-calendar dataType="string" [timeOnly]="true" [hourFormat]="12"
+                                            [showIcon]="true" [(ngModel)]="sh.secondPunchStart" [iconDisplay]="'input'"
                                             inputStyleClass="border-noround-right"
                                             [disabled]="sh.shiftSelection == 0"></p-calendar>
                                         <p-inputGroupAddon>
@@ -476,8 +477,8 @@
                                         <p-inputGroupAddon>
                                             {{'Between'}}
                                         </p-inputGroupAddon>
-                                        <p-calendar [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
-                                            [iconDisplay]="'input'" [(ngModel)]="sh.secondPunchEnd"
+                                        <p-calendar dataType="string" [timeOnly]="true" [hourFormat]="12"
+                                            [showIcon]="true" [iconDisplay]="'input'" [(ngModel)]="sh.secondPunchEnd"
                                             inputStyleClass="border-noround-left border-noround-right"
                                             [disabled]="sh.shiftSelection == 0"></p-calendar>
                                         <p-inputGroupAddon>

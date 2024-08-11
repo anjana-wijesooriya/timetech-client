@@ -113,9 +113,9 @@ export class ShiftComponent implements OnInit {
 
         if (shiftData[key] instanceof Date) {
           const old = shiftData[key];
-          shiftData[key] = this.getFromatedDate(new Date(new Date(new Date(new Date(shiftData[key]).setFullYear(1900)).setMonth(0)).setDate(1)));
+          shiftData[key] = this.formatTime(shiftData[key]);
 
-          console.log(key + ' - ' + ' old:' + old + ' | new:' + shiftData[key])
+          // console.log(key + ' - ' + ' old:' + old + ' | new:' + shiftData[key])
         }
       }
 
@@ -222,6 +222,12 @@ export class ShiftComponent implements OnInit {
     var newdate = new Date().setUTCHours(hours as any);
     newdate = new Date(newdate).setMinutes(mins as any);
     return `1900-01-01T${hours}:${mins}:00.000`;
+  }
+
+  formatTime(date: Date) {
+    const hours = this.datepipe.transform(date, 'hh', '+0300', 'en-US');
+    const mins = this.datepipe.transform(date, 'mm', '+0300', 'en-US');
+    return `${hours}:${mins}`;
   }
 
   getFromatedDate(date: Date) {

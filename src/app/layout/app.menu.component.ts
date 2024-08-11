@@ -9,6 +9,7 @@ import { IChildItem, IMenuItem } from '../context/api/module/menu-item.model';
 import { MenuIconsEnum } from '../context/shared/enum/menu-icons';
 import { BaseService } from '../context/service/base.service';
 import { MenuItem } from 'primeng/api';
+import { map } from 'rxjs';
 
 @Component({
     selector: 'app-menu',
@@ -22,6 +23,7 @@ export class AppMenuComponent implements OnInit {
     menuItems: IMenuItem[] = [];
     items: MenuItem[] = [];
     isLoading: boolean = false;
+    baseModules: any;
 
     constructor(public layoutService: LayoutService, private moduleService: ModuleService,
         public navigationService: NavigationService, private router: Router,
@@ -176,7 +178,8 @@ export class AppMenuComponent implements OnInit {
                 ]
             }
         ];
-        this.getMenuItemsByBaseMenu()
+        this.getBaseModules()
+        this.getMenuItemsByBaseMenu(2)
         this.getMenuItems();
 
         this.items = [
@@ -242,12 +245,32 @@ export class AppMenuComponent implements OnInit {
                 url: 'http://angular.io'
             },
         ];
+
+        this.getBaseModules();
     }
 
-    getMenuItemsByBaseMenu() {
+    getBaseModules() {
+        this.baseModules = this.moduleService.getBaseModules();
+        this.items = this.baseModules.map(a => {
+
+            return {
+                label: a.name,
+                tooltipOptions: {
+                    tooltipLabel: a.name
+                },
+                icon: 'ic ' + a.moduleIcon,
+                command: () => {
+                    this.getMenuItemsByBaseMenu(a.id)
+                }
+            }
+
+        })
+    }
+
+    getMenuItemsByBaseMenu(baseModuleId: number = 2) {
         this.isLoading = true;
         const userDetails = this.baseService.userDetails$.getValue();
-        this.moduleService.getModules(userDetails.id, 2, 'en').subscribe(response => {
+        this.moduleService.getModules(userDetails.id, baseModuleId, 'en').subscribe(response => {
             // this.subModules = response;
             // this.groupBy(response, 'groupName')
             this.isLoading = false;
@@ -271,8 +294,8 @@ export class AppMenuComponent implements OnInit {
                 "btnDisplay": "Reasons",
                 "groupName": "Time Attendance"
             };
-            response.push(attendanceMenu);
-            response.push(reasonsMenu);
+            // response.push(attendanceMenu);
+            // response.push(reasonsMenu);
             this.moduleService.setActiveModules(response);
             localStorage.setItem('Personal', JSON.stringify(response));
         })
