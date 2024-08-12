@@ -42,11 +42,13 @@ export class AppComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         setTimeout(() => {
           window.HSStaticMethods.autoInit();
-        }, 100);
+        }, 200);
       }
     });
 
     window.Alpine = Alpine;
+
+    window.HSStaticMethods.autoInit();
 
     initTWE({ Ripple });
 

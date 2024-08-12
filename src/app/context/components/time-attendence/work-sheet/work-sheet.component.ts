@@ -36,6 +36,8 @@ export class WorkSheetComponent implements OnInit {
   first: number = 0;
   empCode: string = "";
   empName: string = "";
+  shifts: any[];
+  workRules: import("d:/Time Tech V2/timetech-client/src/app/context/api/company/employee-support-data.model").WorkRuleModel[];
 
   constructor(private worksheetService: WorksheetService, private sharedService: SharedService, private breadcrumbState: BreadcrumbStateService, private companyService: CompanyService,
     private employeeService: EmployeeService, private alert: AlertService, public baseService: BaseService, private confirmationService: ConfirmationService) { }
@@ -44,6 +46,8 @@ export class WorkSheetComponent implements OnInit {
   ngOnInit(): void {
     this.getCompanies();
     this.initBreadcrumbs();
+    this.getShifts(this.baseService.userDetails$.getValue().companyId);
+    this.getWorkRules(this.baseService.userDetails$.getValue().companyId);
   }
 
   initBreadcrumbs() {
@@ -66,7 +70,6 @@ export class WorkSheetComponent implements OnInit {
           // this.onChangeCompany(this.selectedComapny);
           // this.getEmployees();
           this.getDepartments();
-          // this.onGetTableEntries();
           this.getEmployees();
           this.getResons();
           this.isLoading = false;
@@ -74,8 +77,29 @@ export class WorkSheetComponent implements OnInit {
       })
   }
 
+  getShifts(companyId = 0) {
+    this.isLoading = true;
+    let filters = [];
+    filters.push({ "key": "CompId", "value": companyId.toString() });
+    filters.push({ "key": "DeptId", "value": "0" });
+    this.sharedService.getMastersData(4, filters, false).subscribe(res => {
+      this.isLoading = false;
+      this.shifts = res as any[];
+    })
+  }
+
+  getWorkRules(companyId = 0) {
+    this.isLoading = true;
+    this.employeeService.getWorkRules(companyId).subscribe(res => {
+      this.workRules = res;
+      this.isLoading = false;
+    })
+  }
+
   onChangeCompany() {
     this.getDepartments();
+    this.getShifts(this.selectedCompany.compId);
+    this.getWorkRules(this.selectedCompany.compId);
   }
 
   getEmployees() {

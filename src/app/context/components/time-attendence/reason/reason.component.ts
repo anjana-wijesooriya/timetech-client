@@ -187,7 +187,7 @@ export class ReasonComponent implements OnInit, ICommonActions {
         type: 'color',
         className: 'field py-2',
         props: {
-          label: 'Choose Color Scheme',
+          label: 'Color',
           description: 'Descriotion',
           required: false,
           styleClass: 'flex w-full align-items-center justify-content-between py-2 gap-2',

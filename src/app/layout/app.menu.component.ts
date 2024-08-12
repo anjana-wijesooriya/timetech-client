@@ -24,6 +24,7 @@ export class AppMenuComponent implements OnInit {
     items: MenuItem[] = [];
     isLoading: boolean = false;
     baseModules: any;
+    selectedMenuName: string = "Personal Menu";
 
     constructor(public layoutService: LayoutService, private moduleService: ModuleService,
         public navigationService: NavigationService, private router: Router,
@@ -260,6 +261,7 @@ export class AppMenuComponent implements OnInit {
                 },
                 icon: 'ic ' + a.moduleIcon,
                 command: () => {
+                    this.selectedMenuName = a.name + ' Menu'
                     this.getMenuItemsByBaseMenu(a.id)
                 }
             }

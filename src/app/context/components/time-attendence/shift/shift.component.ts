@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationService } from 'primeng/api';
 import { CompanyModel } from 'src/app/context/api/company/company.model';
-import { IShift, ShiftModel } from 'src/app/context/api/time-attendance/shift.model';
+import { IShift, ShiftModel, ShiftRequestModel } from 'src/app/context/api/time-attendance/shift.model';
 import { AlertService } from 'src/app/context/service/alert.service';
 import { BaseService } from 'src/app/context/service/base.service';
 import { CompanyService } from 'src/app/context/service/company.service';
@@ -43,8 +43,6 @@ export class ShiftComponent implements OnInit {
   ngOnInit(): void {
     this.initBreadcrumbs()
     this.getCompanies();
-    this.getTableEntries();
-    this.getShiftModes();
     this.bindForm();
     this.changeMode('list')
   }
@@ -71,7 +69,7 @@ export class ShiftComponent implements OnInit {
   }
 
   getShiftModes() {
-    const compId = this.baseService.userDetails$.getValue().companyId;
+    const compId = this.selectedCompany.compId;
     this.sharedService.getMastersData(5, [{ key: 'CompId', value: compId.toString() }], false).subscribe(res => {
       this.shiftModes = res;
     })
@@ -107,22 +105,27 @@ export class ShiftComponent implements OnInit {
       this.sh = { ...this.sh, ...this.formgroup.value }
       this.isSaving = true;
 
-      const shiftData: any = this.sh;
+      const shiftData: ShiftRequestModel = this.sh as ShiftRequestModel;
 
       for (let key in shiftData) {
 
-        if (shiftData[key] instanceof Date) {
-          const old = shiftData[key];
-          shiftData[key] = this.formatTime(shiftData[key]);
+        if (this.sh[key] instanceof Date) {
+          const old = this.sh[key];
+          console.log(this.sh);
+          shiftData[key] = shiftData[key].toLocaleTimeString();
 
           // console.log(key + ' - ' + ' old:' + old + ' | new:' + shiftData[key])
         }
       }
+      shiftData.ot3inTime = new Date();
+      shiftData.ot3outTime = new Date();
+      shiftData.lastUpdateDt = new Date();
+      shiftData.createdDt = new Date();
 
       this.shiftService.saveOrUpdate(shiftData).subscribe(res => {
         this.alert.success('Record updated successfully.')
         this.changeMode('view');
-        this.getTableEntries();
+        this.getTableEntries(true);
         this.isSaving = false;
       },
         error => {
@@ -149,21 +152,27 @@ export class ShiftComponent implements OnInit {
             return element;
           });
           this.selectedCompany = res.find(a => a.compId == this.baseService.userDetails$.getValue().companyId);
-          // this.onChangeCompany(this.selectedComapny);
-          // this.getEmployees();
+          this.getTableEntries();
+          this.getShiftModes();
         }
       })
   }
 
-  getTableEntries() {
+  getTableEntries(isSaved = false) {
     this.isLoading = true;
+    var compId = this.selectedCompany.compId
     let filters = [];
-    filters.push({ "key": "CompId", "value": "1" });
+    filters.push({ "key": "CompId", "value": compId.toString() });
     filters.push({ "key": "DeptId", "value": "0" });
     this.sharedService.getMastersData(4, filters, false).subscribe(res => {
       this.isLoading = false;
       this.tableEntries = res as any[];
-      this.sh = res[1] as ShiftModel;
+
+      if (isSaved) {
+        this.sh = res.find(a => a['code'] == this.sh.code) as ShiftModel
+      } else {
+        this.sh = res[1] as ShiftModel;
+      }
     })
   }
 
@@ -205,7 +214,8 @@ export class ShiftComponent implements OnInit {
 
     for (let key in item) {
 
-      if (typeof item[key] === "string" && (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/.test(item[key]) || /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/.test(item[key]) || /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}$/.test(item[key]))) {
+      if (typeof item[key] === "string" && (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/.test(item[key]) || /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/.test(item[key])
+        || /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}$/.test(item[key]) || /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{1}$/.test(item[key]))) {
         item[key] = this.getFromatedDate(new Date(item[key]));
       }
     }

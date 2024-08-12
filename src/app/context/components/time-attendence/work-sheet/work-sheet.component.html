@@ -75,7 +75,7 @@
 
                     </div>
                     <div class="grid grid-cols-2 grid-rows-5 gap-2 mt-3">
-                        <div>
+                        <div class="space-y-2">
                             <p-panel header="In-Out">
                                 <div class="grid grid-cols-2 gap-4 formgrid">
                                     <div class="w-full col-12 md:col-6 p-fluid">
@@ -91,48 +91,162 @@
                                                 [iconDisplay]="'input'" inputStyleClass="border-noround-right"
                                                 disabled="true"></p-calendar>
                                             <p-inputGroupAddon>
-                                                <p-checkbox [binary]="true" pTooltip="Next Day" /></p-inputGroupAddon>
+                                                <p-checkbox [binary]="true" pTooltip="Next Day"
+                                                    disabled="true" /></p-inputGroupAddon>
                                         </p-inputGroup>
                                         <small class="p-error" id="username-help"></small>
                                     </div>
                                     <div class="w-full col-12 md:col-6 p-fluid">
                                         <label for="float-label" class="font-medium text-900">IN</label>
-                                        <!-- <p-calendar [showIcon]="true" [iconDisplay]="'input'" [showTime]="true"
-                                            [timeOnly]="true" ariaLabel="Date"></p-calendar> -->
                                         <div class="relative">
                                             <div
                                                 class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
                                                 <i class="pi pi-clock"></i>
                                             </div>
-                                            <!-- <input pInputText class="w-full" [ngxTimepicker]="picker" />
-                                            <ngx-material-timepicker #picker></ngx-material-timepicker> -->
+                                            <input pInputText class="w-full" [ngxTimepicker]="picker1" />
+                                            <ngx-material-timepicker #picker1></ngx-material-timepicker>
                                         </div>
                                     </div>
                                     <div class="w-full col-12 md:col-6 p-fluid">
                                         <label for="float-label" class="font-medium text-900">Out</label>
-                                        <p-inputGroup>
-                                            <p-calendar [timeOnly]="true" [hourFormat]="12" [showIcon]="true"
-                                                [iconDisplay]="'input'" [icon]="'pi pi-clock'" inputId="icondisplay"
-                                                inputStyleClass="border-noround-right">
-                                                <ng-template pTemplate="inputicon" let-clickCallBack="clickCallBack">
-                                                    <i class="pointer-events-none pi pi-clock"
-                                                        (click)="clickCallBack($event)"></i>
-                                                </ng-template>
-                                            </p-calendar>
-                                            <p-inputGroupAddon>
-                                                <p-checkbox [binary]="true" pTooltip="Next Day" /></p-inputGroupAddon>
-                                        </p-inputGroup>
-                                        <small class="p-error" id="username-help"></small>
+                                        <div class="relative">
+                                            <p-inputGroup>
+                                                <div
+                                                    class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+                                                    <i class="pi pi-clock"></i>
+                                                </div>
+                                                <input pInputText class="w-full" [ngxTimepicker]="picker2" />
+                                                <ngx-material-timepicker #picker2></ngx-material-timepicker>
+                                                <p-inputGroupAddon>
+                                                    <p-checkbox [binary]="true"
+                                                        pTooltip="Next Day" /></p-inputGroupAddon>
+                                            </p-inputGroup>
+
+                                        </div>
                                     </div>
 
                                 </div>
                             </p-panel>
+                            <div class="flex gap-3 card flex-column md:flex-row">
+                                <div class="grid grid-cols-2 gap-4 formgrid">
+                                    <div class="w-full col-12 md:col-6 p-fluid">
+                                        <label for="float-label" class="font-medium text-900">Shift IN</label>
+                                        <p-dropdown [options]="shifts" [(ngModel)]="selectedReason" [checkmark]="true"
+                                            optionLabel="shiftCode" optionValue="code" [showClear]="true"
+                                            placeholder="Select a Shift" />
+                                    </div>
+                                    <div class="w-full col-12 md:col-6 p-fluid">
+                                        <label for="float-label" class="font-medium text-900">Work Rule</label>
+                                        <p-dropdown [options]="workRules" [(ngModel)]="selectedReason"
+                                            [checkmark]="true" optionLabel="name" optionValue="code" [showClear]="true"
+                                            placeholder="Select a Work Rule" />
+                                    </div>
+                                    <div class="w-full col-12 md:col-6 p-fluid">
+                                        <label for="nickname2" class="w-full font-medium text-900">Emp
+                                            Explanation</label>
+                                        <textarea id="address" rows="3" cols="30" pInputTextarea class="w-full"
+                                            name="notes"></textarea>
+                                    </div>
+                                    <div class="w-full col-12 md:col-6 p-fluid">
+                                        <label for="nickname2" class="w-full font-medium text-900">Remarks</label>
+                                        <textarea id="address" rows="3" cols="30" pInputTextarea class="w-full"
+                                            name="notes"></textarea>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div>
                             <p-panel header="Results">
-                                <p>
-                                    Lorem ipsum dolor sit amet...
-                                </p>
+                                <div class="grid grid-cols-3 gap-2 space-y-3 formgrid">
+                                    <div class="w-full col-12 md:col-6 p-fluid">
+                                        <label for="float-label" class="font-medium text-900">IN</label>
+                                        <div class="relative">
+                                            <div
+                                                class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+                                                <i class="pi pi-clock"></i>
+                                            </div>
+                                            <input pInputText class="w-full" [ngxTimepicker]="picker3" />
+                                            <ngx-material-timepicker #picker3></ngx-material-timepicker>
+                                        </div>
+                                    </div>
+                                    <div class="w-full col-12 md:col-6 p-fluid">
+                                        <label for="float-label" class="font-medium text-900">IN</label>
+                                        <div class="relative">
+                                            <div
+                                                class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+                                                <i class="pi pi-clock"></i>
+                                            </div>
+                                            <input pInputText class="w-full" [ngxTimepicker]="picker4" />
+                                            <ngx-material-timepicker #picker4></ngx-material-timepicker>
+                                        </div>
+                                    </div>
+                                    <div class="w-full col-12 md:col-6 p-fluid">
+                                        <label for="float-label" class="font-medium text-900">IN</label>
+                                        <div class="relative">
+                                            <div
+                                                class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+                                                <i class="pi pi-clock"></i>
+                                            </div>
+                                            <input pInputText class="w-full" [ngxTimepicker]="picker5" />
+                                            <ngx-material-timepicker #picker5></ngx-material-timepicker>
+                                        </div>
+                                    </div>
+                                    <div class="w-full col-12 md:col-6 p-fluid">
+                                        <label for="float-label" class="font-medium text-900">IN</label>
+                                        <div class="relative">
+                                            <div
+                                                class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+                                                <i class="pi pi-clock"></i>
+                                            </div>
+                                            <input pInputText class="w-full" [ngxTimepicker]="picker6" />
+                                            <ngx-material-timepicker #picker6></ngx-material-timepicker>
+                                        </div>
+                                    </div>
+                                    <div class="w-full col-12 md:col-6 p-fluid">
+                                        <label for="float-label" class="font-medium text-900">IN</label>
+                                        <div class="relative">
+                                            <div
+                                                class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+                                                <i class="pi pi-clock"></i>
+                                            </div>
+                                            <input pInputText class="w-full" [ngxTimepicker]="picker7" />
+                                            <ngx-material-timepicker #picker7></ngx-material-timepicker>
+                                        </div>
+                                    </div>
+                                    <div class="w-full col-12 md:col-6 p-fluid">
+                                        <label for="float-label" class="font-medium text-900">IN</label>
+                                        <div class="relative">
+                                            <div
+                                                class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+                                                <i class="pi pi-clock"></i>
+                                            </div>
+                                            <input pInputText class="w-full" [ngxTimepicker]="picker8" />
+                                            <ngx-material-timepicker #picker8></ngx-material-timepicker>
+                                        </div>
+                                    </div>
+                                    <div class="w-full col-12 md:col-6 p-fluid">
+                                        <label for="float-label" class="font-medium text-900">IN</label>
+                                        <div class="relative">
+                                            <div
+                                                class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+                                                <i class="pi pi-clock"></i>
+                                            </div>
+                                            <input pInputText class="w-full" [ngxTimepicker]="picker9" />
+                                            <ngx-material-timepicker #picker9></ngx-material-timepicker>
+                                        </div>
+                                    </div>
+                                    <div class="w-full col-12 md:col-6 p-fluid">
+                                        <label for="float-label" class="font-medium text-900">IN</label>
+                                        <div class="relative">
+                                            <div
+                                                class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+                                                <i class="pi pi-clock"></i>
+                                            </div>
+                                            <input pInputText class="w-full" [ngxTimepicker]="picker10" />
+                                            <ngx-material-timepicker #picker10></ngx-material-timepicker>
+                                        </div>
+                                    </div>
+                                </div>
                             </p-panel>
                         </div>
                     </div>

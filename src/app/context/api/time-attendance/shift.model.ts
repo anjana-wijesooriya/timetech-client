@@ -205,3 +205,107 @@ export class ShiftModel implements IShift {
     isSecurityShift: boolean;
 
 }
+
+export class ShiftRequestModel {
+    compId: number = 0;
+    code: number;
+    deptId: number = 0;
+    shiftCode: string = '';
+    name: string = '';
+    otherCode: string = '';
+    shiftType: null;
+    nhinTime: any
+    nhoutTime: any
+    nhoutNextDay: boolean;
+    nh: any
+    resetNh: boolean;
+    ot1: null;
+    ot1inTime: any
+    ot1outTime: any
+    ot1outNextDay: boolean;
+    ot2: null;
+    ot2inTime: any
+    ot2outTime: any
+    ot2outNextDay: boolean;
+    ot3: null;
+    ot3inTime: any
+    ot3outTime: any
+    ot3outNextDay: boolean;
+    breakHrs: any
+    breakSwipe: boolean;
+    fixedBreak: boolean;
+    earlyInTime: any
+    earlyPrevDay: boolean;
+    earlyOutTime: any
+    earlyPrevDayOutTime: boolean;
+    earlyOt: number;
+    earlyIntime2: any
+    earlyPrevDayIn2: boolean;
+    earlyOutTime2: any
+    earlyPrevDayOut2: boolean;
+    earlyOt2: number;
+    isRosterShift: boolean;
+    minOt: any
+    roundOt: any
+    swipGo: boolean;
+    minSwipe: number = 1;
+    shiftStartRange: any
+    shiftStartRangePrevDay: boolean;
+    shiftEndRange: any
+    shiftEndRangeNexDay: boolean;
+    fullNhrs: null;
+    earliestAllowed: any
+    latestAllowed: any
+    startPaying: any
+    roundingInterval: any
+    createdUser: number;
+    createdDt: any
+    lastUpdatedUser: number;
+    lastUpdateDt: any
+    active: boolean;
+    deleted: boolean;
+    shiftSelection: number;
+    firstPunchStart: any
+    firstPunchEnd: any
+    firstPunchNextDay: boolean;
+    secondPunchStart: any
+    secondPunchEnd: any
+    secondPunchNext: boolean;
+    isSplitShift: boolean;
+    breakIn: any
+    breakInnextDay: boolean;
+    breakOut: any
+    breakOutNextDay: boolean;
+    breakOt: number;
+    legraceTobeAdjustedInexit: boolean;
+    offDay: boolean;
+    firstPunchLastPunch: number = 0;
+    ot1innextDay: boolean;
+    ot2innextDay: boolean;
+    ot3innextDay: boolean;
+    eenextDay: number;
+    alternativeOffDay: boolean;
+    alternateWorkDayShift: string = '';
+    secondPunchStartNextDay: boolean;
+    shift2Intime: Date = new Date("1900-01-01");
+    shift2Outtime: Date = new Date("1900-01-01");
+    shift3Intime: Date = new Date("1900-01-01");
+    shift3Outtime: Date = new Date("1900-01-01");
+    shift3OutNextDay: boolean;
+    compulsoryOt: any
+    explanation: string = '';
+    missingHrRequiered: boolean;
+    leEeRequiered: boolean;
+    isOteligible: boolean;
+    shiftPeriod: number;
+    ottype: string = '';
+    specialOthrs: Date = new Date("1900-01-01");;
+    specialOt: number;
+    splShift: string = '';
+    approvalNeeded: boolean;
+    shiftMode: string;
+    holiday: boolean;
+    timeAdjustment: number;
+    isSecurityShift: boolean;
+
+}
