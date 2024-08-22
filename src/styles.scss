@@ -70,17 +70,19 @@
     --p-text-hover-muted-color: var(--p-surface-300);
 }
 
-@layer tw-base, tw-components, tw-utilities, primeng, tw-variants;
+@layer tw-base, tw-components, primeng, tw-variants, tw-utilities;
 
 // Please take note of the order in which these are imported
 @import "tailwindcss/base.css" layer(tw-base);
 @import "tailwindcss/components.css" layer(tw-components);
-@import "tailwindcss/utilities.css" layer(tw-utilities);
+@import 'tailwindcss/utilities' layer(tw-components);
 @import "tailwindcss/variants.css" layer(tw-variants);
 
-@import "../node_modules/primeng/resources/primeng.min.css";
+@import "../node_modules/primeng/resources/primeng.min.css" layer(primeng);
 @import "../node_modules/primeflex/primeflex.scss";
 @import "primeicons/primeicons";
+
+
 
 
 

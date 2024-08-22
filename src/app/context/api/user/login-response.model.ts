@@ -11,5 +11,6 @@ export class LoginResponseModel {
     token: string;
     isValidLogin: boolean;
     errorMsg: string;
+    profileId: number;
     baseModules: BaseModuleModel[];
 }

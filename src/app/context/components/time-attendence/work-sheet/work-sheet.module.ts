@@ -45,8 +45,9 @@ import { InputGroupModule } from 'primeng/inputgroup';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { PanelModule } from 'primeng/panel';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { FileUploadModule } from 'primeng/fileupload';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
-
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 @NgModule({
   declarations: [WorkSheetComponent],
@@ -54,7 +55,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     CommonModule,
     WorkSheetRoutingModule,
     FormsModule,
-    CalendarModule,
+
     ReactiveFormsModule,
     // Dynamic
     FormlyPrimeNGModule,
@@ -73,16 +74,17 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     FormlyDatepickerModule,
     FormlyCheckboxModule,
     CustomFormControlsModule,
-    PanelModule,
+    ScrollerModule,
     ToastModule,
     InputGroupModule,
-    ScrollerModule,
     ListboxModule,
+    FileUploadModule,
     MultiSelectModule,
     TableModule,
     TabViewModule,
     IconFieldModule,
     InputIconModule,
+    SelectButtonModule,
     InputTextModule,
     ButtonModule,
     TagModule,
@@ -99,6 +101,8 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     TreeModule,
     OverlayPanelModule,
     CheckboxModule,
+    PanelModule,
+    CalendarModule,
     TreeSelectModule,
     DialogModule,
     InputGroupModule,

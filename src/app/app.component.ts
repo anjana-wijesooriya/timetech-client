@@ -41,7 +41,9 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         setTimeout(() => {
-          window.HSStaticMethods.autoInit();
+          if (window.HSStaticMethods) {
+            window.HSStaticMethods.autoInit();
+          }
         }, 200);
       }
     });

@@ -8,6 +8,7 @@ module.exports = {
     './src/**/*.{html,ts}',
     "./node_modules/flowbite/**/*.js",
     './node_modules/preline/dist/*.js',
+    './node_modules/preline/preline.js',
     "./node_modules/tw-elements/js/**/*.js",
   ],
   darkMode: 'class', // or 'media' or 'class'
