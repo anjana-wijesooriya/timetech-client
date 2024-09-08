@@ -29,12 +29,14 @@ import { TabViewModule } from 'primeng/tabview';
 import { TagModule } from 'primeng/tag';
 import { TooltipModule } from 'primeng/tooltip';
 import { FileUploadModule } from 'primeng/fileupload';
+import { TreeSelectCustom } from './tree-select.component';
+import { TreeSelectModule } from 'primeng/treeselect';
 
 const components = [
   InputSwitchCustom,
   InputColorCustom,
   InputFieldWrapper,
-
+  TreeSelectCustom,
 ]
 
 @NgModule({
@@ -53,7 +55,8 @@ const components = [
       ],
       types: [
         { name: 'switch', component: InputSwitchCustom },
-        { name: 'color', component: InputColorCustom }
+        { name: 'color', component: InputColorCustom },
+        { name: 'treeselect', component: TreeSelectCustom },
       ],
       wrappers: [
         { name: 'panel', component: InputFieldWrapper },
@@ -73,6 +76,7 @@ const components = [
     TooltipModule,
     ColorPickerModule,
     FileUploadModule,
+    TreeSelectModule,
   ]
 })
 export class CustomFormControlsModule { }

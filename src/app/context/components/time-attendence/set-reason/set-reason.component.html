@@ -1,1 +1,209 @@
-<p>set-reason works!</p>
+<div class="grid support-wrapper woraksheet-wrapper">
+    <div class="flex flex-wrap w-full p-2 mb-3 justify-content-center surface-ground">
+        <p-confirmDialog></p-confirmDialog>
+        <p-toast></p-toast>
+
+        <div class="flex flex-wrap items-center justify-center w-full h-full">
+            <div
+                class="block w-full p-3 m-0 rounded-lg bg-gray-2 card surface-card page-content-wrapper shadow-secondary-1 dark:bg-surface-dark dark:text-white text-surface animate-fade-right">
+                <div class="flex w-full pb-3 mb-3 card-header border-bottom-1 surface-border justify-content-between">
+                    <div class="flex flex-wrap justify-between gap-3 align-items-center">
+                        <!-- <p-button icon="pi pi-arrow-left text-xl" [rounded]="true" [outlined]="true" severity="primary"
+                            (onClick)="goBack()" /> -->
+                        <h5 class="m-0">Set Reason</h5>
+                    </div>
+                    <div class="flex flex-wrap">
+
+                    </div>
+                </div>
+                <div class="flex w-full">
+                    <p-table #supportTable [rowHover]="true" [value]="tableEntries" [scrollable]="true"
+                        scrollHeight="calc(100vh - 25rem)" [rows]="25" [showCurrentPageReport]="true"
+                        [rowsPerPageOptions]="[25, 50, 100]" [loading]="isLoading" dataKey="code"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        [globalFilterFields]="['empName', 'empCd', 'deptCd', 'reasonCD']" [paginator]="true"
+                        styleClass="p-datatable-gridlines p-datatable-sm" tableStyleClass="table-layout-fixed"
+                        [resizableColumns]="true" columnResizeMode="fit" [autoLayout]="true" class="border-round"
+                        responsive="true">
+                        <ng-template pTemplate="caption">
+                            <div class="flex flex-wrap justify-content-between">
+                                <div class="flex flex-row gap-2 align-items-center justify-content-start">
+                                    <p-floatLabel>
+                                        <p-dropdown [options]="reasons" [showClear]="true"
+                                            styleClass="w-15rem w-min-12rem" placeholder="Filter by Reason"
+                                            optionValue="code" optionLabel="reasonName"
+                                            (onChange)="supportTable.filterGlobal($event.value, 'equals')">
+                                        </p-dropdown>
+                                        <label for="float-label">Search by Reason</label>
+                                    </p-floatLabel>
+                                    <div class="flex flex-wrap">
+                                        <p-floatLabel>
+                                            <input type="text" pInputText placeholder="" #filter
+                                                (input)="supportTable.filterGlobal($event.target.value, 'contains')" />
+                                            <label for="float-label">Search by Name, Code</label>
+                                        </p-floatLabel>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap gap-2">
+                                    <button pButton label="New Reason" class="p-button-outlined" icon="pi pi-plus"
+                                        (click)="bindForm(undefined)"></button>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="width:3rem !important;">
+                                    <div class="flex justify-content-center align-items-center">
+                                        #
+                                    </div>
+                                </th>
+                                <th pSortableColumn="code">
+                                    <div class="flex justify-content-center align-items-center">
+                                        Employee
+                                    </div>
+                                </th>
+                                <th pSortableColumn="code">
+                                    <div class="flex justify-content-center align-items-center">
+                                        Dept. Code
+                                    </div>
+                                </th>
+                                <th pSortableColumn="code">
+                                    <div class="flex justify-content-center align-items-center">
+                                        Reason
+                                    </div>
+                                </th>
+                                <th pSortableColumn="code">
+                                    <div class="flex justify-content-center align-items-center">
+                                        From
+                                    </div>
+                                </th>
+                                <th pSortableColumn="code">
+                                    <div class="flex justify-content-center align-items-center">
+                                        To
+                                    </div>
+                                </th>
+                                <th pSortableColumn="code">
+                                    <div class="flex justify-content-center align-items-center">
+                                        Created By
+                                    </div>
+                                </th>
+                                <th pSortableColumn="code" style="width:5rem !important;">
+                                    <div class="flex justify-content-center align-items-center">
+                                        Delete
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowIndex="rowIndex" let-data>
+                            <tr class="">
+                                <td class="text-center text-900">{{rowIndex + 1}}</td>
+                                <td>
+                                    <span
+                                        class="inline-flex items-center gap-1.5 py-1 px-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-800 dark:bg-neutral-900 dark:text-neutral-200">
+                                        {{ data.empCd }}
+                                    </span>
+                                    <span class="block font-semibold text-gray-800 dark:text-neutral-200">
+                                        {{ data.empName }}
+                                    </span>
+
+                                </td>
+                                <td class="text-center"> {{ data.deptCd }}</td>
+                                <td class="text-center">
+                                    <span [style]="'color: ' + data.color + ''"
+                                        class="inline-flex items-center gap-1.5 py-1 px-2 rounded-lg text-md font-medium shadow-3 bg-gray-100 text-gray-800 dark:bg-neutral-900 dark:text-neutral-200">
+                                        {{ data.reasonName }}
+                                    </span>
+
+                                </td>
+                                <td class="text-center">
+                                    {{ data.fromDt }}
+                                    <!-- <span class="block text-gray-800 dark:text-white">
+                                        {{ data.createdUserName }}
+                                    </span>
+
+                                    <span class="text-sm text-gray-500 dark:text-neutral-500">
+                                        {{ data.fromDt }}
+                                    </span> -->
+                                </td>
+                                <td class="text-center">
+                                    {{ data.toDt }}
+                                </td>
+                                <td class="text-center">
+                                    <span class="block text-gray-800 dark:text-white">
+                                        {{ data.createdUserName }}
+                                    </span>
+
+                                    <span class="text-sm text-gray-500 dark:text-neutral-500">
+                                        {{ data.fromDt }}
+                                    </span>
+
+                                </td>
+                                <td class="text-center text-900">
+                                    <button pButton pRipple icon="icon-trash-2" pTooltip="View"
+                                        class="mr-2 p-button-rounded p-button-danger p-button-outlined"
+                                        (click)="deleteConfirm($event, data)"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <p-sidebar [(visible)]="showAddPanel" position="right" styleClass="w-25rem">
+        <ng-template pTemplate="header">
+            <div class="text-xl font-bold">
+                Set Reason Info
+            </div>
+        </ng-template>
+        <ng-template pTemplate="content">
+            <form [formGroup]="form">
+                <formly-form [model]="model" [fields]="fields" [options]="formOptions" [form]="form"></formly-form>
+            </form>
+            <div class="w-full field p-fluid">
+                <label for="example12">Department</label>
+                <p-treeSelect class="w-full" styleClass="w-full" containerStyleClass="w-full" [options]="departmentTree"
+                    placeholder="Select a Department" [(ngModel)]="selectedDepartment"
+                    (onNodeSelect)="onChangeDepartment(event)">
+                </p-treeSelect>
+
+            </div>
+            <div class="w-full field p-fluid">
+                <label for="example12">Employee</label>
+                <p-dropdown [options]="employees" [(ngModel)]="selectedEmployee" placeholder="Select an Employee"
+                    optionLabel="empName" optionValue="empID" [showClear]="false" styleClass="w-full" filter="true"
+                    [loading]="isLoadingEmployees">
+                </p-dropdown>
+
+            </div>
+            <div class="w-full field p-fluid">
+                <label for="example12">Reason</label>
+                <p-dropdown [options]="reasons" [(ngModel)]="selectedReason" placeholder="Select a Reason"
+                    optionLabel="reasonName" optionValue="code" [showClear]="false" styleClass="w-full" checkmark="true"
+                    [appendTo]="'body'">
+                </p-dropdown>
+
+            </div>
+            <div class="w-full field p-fluid">
+                <label for="example12">Remarks</label>
+                <textarea id="address" rows="3" cols="30" pInputTextarea class="w-full" [(ngModel)]="remarks"
+                    name="notes"></textarea>
+
+            </div>
+        </ng-template>
+
+
+
+        <ng-template pTemplate="footer">
+            <div class="flex gap-2 justify-content-end">
+                <p-button type="submit" label="Update" severity="primary" [outlined]="false" [loading]="isSaving"
+                    icon="pi pi-check" class="ml-auto" (onClick)="onSubmit(false)"></p-button>
+                <p-button label="Cancel" severity="primary" [outlined]="true" text="true" icon="pi pi-times"
+                    (onClick)="showAddPanel = !showAddPanel"></p-button>
+            </div>
+        </ng-template>
+    </p-sidebar>
+</div>

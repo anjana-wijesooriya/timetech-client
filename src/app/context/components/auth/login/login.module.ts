@@ -10,6 +10,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { AuthService } from 'src/app/context/service/auth.service';
 import { MessagesModule } from 'primeng/messages';
 import { MessageService } from 'primeng/api';
+import { NgxParticlesModule } from '@tsparticles/angular';
 
 @NgModule({
     imports: [
@@ -21,7 +22,8 @@ import { MessageService } from 'primeng/api';
         FormsModule,
         ReactiveFormsModule,
         PasswordModule,
-        MessagesModule
+        MessagesModule,
+        NgxParticlesModule
     ],
     declarations: [LoginComponent],
     providers: [

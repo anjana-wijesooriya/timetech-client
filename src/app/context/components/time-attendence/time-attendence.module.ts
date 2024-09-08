@@ -11,7 +11,6 @@ import { SetReasonComponent } from './set-reason/set-reason.component';
 
 @NgModule({
   declarations: [
-    SetReasonComponent
   ],
   imports: [
     CommonModule,

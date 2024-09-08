@@ -5,6 +5,7 @@ const routes: Routes = [
   { path: 'shift', loadChildren: () => import('./shift/shift.module').then(m => m.ShiftModule) },
   { path: 'reason', loadChildren: () => import('./reason/reason.module').then(m => m.ReasonModule) },
   { path: 'daily-worksheet', loadChildren: () => import('./work-sheet/work-sheet.module').then(m => m.WorkSheetModule) },
+  { path: 'set-reason', loadChildren: () => import('./set-reason/set-reason.module').then(m => m.SetReasonModule) },
 ];
 
 @NgModule({

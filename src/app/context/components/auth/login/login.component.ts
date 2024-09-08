@@ -8,6 +8,15 @@ import { LocalStorage } from 'src/app/context/shared/enum/local-storage.enum';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { BaseService } from 'src/app/context/service/base.service';
 import { StateService } from 'src/app/context/service/sharedstate/state.service';
+import {
+    MoveDirection,
+    ClickEvent,
+    HoverEvent,
+    OutMode,
+    Container,
+} from "@tsparticles/engine";
+import { NgParticlesService } from "@tsparticles/angular";
+import { loadSlim } from "@tsparticles/slim";
 
 @Component({
     selector: 'app-login',
@@ -31,6 +40,7 @@ export class LoginComponent {
 
     constructor(private router: Router, private fb: FormBuilder, public layoutService: LayoutService,
         private authService: AuthService, private msgService: MessageService, private baseService: BaseService,
+        private ngParticlesService: NgParticlesService
     ) {
 
     }
@@ -40,6 +50,20 @@ export class LoginComponent {
             username: [null, Validators.compose([Validators.required])],
             password: [null, Validators.compose([Validators.required, Validators.minLength(3)])]
         });
+
+        this.ngParticlesService.init(async (engine) => {
+            console.log(engine);
+
+            // Starting from 1.19.0 you can add custom presets or shape here, using the current tsParticles instance (main)
+            // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
+            // starting from v2 you can add only the features you need reducing the bundle size
+            //await loadFull(engine);
+            await loadSlim(engine);
+        });
+    }
+
+    particlesLoaded(container: Container): void {
+        console.log(container);
     }
 
     login() {
@@ -81,4 +105,110 @@ export class LoginComponent {
         return this.signinForm.get('password')!;
     }
 
+    id = "tsparticles";
+    particlesOptions = {
+        particles: {
+            number: {
+                value: 80,
+                density: {
+                    enable: true,
+                    value_area: 700
+                }
+            },
+            color: {
+                value: "#ffffff"
+            },
+            shape: {
+                type: "circle",
+                stroke: {
+                    width: 0,
+                    color: "#000000"
+                },
+                polygon: {
+                    nb_sides: 5
+                }
+            },
+            opacity: {
+                value: 0.5,
+                random: false,
+                anim: {
+                    enable: false,
+                    speed: 1,
+                    opacity_min: 0.1,
+                    sync: false
+                }
+            },
+            size: {
+                value: 3,
+                random: true,
+                anim: {
+                    enable: false,
+                    speed: 40,
+                    size_min: 0.1,
+                    sync: false
+                }
+            },
+            line_linked: {
+                enable: true,
+                distance: 150,
+                color: "#ffffff",
+                opacity: 0.4,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 6,
+                direction: "none",
+                random: false,
+                straight: false,
+                out_mode: "out",
+                bounce: false,
+                attract: {
+                    enable: false,
+                    rotateX: 600,
+                    rotateY: 1200
+                }
+            }
+        },
+        interactivity: {
+            detect_on: "canvas",
+            events: {
+                onhover: {
+                    enable: true,
+                    mode: "grab"
+                },
+                onclick: {
+                    enable: true,
+                    mode: "push"
+                },
+                resize: true
+            },
+            modes: {
+                grab: {
+                    distance: 140,
+                    line_linked: {
+                        opacity: 1
+                    }
+                },
+                bubble: {
+                    distance: 400,
+                    size: 40,
+                    duration: 2,
+                    opacity: 8,
+                    speed: 3
+                },
+                repulse: {
+                    distance: 200,
+                    duration: 0.4
+                },
+                push: {
+                    particles_nb: 4
+                },
+                remove: {
+                    particles_nb: 2
+                }
+            }
+        },
+        retina_detect: true
+    }
 }
