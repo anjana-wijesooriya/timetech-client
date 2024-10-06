@@ -1,0 +1,365 @@
+<div class="duty-roster">
+    <div class="flex gap-3 p-4 rounded-lg flex-column glass-effect effect-3d glassmorphism">
+        <div class="flex items-center justify-between mb-1">
+            <h1 class="m-0 text-2xl font-semibold">Duty Roster</h1>
+        </div>
+    </div>
+    <div
+        class="w-full h-full p-4  border border-gray-100 rounded-md  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 bg-[#222E3A]/[6%]  glass-card glass glass-xl m-0">
+    
+        <div class="flex flex-wrap w-full gap-3">
+            <div class="flex-1 field p-fluid "></div>
+                    <label class="flex w-full text-gray-700">Company</label>
+                    <p-dropdown [options]="companies" [showClear]="false" placeholder="Filter by Company"  optionLabel="name" appendTo="body"
+                        class="" (onChange)="getDutyRoster()" inputStyleClass="input-element p-inputtext-lg border-round  text-md"
+                        [(ngModel)]="selectedCompany" optionValue="compId" styleClass="flex w-full input-component glass-dropdown p-inputtext-lg">
+                       
+                    </p-dropdown>
+                </div>
+        </div>
+    
+    <div class="mb-4">
+        <label for="company" class="block mb-2 font-bold text-gray-700">Company</label>
+        <select id="company" class="block w-full p-2 border border-gray-300 rounded">
+            <option>TimeTech Bahrain Company</option>
+        </select>
+    </div>
+    <div class="mb-4">
+        <label for="status" class="block mb-2 font-bold text-gray-700">Status</label>
+        <select id="status" class="block w-full p-2 border border-gray-300 rounded">
+            <option>Active</option>
+        </select>
+    </div>
+    <button class="px-4 py-2 text-white bg-gray-500 rounded">View</button>
+<div class="flex w-full">
+    <p-table #supportTable [rowHover]="true" [value]="tableEntries" [scrollable]="true"
+                        scrollHeight="calc(100vh - 25rem)" [rows]="25" [showCurrentPageReport]="true"
+                        [rowsPerPageOptions]="[25, 50, 100]" [loading]="isLoading" dataKey="code"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        [globalFilterFields]="['empName', 'empCd', 'deptCd', 'reasonCD']" [paginator]="true"
+                        styleClass="p-datatable-gridlines p-datatable-sm" tableStyleClass="table-layout-fixed"
+                        [resizableColumns]="true" columnResizeMode="fit" [autoLayout]="true" class="border-round"
+                        responsive="true">
+                        <ng-template pTemplate="caption">
+                            <div class="flex flex-wrap justify-content-between">
+                                <div class="flex flex-row gap-2 align-items-center justify-content-start">
+                                    <p-floatLabel>
+                                        <p-dropdown [options]="reasons" [showClear]="true"
+                                            styleClass="w-15rem w-min-12rem" placeholder="Filter by Reason"
+                                            optionValue="code" optionLabel="reasonName"
+                                            (onChange)="supportTable.filterGlobal($event.value, 'equals')">
+                                        </p-dropdown>
+                                        <label for="float-label">Search by Reason</label>
+                                    </p-floatLabel>
+                                    <div class="flex flex-wrap">
+                                        <p-floatLabel>
+                                            <input type="text" pInputText placeholder="" #filter
+                                                (input)="supportTable.filterGlobal($event.target.value, 'contains')" />
+                                            <label for="float-label">Search by Name, Code</label>
+                                        </p-floatLabel>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap gap-2">
+                                    <button pButton label="New Reason" class="p-button-outlined" icon="pi pi-plus"
+                                        (click)="bindForm(undefined)"></button>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="width:3rem !important;">
+                                    <div class="flex justify-content-center align-items-center">
+                                        #
+                                    </div>
+                                </th>
+                                <th pSortableColumn="code">
+                                    <div class="flex justify-content-center align-items-center">
+                                        Employee
+                                    </div>
+                                </th>
+                                <th pSortableColumn="code">
+                                    <div class="flex justify-content-center align-items-center">
+                                        Dept. Code
+                                    </div>
+                                </th>
+                                <th pSortableColumn="code">
+                                    <div class="flex justify-content-center align-items-center">
+                                        Reason
+                                    </div>
+                                </th>
+                                <th pSortableColumn="code">
+                                    <div class="flex justify-content-center align-items-center">
+                                        From
+                                    </div>
+                                </th>
+                                <th pSortableColumn="code">
+                                    <div class="flex justify-content-center align-items-center">
+                                        To
+                                    </div>
+                                </th>
+                                <th pSortableColumn="code">
+                                    <div class="flex justify-content-center align-items-center">
+                                        Created By
+                                    </div>
+                                </th>
+                                <th pSortableColumn="code" style="width:5rem !important;">
+                                    <div class="flex justify-content-center align-items-center">
+                                        Delete
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowIndex="rowIndex" let-data>
+                            <tr class="">
+                                <td class="text-center text-900">{{rowIndex + 1}}</td>
+                                <td>
+                                    <span
+                                        class="inline-flex items-center gap-1.5 py-1 px-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-800 dark:bg-neutral-900 dark:text-neutral-200">
+                                        {{ data.empCd }}
+                                    </span>
+                                    <span class="block font-semibold text-gray-800 dark:text-neutral-200">
+                                        {{ data.empName }}
+                                    </span>
+
+                                </td>
+                                <td class="text-center"> {{ data.deptCd }}</td>
+                                <td class="text-center">
+                                    <span [style]="'color: ' + data.color + ''"
+                                        class="inline-flex items-center gap-1.5 py-1 px-2 rounded-lg text-md font-medium shadow-3 bg-gray-100 text-gray-800 dark:bg-neutral-900 dark:text-neutral-200">
+                                        {{ data.reasonName }}
+                                    </span>
+
+                                </td>
+                                <td class="text-center">
+                                    {{ data.fromDt }}
+                                    <!-- <span class="block text-gray-800 dark:text-white">
+                                        {{ data.createdUserName }}
+                                    </span>
+
+                                    <span class="text-sm text-gray-500 dark:text-neutral-500">
+                                        {{ data.fromDt }}
+                                    </span> -->
+                                </td>
+                                <td class="text-center">
+                                    {{ data.toDt }}
+                                </td>
+                                <td class="text-center">
+                                    <span class="block text-gray-800 dark:text-white">
+                                        {{ data.createdUserName }}
+                                    </span>
+
+                                    <span class="text-sm text-gray-500 dark:text-neutral-500">
+                                        {{ data.fromDt }}
+                                    </span>
+
+                                </td>
+                                <td class="text-center text-900">
+                                    <button pButton pRipple icon="icon-trash-2" pTooltip="View"
+                                        class="mr-2 p-button-rounded p-button-danger p-button-outlined"
+                                        (click)="deleteConfirm($event, data)"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+</div>
+    <div class="mt-6 overflow-x-auto" *ngIf="false">
+        <table class="min-w-full bg-white border border-gray-300">
+            <thead>
+                @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
+                <tr class="bg-gray-50">
+                    @for (header of headerGroup.headers; track header.id) {
+                    @if (!header.isPlaceholder) {
+                    <th class="p-5 text-sm font-semibold leading-6 text-left text-gray-900 capitalize whitespace-nowrap">
+                        <ng-container *flexRender="
+                            header.column.columnDef.header;
+                            props: header.getContext();
+                            let header
+                          ">
+                            <div [innerHTML]="header"></div>
+                        </ng-container>
+                    </th>
+                    }
+                    }
+                </tr>
+                }
+            </thead>
+            <tbody class="divide-y divide-gray-300 ">
+                @for (row of table.getRowModel().rows; track row.id) {
+                <tr  class="transition-all duration-500 bg-white hover:bg-gray-50">
+                    @for (cell of row.getVisibleCells(); track cell.id) {
+                    <td  class="px-4 py-2 border border-gray-300">
+                        <ng-container *flexRender="
+                          cell.column.columnDef.cell;
+                          props: cell.getContext();
+                          let cell
+                        ">
+                            <div [innerHTML]="cell"></div>
+                        </ng-container>
+                    </td>
+                    }
+                </tr>
+                }
+            </tbody>
+        
+        </table>
+        <table class="min-w-full bg-white border border-gray-300" *ngIf="false">
+            <thead class="divide-y divide-gray-300 ">
+                <tr>
+                    <th class="px-4 py-2 border border-gray-300">Doc No</th>
+                    <th class="px-4 py-2 border border-gray-300">From</th>
+                    <th class="px-4 py-2 border border-gray-300">To</th>
+                    <th class="px-4 py-2 border border-gray-300">Having Workrule</th>
+                    <th class="px-4 py-2 border border-gray-300">Shift</th>
+                    <th class="px-4 py-2 border border-gray-300">Workrule</th>
+                    <th class="px-4 py-2 border border-gray-300">Muslim Only</th>
+                    <th class="px-4 py-2 border border-gray-300">Creator</th>
+                    <th class="px-4 py-2 border border-gray-300">CreatedOn</th>
+                    <th class="px-4 py-2 border border-gray-300">Deleted</th>
+                    <th class="px-4 py-2 border border-gray-300">DeletedBy</th>
+                    <th class="px-4 py-2 border border-gray-300">Rollbacked</th>
+                    <th class="px-4 py-2 border border-gray-300">All Dept</th>
+                    <th class="px-4 py-2 border border-gray-300">All Emp</th>
+                    <th class="px-4 py-2 border border-gray-300">Rollback</th>
+                    <th class="px-4 py-2 border border-gray-300">Delete</th>
+                    <th class="px-4 py-2 border border-gray-300">Show</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="px-4 py-2 border border-gray-300">6</td>
+                    <td class="px-4 py-2 border border-gray-300">06-Jun-2022</td>
+                    <td class="px-4 py-2 border border-gray-300">06-Jun-2022</td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300">N-10PM-6AM+</td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300">admin</td>
+                    <td class="px-4 py-2 border border-gray-300">06-06-2022 15:36</td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300">...</td>
+                    <td class="px-4 py-2 border border-gray-300">
+                        <button class="text-red-500"><i class="fas fa-trash-alt"></i></button>
+                    </td>
+                    <td class="px-4 py-2 border border-gray-300">
+                        <button class="text-yellow-500"><i class="fas fa-folder-open"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="px-4 py-2 border border-gray-300">5</td>
+                    <td class="px-4 py-2 border border-gray-300">01-Jun-2022</td>
+                    <td class="px-4 py-2 border border-gray-300">01-Jun-2022</td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300">A-14:00-22:00</td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300">admin</td>
+                    <td class="px-4 py-2 border border-gray-300">06-06-2022 15:25</td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300">...</td>
+                    <td class="px-4 py-2 border border-gray-300">
+                        <button class="text-red-500"><i class="fas fa-trash-alt"></i></button>
+                    </td>
+                    <td class="px-4 py-2 border border-gray-300">
+                        <button class="text-yellow-500"><i class="fas fa-folder-open"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="px-4 py-2 border border-gray-300">4</td>
+                    <td class="px-4 py-2 border border-gray-300">18-Apr-2021</td>
+                    <td class="px-4 py-2 border border-gray-300">21-Apr-2021</td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300">Ramdan Workrule</td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300">admin</td>
+                    <td class="px-4 py-2 border border-gray-300">15-04-2021 16:34</td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300">SD01</td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300">
+                        <button class="text-red-500"><i class="fas fa-trash-alt"></i></button>
+                    </td>
+                    <td class="px-4 py-2 border border-gray-300">
+                        <button class="text-yellow-500"><i class="fas fa-folder-open"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="px-4 py-2 border border-gray-300">3</td>
+                    <td class="px-4 py-2 border border-gray-300">18-Apr-2021</td>
+                    <td class="px-4 py-2 border border-gray-300">18-Apr-2021</td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300">admin</td>
+                    <td class="px-4 py-2 border border-gray-300">15-04-2021 16:34</td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300">X</td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300">
+                        <button class="text-red-500"><i class="fas fa-trash-alt"></i></button>
+                    </td>
+                    <td class="px-4 py-2 border border-gray-300">
+                        <button class="text-yellow-500"><i class="fas fa-folder-open"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="px-4 py-2 border border-gray-300">2</td>
+                    <td class="px-4 py-2 border border-gray-300">04-Apr-2021</td>
+                    <td class="px-4 py-2 border border-gray-300">07-Apr-2021</td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300">Ramdan Workrule</td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300">admin</td>
+                    <td class="px-4 py-2 border border-gray-300">15-04-2021 16:30</td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300">X</td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300">
+                        <button class="text-red-500"><i class="fas fa-trash-alt"></i></button>
+                    </td>
+                    <td class="px-4 py-2 border border-gray-300">
+                        <button class="text-yellow-500"><i class="fas fa-folder-open"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="px-4 py-2 border border-gray-300">1</td>
+                    <td class="px-4 py-2 border border-gray-300">01-Apr-2021</td>
+                    <td class="px-4 py-2 border border-gray-300">02-Apr-2021</td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300">Ramdan Workrule</td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300">admin</td>
+                    <td class="px-4 py-2 border border-gray-300">15-04-2021 16:25</td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300">X</td>
+                    <td class="px-4 py-2 border border-gray-300"></td>
+                    <td class="px-4 py-2 border border-gray-300">
+                        <button class="text-red-500"><i class="fas fa-trash-alt"></i></button>
+                    </td>
+                    <td class="px-4 py-2 border border-gray-300">
+                        <button class="text-yellow-500"><i class="fas fa-folder-open"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>

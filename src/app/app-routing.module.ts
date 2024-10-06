@@ -31,6 +31,9 @@ import { IconTypes, Breadcrumb } from './context/service/sharedstate/breadcrumb.
                     { path: 'TimeTechCore/pages/Masters/reasonMaster.aspx', redirectTo: 'time-attendance/reason', pathMatch: 'prefix' },
                     { path: 'TimeTechCore/pages/TA/EmpDailyWorkSheet.aspx', redirectTo: 'time-attendance/daily-worksheet', pathMatch: 'prefix' },
                     { path: 'TimeTechCore/pages/TA/ExcReq_All.aspx', redirectTo: 'time-attendance/set-reason', pathMatch: 'prefix' },
+                    { path: 'TimeTechCore/pages/TA/DutyRoster.aspx', redirectTo: 'time-attendance/duty-roster', pathMatch: 'prefix' },
+                    { path: 'TimeTechCore/pages/TA/DutyRosterUpload-Pivot.aspx', redirectTo: 'time-attendance/duty-roster-import', pathMatch: 'prefix' },
+                    { path: 'TimeTechCore/pages/TA/ShiftWR4Period.aspx', redirectTo: 'time-attendance/schedule-shift-or-workrule', pathMatch: 'prefix' },
 
                 ]
             },

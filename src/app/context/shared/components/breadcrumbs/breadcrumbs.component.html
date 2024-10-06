@@ -1,36 +1,65 @@
-<div class="grid">
-    <div class="p-2 mb-0 col-12 surface-ground">
-        <div class="flex flex-row justify-between px-2 py-0 m-0 align-items-center card border-noround surface-card">
-            <ul class="flex p-0 m-0 overflow-x-auto overflow-y-hidden font-medium list-none layout-breadcrumb">
-                <li class="relative p-3">
-                    <a class="cursor-pointer" [routerLink]="'/self-service/dashboard'">
-                        <i class="text-lg pi pi-home"></i>
-                    </a>
-                </li>
-                <li class="relative p-3" *ngFor="let item of breadcrumbs;">
-                    <div class="absolute top-0 left-0 z-1"
-                        style="border-left: 20px solid var(--surface-card); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0;">
-                    </div>
-                    <a class="flex gap-2 pl-4 align-items-center justify-content-center white-space-nowrap"
-                        [ngClass]="{'cursor-pointer': item.path != undefined }" [routerLink]="item.path">
-                        <i [class]="item.icon" class="flex text-lg"></i>
-                        <span class="flex">{{item.label}}</span>
-                    </a>
-                    <div class="absolute top-0"
-                        style="left: 1px; border-left: 20px solid var(--surface-border); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0;">
-                    </div>
-                </li>
-            </ul>
-            <div class="flex">
-                <p-calendar *ngIf="isShowDatePicker" class="max-w-full border dashboard-month-picker"
-                    [readonlyInput]="true" inline="true" [showWeek]="true" dateFormat="M-yy" [(ngModel)]="dashboardDate"
-                    (onMonthChange)="onSelectYear($event)" [defaultDate]="dashboardDate"></p-calendar>
-                <!-- <p-calendar *ngIf="isShowDatePicker" class="max-w-full dashboard-month-picker" [readonlyInput]="true"
-                    [showWeek]="true" view="year" dateFormat="yy" [(ngModel)]="dashboardDate"
-                    (onMonthChange)="onSelectYear($event)"></p-calendar> -->
+<div
+    class="flex justify-between w-full p-0 px-2 py-0 m-0 align-items-center bg-backdrop-filter glass-effect effect-3d glassmorphism">
+    <div
+        class="flex items-center px-3 py-2 space-x-2 flex-nowrap breadcrumbs dark:bg-gray-800">
+        <div class="">
+            <div class="flex flex-row p-1 m-2 space-x-1 bg-gray-200 rounded-sm dot-container dark:bg-gray-700">
+                <div class="bg-gray-400 rounded-full size-2"></div>
+                <div class="bg-gray-400 rounded-full size-2"></div>
+                <div class="bg-gray-400 rounded-full size-2"></div>
             </div>
-
-
         </div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="w-4 h-4 text-gray-500 bi bi-arrow-right-short" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z" />
+        </svg>
+        <a [routerLink]="'/self-service/dashboard'" class="text-sm text-gray-500 dark:text-gray-300">Home</a>
+        <ng-container *ngFor="let item of breadcrumbs;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="w-4 h-4 text-gray-500 bi bi-arrow-right-short" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z" />
+            </svg>
+            <a [ngClass]="{'cursor-pointer': item.path != undefined }" [routerLink]="item.path"
+                class="text-sm text-gray-500 dark:text-gray-300">{{item.label}}</a>
+        </ng-container>
+    </div>
+
+    <div class="flex">
+        <p-calendar *ngIf="isShowDatePicker" class="max-w-full p-0 border dashboard-month-picker" [readonlyInput]="true"
+            inline="true" [showWeek]="true" dateFormat="M-yy" [(ngModel)]="dashboardDate"
+            (onMonthChange)="onSelectYear($event)" [defaultDate]="dashboardDate"></p-calendar>
+        <!-- <p-calendar *ngIf="isShowDatePicker" class="max-w-full dashboard-month-picker" [readonlyInput]="true"
+                        [showWeek]="true" view="year" dateFormat="yy" [(ngModel)]="dashboardDate"
+                        (onMonthChange)="onSelectYear($event)"></p-calendar> -->
+    </div>
+</div>
+<div class="flex flex-wrap w-full" *ngIf="false">
+    <div
+        class="flex flex-row justify-between w-full p-0 py-0 m-0 align-items-center bg-backdrop-filter glass-effect effect-3d glassmorphism">
+        <ul class="flex p-0 m-0 overflow-x-auto overflow-y-hidden font-medium list-none layout-breadcrumb">
+            <li class="relative p-3">
+                <a class="cursor-pointer" [routerLink]="'/self-service/dashboard'">
+                    <i class="text-lg pi pi-home"></i>
+                </a>
+            </li>
+            <li class="relative p-3" *ngFor="let item of breadcrumbs;">
+                <div class="absolute top-0 left-0 z-1"
+                    style="border-left: 20px solid var(--surface-card); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0;">
+                </div>
+                <a class="flex gap-2 pl-4 align-items-center justify-content-center white-space-nowrap"
+                    [ngClass]="{'cursor-pointer': item.path != undefined }" [routerLink]="item.path">
+                    <i [class]="item.icon" class="flex text-lg"></i>
+                    <span class="flex">{{item.label}}</span>
+                </a>
+                <div class="absolute top-0"
+                    style="left: 1px; border-left: 20px solid var(--surface-border); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0;">
+                </div>
+            </li>
+        </ul>
+
+
+
     </div>
 </div>

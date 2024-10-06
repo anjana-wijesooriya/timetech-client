@@ -1434,3 +1434,31 @@
     --topbar-popup-item-shadow: 0 5px 12px 6px #00000017
 }
 
+.layout-sidebar {
+    // background-color: #50E3C2;
+    //     background-image:
+    //         radial-gradient(at 47% 33%, hsl(162.00, 77%, 40%) 0, transparent 59%),
+    //         radial-gradient(at 82% 65%, hsl(198.00, 100%, 50%) 0, transparent 55%);
+    .sidebar-header, .layout-menu-container{
+        // background: rgba(253, 114, 57, 0.4);
+        // -webkit-backdrop-filter: blur(50px);
+        // backdrop-filter: blur(50px);
+        // border: 1px solid rgba(253, 114, 57, 0.2);
+    }
+
+    .layout-menu-container .p-chip {
+        background: transparent;
+    }
+}
+
+.layout-wrapper{
+    min-height: 100vh;
+    // background: linear-gradient(to right top in lch, rgb(134, 239, 172), rgb(59, 130, 246), rgb(147, 51, 234));
+    background: linear-gradient(to right top in lch, rgb(239 212 134 / 15%), rgb(59 130 246 / 15%), rgb(147 51 234 / 15%));
+    
+    .layout-sidebar {
+        background: transparent;
+        background-color: transparent;
+        background-image: none;
+    }
+}

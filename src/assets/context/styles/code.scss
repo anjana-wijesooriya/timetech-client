@@ -1,3 +1,30 @@
+
+
+ :root {
+    --surface-ground: transparent;
+ }
+
+ *,
+ ::after,
+ ::before {
+     border-width: revert-layer!important;
+     border-style: revert-layer!important;
+     border-color: revert-layer!important;
+ }
+
+ button,
+ input,
+ optgroup,
+ select,
+ textarea {
+    color: revert-layer !important;
+    margin: revert-layer !important;
+    padding: revert-layer !important;
+ }
+
+         
+
+
 pre.app-code {
     background-color: var(--surface-ground);
     margin: 0 0 1rem 0;
@@ -341,6 +368,10 @@ p-fileupload.ng-invalid.ng-touched .p-fileupload-advanced {
     // height: calc(100vh - 10.5rem);
 }
 
+p-calendar .p-inputtext.p-inputtext-sm {
+    padding: 0.4375rem 0.65625rem !important;
+}
+
 .dashboard-month-picker {
 
     .p-yearpicker,
@@ -465,4 +496,734 @@ formly-wrapper-primeng-form-field {
             @extend .bg-gray-200;
         }
     }
+}
+
+.btn-class-name {
+    --color: 180, 255, 100;
+    border-radius: .5em;
+    transition: .3s;
+    background-color: rgba(var(--color), .2);
+    color: rgb(var(--color));
+    fill: rgb(var(--color));
+    font-family: monospace;
+    font-weight: bolder;
+    font-size: x-large;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    border: 2px solid rgb(var(--color));
+    box-shadow: 0 0 10px rgba(var(--color), .4);
+    outline: none;
+    display: flex;
+    align-items: center;
+    padding: .5em 1em;
+}
+
+.btn-class-name:hover {
+    box-shadow: 0 0 0 5px rgba(var(--color), .5);
+}
+
+.btn-class-name span {
+    transform: scale(.8);
+    transition: .3s;
+}
+
+.btn-class-name:hover span {
+    transform: scale(1);
+}
+
+.btn-class-name svg {
+    font-size: 0;
+    transform: scale(0.5) translateX(0%) rotate(-180deg);
+    transition: .3s;
+}
+
+.btn-class-name:hover svg {
+    font-size: 20px;
+    transform: scale(1) translateX(20%) rotate(0deg);
+}
+
+.btn-class-name:active {
+    transition: 0s;
+    box-shadow: 0 0 0 5px rgb(var(--color));
+}
+
+.layout-topbar {
+    background: linear-gradient(90deg, #eaea8c 6%, #ffa50069 25%, #f1444485 45%, #d5356770 55%, #9a109a52 94%);
+}
+
+ @layer tailwind-utilities {
+    div:has(+ .glass-dropdown) {
+        perspective: 400px;
+    }
+     .glass-dropdown {
+         @apply bg-transparent backdrop-blur-lg border-gray-200 scale3d-95 transition-all ease-in duration-300;
+         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+         &:hover {
+             @apply scale3d-100;
+             box-shadow: -12px 20px 11px 13px rgba(0, 0, 0, 0.1),
+                inset 19px 11px 11px 13px rgba(0, 0, 0, 0.1);
+         }
+     }
+
+     .table {
+         @apply bg-opacity-50 backdrop-blur-md shadow-xl;
+     }
+
+     .table-cell {
+         @apply transition translate-y-14 duration-300 ease-in-out;
+     }
+ }
+
+ .glass-dropdown {
+    .p-inputtext, .p-treeselect-label, .p-treeselect-label.p-placeholder  {
+        color: var(--text-color);
+        border-color: var(--surface-300);
+        border-radius: var(--border-radius);
+        font-size: 1.25rem !important;
+        padding: 0.625rem 0.9375rem !important;
+
+        &:focus {
+            border: none !important
+        }
+
+        .p-input-icon-right, .p-icon-wrapper {
+            color: var(--text-color);
+        }
+    }
+ }
+
+//  p-calendar .p-inputtext.p-inputtext-sm {
+//     //  padding: 0.4375rem 0.65625rem !important;
+//     padding: 1rem;
+
+//  }
+
+ .border-effect {
+    border-image: fill 0 linear-gradient(#0003, #0000);
+ }
+
+ .bg-backdrop-filter{
+    // background-color: rgba(255, 255, 255, 0.1) !important;
+    // border-radius: 10px !important;
+    // backdrop-filter: blur(5px);
+    // border: 2px solid rgba(255, 255, 255, 0.1);
+    // box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+
+    background-color: #FFFFFF55 !important;
+    border-radius: 10px !important;
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 20px 20px 60px #00000044, -20px -20px 60px #ffffff26, -1px -1px 1px #ffffff26 !important;
+    // border-image: fill 0 linear-gradient(#0003, #0000) !important;
+ }
+
+ .effect-3d {
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+ }
+
+ .glassmorphism {
+     background: rgba(255, 255, 255, 0.6);
+     border-radius: 16px;
+     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+     backdrop-filter: blur(10px);
+     -webkit-backdrop-filter: blur(10px);
+     border: 1px solid rgba(255, 255, 255, 0.3);
+ }
+
+ .glass-effect {
+     background: rgba(255, 255, 255, 0.2);
+     backdrop-filter: blur(10px);
+     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+     border: 1px solid rgba(255, 255, 255, 0.3);
+     transition: transform 0.3s, box-shadow 0.3s;
+ }
+
+// :root {
+//     .route-wrapper:has(.duty-roster) {
+//         // @extend .flex;
+//         --surface-ground: transparent;
+//         background-color: transparent !important;
+//     }
+//         .route-wrapper:not(.duty-roster) {
+//             // @extend .flex;
+//             --surface-ground: var(--surface-50);
+//             background-color: transparent !important;
+//         }
+// }
+ .app-card {
+        background-color: rgb(146 151 179 / 13%) !important;
+        border: 1px solid rgb(255 255 255 / 31%) !important;
+        backdrop-filter: blur(2px) saturate(200%);
+    -webkit-backdrop-filter: blur(2px) saturate(200%);
+    background-color: rgba(255, 255, 255, 0.6) !important;
+    border-radius: 12px;
+    border: 1px solid rgba(209, 213, 219, 0.3);
+        transform: scale(1);
+    &:hover {
+        transition: 0.3s ease;
+        transform: scale(1);
+        background-color: rgb(255 255 255 / 31%) !important;
+    }
+ }
+
+ .app-table {
+    @extend .effect-3d;
+    table {
+        @extend .glass-effect;
+        @extend .glassmorphism; 
+
+        // th,td {
+        //     background-color: rgb(146 151 179 / 13%) !important;
+        //     // border: 1px solid rgb(255 255 255 / 31%) !important;
+        //     transition: 0.3s ease;
+        // }
+        // tr:hover {
+        //     transform: scale(1.02);
+        //     background-color: rgb(255 255 255 / 31%) !important;
+        // }
+    }
+    .p-datatable-thead>tr>th, .p-datatable-tbody tr td  {
+        background: transparent !important;
+        transition: 0.3s ease;
+        backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+    }
+}
+    
+// :root {
+//  --surface-ground: transparent;
+//  --surface-section: transparent;
+//  --surface-card: transparent;
+// }
+
+.glass-card {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+
+    p-card {
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+
+        p-header {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px 10px 0 0;
+            padding: 10px;
+        }
+
+        p-body {
+            padding: 20px;
+        }
+    }
+}
+
+ .glass-datatable {
+     perspective: 1000px;
+
+     /* Add perspective for 3D effect */
+     .p-datatable {
+         background-color: rgba(255, 255, 255, 0.2);
+         border-radius: 10px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+         padding: 20px;
+         transform: rotateY(0deg);
+         /* Initial 3D rotation */
+         transition: transform 0.5s;
+         /* Add animation effect */
+     }
+
+     .p-datatable:hover {
+         transform: rotateY(10deg);
+         /* 3D rotation on hover */
+     }
+
+     .p-datatable-thead {
+         background-color: rgba(255, 255, 255, 0.2);
+         border-radius: 10px 10px 0 0;
+         padding: 10px;
+     }
+
+     .p-datatable-tbody {
+         padding: 20px;
+     }
+
+     .p-datatable-tbody tr {
+         transition: background-color 0.5s;
+         /* Add animation effect */
+     }
+
+     .p-datatable-tbody tr:hover {
+         background-color: rgba(255, 255, 255, 0.3);
+         /* Hover effect */
+     }
+
+     .p-datatable-tbody td {
+         padding: 10px;
+         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+     }
+
+     .p-paginator {
+         background-color: rgba(255, 255, 255, 0.2);
+         border-radius: 10px;
+         padding: 10px;
+     }
+ }
+
+ .glass-table-q {
+     background-color: rgba(255, 255, 255, 0.2); // Adjust the opacity as needed
+     border-radius: 10px;
+     backdrop-filter: blur(10px); // Adjust the blur radius as needed
+     -webkit-backdrop-filter: blur(10px); // For Safari support
+     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+     border: 1px solid rgba(255, 255, 255, 0.3);
+
+     .p-datatable-thead {
+         background-color: rgba(255, 255, 255, 0.3); // Adjust the opacity as needed
+         border-radius: 10px 10px 0 0;
+         padding: 10px;
+     }
+
+     .p-datatable-tbody {
+         padding: 20px;
+
+         tr {
+             transition: background-color 0.3s ease; // Add a smooth transition effect
+
+             &:hover {
+                 background-color: rgba(255, 255, 255, 0.4); // Adjust the hover effect opacity
+             }
+         }
+
+         td {
+             padding: 10px;
+             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+         }
+     }
+
+     .p-paginator {
+         background-color: rgba(255, 255, 255, 0.3); // Adjust the opacity as needed
+         border-radius: 10px;
+         padding: 10px;
+     }
+ }
+
+ .glass-element {
+     position: relative;
+     background-color: rgba(255, 255, 255, 0.8);
+     border-radius: 10px;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+     transform: translateZ(50px);
+     /* Create depth */
+    //  animation: rotate 5s infinite linear;
+ }
+
+ @keyframes rotate {
+     0% {
+         transform: rotateX(0deg) rotateY(0deg);
+     }
+
+     100% {
+         transform: rotateX(360deg) rotateY(360deg);
+     }
+ }
+
+ .glass-element::after {
+     content: '';
+     position: absolute;
+     bottom: -10px;
+     left: 0;
+     width: 100%;
+     height: 100%;
+    //  background-image: url('reflection.png');
+     /* Replace with your reflection image */
+     transform: scaleY(-1);
+     opacity: 0.5;
+ }
+
+ .glass-table {
+     perspective: 1000px;
+     position: relative;
+     /* ... other base styles from previous response ... */
+ }
+
+ .glass-table tr {
+     animation: table-rotate 10s infinite linear;
+ }
+
+ @keyframes table-rotate {
+     0% {
+         transform: rotateX(0deg) rotateY(0deg);
+     }
+
+     100% {
+         transform: rotateX(360deg) rotateY(360deg);
+     }
+ }
+
+ .glass-table td,
+ .glass-table th {
+     /* ... other styles ... */
+     transform: translateZ(50px);
+     /* Create depth */
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 10px rgba(0, 0, 0, 0.1);
+ }
+
+ .glass-table tr:hover td,
+ .glass-table tr:hover th {
+     transform: translateZ(75px);
+     /* Increase depth on hover */
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 0, 0, 0.2);
+ }
+
+ /* Add reflection */
+ .glass-table::after {
+     /* ... reflection styles from previous response ... */
+     animation: reflection-pulse 2s infinite;
+ }
+
+ @keyframes reflection-pulse {
+     0% {
+         opacity: 0.5;
+     }
+
+     50% {
+         opacity: 0.7;
+     }
+
+     100% {
+         opacity: 0.5;
+     }
+ }
+
+.glass-container {
+    width: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.glass-container .btn {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 50px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.glass-container .btn a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 15px 15px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    padding: 10px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    overflow: hidden;
+    color: #fff;
+    font-weight: 400px;
+    z-index: 1;
+    transition: 0.5s;
+    backdrop-filter: blur(15px);
+}
+
+.glass-container .btn:hover a {
+    letter-spacing: 3px;
+}
+
+.glass-container .btn a::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.15), transparent);
+    transform: skewX(45deg) translate(0);
+    transition: 0.5s;
+    filter: blur(0px);
+}
+
+.glass-container .btn:hover a::before {
+    transform: skewX(45deg) translate(200px);
+}
+
+.glass-container .btn::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translatex(-50%);
+    bottom: -5px;
+    width: 30px;
+    height: 10px;
+    background: #f00;
+    border-radius: 10px;
+    transition: 0.5s;
+    transition-delay: 0.5;
+}
+
+.glass-container {
+    .btn:hover::before
+
+    /*lightup button*/
+        {
+        bottom: 0;
+        height: 50%;
+        width: 80%;
+        border-radius: 30px;
+    }
+
+    .btn::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translatex(-50%);
+        top: -5px;
+        width: 30px;
+        height: 10px;
+        background: #f00;
+        border-radius: 10px;
+        transition: 0.5s;
+        transition-delay: 0.5;
+    }
+
+    .btn:hover::after
+
+    /*lightup button*/
+        {
+        top: 0;
+        height: 50%;
+        width: 80%;
+        border-radius: 30px;
+    }
+
+    .btn:nth-child(1)::before,
+    /*chnage 1*/
+    .btn:nth-child(1)::after {
+        background: #ff1f71;
+        box-shadow: 0 0 5px #ff1f71, 0 0 15px #ff1f71, 0 0 30px #ff1f71,
+            0 0 60px #ff1f71;
+    }
+
+    ontainer .btn:nth-child(2)::before,
+    /* 2*/
+    .btn:nth-child(2)::after {
+        background: #2db2ff;
+        box-shadow: 0 0 5px #2db2ff, 0 0 15px #2db2ff, 0 0 30px #2db2ff,
+            0 0 60px #2db2ff;
+    }
+
+    .btn:nth-child(3)::before,
+    /* 3*/
+    .btn:nth-child(3)::after {
+        background: #1eff45;
+        box-shadow: 0 0 5px #1eff45, 0 0 15px #1eff45, 0 0 30px #1eff45,
+            0 0 60px #1eff45;
+    }
+}
+
+.glassmorphism-table {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    margin: 20px;
+    overflow: hidden;
+}
+
+.glassmorphism-table th,
+.glassmorphism-table td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glassmorphism-table th {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px 10px 0 0;
+    text-wrap: nowrap;
+    border-width: 1px;
+    box-shadow: 20px 7px 20px 0px #000000aa;
+}
+
+.glassmorphism-table td {
+    background: rgba(255, 255, 255, 0.1);
+    // border-radius: 0 0 10px 10px;
+}
+
+.glassmorphism-table tr:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.glassmorphism-table tr:hover td {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.glassmorphism-checkbox {
+    @apply flex items-center justify-center w-6 h-6 rounded-lg shadow-md;
+    @apply bg-gradient-to-r from-gray-100 to-gray-300;
+    @apply transition duration-300 ease-in-out;
+    @apply transform hover:scale-105 hover:shadow-lg;
+}
+
+.glassmorphism-checkbox .ui-chkbox-box {
+    @apply w-4 h-4 rounded-lg;
+    @apply bg-white;
+    @apply border border-gray-300;
+    @apply transition duration-300 ease-in-out;
+}
+
+.glassmorphism-checkbox .ui-chkbox-icon {
+    @apply text-lg;
+    @apply text-gray-600;
+    @apply transition duration-300 ease-in-out;
+}
+
+.glassmorphism-checkbox .ui-chkbox-icon.fas.fa-check {
+    @apply animate-bounce;
+    @apply transform rotate-45;
+}
+
+.glassmorphism-checkbox .ui-chkbox-icon.fas.fa-times {
+    @apply animate-bounce;
+    @apply transform rotate-45;
+}
+
+.animate-bounce {
+    animation: bounce 0.5s infinite;
+}
+
+@keyframes bounce {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+div:has(+ .glass-card) {
+    perspective: 400px;
+}
+.glass-card{
+
+  background: rgba(255, 255, 255, 0);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(17.7px);
+  -webkit-backdrop-filter: blur(17.7px);
+
+ 
+}
+
+.checkbox-wrapper {
+  .terms-label {
+    display: flex;
+    align-items: center;
+
+    > .label-text {
+      margin-left: 10px;
+    }
+  }
+
+  .checkbox-svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .checkbox-box,
+  .checkbox-tick {
+    transition: stroke-dasharray 0.6s ease-in;
+  }
+
+  .checkbox-box {
+    fill: rgba(207, 205, 205, 0.425);
+    stroke: #8c00ff;
+    stroke-dasharray: 800 800;
+  }
+
+  .checkbox-tick {
+    stroke: #8c00ff;
+    stroke-dasharray: 172 172;
+  }
+
+  input[type="checkbox"] {
+    &:not(:checked) + .checkbox-svg {
+      .checkbox-box,
+      .checkbox-tick {
+        stroke-dasharray: 0 800;
+      }
+    }
+
+    &:checked + .checkbox-svg {
+      .checkbox-box,
+      .checkbox-tick {
+        stroke-dasharray: 800 800;
+      }
+    }
+
+    &, & + .checkbox-svg {
+      cursor: pointer;
+    }
+  }
+}
+.checkbox-wrapper .terms-label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-wrapper .terms-label .label-text {
+    margin-left: 10px;
+}
+
+.checkbox-wrapper .checkbox-svg {
+    width: 30px;
+    height: 30px;
+}
+
+.checkbox-wrapper .checkbox-box {
+    fill: rgba(207, 205, 205, 0.425);
+    stroke: #8c00ff;
+    stroke-dasharray: 800;
+    stroke-dashoffset: 800;
+    transition: stroke-dashoffset 0.6s ease-in;
+}
+
+.checkbox-wrapper .checkbox-tick {
+    stroke: #8c00ff;
+    stroke-dasharray: 172;
+    stroke-dashoffset: 172;
+    transition: stroke-dashoffset 0.6s ease-in;
+}
+
+.checkbox-wrapper input[type="checkbox"]:checked+.terms-label .checkbox-box,
+.checkbox-wrapper input[type="checkbox"]:checked+.terms-label .checkbox-tick {
+    stroke-dashoffset: 0;
 }

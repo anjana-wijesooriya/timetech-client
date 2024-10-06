@@ -15,7 +15,8 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
+          
           "options": {
             "outputPath": "dist/timetech-client",
             "index": "src/index.html",
@@ -29,6 +30,9 @@
               "src/favicon.ico",
               "src/assets"
             ],
+            "customWebpackConfig": {
+              "path": "./custom-webpack.config.js"
+            },
             "styles": [
               "src/styles.scss",
               "node_modules/primeng/resources/primeng.min.css",
@@ -39,6 +43,7 @@
               "node_modules/chart.js/dist/Chart.js",
               "node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.js"
             ]
+
           },
           "configurations": {
             "production": {

@@ -1,5 +1,7 @@
 {
     "chatgpt.apiKey": "sk-proj-hymzTXwYMadx08LsGmBsT3BlbkFJe2KcwT2aj3vZTEr0CTlS",
-    "CodeGPT.Autocomplete.provider": "Ollama - codegpt/deepseek-coder-1.3b-typescript",
-    "CodeGPT.apiKey": "CodeGPT Plus Beta"
+    "CodeGPT.Autocomplete.provider": "CodeGPT Plus - Plus",
+    "CodeGPT.apiKey": "CodeGPT Plus Beta",
+    "CodeGPT.Autocomplete.enabled": false,
+    "notebook.defaultFormatter": "esbenp.prettier-vscode"
 }

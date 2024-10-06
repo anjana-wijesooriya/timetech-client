@@ -11,6 +11,7 @@ export function valueOrDefault<T>(value: T | undefined, defaultValue: T) {
 }
 
 export class Utils {
+    static DAYS: any;
     isMobile() {
         return window && window.matchMedia('(max-width: 767px)').matches;
     }

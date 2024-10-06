@@ -276,27 +276,31 @@ export class AppMenuComponent implements OnInit {
             // this.subModules = response;
             // this.groupBy(response, 'groupName')
             this.isLoading = false;
-            const attendanceMenu = {
-                "btnId": "Holidays",
-                "btnTag": "/TimeTechCore/pages/TA/Holiday.aspx",
-                "btnPicture": "pi-calendar-times",
+            const importDuty = {
+                "btnId": "Import Duty Roster",
+                "btnTag": "/TimeTechCore/pages/TA/DutyRosterUpload-Pivot.aspx",
+                "btnPicture": "bx bx-import",
                 "sequence": 1,
                 "btnSeq": 3,
-                "btnToolTip": "Holidays",
-                "btnDisplay": "Holidays",
+                "btnToolTip": "Import Duty Roster",
+                "btnDisplay": "Import Duty Roster",
                 "groupName": "Masters"
             };
-            const reasonsMenu = {
-                "btnId": "Reasons",
-                "btnTag": "/TimeTechCore/pages/Masters/reasonMaster.aspx",
+            const setwrshift = {
+                "btnId": "Set Shift/Workrule",
+                "btnTag": "/TimeTechCore/pages/TA/ShiftWR4Period.aspx",
                 "btnPicture": "pi pi-question-circle pi",
                 "sequence": 4,
                 "btnSeq": 4,
-                "btnToolTip": "Reasons",
-                "btnDisplay": "Reasons",
+                "btnToolTip": "Set Shift/Workrule",
+                "btnDisplay": "Set Shift/Workrule",
                 "groupName": "Time Attendance"
             };
-            // response.push(attendanceMenu);
+            if (baseModuleId == 1) {
+                response.push(importDuty);
+                response.push(setwrshift);
+            }
+
             // response.push(reasonsMenu);
             this.moduleService.setActiveModules(response);
             localStorage.setItem('Personal', JSON.stringify(response));

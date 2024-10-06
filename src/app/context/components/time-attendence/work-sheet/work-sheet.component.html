@@ -629,13 +629,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-wrap justify-center w-full mt-2 ">
+                <div class="flex justify-center w-full mt-2 flex-column ">
                     <p-table #supportTable [rowHover]="true" [value]="virtualWorksheets" [loading]="isLoading"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                         [rows]="rowsPerPage" [showCurrentPageReport]="true" (onPage)="pageChange($event)"
                         [rowsPerPageOptions]="[25, 50, 100]" dataKey="code" [first]="first" [paginator]="true"
                         styleClass="p-datatable-gridlines" scrollHeight="calc(100vh - 40rem)" class="border-round"
-                        tableStyleClass="w-full" [scrollable]="true" [style]="getTableWidth">
+                        tableStyleClass="w-full" [scrollable]="true" >
                         <ng-template pTemplate="header">
                             <tr>
                                 <th style="width:3.5rem !important;" alignFrozen="left" pFrozenColumn>

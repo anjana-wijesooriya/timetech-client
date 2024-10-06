@@ -7,11 +7,11 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ListboxModule } from 'primeng/listbox';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { SetReasonComponent } from './set-reason/set-reason.component';
+import { DutyRosterComponent } from './duty-roster/duty-roster.component';
 
 
 @NgModule({
-  declarations: [
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     TimeAttendenceRoutingModule

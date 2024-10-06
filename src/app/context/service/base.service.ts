@@ -14,6 +14,8 @@ export class BaseService {
 
   public userDetails$ = new BehaviorSubject<LoginResponseModel>(new LoginResponseModel());
 
+  public routeData: any = new BehaviorSubject<any>(undefined);
+
   constructor() {
   }
 
@@ -24,5 +26,14 @@ export class BaseService {
   public getUser() {
     return this.userDetails$.asObservable();
   }
+
+  public getRouteData() {
+    return this.routeData.asObservable();
+  }
+
+  public setLRouteData(value: any) {
+    this.routeData.next(value);
+  }
+
 
 }

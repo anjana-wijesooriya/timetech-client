@@ -23,6 +23,7 @@ export class AppLayoutComponent implements OnDestroy, OnInit {
     @ViewChild(AppSidebarComponent) appSidebar!: AppSidebarComponent;
 
     @ViewChild(AppTopBarComponent) appTopbar!: AppTopBarComponent;
+    isGlassUi: boolean;
 
     constructor(private route: ActivatedRoute, public layoutService: LayoutService, public renderer: Renderer2, public router: Router,
         private baseService: BaseService) {
@@ -60,8 +61,12 @@ export class AppLayoutComponent implements OnDestroy, OnInit {
                 this.hideMenu();
                 this.hideProfileMenu();
                 // let bread = this.createBreadcrumbs(this.route.root);
-                // console.log(bread)
+                console.log(res);
+                this.isGlassUi = this.router.url.includes('duty-roster');
             });
+        
+        
+        
 
         this.route.data.subscribe((data: Data) => {
             console.log(data);

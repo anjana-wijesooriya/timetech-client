@@ -2,10 +2,10 @@
 <div class="layout-wrapper" [ngClass]="containerClass">
     <app-topbar></app-topbar>
     <app-sidebar></app-sidebar>
-    <div class="layout-main-container pb-0">
-        <div class="layout-main">
+    <div class="pb-0 layout-main-container">
+        <div class="flex w-full gap-3 flex-column layout-main">
             <app-breadcrumbs></app-breadcrumbs>
-            <div class="surface-ground mt-2">
+            <div class="mt-2 route-wrapper" [ngClass]="{'surface-ground': isGlassUi == false}">
                 <router-outlet></router-outlet>
             </div>
         </div>
