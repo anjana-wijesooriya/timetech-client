@@ -7,6 +7,8 @@ import { AppTopBarComponent } from './app.topbar.component';
 import { LocalStorage } from '../context/shared/enum/local-storage.enum';
 import { BaseService } from '../context/service/base.service';
 import { Utils } from 'src/app/context/shared/utils';
+import { PrimeNGConfig } from 'primeng/api';
+import { Aura } from 'primeng/themes/aura';
 
 @Component({
     selector: 'app-layout',
@@ -26,7 +28,7 @@ export class AppLayoutComponent implements OnDestroy, OnInit {
     isGlassUi: boolean;
 
     constructor(private route: ActivatedRoute, public layoutService: LayoutService, public renderer: Renderer2, public router: Router,
-        private baseService: BaseService) {
+        private baseService: BaseService, private primeNGConfig:PrimeNGConfig) {
         this.overlayMenuOpenSubscription = this.layoutService.overlayOpen$.subscribe(() => {
             if (!this.menuOutsideClickListener) {
                 this.menuOutsideClickListener = this.renderer.listen('document', 'click', event => {
@@ -63,6 +65,14 @@ export class AppLayoutComponent implements OnDestroy, OnInit {
                 // let bread = this.createBreadcrumbs(this.route.root);
                 console.log(res);
                 this.isGlassUi = this.router.url.includes('duty-roster');
+                this.primeNGConfig.theme.set({
+                    preset: Aura, options: {
+                        prefix: 'p',
+                        darkModeSelector: 'app-dark',
+                        cssLayer: false
+                    }
+                });
+                this.primeNGConfig.ripple.set(true);
             });
         
         

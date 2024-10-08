@@ -1,39 +1,39 @@
 <div class="p-0">
     <form (ngSubmit)="onSubmit(form)" novalidate autocomplete="off" #form="ngForm">
-        <div class="grid formgrid p-fluid ">
-            <div class="field mb-2 col-12 md:col-6 lg:col-4">
-                <label for="name" class="font-medium text-900">Employee Name</label>
+        <div class="grid grid-cols-12 gap-4 formgrid p-fluid ">
+            <div class="field mb-2 col-span-12 md:col-span-6 lg:col-span-4">
+                <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Employee Name</label>
                 <input pInputText id="name" class="" name="empName" [(ngModel)]="emp.empName" [required]="true" />
                 <small class="p-error" id="username-help">Employee name required.</small>
             </div>
-            <div class="field mb-2 col-12 md:col-6 lg:col-4">
-                <label for="nickname2" class="font-medium text-900">Employee Name(Arabic)</label>
+            <div class="field mb-2 col-span-12 md:col-span-6 lg:col-span-4">
+                <label for="nickname2" class="font-medium text-surface-900 dark:text-surface-0">Employee Name(Arabic)</label>
                 <input pInputText [pKeyFilter]="arabicRegex" id="name" class="" name="empArabicName"
                     [(ngModel)]="emp.empArabicName" />
             </div>
-            <div class="field mb-2 col-12 md:col-6 lg:col-4">
-                <label for="nickname2" class="font-medium text-900">Employee Known As</label>
+            <div class="field mb-2 col-span-12 md:col-span-6 lg:col-span-4">
+                <label for="nickname2" class="font-medium text-surface-900 dark:text-surface-0">Employee Known As</label>
                 <input pInputText id="name" class="" name="empShName" [(ngModel)]="emp.empShName" />
             </div>
-            <div class="field mb-2 col-12 md:col-6 lg:col-4">
-                <label for="nickname2" class="font-medium text-900">Employee Known As(Arabic)</label>
+            <div class="field mb-2 col-span-12 md:col-span-6 lg:col-span-4">
+                <label for="nickname2" class="font-medium text-surface-900 dark:text-surface-0">Employee Known As(Arabic)</label>
                 <input pInputText [pKeyFilter]="arabicRegex" id="name" class="" name="empArabicShName"
                     [(ngModel)]="emp.empArabicShName" />
             </div>
-            <div class="field mb-2 col-12 md:col-6 lg:col-4">
-                <label for="nickname2" class="font-medium text-900">Employee Code</label>
+            <div class="field mb-2 col-span-12 md:col-span-6 lg:col-span-4">
+                <label for="nickname2" class="font-medium text-surface-900 dark:text-surface-0">Employee Code</label>
                 <input pInputText id="name" class="" name="empCd" [(ngModel)]="emp.empCd" [required]="true" />
                 <small class="p-error" id="username-help">Employee code required.</small>
             </div>
-            <div class="field mb-2 col-12 md:col-6 lg:col-4">
-                <label id="active" class="font-medium text-900">Active Status</label>
-                <div class="flex align-items-center w-auto">
+            <div class="field mb-2 col-span-12 md:col-span-6 lg:col-span-4">
+                <label id="active" class="font-medium text-surface-900 dark:text-surface-0">Active Status</label>
+                <div class="flex items-center w-auto">
                     <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on" [(ngModel)]="emp.active"
                         name="active"></p-inputSwitch>
                     <!-- <p-selectButton [options]="stateOptions" optionLabel="label" optionValue="value"
                         styleClass="flex w-full" [(ngModel)]="emp.active" [unselectable]="true" name="active">
                         <ng-template let-item pTemplate>
-                            <div class="inline-flex align-items-center justify-content-center">
+                            <div class="inline-flex items-center justify-center">
                                 <i [class]="'mr-1 pi pi-circle-on text-green-500'" *ngIf="item.value"></i>
                                 <i [class]="'mr-1 pi pi-circle-on text-red-500'" *ngIf="!item.value"></i>
                                 <span>{{item.label}}</span>
@@ -43,101 +43,101 @@
                 </div>
             </div>
             <p-divider styleClass="w-full" class="w-full"></p-divider>
-            <div class="field mb-2 col-12 md:col-6 lg:col-3">
-                <label for="nickname2" class="font-medium text-900">Joined Date</label>
+            <div class="field mb-2 col-span-12 md:col-span-6 lg:col-span-3">
+                <label for="nickname2" class="font-medium text-surface-900 dark:text-surface-0">Joined Date</label>
                 <p-calendar [iconDisplay]="'input'" [showIcon]="true" name="joinDate"
                     [(ngModel)]="emp.joinDate"></p-calendar>
             </div>
-            <div class="field mb-2 col-12 md:col-6 lg:col-3">
-                <label for="nickname2" class="font-medium text-900">Service Start Date</label>
+            <div class="field mb-2 col-span-12 md:col-span-6 lg:col-span-3">
+                <label for="nickname2" class="font-medium text-surface-900 dark:text-surface-0">Service Start Date</label>
                 <p-calendar [iconDisplay]="'input'" [showIcon]="true" name="serviceStartDate"
                     [(ngModel)]="emp.serviceStartDate" [required]="true"></p-calendar>
                 <small class="p-error" id="username-help">Service start date required.</small>
             </div>
-            <div class="field mb-2 col-12 md:col-6 lg:col-3">
-                <label for="nickname2" class="font-medium text-900">User Profile</label>
+            <div class="field mb-2 col-span-12 md:col-span-6 lg:col-span-3">
+                <label for="nickname2" class="font-medium text-surface-900 dark:text-surface-0">User Profile</label>
                 <p-dropdown [options]="userProfiles" placeholder="Select a Profile" optionLabel="name"
                     inputId="float-label" name="userProfile" [(ngModel)]="emp.userProfile" optionValue="id"
                     [showClear]="true" [required]="true"></p-dropdown>
                 <small class="p-error" id="username-help">User profile required.</small>
             </div>
-            <div class="field mb-2 col-12 md:col-6 lg:col-3">
-                <label for="nickname2" class="font-medium text-900">Employee Group</label>
+            <div class="field mb-2 col-span-12 md:col-span-6 lg:col-span-3">
+                <label for="nickname2" class="font-medium text-surface-900 dark:text-surface-0">Employee Group</label>
                 <p-dropdown [options]="employeeGroups" placeholder="Select a Type" optionLabel="name" optionValue="id"
                     inputId="float-label" name="grpCd" [(ngModel)]="emp.grpCd" [showClear]="true"></p-dropdown>
             </div>
-            <div class="field mb-2 col-12 md:col-6 lg:col-3">
-                <label for="nickname2" class="font-medium text-900">Report To</label>
+            <div class="field mb-2 col-span-12 md:col-span-6 lg:col-span-3">
+                <label for="nickname2" class="font-medium text-surface-900 dark:text-surface-0">Report To</label>
                 <p-dropdown [options]="rpersons" placeholder="Select an Employee" optionLabel="name" optionValue="id"
                     inputId="float-label" name="reportTo" [(ngModel)]="emp.reportTo" [filter]="true"
                     class="report-persons" [showClear]="true">
                     <!-- <ng-template let-item pTemplate="group">
-                        <div class="flex flex-wrap justify-content-between align-items-center">
-                            <div class="font-semibold text-900">{{ item.label }}</div>
+                        <div class="flex flex-wrap justify-between items-center">
+                            <div class="font-semibold text-surface-900 dark:text-surface-0">{{ item.label }}</div>
                         </div>
                     </ng-template> -->
                     <ng-template let-item pTemplate="item">
-                        <div class="flex justify-content-between align-items-center">
-                            <div class="flex flex-column">
-                                <span class="font-medium text-color-secondary">{{item.code}}</span>
+                        <div class="flex justify-between items-center">
+                            <div class="flex flex-col">
+                                <span class="font-medium text-muted-color">{{item.code}}</span>
                                 <span class="font-semibold">{{ item.name }}</span>
                             </div>
-                            <div class="flex flex-column justify-content-end flex-wrap">
-                                <span class="font-semibold text-900 text-right">{{item.company}}</span>
-                                <span class="font-medium text-900 text-right">{{item.department}}</span>
+                            <div class="flex flex-col justify-end flex-wrap">
+                                <span class="font-semibold text-surface-900 dark:text-surface-0 text-right">{{item.company}}</span>
+                                <span class="font-medium text-surface-900 dark:text-surface-0 text-right">{{item.department}}</span>
                             </div>
                         </div>
                     </ng-template>
                 </p-dropdown>
             </div>
-            <div class="field mb-2 col-12 md:col-6 lg:col-3">
-                <label for="nickname2" class="font-medium text-900">Location</label>
+            <div class="field mb-2 col-span-12 md:col-span-6 lg:col-span-3">
+                <label for="nickname2" class="font-medium text-surface-900 dark:text-surface-0">Location</label>
                 <p-dropdown [options]="locations" placeholder="Select a Location" optionLabel="name" optionValue="id"
                     inputId="float-label" name="locationCd" [(ngModel)]="emp.locationCd"
                     [showClear]="true"></p-dropdown>
             </div>
-            <div class="field mb-2 col-12 md:col-6 lg:col-3">
-                <label for="nickname2" class="font-medium text-900">National ID</label>
+            <div class="field mb-2 col-span-12 md:col-span-6 lg:col-span-3">
+                <label for="nickname2" class="font-medium text-surface-900 dark:text-surface-0">National ID</label>
                 <input pInputText id="name" name="cpr" [(ngModel)]="emp.cpr" optionLabel="name" optionValue="id" />
             </div>
-            <div class="field mb-2 col-12 md:col-6 lg:col-3">
-                <label for="nickname2" class="font-medium text-900">License</label>
+            <div class="field mb-2 col-span-12 md:col-span-6 lg:col-span-3">
+                <label for="nickname2" class="font-medium text-surface-900 dark:text-surface-0">License</label>
                 <input pInputText id="name" name="license" [(ngModel)]="emp.license" />
             </div>
             <p-divider styleClass="w-full" class="w-full"></p-divider>
-            <div class="field mb-2 col-12 md:col-6 lg:col-3">
-                <label for="discontinued" class="font-medium text-900">Discontinued</label>
-                <div class="flex align-items-center w-auto">
+            <div class="field mb-2 col-span-12 md:col-span-6 lg:col-span-3">
+                <label for="discontinued" class="font-medium text-surface-900 dark:text-surface-0">Discontinued</label>
+                <div class="flex items-center w-auto">
                     <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on" [(ngModel)]="emp.discontinued"
                         name="discontinued" (ngModelChange)="onModelChange(form)"></p-inputSwitch>
 
                 </div>
             </div>
-            <div class="field mb-2 col-12 md:col-6 lg:col-3">
-                <label for="nickname2" class="font-medium text-900">Resignation Submission Date</label>
+            <div class="field mb-2 col-span-12 md:col-span-6 lg:col-span-3">
+                <label for="nickname2" class="font-medium text-surface-900 dark:text-surface-0">Resignation Submission Date</label>
                 <p-calendar [iconDisplay]="'input'" [showIcon]="true" name="resignationDt"
                     [(ngModel)]="emp.resignationDt"></p-calendar>
             </div>
-            <div class="field mb-2 col-12 md:col-6 lg:col-3">
-                <label for="nickname2" class="font-medium text-900">Discontinued Date</label>
+            <div class="field mb-2 col-span-12 md:col-span-6 lg:col-span-3">
+                <label for="nickname2" class="font-medium text-surface-900 dark:text-surface-0">Discontinued Date</label>
                 <p-calendar [iconDisplay]="'input'" [showIcon]="true" name="discontinuedDate"
                     [(ngModel)]="emp.discontinuedDate"></p-calendar>
                 <small class="p-error" id="username-help">Discontinued Date required.</small>
             </div>
-            <div class="field mb-2 col-12 md:col-6 lg:col-3">
-                <label for="nickname2" class="font-medium text-900">Type</label>
+            <div class="field mb-2 col-span-12 md:col-span-6 lg:col-span-3">
+                <label for="nickname2" class="font-medium text-surface-900 dark:text-surface-0">Type</label>
                 <p-dropdown [options]="resignTypes" placeholder="Select a Type" optionLabel="name" inputId="float-label"
                     name="discontinuedReasonId" [showClear]="true" [(ngModel)]="emp.discontinuedReasonId"
                     optionLabel="name" optionValue="id"></p-dropdown>
             </div>
-            <div class="field mb-0 col-12 md:col-6 lg:col-3">
-                <label for="nickname2" class="font-medium text-900">Discontinue Reason</label>
+            <div class="field mb-0 col-span-12 md:col-span-6 lg:col-span-3">
+                <label for="nickname2" class="font-medium text-surface-900 dark:text-surface-0">Discontinue Reason</label>
                 <textarea id="address" rows="3" cols="30" pInputTextarea name="discontinuedReason"
                     [(ngModel)]="emp.discontinuedReason"></textarea>
                 <small class="p-error" id="username-help">Discontinue Reason required.</small>
             </div>
             <p-divider styleClass="w-full" class="w-full"></p-divider>
-            <div class="col-12 flex justify-content-end flex-wrap">
+            <div class="col-span-12 flex justify-end flex-wrap">
                 <p-toast />
                 <p-button label="Update" severity="primary" [outlined]="true" [loading]="isSaving" icon="pi pi-check"
                     (onClick)="onSubmit(form)" styleClass="w-auto"></p-button>

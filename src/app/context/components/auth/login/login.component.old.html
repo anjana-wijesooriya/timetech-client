@@ -1,11 +1,11 @@
 
 <div>
     
-    <div class="p-4">
-        <div class="auth-logo text-center mt-5">
+    <div class="p-6">
+        <div class="auth-logo text-center mt-8">
             <img src="../../../../assets/images/time-tech/TimeTech_1.png" alt="" class="width-auto">
         </div>
-        <h1 class="mb-3 text-18">Sign In</h1>
+        <h1 class="mb-4 text-18">Sign In</h1>
         <h6 class="invalid-tooltip" *ngIf="errorMsg != ''">{{errorMsg}}</h6>
         <form [formGroup]="signinForm" (ngSubmit)="onSubmitLogin()" novalidate autocomplete="off">
             <div class="form-group">
@@ -28,17 +28,17 @@
                 </div>
             </div>
             <!-- <button class="btn btn-rounded btn-primary btn-block mt-2" [disabled]="signinForm.invalid">Sign In</button> -->
-            <btn-loading btnClass="btn-primary btn-rounded btn-block mt-3" 
+            <btn-loading btnClass="btn-primary btn-rounded btn-block mt-4" 
             [loadingText]="loadingText" [loading]="loading" [disabled]="signinForm.invalid && signinForm.untouched">
                 Sign In
             </btn-loading>
         </form>
 
-        <div class="mt-3 text-center">
+        <div class="mt-4 text-center">
             <a href="" class="text-muted" routerLink="/sessions/forgot"><u>Forgot Password</u></a>
         </div>
     </div>
-    <!-- <div class="auth-logo text-right mb-4">
+    <!-- <div class="auth-logo text-right mb-6">
         <h5 class="auth-text">Powered by</h5>
         <img src="https://www.dthree.co/images/D3_logo.png" alt="">
     </div> -->

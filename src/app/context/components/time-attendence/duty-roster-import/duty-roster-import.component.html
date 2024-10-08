@@ -1,11 +1,11 @@
 <div class="duty-roster">
-    <div class="flex gap-3 p-4 rounded-lg flex-column glass-effect effect-3d glassmorphism">
+    <div class="flex gap-4 p-6 rounded-lg flex-col glass-effect effect-3d glassmorphism">
         <div class="flex items-center justify-between mb-1">
             <h1 class="m-0 text-2xl font-semibold">Import Duty Roster </h1>
         </div>
         <div
-            class="w-full h-full p-4 border border-gray-300 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 bg-[#222E3A]/[6%]  glass glass-sm m-0">
-            <form class="flex flex-wrap w-full gap-3" [formGroup]="formgroup">
+            class="w-full h-full p-6 border border-gray-300 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 bg-[#222E3A]/[6%]  glass glass-sm m-0">
+            <form class="flex flex-wrap w-full gap-4" [formGroup]="formgroup">
                 <div class="flex-1 field p-fluid">
                     <label class="flex w-full text-gray-700">Month</label>
                     <p-calendar [showIcon]="true"
@@ -25,16 +25,16 @@
 
 
                 </div>
-                <div class="flex flex-wrap mt-4 space-x-2">
+                <div class="flex flex-wrap mt-6 space-x-2">
                     <p-button [label]="'Add to Roster'" icon="bx bx-import" [iconPos]="'left'" [loading]="saving"
                         (onClick)="onSaveRoster()" *ngIf="rosterEntries && rosterEntries.length > 0"
-                        styleClass="btn btn-outline transition duration-500 rounded-md glass-effect effect-3d btn glass px-4 py-3 hover:drop-shadow-2xl hover:ring-1">
+                        styleClass="btn btn-outline transition duration-500 rounded-md glass-effect effect-3d btn glass px-6 py-4 hover:drop-shadow-2xl hover:ring-1">
                     </p-button>
                     <p-button [label]="'Import'" icon="bx bx-import" [iconPos]="'left'" (onClick)="uploadRosterFile()"
-                        styleClass="btn btn-outline transition duration-500 rounded-md glass-effect effect-3d btn glass px-4 py-3 hover:drop-shadow-2xl hover:ring-1">
+                        styleClass="btn btn-outline transition duration-500 rounded-md glass-effect effect-3d btn glass px-6 py-4 hover:drop-shadow-2xl hover:ring-1">
                     </p-button>
                     <p-button [label]="'Clear'" (onClick)="onClearTable()" icon="pi pi-pencil" [iconPos]="'left'"
-                        styleClass="btn btn-outline transition duration-500 rounded-md glass-effect effect-3d btn glass px-4 py-3 hover:drop-shadow-2xl hover:ring-1">
+                        styleClass="btn btn-outline transition duration-500 rounded-md glass-effect effect-3d btn glass px-6 py-4 hover:drop-shadow-2xl hover:ring-1">
                         <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -54,14 +54,14 @@
                                 <thead class="bg-gray-50 dark:bg-neutral-700">
                                     <tr>
                                         <th scope="col"
-                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start dark:text-neutral-500">
+                                            class="px-12 py-4 text-xs font-medium text-gray-500 uppercase text-start dark:text-neutral-500">
                                             ##</th>
                                         <th scope="col"
-                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start dark:text-neutral-500">
+                                            class="px-12 py-4 text-xs font-medium text-gray-500 uppercase text-start dark:text-neutral-500">
                                             Employee</th>
 
                                         <th scope="col" *ngFor="let date of daysInMonth"
-                                            class="px-4 py-3 text-xs font-medium text-center text-gray-500 uppercase dark:text-neutral-500">
+                                            class="px-6 py-4 text-xs font-medium text-center text-gray-500 uppercase dark:text-neutral-500">
                                             {{date.dateNumber}}
                                         </th>
 
@@ -71,16 +71,16 @@
                                     <ng-container *ngFor="let item of tableEntries | keyvalue; let i=index;">
                                         <tr class="hover:bg-gray-100 dark:hover:bg-neutral-700">
                                             <td
-                                                class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-neutral-200">
+                                                class="px-12 py-6 text-sm text-gray-800 whitespace-nowrap dark:text-neutral-200">
                                                 {{item.value[0].empCode}}
                                             </td>
                                             <td
-                                                class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-neutral-200">
+                                                class="px-12 py-6 text-sm text-gray-800 whitespace-nowrap dark:text-neutral-200">
                                                 {{item.value[0].empName}}
                                             </td>
                                             
                                             <td *ngFor="let row of item.value"
-                                                class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-neutral-200">
+                                                class="px-12 py-6 text-sm text-gray-800 whitespace-nowrap dark:text-neutral-200">
                                                 {{row.shift}}
                                             </td>
                                         </tr>

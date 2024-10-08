@@ -1,18 +1,18 @@
 <div class="p-0">
-    <div class="grid formgrid p-fluid">
-        <div class="col-12">
-            <p-panel [toggleable]="true" styleClass="border-noround">
+    <div class="grid grid-cols-12 gap-4 formgrid p-fluid">
+        <div class="col-span-12">
+            <p-panel [toggleable]="true" styleClass="rounded-none">
                 <ng-template pTemplate="header">
-                    <div class="flex align-items-center gap-2">
+                    <div class="flex items-center gap-2">
                         <!-- <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" size="large"
                     shape="circle" /> -->
                         <span class="font-bold">Emergency Contact</span>
                     </div>
                 </ng-template>
                 <ng-template pTemplate="footer">
-                    <div class="flex flex-wrap align-items-center justify-content-between gap-3">
+                    <div class="flex flex-wrap items-center justify-between gap-4">
                         <span class="p-text-secondary">Updated 2 hours ago</span>
-                        <div class="flex align-items-center gap-2">
+                        <div class="flex items-center gap-2">
                             <p-confirmDialog />
                             <p-toast></p-toast>
                             <p-button type="submit" label="Update" severity="primary" [outlined]="true"
@@ -26,23 +26,23 @@
                 <div>
                     <form (ngSubmit)="onSubmit()" [formGroup]="validationForm" novalidate autocomplete="off"
                         #form="ngForm">
-                        <div class="grid formgrid p-fluid p-2">
-                            <div class="field md:mb-4 col-12 md:col-6 lg:col-4">
-                                <label for="name" class="font-medium text-900">Contact Name</label>
+                        <div class="grid grid-cols-12 gap-4 formgrid p-fluid p-2">
+                            <div class="field md:mb-6 col-span-12 md:col-span-6 lg:col-span-4">
+                                <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Contact Name</label>
                                 <input pInputText id="name" class="" formControlName="emergencyContactName"
                                     name="emergencyContactName" [(ngModel)]="employeeData.emergencyContactName"
                                     autocomplete="off" />
                                 <small class="p-error" id="username-help">Contact Name required.</small>
                             </div>
-                            <div class="field md:mb-4 col-12 md:col-6 lg:col-4">
-                                <label for="name" class="font-medium text-900">Contact Relation</label>
+                            <div class="field md:mb-6 col-span-12 md:col-span-6 lg:col-span-4">
+                                <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Contact Relation</label>
                                 <input pInputText id="name" class="" formControlName="emergencyContactRelation"
                                     name="emergencyContactRelation"
                                     [(ngModel)]="employeeData.emergencyContactRelation" />
                                 <small class="p-error" id="username-help">Contact Relation required.</small>
                             </div>
-                            <div class="field md:mb-4 col-12 md:col-6 lg:col-4">
-                                <label for="name" class="font-medium text-900">Contact Number</label>
+                            <div class="field md:mb-6 col-span-12 md:col-span-6 lg:col-span-4">
+                                <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Contact Number</label>
                                 <input pInputText id="name" class="" formControlName="emergencyContactNo"
                                     name="emergencyContactNo" [(ngModel)]="employeeData.emergencyContactNo" />
                                 <small class="p-error" id="username-help">Contact Number required.</small>
@@ -51,13 +51,13 @@
                     </form>
                 </div>
             </p-panel>
-            <p-panel [toggleable]="true" styleClass="border-noround mt-4">
+            <p-panel [toggleable]="true" styleClass="rounded-none mt-6">
                 <ng-template pTemplate="header">
-                    <div class="flex flex-wrap align-items-center justify-content-between gap-3">
+                    <div class="flex flex-wrap items-center justify-between gap-4">
                         <!-- <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" size="large"
                         shape="circle" /> -->
                         <span class="flex font-bold">Contact Details</span>
-                        <!-- <div class="flex align-items-center gap-2">
+                        <!-- <div class="flex items-center gap-2">
                     <p-button label="Add Contact" severity="primary" [outlined]="true" [loading]="isSaving"
                         icon="pi pi-plus" (onClick)="onSubmit()" styleClass="w-auto"></p-button>
                 </div> -->
@@ -69,7 +69,7 @@
                         scrollHeight="calc(100vh - 305px)" dataKey="id" [loading]="loadingContacts" [rows]="10"
                         [autoLayout]="true" styleClass="p-datatable-sm p-datatable-gridlines w-full">
                         <ng-template pTemplate="caption">
-                            <div class="flex align-items-center justify-content-end">
+                            <div class="flex items-center justify-end">
 
                                 <p-button label="Add Contact" severity="primary" [outlined]="true" [loading]="isSaving"
                                     icon="pi pi-plus"
@@ -115,48 +115,48 @@
                     </ng-template>
                     <ng-template pTemplate="content">
                         <div class="flex-auto overflow-y-auto">
-                            <div class="text-center mb-4">
+                            <div class="text-center mb-6">
                                 <!-- <img src="../../../../../assets/context/images/avatar/onyamalimba.png"
                                 style="width: 70px; height: 70px;"> -->
-                                <div class="text-900 mt-3 mb-2 text-xl font-medium">John Doe</div>
-                                <span class="text-700">Father</span>
+                                <div class="text-surface-900 dark:text-surface-0 mt-4 mb-2 text-xl font-medium">John Doe</div>
+                                <span class="text-surface-700 dark:text-surface-100">Father</span>
                             </div>
                         </div>
-                        <div class="flex align-items-center mb-5">
+                        <div class="flex items-center mb-8">
                             <form #form="ngForm" [formGroup]="contactForm" novalidate autocomplete="off">
-                                <div class="grid formgrid p-fluid p-2">
-                                    <div class="field md:mb-4 col-12 md:col-6 ">
-                                        <label for="name" class="font-medium text-900">Type</label>
+                                <div class="grid grid-cols-12 gap-4 formgrid p-fluid p-2">
+                                    <div class="field md:mb-6 col-span-12 md:col-span-6 ">
+                                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Type</label>
                                         <p-dropdown [options]="contactTypes" placeholder="Select a Type"
                                             optionLabel="name" optionValue="key" inputId="float-label"
                                             formControlName="contactType" [showClear]="true"></p-dropdown>
                                         <small class="p-error" id="username-help">Type required.</small>
                                     </div>
-                                    <div class="field md:mb-4 col-12 md:col-6">
-                                        <label for="name" class="font-medium text-900">Email</label>
+                                    <div class="field md:mb-6 col-span-12 md:col-span-6">
+                                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Email</label>
                                         <input pInputText id="username" class="" formControlName="email" />
                                         <small class="p-error" id="username-help">Invalid.</small>
                                     </div>
-                                    <div class="field md:mb-4 col-12 md:col-6">
-                                        <label for="name" class="font-medium text-900">Mobile</label>
+                                    <div class="field md:mb-6 col-span-12 md:col-span-6">
+                                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Mobile</label>
                                         <input pInputText id="mobile" class="" formControlName="mobileNo" />
                                     </div>
-                                    <div class="field md:mb-4 col-12 md:col-6">
-                                        <label for="name" class="font-medium text-900">Telephone</label>
+                                    <div class="field md:mb-6 col-span-12 md:col-span-6">
+                                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Telephone</label>
                                         <input pInputText id="telephone" class="" formControlName="telephone" />
                                     </div>
-                                    <div class="field md:mb-4 col-12 md:col-6">
-                                        <label for="name" class="font-medium text-900">Address</label>
+                                    <div class="field md:mb-6 col-span-12 md:col-span-6">
+                                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Address</label>
                                         <textarea id="address" rows="4" cols="30" pInputTextarea
                                             formControlName="address"></textarea>
                                     </div>
-                                    <div class="field md:mb-4 col-12 md:col-6">
-                                        <label for="name" class="font-medium text-900">Notes</label>
+                                    <div class="field md:mb-6 col-span-12 md:col-span-6">
+                                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Notes</label>
                                         <textarea id="notes" rows="4" cols="30" pInputTextarea
                                             formControlName="notes"></textarea>
                                     </div>
-                                    <div class="field md:mb-4 col-12 md:col-6">
-                                        <label for="name" class="font-medium text-900">Effective Date</label>
+                                    <div class="field md:mb-6 col-span-12 md:col-span-6">
+                                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Effective Date</label>
                                         <p-calendar [iconDisplay]="'input'" [showIcon]="true"
                                             formControlName="effectiveDate"></p-calendar>
                                     </div>
@@ -165,7 +165,7 @@
                         </div>
                     </ng-template>
                     <ng-template pTemplate="footer">
-                        <div class="flex align-items-center justify-content-end">
+                        <div class="flex items-center justify-end">
                             <p-button label="Save" severity="primary" [outlined]="true" [loading]="isSavingContact"
                                 icon="pi pi-check" (onClick)="onSubmitContact()" styleClass="w-auto"></p-button>
                         </div>

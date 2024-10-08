@@ -3,7 +3,7 @@
         tableStyleClass="w-full" [paginator]="true" [autoLayout]="true" scrollHeight="calc(100vh - 20rem)" dataKey="id"
         [loading]="isLoading" [rows]="10">
         <ng-template pTemplate="caption">
-            <div class="flex align-items-center justify-content-end">
+            <div class="flex items-center justify-end">
                 <p-button label="Add Dependent" severity="primary" [outlined]="true" [loading]="isSaving"
                     icon="pi pi-plus" (onClick)="openAddDependantModel(undefined);" styleClass="w-auto"></p-button>
             </div>
@@ -49,71 +49,71 @@
             <div class="font-bold text-xl">Add New Dependent</div>
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="flex align-items-center mb-5">
+            <div class="flex items-center mb-8">
                 <form #form="ngForm" novalidate autocomplete="off">
-                    <div class="grid formgrid p-fluid p-2" ngModelGroup="selectedDependent">
-                        <div class="field col-12 md:col-4">
-                            <label for="name" class="font-medium text-900">Dependent Name</label>
+                    <div class="grid grid-cols-12 gap-4 formgrid p-fluid p-2" ngModelGroup="selectedDependent">
+                        <div class="field col-span-12 md:col-span-4">
+                            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Dependent Name</label>
                             <input pInputText id="name" [(ngModel)]="selectedDependent.dependentName"
                                 name="dependentName" [required]="true" />
                             <small class="p-error" id="username-help">Dependent Name required.</small>
                         </div>
-                        <div class="field  col-12 md:col-4">
-                            <label for="name" class="font-medium text-900">Relation</label>
+                        <div class="field  col-span-12 md:col-span-4">
+                            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Relation</label>
                             <p-dropdown [options]="relations" placeholder="Select Relation" optionLabel="value"
                                 optionValue="name" inputId="float-label" name="relation"
                                 [(ngModel)]="selectedDependent.relation" [showClear]="true"
                                 [required]="true"></p-dropdown>
                             <small class="p-error" id="username-help">Relation required.</small>
                         </div>
-                        <div class="field col-12 md:col-4">
-                            <label for="name" class="font-medium text-900">Date of Birth</label>
+                        <div class="field col-span-12 md:col-span-4">
+                            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Date of Birth</label>
                             <p-calendar [iconDisplay]="'input'" [showIcon]="true" name="dateBirth"
                                 [(ngModel)]="selectedDependent.dateBirth"></p-calendar>
                             <small class="p-error">Date of Birth required.</small>
 
                         </div>
-                        <div class="field col-12 md:col-4">
-                            <label for="name" class="font-medium text-900">Gender</label>
+                        <div class="field col-span-12 md:col-span-4">
+                            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Gender</label>
                             <p-dropdown [options]="gender" placeholder="Select Gender" name="gender"
                                 [(ngModel)]="selectedDependent.gender" optionLabel="name" optionValue="key"
                                 inputId="float-label" [showClear]="true"></p-dropdown>
                         </div>
-                        <div class="field col-12 md:col-4">
-                            <label for="name" class="font-medium text-900">Major/Minor</label>
+                        <div class="field col-span-12 md:col-span-4">
+                            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Major/Minor</label>
                             <p-dropdown [options]="dependentType" placeholder="Select a Type" name="majorMinor"
                                 [(ngModel)]="selectedDependent.majorMinor" optionLabel="name" optionValue="key"
                                 inputId="float-label" [showClear]="true"></p-dropdown>
                         </div>
-                        <div class="field col-12 md:col-4">
-                            <label for="name" class="font-medium text-900">Visa cost by company</label>
-                            <div class="flex align-items-center w-auto">
+                        <div class="field col-span-12 md:col-span-4">
+                            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Visa cost by company</label>
+                            <div class="flex items-center w-auto">
                                 <p-inputSwitch class="p-inputSwitch-lg" id="visa-cost" name="isVisaCostByCompany"
                                     [(ngModel)]="selectedDependent.isVisaCostByCompany"></p-inputSwitch>
                             </div>
                         </div>
-                        <div class="col-12 md:col-6">
+                        <div class="col-span-12 md:col-span-6">
                             <p-fieldset>
                                 <ng-template pTemplate="header">
-                                    <div class="flex align-items-center gap-2 px-2 py-2">
+                                    <div class="flex items-center gap-2 px-2 py-2">
                                         <p-checkbox name="isSchoolFee" value="false" [binary]="true" inputId="binary"
                                             [(ngModel)]="selectedDependent.isSchoolFee"
                                             (ngModelChange)="onModelChange(form)"></p-checkbox>
                                         <span class="p-fieldset-legend-text text-primary">School Fees</span>
                                     </div>
                                 </ng-template>
-                                <div class="grid formgrid p-fluid">
-                                    <div class="field col-12 md:col-6">
-                                        <label for="name" class="font-medium text-900">Based On Receipt</label>
-                                        <div class="flex align-items-center w-auto">
+                                <div class="grid grid-cols-12 gap-4 formgrid p-fluid">
+                                    <div class="field col-span-12 md:col-span-6">
+                                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Based On Receipt</label>
+                                        <div class="flex items-center w-auto">
                                             <p-inputSwitch class="p-inputSwitch-lg" id="base-on"
                                                 [disabled]="!selectedDependent.isSchoolFee"
                                                 [(ngModel)]="selectedDependent.isBasedOnFeeReceipt"
                                                 name="isBasedOnFeeReceipt"></p-inputSwitch>
                                         </div>
                                     </div>
-                                    <div class="field col-12 md:col-6">
-                                        <div class="flex align-items-center w-auto">
+                                    <div class="field col-span-12 md:col-span-6">
+                                        <div class="flex items-center w-auto">
                                             <p-selectButton [options]="stateOptions" optionLabel="label"
                                                 optionValue="value" size="small" styleClass="flex"
                                                 [(ngModel)]="selectedDependent.paySchoolFeeYearly"
@@ -122,16 +122,16 @@
                                         </div>
 
                                     </div>
-                                    <div class="field col-12 md:col-6">
-                                        <label for="name" class="font-medium text-900">Pay month</label>
+                                    <div class="field col-span-12 md:col-span-6">
+                                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Pay month</label>
                                         <p-dropdown [options]="months" placeholder="Select Month"
                                             [(ngModel)]="selectedDependent.schoolFeeYearlyPayMonth" optionLabel="name"
                                             [showClear]="true" optionValue="key" name="schoolFeeYearlyPayMonth"
                                             inputId="float-label"
                                             [disabled]="!selectedDependent.isSchoolFee"></p-dropdown>
                                     </div>
-                                    <div class="field col-12 md:col-6">
-                                        <label for="name" class="font-medium text-900">Monthly Fees</label>
+                                    <div class="field col-span-12 md:col-span-6">
+                                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Monthly Fees</label>
                                         <input pInputText id="name" name="monthlyFeeAmount"
                                             [(ngModel)]="selectedDependent.monthlyFeeAmount"
                                             [disabled]="!selectedDependent.isSchoolFee" />
@@ -141,35 +141,35 @@
                                 </div>
                             </p-fieldset>
                         </div>
-                        <div class="col-12 md:col-6">
+                        <div class="col-span-12 md:col-span-6">
                             <p-fieldset [toggleable]="false">
                                 <ng-template pTemplate="header">
-                                    <div class="flex align-items-center gap-2 px-2 py-2">
+                                    <div class="flex items-center gap-2 px-2 py-2">
                                         <p-checkbox name="hasAirTicket" value="false" [binary]="true" inputId="binary"
                                             [(ngModel)]="selectedDependent.hasAirTicket"
                                             (ngModelChange)="onModelChange(form)"></p-checkbox>
                                         <span class="p-fieldset-legend-text text-primary">Air Ticket</span>
                                     </div>
                                 </ng-template>
-                                <div class="grid formgrid p-fluid">
-                                    <div class="field col-12 md:col-6">
-                                        <label for="base-on" class="font-medium text-900">Has Opening Ticket</label>
-                                        <div class="flex align-items-center w-auto">
+                                <div class="grid grid-cols-12 gap-4 formgrid p-fluid">
+                                    <div class="field col-span-12 md:col-span-6">
+                                        <label for="base-on" class="font-medium text-surface-900 dark:text-surface-0">Has Opening Ticket</label>
+                                        <div class="flex items-center w-auto">
                                             <p-inputSwitch class="p-inputSwitch-lg" id="base-on"
                                                 [disabled]="!selectedDependent.hasAirTicket"
                                                 [(ngModel)]="selectedDependent.hasOpenTicket" name="hasOpenTicket"
                                                 (ngModelChange)="onModelChange(form)"></p-inputSwitch>
                                         </div>
                                     </div>
-                                    <div class="field col-12 md:col-6">
-                                        <label for="base-on" class="font-medium text-900">Effective Date</label>
+                                    <div class="field col-span-12 md:col-span-6">
+                                        <label for="base-on" class="font-medium text-surface-900 dark:text-surface-0">Effective Date</label>
                                         <p-calendar [iconDisplay]="'input'" [showIcon]="true" name="openingDate"
                                             [(ngModel)]="selectedDependent.openingDate"
                                             [disabled]="!selectedDependent.hasAirTicket"></p-calendar>
                                         <small class="p-error" id="username-help">Effective Date required.</small>
                                     </div>
-                                    <div class="field col-12 md:col-6">
-                                        <label for="base-on" class="font-medium text-900">Opening tickets</label>
+                                    <div class="field col-span-12 md:col-span-6">
+                                        <label for="base-on" class="font-medium text-surface-900 dark:text-surface-0">Opening tickets</label>
                                         <input pInputText id="name" name="openingTicket"
                                             [(ngModel)]="selectedDependent.openingTicket"
                                             [disabled]="!selectedDependent.hasAirTicket" />
@@ -183,7 +183,7 @@
             </div>
         </ng-template>
         <ng-template pTemplate="footer">
-            <div class="flex align-items-center justify-content-end">
+            <div class="flex items-center justify-end">
                 <p-button label="Save" severity="primary" [outlined]="true" [loading]="isSaving" icon="pi pi-check"
                     (onClick)="onSubmitDependent(form)"></p-button>
 

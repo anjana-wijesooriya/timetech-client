@@ -1,7 +1,7 @@
-<div class="p-0 surface-card shadow-3 border-round h-full">
+<div class="p-0 bg-surface-0 dark:bg-surface-900 shadow-md rounded-border h-full">
     <p-panel>
         <ng-template pTemplate="header">
-            <div class="flex align-items-center gap-2">
+            <div class="flex items-center gap-2">
                 <p-avatar icon="font-semibold text-lg ic i-Folders" shape="circle" />
                 <span class="font-bold">
                     Documents
@@ -23,7 +23,7 @@
                 <ng-template pTemplate="header">
                     <tr>
                         <th>
-                            <div class="flex justify-content-between align-items-center">
+                            <div class="flex justify-between items-center">
                                 Dependent
                                 <!-- <p-sortIcon field="empCd"></p-sortIcon> -->
                                 <p-columnFilter class="ml-auto" type="text" field="dependentName" display="menu"
@@ -31,13 +31,13 @@
                             </div>
                         </th>
                         <th>
-                            <div class="flex justify-content-between align-items-center">
+                            <div class="flex justify-between items-center">
                                 Doc Type
                                 <!-- <p-sortIcon field="empCd"></p-sortIcon> -->
                                 <p-columnFilter class="ml-auto" field="docType" matchMode="in" display="menu"
                                     [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
                                     <ng-template pTemplate="header">
-                                        <div class="px-3 pt-3 pb-0">
+                                        <div class="px-4 pt-4 pb-0">
                                             <span class="font-bold">Doc Type Picker</span>
                                         </div>
                                     </ng-template>
@@ -45,7 +45,7 @@
                                         <p-multiSelect [ngModel]="value" [options]="docTypes" placeholder="Any"
                                             (onChange)="filter($event.value)">
                                             <ng-template let-option pTemplate="item">
-                                                <div class="inline-block vertical-align-middle">
+                                                <div class="inline-block align-middle">
                                                     <span class="ml-1 mt-1">{{ option }}</span>
                                                 </div>
                                             </ng-template>
@@ -55,7 +55,7 @@
                             </div>
                         </th>
                         <th>
-                            <div class="flex justify-content-between align-items-center">
+                            <div class="flex justify-between items-center">
                                 Doc Name
                                 <!-- <p-sortIcon field="empCd"></p-sortIcon> -->
                                 <p-columnFilter class="ml-auto" type="text" field="name" display="menu"
@@ -63,7 +63,7 @@
                             </div>
                         </th>
                         <th>
-                            <div class="flex justify-content-between align-items-center">
+                            <div class="flex justify-between items-center">
                                 Doc No
                                 <!-- <p-sortIcon field="empCd"></p-sortIcon> -->
                                 <p-columnFilter class="ml-auto" type="text" field="docNo" display="menu"
@@ -71,21 +71,21 @@
                             </div>
                         </th>
                         <th>
-                            <div class="flex justify-content-between align-items-center">
+                            <div class="flex justify-between items-center">
                                 <span>Reminder</span>
                                 <!-- <p-sortIcon field="empCd"></p-sortIcon> -->
                                 <p-columnFilter type="boolean" field="remindMe" class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
                         <th>
-                            <div class="flex justify-content-between align-items-center">
+                            <div class="flex justify-between items-center">
                                 <span>Status</span>
                                 <!-- <p-sortIcon field="empCd"></p-sortIcon> -->
                                 <p-columnFilter type="boolean" field="active" class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
                         <th>
-                            <div class="flex justify-content-between align-items-center">
+                            <div class="flex justify-between items-center">
                                 <span>Expiry Date</span>
                                 <!-- <p-sortIcon field="empCd"></p-sortIcon> -->
                                 <p-columnFilter type="date" field="expiryDate" display="menu" class="ml-auto" />
@@ -146,65 +146,65 @@
     <p-sidebar [(visible)]="sidebarVisible" (onHide)="sidebarVisible = false">
         <ng-template pTemplate="header">Document Info</ng-template>
         <ng-template pTemplate="content">
-            <div class="grid" *ngIf="selectedDoc">
-                <div class="col-12">
+            <div class="grid grid-cols-12 gap-4" *ngIf="selectedDoc">
+                <div class="col-span-12">
                     <ul class="list-none p-0 m-0">
-                        <li class="flex flex-row surface-100 text-sm text-700 font-medium p-2 border-round mb-1">
-                            Linked to:<p class="text-900 ml-auto">{{selectedDoc.dependentName}}</p>
+                        <li class="flex flex-row bg-surface-100 dark:bg-surface-700 text-sm text-surface-700 dark:text-surface-100 font-medium p-2 rounded-border mb-1">
+                            Linked to:<p class="text-surface-900 dark:text-surface-0 ml-auto">{{selectedDoc.dependentName}}</p>
                         </li>
-                        <li class="flex flex-row surface-100 text-sm text-700 font-medium p-2 border-round mb-1">
+                        <li class="flex flex-row bg-surface-100 dark:bg-surface-700 text-sm text-surface-700 dark:text-surface-100 font-medium p-2 rounded-border mb-1">
                             Type:
-                            <p class="text-900 ml-auto">{{selectedDoc.docType}}</p>
+                            <p class="text-surface-900 dark:text-surface-0 ml-auto">{{selectedDoc.docType}}</p>
                         </li>
-                        <li class="flex flex-row surface-100 text-sm text-700 font-medium p-2 border-round mb-1">
+                        <li class="flex flex-row bg-surface-100 dark:bg-surface-700 text-sm text-surface-700 dark:text-surface-100 font-medium p-2 rounded-border mb-1">
                             Document Name:
-                            <p class="text-900 ml-auto">{{selectedDoc.name}}</p>
+                            <p class="text-surface-900 dark:text-surface-0 ml-auto">{{selectedDoc.name}}</p>
                         </li>
-                        <li class="flex flex-row surface-100 text-sm text-700 font-medium p-2 border-round mb-1">
+                        <li class="flex flex-row bg-surface-100 dark:bg-surface-700 text-sm text-surface-700 dark:text-surface-100 font-medium p-2 rounded-border mb-1">
                             Document No.:
-                            <p class="text-900 ml-auto">{{selectedDoc.docNo}}</p>
+                            <p class="text-surface-900 dark:text-surface-0 ml-auto">{{selectedDoc.docNo}}</p>
                         </li>
-                        <li class="flex flex-row surface-100 text-sm text-700 font-medium p-2 border-round mb-1">
+                        <li class="flex flex-row bg-surface-100 dark:bg-surface-700 text-sm text-surface-700 dark:text-surface-100 font-medium p-2 rounded-border mb-1">
                             Mark as old:
-                            <p class="text-900 ml-auto">
+                            <p class="text-surface-900 dark:text-surface-0 ml-auto">
                                 <p-tag [value]="selectedDoc.markAsOld ? 'Active' : 'Inactive'"
                                     [severity]="selectedDoc.markAsOld ? 'success' : 'warning'">
                                 </p-tag>
                             </p>
                         </li>
                         <li *ngIf="selectedDoc.markAsOld"
-                            class="flex flex-row surface-100 text-sm text-700 font-medium p-2 border-round mb-1">
+                            class="flex flex-row bg-surface-100 dark:bg-surface-700 text-sm text-surface-700 dark:text-surface-100 font-medium p-2 rounded-border mb-1">
                             Mark as old date:
-                            <p class="text-900 ml-auto">{{getDate(selectedDoc.markAsOldDate)| date : 'MM/dd/yyyy'}}</p>
+                            <p class="text-surface-900 dark:text-surface-0 ml-auto">{{getDate(selectedDoc.markAsOldDate)| date : 'MM/dd/yyyy'}}</p>
                         </li>
-                        <li class="flex flex-row surface-100 text-sm text-700 font-medium p-2 border-round mb-1">
+                        <li class="flex flex-row bg-surface-100 dark:bg-surface-700 text-sm text-surface-700 dark:text-surface-100 font-medium p-2 rounded-border mb-1">
                             Issue date:
-                            <p class="text-900 ml-auto">{{getDate(selectedDoc.issueDate) | date : 'MM/dd/yyyy'}}</p>
+                            <p class="text-surface-900 dark:text-surface-0 ml-auto">{{getDate(selectedDoc.issueDate) | date : 'MM/dd/yyyy'}}</p>
                         </li>
-                        <li class="flex flex-row surface-100 text-sm text-700 font-medium p-2 border-round mb-1">
+                        <li class="flex flex-row bg-surface-100 dark:bg-surface-700 text-sm text-surface-700 dark:text-surface-100 font-medium p-2 rounded-border mb-1">
                             Expiry date:
-                            <p class="text-900 ml-auto">{{getDate(selectedDoc.expiryDate)| date : 'MM/dd/yyyy'}}</p>
+                            <p class="text-surface-900 dark:text-surface-0 ml-auto">{{getDate(selectedDoc.expiryDate)| date : 'MM/dd/yyyy'}}</p>
                         </li>
-                        <li class="flex flex-row surface-100 text-sm text-700 font-medium p-2 border-round mb-1">
+                        <li class="flex flex-row bg-surface-100 dark:bg-surface-700 text-sm text-surface-700 dark:text-surface-100 font-medium p-2 rounded-border mb-1">
                             Place of issue:
-                            <p class="text-900 ml-auto">{{selectedDoc.placeOfIssue}}</p>
+                            <p class="text-surface-900 dark:text-surface-0 ml-auto">{{selectedDoc.placeOfIssue}}</p>
                         </li>
                         <li *ngIf="selectedDoc.remindMe"
-                            class="flex flex-row surface-100 text-sm text-700 font-medium p-2 border-round mb-1">
+                            class="flex flex-row bg-surface-100 dark:bg-surface-700 text-sm text-surface-700 dark:text-surface-100 font-medium p-2 rounded-border mb-1">
                             Remind me on:
-                            <p class="text-900 ml-auto">{{selectedDoc.remindOn}}</p>
+                            <p class="text-surface-900 dark:text-surface-0 ml-auto">{{selectedDoc.remindOn}}</p>
                         </li>
                     </ul>
                 </div>
-                <div class="col-12 md:col-4">
+                <div class="col-span-12 md:col-span-4">
                     <p-image [src]="selectedDoc.attachmentOne" alt="Image" [preview]="true"
                         imageClass="w-full"></p-image>
                 </div>
-                <div class="col-12 md:col-4">
+                <div class="col-span-12 md:col-span-4">
                     <p-image [src]="selectedDoc.attachmentTwo" alt="Image" [preview]="true"
                         imageClass="w-full"></p-image>
                 </div>
-                <div class="col-12 md:col-4">
+                <div class="col-span-12 md:col-span-4">
                     <p-image [src]="selectedDoc.attachmentThree" alt="Image" [preview]="true"
                         imageClass="w-full"></p-image>
                 </div>
@@ -213,30 +213,30 @@
 
     </p-sidebar>
     <p-dialog header="Delete Confirmation" [(visible)]="showDeleteDialog" [modal]="true" [style]="{ width: '25rem' }">
-        <div class="grid" *ngIf="selectedDoc">
-            <div class="col-12">
-                <div class="inline-flex align-items-center justify-content-center gap-2 ">
+        <div class="grid grid-cols-12 gap-4" *ngIf="selectedDoc">
+            <div class="col-span-12">
+                <div class="inline-flex items-center justify-center gap-2 ">
                     <p-avatar icon="pi pi-exclamation-triangle" shape="circle"></p-avatar>
-                    <span class="font-bold white-space-nowrap">Do you want to delete this record?</span>
+                    <span class="font-bold whitespace-nowrap">Do you want to delete this record?</span>
                 </div>
             </div>
-            <div class="col-12">
+            <div class="col-span-12">
                 <ul class="list-none p-0 m-0">
-                    <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-2">
-                        <span class="block text-900 font-medium mb-1">Dependent: </span>
-                        <p class="text-600">{{selectedDoc.dependentName}}</p>
+                    <li class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                        <span class="block text-surface-900 dark:text-surface-0 font-medium mb-1">Dependent: </span>
+                        <p class="text-surface-600 dark:text-surface-200">{{selectedDoc.dependentName}}</p>
                     </li>
-                    <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-2">
-                        <span class="block text-900 font-medium mb-1">Doc Type: </span>
-                        <p class="text-600">{{selectedDoc.docType}}</p>
+                    <li class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                        <span class="block text-surface-900 dark:text-surface-0 font-medium mb-1">Doc Type: </span>
+                        <p class="text-surface-600 dark:text-surface-200">{{selectedDoc.docType}}</p>
                     </li>
-                    <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-2">
-                        <span class="block text-900 font-medium mb-1">Doc Name: </span>
-                        <p class="text-600">{{selectedDoc.name}}</p>
+                    <li class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                        <span class="block text-surface-900 dark:text-surface-0 font-medium mb-1">Doc Name: </span>
+                        <p class="text-surface-600 dark:text-surface-200">{{selectedDoc.name}}</p>
                     </li>
                 </ul>
             </div>
-            <div class="col-12">
+            <div class="col-span-12">
                 <div class="field p-fluid">
                     <span class="p-float-label">
                         <textarea id="address" rows="4" cols="30" pInputTextarea [(ngModel)]="deleteReason"

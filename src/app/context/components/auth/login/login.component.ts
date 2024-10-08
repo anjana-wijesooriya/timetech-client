@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { LoginModel } from 'src/app/context/api/user/login.model';
 import { AuthService } from 'src/app/context/service/auth.service';
 import { LocalStorage } from 'src/app/context/shared/enum/local-storage.enum';
@@ -17,6 +17,7 @@ import {
 } from "@tsparticles/engine";
 import { NgParticlesService } from "@tsparticles/angular";
 import { loadSlim } from "@tsparticles/slim";
+import { Aura } from 'primeng/themes/aura';
 
 @Component({
     selector: 'app-login',
@@ -40,9 +41,16 @@ export class LoginComponent {
 
     constructor(private router: Router, private fb: FormBuilder, public layoutService: LayoutService,
         private authService: AuthService, private msgService: MessageService, private baseService: BaseService,
-        private ngParticlesService: NgParticlesService
+        private ngParticlesService: NgParticlesService, private primeNGConfig: PrimeNGConfig
     ) {
-
+        this.primeNGConfig.theme.set({
+            preset: Aura, options: {
+                prefix: 'p',
+                darkModeSelector: 'app-dark',
+                cssLayer: false
+            }
+        });
+        this.primeNGConfig.ripple.set(true);
     }
 
     ngOnInit(): void {

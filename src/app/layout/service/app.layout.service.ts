@@ -123,20 +123,20 @@ export class LayoutService {
 
     changeTheme() {
         const config = this.config();
-        const themeLink = <HTMLLinkElement>document.getElementById('theme-css');
-        const themeLinkHref = themeLink.getAttribute('href')!;
-        const newHref = themeLinkHref
-            .split('/')
-            .map((el) =>
-                el == this._config.theme
-                    ? (el = config.theme)
-                    : el == `theme-${this._config.colorScheme}`
-                        ? (el = `theme-${config.colorScheme}`)
-                        : el
-            )
-            .join('/');
+        // const themeLink = <HTMLLinkElement>document.getElementById('theme-css');
+        // const themeLinkHref = themeLink.getAttribute('href')!;
+        // const newHref = themeLinkHref
+        //     .split('/')
+        //     .map((el) =>
+        //         el == this._config.theme
+        //             ? (el = config.theme)
+        //             : el == `theme-${this._config.colorScheme}`
+        //                 ? (el = `theme-${config.colorScheme}`)
+        //                 : el
+        //     )
+        //     .join('/');
 
-        this.replaceThemeLink(newHref);
+        // this.replaceThemeLink(newHref);
     }
     replaceThemeLink(href: string) {
         const id = 'theme-css';

@@ -1,36 +1,36 @@
-<div class="grid support-wrapper workrule-wrapper">
+<div class="grid grid-cols-12 gap-4 support-wrapper workrule-wrapper">
 
-    <div class="p-2 mb-3 col-12 surface-ground">
+    <div class="p-2 mb-4 col-span-12 bg-surface-50 dark:bg-surface-950">
         <p-confirmDialog></p-confirmDialog>
         <p-toast></p-toast>
-        <div class="w-full p-3 m-0 card surface-card page-content-wrapper zoominup animation-duration-400 "
+        <div class="w-full p-4 m-0 card bg-surface-0 dark:bg-surface-900 page-content-wrapper animate-zoominup animate-duration-400 "
             *ngIf="mode == 'template'">
-            <div class="flex w-full pb-3 mb-3 card-header border-bottom-1 surface-border justify-content-between">
-                <div class="flex flex-wrap gap-3 align-items-center">
+            <div class="flex w-full pb-4 mb-4 card-header border-b border-surface justify-between">
+                <div class="flex flex-wrap gap-4 items-center">
                     <p-button icon="pi pi-arrow-left text-xl" [rounded]="true" [outlined]="true" severity="primary"
                         (click)="changeMode('list', undefined)" />
                     <h5 class="m-0">Work Rule Template</h5>
                 </div>
-                <div class="flex flex-wrap gap-3">
+                <div class="flex flex-wrap gap-4">
                 </div>
             </div>
             <div class="w-full data-view">
-                <div class="grid">
-                    <div class="col-12" *ngIf="this.selectedWorkRuleModel">
-                        <div class="detail-box w-30rem mx-auto">
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-12" *ngIf="this.selectedWorkRuleModel">
+                        <div class="detail-box w-[30rem] mx-auto">
                             <ul
-                                class="flex flex-wrap gap-8 row-gap-2 p-0 m-0 list-none text-600 justify-content-around">
+                                class="flex flex-wrap gap-20 gap-y-2 p-0 m-0 list-none text-surface-600 dark:text-surface-200 justify-around">
                                 <li>
-                                    <div class="mb-1 font-medium text-900">WorkRule Code</div>
+                                    <div class="mb-1 font-medium text-surface-900 dark:text-surface-0">WorkRule Code</div>
                                     <span
-                                        class="p-1 text-lg text-600 border-1 surface-border border-round surface-ground">
+                                        class="p-1 text-lg text-surface-600 dark:text-surface-200 border border-surface rounded-border bg-surface-50 dark:bg-surface-950">
                                         {{this.selectedWorkRuleModel.code}}
                                     </span>
                                 </li>
                                 <li>
-                                    <div class="mb-1 font-medium text-900">Description</div>
+                                    <div class="mb-1 font-medium text-surface-900 dark:text-surface-0">Description</div>
                                     <span
-                                        class="p-1 text-lg text-600 border-1 surface-border border-round surface-ground">
+                                        class="p-1 text-lg text-surface-600 dark:text-surface-200 border border-surface rounded-border bg-surface-50 dark:bg-surface-950">
                                         {{this.selectedWorkRuleModel.name}}
                                     </span>
                                 </li>
@@ -38,7 +38,7 @@
                         </div>
 
                     </div>
-                    <div class="col-12">
+                    <div class="col-span-12">
 
                         <p-tabMenu [model]="scrollableTabs" [(activeItem)]="activeIndex"
                             (activeItemChange)="onChangeTabIndex($event)" />
@@ -50,70 +50,70 @@
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                             [globalFilterFields]="['name', 'compId']" [paginator]="true"
                             styleClass="p-datatable-gridlines p-datatable-sm" tableStyleClass="table-layout-fixed"
-                            [resizableColumns]="true" columnResizeMode="fit" [autoLayout]="true" class="border-round"
+                            [resizableColumns]="true" columnResizeMode="fit" [autoLayout]="true" class="rounded-border"
                             responsive="true">
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th style="width:3.5rem !important;">
-                                        <div class="flex justify-content-center align-items-center">
+                                        <div class="flex justify-center items-center">
                                             #
                                         </div>
                                     </th>
                                     <th pSortableColumn="code">
-                                        <div class="flex justify-content-center align-items-center">
+                                        <div class="flex justify-center items-center">
                                             Code
                                         </div>
                                     </th>
-                                    <th pSortableColumn="name" class="w-20rem">
-                                        <div class="flex justify-content-center align-items-center">
+                                    <th pSortableColumn="name" class="w-80">
+                                        <div class="flex justify-center items-center">
                                             Name
                                         </div>
                                     </th>
                                     <th pSortableColumn="shiftStartRange">
-                                        <div class="flex justify-content-center align-items-center">
+                                        <div class="flex justify-center items-center">
                                             Start Range
                                         </div>
                                     </th>
                                     <th pSortableColumn="nhinTime">
-                                        <div class="flex justify-content-center align-items-center">
+                                        <div class="flex justify-center items-center">
                                             In Time
                                         </div>
                                     </th>
                                     <th pSortableColumn="latestAllowed">
-                                        <div class="flex justify-content-center align-items-center">
+                                        <div class="flex justify-center items-center">
                                             Late Grace
                                         </div>
                                     </th>
                                     <th pSortableColumn="earliestAllowed">
-                                        <div class="flex justify-content-center align-items-center">
+                                        <div class="flex justify-center items-center">
                                             Early Grace
                                         </div>
                                     </th>
                                     <th pSortableColumn="earliestAllowed">
-                                        <div class="flex justify-content-center align-items-center">
+                                        <div class="flex justify-center items-center">
                                             Sequence
                                         </div>
                                     </th>
-                                    <th class="w-8rem" style="width: 6rem">Actions</th>
+                                    <th class="w-32" style="width: 6rem">Actions</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-rowIndex="rowIndex" let-data let-editing="editing">
                                 <tr [pEditableRow]="data">
-                                    <td class="text-center text-900">{{rowIndex + 1}}</td>
-                                    <td class="text-left text-900">{{data.shiftCode}}</td>
-                                    <td class="text-left text-900">{{data.name}}</td>
-                                    <td class="text-center text-900">{{data.shiftStartRange | date :'shortTime'}}</td>
-                                    <td class="text-center text-900">{{data.nhinTime | date :'shortTime'}}</td>
-                                    <td class="text-center text-900">{{data.latestAllowed | date :'shortTime'}}</td>
-                                    <td class="text-center text-900">{{data.earliestAllowed | date :'shortTime'}}</td>
-                                    <td class="text-center text-900">
+                                    <td class="text-center text-surface-900 dark:text-surface-0">{{rowIndex + 1}}</td>
+                                    <td class="text-left text-surface-900 dark:text-surface-0">{{data.shiftCode}}</td>
+                                    <td class="text-left text-surface-900 dark:text-surface-0">{{data.name}}</td>
+                                    <td class="text-center text-surface-900 dark:text-surface-0">{{data.shiftStartRange | date :'shortTime'}}</td>
+                                    <td class="text-center text-surface-900 dark:text-surface-0">{{data.nhinTime | date :'shortTime'}}</td>
+                                    <td class="text-center text-surface-900 dark:text-surface-0">{{data.latestAllowed | date :'shortTime'}}</td>
+                                    <td class="text-center text-surface-900 dark:text-surface-0">{{data.earliestAllowed | date :'shortTime'}}</td>
+                                    <td class="text-center text-surface-900 dark:text-surface-0">
                                         <p-cellEditor>
                                             <ng-template pTemplate="input">
                                                 <p-dropdown [options]="[0,1,2,3,4,5,6,7]" appendTo="body"
                                                     [(ngModel)]="data.seq" styleClass="w-full" />
                                             </ng-template>
                                             <ng-template pTemplate="output">
-                                                <p-chip styleClass="pr-0 pl-3">
+                                                <p-chip styleClass="pr-0 pl-4">
                                                     <span class="ml-2 font-medium">
                                                         {{data.seq}}
                                                     </span>
@@ -125,7 +125,7 @@
                                             </ng-template>
                                         </p-cellEditor>
                                     </td>
-                                    <td class="text-center text-900">
+                                    <td class="text-center text-surface-900 dark:text-surface-0">
 
                                         <button *ngIf="!editing" pButton pRipple type="button" icon="pi pi-trash"
                                             (click)="onDeleteTemplateRecord($event, data)"
@@ -146,31 +146,31 @@
                             </ng-template>
                         </p-table>
                     </div>
-                    <div class="py-0 col-12">
+                    <div class="py-0 col-span-12">
                         <p-divider align="left" type="solid" styleClass="w-full">
                             <h5 class="m-0">Active Shifts</h5>
                         </p-divider>
                     </div>
-                    <!-- <div class="w-12 my-1 border-bottom-1 surface-border"></div> -->
-                    <div class="pt-0 col-12">
+                    <!-- <div class="w-full my-1 border-b border-surface"></div> -->
+                    <div class="pt-0 col-span-12">
                         <p-table #supportTable [rowHover]="true" [value]="shifts" [scrollable]="true"
                             scrollHeight="calc(100vh - 25rem)" [rows]="25" [showCurrentPageReport]="true"
                             [rowsPerPageOptions]="[25, 50, 100]" [loading]="isLoading" dataKey="code"
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                             [globalFilterFields]="['name', 'compId']" [paginator]="true"
                             styleClass="p-datatable-gridlines p-datatable-sm" tableStyleClass="table-layout-fixed"
-                            [resizableColumns]="true" columnResizeMode="fit" [autoLayout]="true" class="border-round"
+                            [resizableColumns]="true" columnResizeMode="fit" [autoLayout]="true" class="rounded-border"
                             responsive="true">
                             <ng-template pTemplate="caption">
-                                <div class="flex flex-wrap justify-content-between">
-                                    <div class="flex flex-wrap gap-2 align-items-center">
+                                <div class="flex flex-wrap justify-between">
+                                    <div class="flex flex-wrap gap-2 items-center">
                                         <p-iconField iconPosition="left">
                                             <p-inputIcon styleClass="pi pi-search" />
                                             <input type="text" pInputText placeholder="Search by Name" #filter
                                                 (input)="supportTable.filterGlobal($event.target.value, 'contains')" />
                                         </p-iconField>
                                     </div>
-                                    <div class="flex flex-row gap-2 align-items-center justify-content-start">
+                                    <div class="flex flex-row gap-2 items-center justify-start">
                                         <div class="flex flex-wrap">
 
                                         </div>
@@ -182,53 +182,53 @@
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th style="width:3.5rem !important;">
-                                        <div class="flex justify-content-center align-items-center">
+                                        <div class="flex justify-center items-center">
                                             #
                                         </div>
                                     </th>
                                     <th pSortableColumn="code">
-                                        <div class="flex justify-content-center align-items-center">
+                                        <div class="flex justify-center items-center">
                                             Code
                                         </div>
                                     </th>
-                                    <th pSortableColumn="name" class="w-20rem">
-                                        <div class="flex justify-content-center align-items-center">
+                                    <th pSortableColumn="name" class="w-80">
+                                        <div class="flex justify-center items-center">
                                             Name
                                         </div>
                                     </th>
                                     <th pSortableColumn="shiftStartRange">
-                                        <div class="flex justify-content-center align-items-center">
+                                        <div class="flex justify-center items-center">
                                             Start Range
                                         </div>
                                     </th>
                                     <th pSortableColumn="nhinTime">
-                                        <div class="flex justify-content-center align-items-center">
+                                        <div class="flex justify-center items-center">
                                             In Time
                                         </div>
                                     </th>
                                     <th pSortableColumn="latestAllowed">
-                                        <div class="flex justify-content-center align-items-center">
+                                        <div class="flex justify-center items-center">
                                             Late Grace
                                         </div>
                                     </th>
                                     <th pSortableColumn="earliestAllowed">
-                                        <div class="flex justify-content-center align-items-center">
+                                        <div class="flex justify-center items-center">
                                             Early Grace
                                         </div>
                                     </th>
-                                    <th class="text-center" class="w-8rem">Actions</th>
+                                    <th class="text-center" class="w-32">Actions</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-rowIndex="rowIndex" let-data>
                                 <tr>
-                                    <td class="text-center text-900">{{rowIndex + 1}}</td>
-                                    <td class="text-left text-900">{{data.shiftCode}}</td>
-                                    <td class="text-left text-900">{{data.name}}</td>
-                                    <td class="text-center text-900">{{data.shiftStartRange | date :'shortTime'}}</td>
-                                    <td class="text-center text-900">{{data.nhinTime | date :'shortTime'}}</td>
-                                    <td class="text-center text-900">{{data.latestAllowed | date :'shortTime'}}</td>
-                                    <td class="text-center text-900">{{data.earliestAllowed | date :'shortTime'}}</td>
-                                    <td class="text-center text-900">
+                                    <td class="text-center text-surface-900 dark:text-surface-0">{{rowIndex + 1}}</td>
+                                    <td class="text-left text-surface-900 dark:text-surface-0">{{data.shiftCode}}</td>
+                                    <td class="text-left text-surface-900 dark:text-surface-0">{{data.name}}</td>
+                                    <td class="text-center text-surface-900 dark:text-surface-0">{{data.shiftStartRange | date :'shortTime'}}</td>
+                                    <td class="text-center text-surface-900 dark:text-surface-0">{{data.nhinTime | date :'shortTime'}}</td>
+                                    <td class="text-center text-surface-900 dark:text-surface-0">{{data.latestAllowed | date :'shortTime'}}</td>
+                                    <td class="text-center text-surface-900 dark:text-surface-0">{{data.earliestAllowed | date :'shortTime'}}</td>
+                                    <td class="text-center text-surface-900 dark:text-surface-0">
                                         <button pButton pRipple icon="pi pi-plus" pTooltip="Link to Template Day"
                                             class="mr-2 p-button-rounded p-button-outlined p-button-primary"
                                             (click)="onLinkTemplateRecord(data)"></button>
@@ -243,7 +243,7 @@
             </div>
         </div>
 
-        <div class="w-full p-3 m-0 card surface-card page-content-wrapper flipright animation-duration-400"
+        <div class="w-full p-4 m-0 card bg-surface-0 dark:bg-surface-900 page-content-wrapper animate-flipright animate-duration-400"
             *ngIf="mode == 'list'">
 
             <h5 class="mb-0">Work Rules</h5>
@@ -258,23 +258,23 @@
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                     [globalFilterFields]="['code', 'name', 'employeeCode', 'lastUpdatedDate', 'active', 'companyId']"
                     [paginator]="true" styleClass="p-datatable-gridlines p-datatable-sm"
-                    tableStyleClass="table-layout-fixed" columnResizeMode="fit" [autoLayout]="true" class="border-round"
+                    tableStyleClass="table-layout-fixed" columnResizeMode="fit" [autoLayout]="true" class="rounded-border"
                     responsive="true">
                     <ng-template pTemplate="caption">
-                        <div class="flex flex-wrap justify-content-between">
-                            <div class="flex flex-row gap-2 align-items-center justify-content-start">
+                        <div class="flex flex-wrap justify-between">
+                            <div class="flex flex-row gap-2 items-center justify-start">
                                 <p-dropdown [options]="companies" [showClear]="false" placeholder="Filter by Company"
                                     (onChange)="supportTable.filterGlobal($event.value.compId, 'equals')"
                                     [(ngModel)]="selectedCompany">
                                     <ng-template let-selectedValue pTemplate="selectedItem">
-                                        <div class="flex gap-2 align-items-center" *ngIf="selectedValue">
+                                        <div class="flex gap-2 items-center" *ngIf="selectedValue">
                                             <img src="assets/context/images/flag/flag_placeholder.png"
                                                 [class]="'flag flag-' + selectedValue.logo" style="width: 21px" />
                                             <div>{{ selectedValue.name }}</div>
                                         </div>
                                     </ng-template>
                                     <ng-template let-company pTemplate="item">
-                                        <div class="flex gap-2 align-items-center">
+                                        <div class="flex gap-2 items-center">
                                             <img src="assets/context/images/flag/flag_placeholder.png"
                                                 [class]="'flag flag-' + company.logo" style="width: 21px" />
                                             <div>{{ company.name }}</div>
@@ -300,8 +300,8 @@
                     </ng-template>
                     <ng-template pTemplate="header">
                         <tr>
-                            <th pSortableColumn="code" class="w-8rem">
-                                <div class="flex justify-content-between align-items-center">
+                            <th pSortableColumn="code" class="w-32">
+                                <div class="flex justify-between items-center">
                                     <div></div>
                                     #
                                     <p-sortIcon field="code"></p-sortIcon>
@@ -310,7 +310,7 @@
                                 </div>
                             </th>
                             <th pSortableColumn="name">
-                                <div class="flex justify-content-between align-items-center">
+                                <div class="flex justify-between items-center">
                                     Work Rule Name
                                     <p-sortIcon field="name"></p-sortIcon>
                                     <!-- <p-columnFilter class="ml-auto" type="text" field="otherCode" display="menu"
@@ -319,7 +319,7 @@
                                 </div>
                             </th>
                             <th pSortableColumn="lastUpdatedUser">
-                                <div class="flex justify-content-between align-items-center">
+                                <div class="flex justify-between items-center">
                                     <div></div>
                                     Updated By
                                     <p-sortIcon field="lastUpdatedUser"></p-sortIcon>
@@ -328,7 +328,7 @@
                                 </div>
                             </th>
                             <th pSortableColumn="lastUpdatedDate">
-                                <div class="flex justify-content-between align-items-center">
+                                <div class="flex justify-between items-center">
                                     <div></div>
                                     Last Updated Date
                                     <p-sortIcon field="lastUpdatedDate"></p-sortIcon>
@@ -337,8 +337,8 @@
                                                     </p-columnFilter> -->
                                 </div>
                             </th>
-                            <th pSortableColumn="active" class="w-12rem">
-                                <div class="flex justify-content-between align-items-center">
+                            <th pSortableColumn="active" class="w-48">
+                                <div class="flex justify-between items-center">
                                     <div></div>
                                     Active
                                     <p-sortIcon field="active"></p-sortIcon>
@@ -346,17 +346,17 @@
                                                                                                                 </p-columnFilter> -->
                                 </div>
                             </th>
-                            <th class="text-center w-10rem">Actions</th>
+                            <th class="text-center w-40">Actions</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-data>
                         <tr>
-                            <td class="text-center text-900">{{data.code}}</td>
-                            <td class="text-left text-900">{{data.name}}</td>
-                            <td class="text-center text-900">{{data.employeeCode}}</td>
-                            <td class="text-center text-900"> {{data.lastUpdatedDate | date :'mediumDate'}}</td>
+                            <td class="text-center text-surface-900 dark:text-surface-0">{{data.code}}</td>
+                            <td class="text-left text-surface-900 dark:text-surface-0">{{data.name}}</td>
+                            <td class="text-center text-surface-900 dark:text-surface-0">{{data.employeeCode}}</td>
+                            <td class="text-center text-surface-900 dark:text-surface-0"> {{data.lastUpdatedDate | date :'mediumDate'}}</td>
                             <td class="text-center">
-                                <div class="flex text-center justify-content-center">
+                                <div class="flex text-center justify-center">
                                     <i class="pi"
                                         [ngClass]="data.active ? 'text-green-500 pi-check-circle' : 'text-red-500 pi-times-circle'"></i>
 
@@ -391,8 +391,8 @@
                                 [form]="form"></formly-form>
 
                             <!-- <div class="w-full py-2">
-        <label for="float-label" class="font-medium text-900">Reimbursement</label>
-        <div class="flex w-auto align-items-center">
+        <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Reimbursement</label>
+        <div class="flex w-auto items-center">
             <p-inputSwitch class="p-inputSwitch-lg" id="visa-cost" triggers="focus"></p-inputSwitch>
         </div>
     </div> -->
@@ -400,7 +400,7 @@
 
                     </ng-template>
                     <ng-template pTemplate="footer">
-                        <div class="flex gap-2 justify-content-end">
+                        <div class="flex gap-2 justify-end">
                             <p-button type="submit" label="Update" severity="primary" [outlined]="false"
                                 [loading]="isLoading" icon="pi pi-check" class="ml-auto"
                                 (onClick)="submit()"></p-button>
@@ -417,22 +417,22 @@
                     </ng-template>
                     <ng-template pTemplate="content">
                         <form [formGroup]="depForm">
-                            <div class="grid w-full fromgrid">
-                                <div class="col-12 p-fluid">
-                                    <label for="float-label" class="font-medium text-900">Department</label>
+                            <div class="grid grid-cols-12 gap-4 w-full fromgrid">
+                                <div class="col-span-12 p-fluid">
+                                    <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Department</label>
                                     <p-treeSelect class="w-full" containerStyleClass="w-full" [options]="departmentTree"
                                         placeholder="Select a Department" selectionMode="single"
                                         formControlName="department" />
                                     <small class="p-error" id="username-help">Field is required.</small>
                                 </div>
-                                <div class="col-12 p-fluid">
-                                    <label for="float-label" class="font-medium text-900">Work Rule</label>
+                                <div class="col-span-12 p-fluid">
+                                    <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Work Rule</label>
                                     <p-dropdown [options]="workRules" placeholder="Select a Rule" [showClear]="true"
                                         formControlName="workRuleId" optionLabel="name" optionValue="code"></p-dropdown>
                                     <small class="p-error" id="username-help">Field is required.</small>
                                 </div>
-                                <div class="col-12 p-fluid">
-                                    <label for="float-label" class="font-medium text-900">Work Rule Start Date</label>
+                                <div class="col-span-12 p-fluid">
+                                    <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Work Rule Start Date</label>
                                     <p-calendar [iconDisplay]="'input'" [showIcon]="true"
                                         formControlName="startDate"></p-calendar>
                                     <small class="p-error" id="username-help">Field is required.</small>
@@ -442,7 +442,7 @@
 
                     </ng-template>
                     <ng-template pTemplate="footer">
-                        <div class="flex gap-2 justify-content-end">
+                        <div class="flex gap-2 justify-end">
                             <p-button type="submit" label="Update" [outlined]="true" severity="primary"
                                 [outlined]="false" [loading]="loadingDept" icon="pi pi-check" class="ml-auto"
                                 (onClick)="onSaveLinkDepartments()"></p-button>

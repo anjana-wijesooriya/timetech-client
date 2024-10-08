@@ -1,39 +1,39 @@
-<div class="grid support-wrapper">
+<div class="grid grid-cols-12 gap-4 support-wrapper">
 
-    <div class="col-12 surface-ground p-2 mb-3">
-        <div class="card surface-card  p-3 m-0 page-content-wrapper">
+    <div class="col-span-12 bg-surface-50 dark:bg-surface-950 p-2 mb-4">
+        <div class="card bg-surface-0 dark:bg-surface-900  p-4 m-0 page-content-wrapper">
             <h5 class="mb-0">Support Fields</h5>
             <p> Add, Edit, Delete or Search by Creating custom support fields and options to the relevent critarieas.
             </p>
-            <div class="flex md:flex-row gap-4">
-                <div class="w-full md:w-4 lg:w-3">
+            <div class="flex md:flex-row gap-6">
+                <div class="w-full md:w-4/12 lg:w-3/12">
                     <p-listbox [options]="supportFields" [(ngModel)]="selectedField" optionLabel="treeNodeName"
                         optionValue="code" [filter]="true" scrollHeight="calc(100vh - 24.5rem)"
                         [filterPlaceHolder]="'Search Support Fields....'" (onClick)="onClickSupportField($event)"
                         focusOnHover="true">
                         <ng-template let-field pTemplate="item">
-                            <div class="flex align-items-center gap-2 border-1 surface-border border-round p-3 w-full">
+                            <div class="flex items-center gap-2 border border-surface rounded-border p-4 w-full">
                                 <i class="pi pi-arrow-right"></i>
                                 <div class="text-semibold">{{ field.treeNodeName }}</div>
                             </div>
                         </ng-template>
                     </p-listbox>
                 </div>
-                <div class="md:w-8 lg:w-9">
+                <div class="md:w-8/12 lg:w-9/12">
                     <p-table #supportTable [rowHover]="true" [value]="supportFieldOptions" [scrollable]="true"
                         scrollHeight="calc(100vh - 28rem)" [rows]="25" [showCurrentPageReport]="true"
                         [rowsPerPageOptions]="[25, 50, 100]" [loading]="false" dataKey="code"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                         [globalFilterFields]="['otherCode', 'name', 'active', 'sequence']" [paginator]="true"
                         styleClass="p-datatable-gridlines p-datatable-sm" tableStyleClass="table-layout-fixed"
-                        columnResizeMode="fit" [autoLayout]="true" class="border-round" responsive="true">
+                        columnResizeMode="fit" [autoLayout]="true" class="rounded-border" responsive="true">
                         <ng-template pTemplate="caption">
-                            <div class="flex flex-wrap justify-content-between">
+                            <div class="flex flex-wrap justify-between">
                                 <div class="flex flex-wrap">
                                     <p-iconField iconPosition="left">
                                         <p-inputIcon styleClass="pi pi-search" />
                                         <input type="text" pInputText placeholder="Search by Code, Name and Status"
-                                            #filter class="w-20rem"
+                                            #filter class="w-80"
                                             (input)="supportTable.filterGlobal($event.target.value, 'contains')" />
                                     </p-iconField>
                                 </div>
@@ -45,16 +45,16 @@
                         </ng-template>
                         <ng-template pTemplate="header">
                             <tr>
-                                <th pSortableColumn="code" class="w-5rem">
-                                    <div class="flex justify-content-between align-items-center">
+                                <th pSortableColumn="code" class="w-20">
+                                    <div class="flex justify-between items-center">
                                         #
                                         <p-sortIcon field="code"></p-sortIcon>
                                         <!-- <p-columnFilter class="ml-auto" type="text" field="otherCode" display="menu" placeholder="Search by Code">
                                         </p-columnFilter> -->
                                     </div>
                                 </th>
-                                <th pSortableColumn="otherCode" class="w-12rem">
-                                    <div class="flex justify-content-between align-items-center">
+                                <th pSortableColumn="otherCode" class="w-48">
+                                    <div class="flex justify-between items-center">
                                         Code
                                         <p-sortIcon field="otherCode"></p-sortIcon>
                                         <p-columnFilter class="ml-auto" type="text" field="otherCode" display="menu"
@@ -63,7 +63,7 @@
                                     </div>
                                 </th>
                                 <th pSortableColumn="name">
-                                    <div class="flex justify-content-between align-items-center">
+                                    <div class="flex justify-between items-center">
                                         Name
                                         <p-sortIcon field="name"></p-sortIcon>
                                         <p-columnFilter class="ml-auto" type="text" field="name" display="menu"
@@ -72,38 +72,38 @@
                                     </div>
                                 </th>
 
-                                <th pSortableColumn="active" class="w-12rem">
-                                    <div class="flex justify-content-between align-items-center">
+                                <th pSortableColumn="active" class="w-48">
+                                    <div class="flex justify-between items-center">
                                         Status
                                         <p-sortIcon field="active"></p-sortIcon>
                                         <p-columnFilter class="ml-auto" type="boolean" field="active" display="menu">
                                         </p-columnFilter>
                                     </div>
                                 </th>
-                                <th pSortableColumn="sequence" class="w-10rem">
-                                    <div class="flex justify-content-between align-items-center">
+                                <th pSortableColumn="sequence" class="w-40">
+                                    <div class="flex justify-between items-center">
                                         Sequence
                                         <p-sortIcon field="sequence" />
                                         <p-columnFilter class="ml-auto" type="text" field="sequence" display="menu" />
                                     </div>
                                 </th>
-                                <th class="w-4rem">Edit</th>
+                                <th class="w-16">Edit</th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-data>
                             <tr>
-                                <td class="text-900">{{data.code}}</td>
-                                <td class="text-900">{{data.otherCode}}</td>
-                                <td class="text-900"> {{data.name}}</td>
+                                <td class="text-surface-900 dark:text-surface-0">{{data.code}}</td>
+                                <td class="text-surface-900 dark:text-surface-0">{{data.otherCode}}</td>
+                                <td class="text-surface-900 dark:text-surface-0"> {{data.name}}</td>
                                 <td class="text-center">
-                                    <div class="flex text-center justify-content-center">
+                                    <div class="flex text-center justify-center">
                                         <p-tag [value]="data.active ? 'Active' : 'Inactive'"
                                             [severity]="data.active ? 'success' : 'danger'"
-                                            styleClass="mx-auto text-md text-100 font-semibold">
+                                            styleClass="mx-auto text-md text-surface-100 dark:text-surface-700 font-semibold">
                                         </p-tag>
                                     </div>
                                 </td>
-                                <td class="text-900 text-center font-bold">{{data.sequence}}</td>
+                                <td class="text-surface-900 dark:text-surface-0 text-center font-bold">{{data.sequence}}</td>
                                 <td class="text-center">
                                     <button pButton pRipple icon="pi pi-pencil"
                                         (click)="openFieldOptionSlide(data, form)"
@@ -125,28 +125,28 @@
         </ng-template>
         <ng-template pTemplate="content">
             <form #form="ngForm" novalidate autocomplete="off">
-                <div class="grid formgrid p-fluid p-2" [formGroup]="validationForm">
-                    <div class="col-12 field">
-                        <label for="float-label" class="font-medium text-900">Option Name</label>
+                <div class="grid grid-cols-12 gap-4 formgrid p-fluid p-2" [formGroup]="validationForm">
+                    <div class="col-span-12 field">
+                        <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Option Name</label>
                         <input pInputText id="name" class="" [(ngModel)]="selectedDetails.name" formControlName="name"
                             [required]="true" />
                         <small class="p-error" id="username-help">Option Name required.</small>
                     </div>
-                    <div class="col-12 field">
-                        <label for="float-label" class="font-medium text-900">Code</label>
+                    <div class="col-span-12 field">
+                        <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Code</label>
                         <input pInputText id="otherCode" class="" [(ngModel)]="selectedDetails.otherCode"
                             formControlName="otherCode" [required]="true" />
                         <small class="p-error" id="username-help">Code required.</small>
                     </div>
-                    <div class="col-12 field">
-                        <label for="float-label" class="font-medium text-900">Sequence</label>
+                    <div class="col-span-12 field">
+                        <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Sequence</label>
                         <p-inputNumber [(ngModel)]="selectedDetails.sequence" mode="decimal" inputId="withoutgrouping"
                             [useGrouping]="false" formControlName="sequence" />
                         <small class="p-error" id="username-help">Sequence required.</small>
                     </div>
-                    <div class=" col-12 field ">
-                        <label for="name" class="font-medium text-900">Active Status</label>
-                        <div class="flex align-items-center w-auto">
+                    <div class=" col-span-12 field ">
+                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Active Status</label>
+                        <div class="flex items-center w-auto">
                             <p-inputSwitch class="p-inputSwitch-lg" id="visa-cost" formControlName="active"
                                 [(ngModel)]="selectedDetails.active"
                                 [pTooltip]="selectedDetails.active ? 'Active' : 'Inactive'"
@@ -157,7 +157,7 @@
             </form>
         </ng-template>
         <ng-template pTemplate="footer">
-            <div class="flex justify-content-end gap-2">
+            <div class="flex justify-end gap-2">
                 <p-button type="submit" label="Update" severity="primary" [outlined]="true" [loading]="isSaving"
                     icon="pi pi-check" class="ml-auto" (onClick)="onSubmit()"></p-button>
                 <p-button label="Cancel" severity="primary" [outlined]="true" text="true" icon="pi pi-times"

@@ -1,7 +1,7 @@
-<div class="p-0 surface-card shadow-3 border-round h-full">
+<div class="p-0 bg-surface-0 dark:bg-surface-900 shadow-md rounded-border h-full">
     <p-panel>
         <ng-template pTemplate="header">
-            <div class="flex align-items-center gap-2">
+            <div class="flex items-center gap-2">
                 <p-avatar icon="font-semibold text-lg ic i-Home-4" shape="circle" />
                 <span class="font-bold">
                     Leaves
@@ -107,7 +107,7 @@
                 <ng-template pTemplate="rowexpansion" let-leave>
                     <tr>
                         <td colspan="13">
-                            <div class="px-3 py-2">
+                            <div class="px-4 py-2">
                                 <p-table [value]="breakups" dataKey="leaveCd" [loading]="isLoadingBreakups">
                                     <ng-template pTemplate="header">
                     <tr>
@@ -159,7 +159,7 @@
     </p-table>
 </p-dialog>
 <p-confirmDialog />
-<p-sidebar [(visible)]="showAddLeave" position="right" styleClass="w-30rem">
+<p-sidebar [(visible)]="showAddLeave" position="right" styleClass="w-[30rem]">
     <ng-template pTemplate="header">
         <div class="font-bold text-xl">
             Update Leave Type
@@ -167,25 +167,25 @@
     </ng-template>
     <ng-template pTemplate="body">
         <form (ngSubmit)="onSubmit()" #form="ngForm" novalidate autocomplete="off" *ngIf="showAddLeave">
-            <div class="grid p-fluid row-gap-1">
-                <div class="col-12 field mb-0 py-12">
-                    <label for="float-label" class="font-medium text-900">Leave Type</label>
+            <div class="grid grid-cols-12 gap-4 p-fluid gap-y-1">
+                <div class="col-span-12 field mb-0 py-12">
+                    <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Leave Type</label>
                     <p-dropdown [options]="leaveTypes" placeholder="Select a Leave type" optionLabel="reasonName"
                         optionValue="code" inputId="float-label" name="leaveCd" [(ngModel)]="selectedType.leaveCd"
                         [showClear]="true" [required]="true" (ngModelChange)="onChangeType($event)">
                     </p-dropdown>
                     <small class="p-error" id="username-help">Linked to required.</small>
                 </div>
-                <div class="col-12 field mb-0 py-1">
-                    <label for="float-label" class="font-medium text-900">Yearly leaves</label>
+                <div class="col-span-12 field mb-0 py-1">
+                    <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Yearly leaves</label>
                     <p-inputNumber [(ngModel)]="selectedType.yearlyDays" suffix=" days" [showButtons]="true"
                         buttonLayout="horizontal" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"
                         inputId="integeronly" name="yearlyDays" />
                     <small class="p-error" id="username-help">Linked to required.</small>
                 </div>
-                <div class="col-12 field-checkbox justify-content-between mb-1 py-1">
-                    <label for="float-label" class="font-medium text-900 ml-0">Leave carry forward</label>
-                    <div class="flex align-items-center w-auto">
+                <div class="col-span-12 field-checkbox justify-between mb-1 py-1">
+                    <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0 ml-0">Leave carry forward</label>
+                    <div class="flex items-center w-auto">
                         <p-inputSwitch class="p-inputSwitch-lg" id="visa-cost" name="leaveCarryForward"
                             (ngModelChange)="onModelChange(form)" [(ngModel)]="selectedType.leaveCarryForward"
                             [pTooltip]="selectedType.leaveCarryForward ? 'Active' : 'Inactive'"
@@ -193,9 +193,9 @@
                     </div>
                     <small class="p-error" id="username-help">Linked to required.</small>
                 </div>
-                <div class="col-12 field-checkbox justify-content-between mb-1 py-1">
-                    <label for="float-label" class="font-medium text-900 ml-0">Leave carry forward limit</label>
-                    <div class="flex align-items-center w-auto">
+                <div class="col-span-12 field-checkbox justify-between mb-1 py-1">
+                    <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0 ml-0">Leave carry forward limit</label>
+                    <div class="flex items-center w-auto">
                         <p-inputSwitch class="p-inputSwitch-lg" id="visa-cost" name="leaveCarryForwardLimit"
                             (ngModelChange)="onModelChange(form)" [(ngModel)]="selectedType.leaveCarryForwardLimit"
                             [pTooltip]="selectedType.leaveCarryForwardLimit ? 'Active' : 'Inactive'"
@@ -203,16 +203,16 @@
                     </div>
                     <small class="p-error" id="username-help">Linked to required.</small>
                 </div>
-                <div class="col-12 field mb-0 py-1">
-                    <label for="float-label" class="font-medium text-900">Leave carry forward limit upto</label>
+                <div class="col-span-12 field mb-0 py-1">
+                    <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Leave carry forward limit upto</label>
                     <p-inputNumber [(ngModel)]="selectedType.leaveCarryForwardLimitUpTo" suffix=" days"
                         [showButtons]="true" buttonLayout="horizontal" incrementButtonIcon="pi pi-plus"
                         decrementButtonIcon="pi pi-minus" inputId="integeronly" name="leaveCarryForwardLimitUpTo" />
                     <small class="p-error" id="username-help">Linked to required.</small>
                 </div>
-                <div class="col-12 field-checkbox justify-content-between mb-1 py-1">
-                    <label for="float-label" class="font-medium text-900 ml-0">Leave eligible for full year</label>
-                    <div class="flex align-items-center w-auto">
+                <div class="col-span-12 field-checkbox justify-between mb-1 py-1">
+                    <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0 ml-0">Leave eligible for full year</label>
+                    <div class="flex items-center w-auto">
                         <p-inputSwitch class="p-inputSwitch-lg" id="visa-cost" name="leaveEligibleForFullYear"
                             (ngModelChange)="onModelChange(form)" [(ngModel)]="selectedType.leaveEligibleForFullYear"
                             [pTooltip]="selectedType.leaveEligibleForFullYear ? 'Active' : 'Inactive'"
@@ -220,9 +220,9 @@
                     </div>
                     <small class="p-error" id="username-help">Linked to required.</small>
                 </div>
-                <div class="col-12 field-checkbox justify-content-between mb-1 py-1">
-                    <label for="float-label" class="font-medium text-900 ml-0">Calendar Days</label>
-                    <div class="flex align-items-center w-auto">
+                <div class="col-span-12 field-checkbox justify-between mb-1 py-1">
+                    <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0 ml-0">Calendar Days</label>
+                    <div class="flex items-center w-auto">
                         <p-inputSwitch class="p-inputSwitch-lg" id="visa-cost" name="isCalenderDays"
                             (ngModelChange)="onModelChange(form)" [(ngModel)]="selectedType.isCalenderDays"
                             [pTooltip]="selectedType.isCalenderDays ? 'Active' : 'Inactive'"
@@ -230,10 +230,10 @@
                     </div>
                     <small class="p-error" id="username-help">Linked to required.</small>
                 </div>
-                <div class="col-12 field-checkbox justify-content-between mb-1 py-1">
-                    <label for="float-label" class="font-medium text-900 ml-0">Leave eligible for full service
+                <div class="col-span-12 field-checkbox justify-between mb-1 py-1">
+                    <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0 ml-0">Leave eligible for full service
                         year</label>
-                    <div class="flex align-items-center w-auto">
+                    <div class="flex items-center w-auto">
                         <p-inputSwitch class="p-inputSwitch-lg" id="visa-cost" name="leaveEligibleForFullServiceYear"
                             (ngModelChange)="onModelChange(form)"
                             [(ngModel)]="selectedType.leaveEligibleForFullServiceYear"
@@ -241,23 +241,23 @@
                             triggers="focus"></p-inputSwitch>
                     </div>
                 </div>
-                <div class="col-12 field-checkbox justify-content-between mb-1 py-1">
-                    <label for="float-label" class="font-medium text-900 ml-0">Opening Leaves</label>
-                    <div class="flex align-items-center w-auto">
+                <div class="col-span-12 field-checkbox justify-between mb-1 py-1">
+                    <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0 ml-0">Opening Leaves</label>
+                    <div class="flex items-center w-auto">
                         <p-inputSwitch class="p-inputSwitch-lg" id="visa-cost" name="hasOpeningLeave"
                             (ngModelChange)="onModelChange(form)" [(ngModel)]="selectedType.hasOpeningLeave"
                             [pTooltip]="selectedType.hasOpeningLeave ? 'Active' : 'Inactive'"
                             triggers="focus"></p-inputSwitch>
                     </div>
                 </div>
-                <div class="col-12 field mb-0 py-1">
-                    <label for="float-label" class="font-medium text-900">Opening Leaves Days</label>
+                <div class="col-span-12 field mb-0 py-1">
+                    <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Opening Leaves Days</label>
                     <p-inputNumber [(ngModel)]="selectedType.openLeaveDays" suffix=" days" [showButtons]="true"
                         buttonLayout="horizontal" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"
                         inputId="integeronly" name="openLeaveDays" />
                 </div>
-                <div class="col-12 field mb-0 py-1">
-                    <label for="float-label" class="font-medium text-900">Opening Leaves Effective Date</label>
+                <div class="col-span-12 field mb-0 py-1">
+                    <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Opening Leaves Effective Date</label>
                     <p-calendar [iconDisplay]="'input'" [showIcon]="true" name="openLeaveEffectiveDate"
                         [(ngModel)]="selectedType.openLeaveEffectiveDate"></p-calendar>
                 </div>
@@ -265,7 +265,7 @@
         </form>
     </ng-template>
     <ng-template pTemplate="footer">
-        <div class="flex justify-content-end gap-2">
+        <div class="flex justify-end gap-2">
             <p-button label="Save" severity="primary" [outlined]="true" text="true" icon="pi pi-check"
                 (onClick)="onSubmit()" [loading]="isSaving"></p-button>
             <p-button label="Close" severity="primary" [outlined]="true" text="false" icon="pi pi-times"

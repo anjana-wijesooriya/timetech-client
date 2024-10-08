@@ -1,29 +1,9 @@
 
+@import "../../../../node_modules/primeflex/primeflex.scss";
 
  :root {
     --surface-ground: transparent;
- }
-
- *,
- ::after,
- ::before {
-     border-width: revert-layer!important;
-     border-style: revert-layer!important;
-     border-color: revert-layer!important;
- }
-
- button,
- input,
- optgroup,
- select,
- textarea {
-    color: revert-layer !important;
-    margin: revert-layer !important;
-    padding: revert-layer !important;
- }
-
-         
-
+ }      
 
 pre.app-code {
     background-color: var(--surface-ground);
@@ -150,8 +130,6 @@ $employeeTableWidth: calc(100% - 21rem);
         text-wrap: nowrap;
     }
 }
-
-// card shadow-5 w-18rem flex flex-wrap p-1
 
 @mixin classExtend($class) {
     @extend .#{$class};

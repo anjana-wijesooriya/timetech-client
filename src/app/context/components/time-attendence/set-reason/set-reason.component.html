@@ -1,13 +1,13 @@
-<div class="grid support-wrapper woraksheet-wrapper">
-    <div class="flex flex-wrap w-full p-2 mb-3 justify-content-center surface-ground">
+<div class="grid grid-cols-12 gap-4 support-wrapper woraksheet-wrapper">
+    <div class="flex flex-wrap w-full p-2 mb-4 justify-center bg-surface-50 dark:bg-surface-950">
         <p-confirmDialog></p-confirmDialog>
         <p-toast></p-toast>
 
         <div class="flex flex-wrap items-center justify-center w-full h-full">
             <div
-                class="block w-full p-3 m-0 rounded-lg bg-gray-2 card surface-card page-content-wrapper shadow-secondary-1 dark:bg-surface-dark dark:text-white text-surface animate-fade-right">
-                <div class="flex w-full pb-3 mb-3 card-header border-bottom-1 surface-border justify-content-between">
-                    <div class="flex flex-wrap justify-between gap-3 align-items-center">
+                class="block w-full p-4 m-0 rounded-lg bg-gray-2 card bg-surface-0 dark:bg-surface-900 page-content-wrapper shadow-secondary-1 dark:bg-surface-dark dark:text-white text-surface animate-fade-right">
+                <div class="flex w-full pb-4 mb-4 card-header border-b border-surface justify-between">
+                    <div class="flex flex-wrap justify-between gap-4 items-center">
                         <!-- <p-button icon="pi pi-arrow-left text-xl" [rounded]="true" [outlined]="true" severity="primary"
                             (onClick)="goBack()" /> -->
                         <h5 class="m-0">Set Reason</h5>
@@ -23,14 +23,14 @@
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                         [globalFilterFields]="['empName', 'empCd', 'deptCd', 'reasonCD']" [paginator]="true"
                         styleClass="p-datatable-gridlines p-datatable-sm" tableStyleClass="table-layout-fixed"
-                        [resizableColumns]="true" columnResizeMode="fit" [autoLayout]="true" class="border-round"
+                        [resizableColumns]="true" columnResizeMode="fit" [autoLayout]="true" class="rounded-border"
                         responsive="true">
                         <ng-template pTemplate="caption">
-                            <div class="flex flex-wrap justify-content-between">
-                                <div class="flex flex-row gap-2 align-items-center justify-content-start">
+                            <div class="flex flex-wrap justify-between">
+                                <div class="flex flex-row gap-2 items-center justify-start">
                                     <p-floatLabel>
                                         <p-dropdown [options]="reasons" [showClear]="true"
-                                            styleClass="w-15rem w-min-12rem" placeholder="Filter by Reason"
+                                            styleClass="w-60 w-min-12rem" placeholder="Filter by Reason"
                                             optionValue="code" optionLabel="reasonName"
                                             (onChange)="supportTable.filterGlobal($event.value, 'equals')">
                                         </p-dropdown>
@@ -54,42 +54,42 @@
                         <ng-template pTemplate="header">
                             <tr>
                                 <th style="width:3rem !important;">
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         #
                                     </div>
                                 </th>
                                 <th pSortableColumn="code">
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         Employee
                                     </div>
                                 </th>
                                 <th pSortableColumn="code">
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         Dept. Code
                                     </div>
                                 </th>
                                 <th pSortableColumn="code">
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         Reason
                                     </div>
                                 </th>
                                 <th pSortableColumn="code">
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         From
                                     </div>
                                 </th>
                                 <th pSortableColumn="code">
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         To
                                     </div>
                                 </th>
                                 <th pSortableColumn="code">
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         Created By
                                     </div>
                                 </th>
                                 <th pSortableColumn="code" style="width:5rem !important;">
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         Delete
                                     </div>
                                 </th>
@@ -97,7 +97,7 @@
                         </ng-template>
                         <ng-template pTemplate="body" let-rowIndex="rowIndex" let-data>
                             <tr class="">
-                                <td class="text-center text-900">{{rowIndex + 1}}</td>
+                                <td class="text-center text-surface-900 dark:text-surface-0">{{rowIndex + 1}}</td>
                                 <td>
                                     <span
                                         class="inline-flex items-center gap-1.5 py-1 px-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-800 dark:bg-neutral-900 dark:text-neutral-200">
@@ -111,7 +111,7 @@
                                 <td class="text-center"> {{ data.deptCd }}</td>
                                 <td class="text-center">
                                     <span [style]="'color: ' + data.color + ''"
-                                        class="inline-flex items-center gap-1.5 py-1 px-2 rounded-lg text-md font-medium shadow-3 bg-gray-100 text-gray-800 dark:bg-neutral-900 dark:text-neutral-200">
+                                        class="inline-flex items-center gap-1.5 py-1 px-2 rounded-lg text-md font-medium shadow-md bg-gray-100 text-gray-800 dark:bg-neutral-900 dark:text-neutral-200">
                                         {{ data.reasonName }}
                                     </span>
 
@@ -139,7 +139,7 @@
                                     </span>
 
                                 </td>
-                                <td class="text-center text-900">
+                                <td class="text-center text-surface-900 dark:text-surface-0">
                                     <button pButton pRipple icon="icon-trash-2" pTooltip="View"
                                         class="mr-2 p-button-rounded p-button-danger p-button-outlined"
                                         (click)="deleteConfirm($event, data)"></button>
@@ -153,7 +153,7 @@
 
         </div>
     </div>
-    <p-sidebar [(visible)]="showAddPanel" position="right" styleClass="w-25rem">
+    <p-sidebar [(visible)]="showAddPanel" position="right" styleClass="w-[25rem]">
         <ng-template pTemplate="header">
             <div class="text-xl font-bold">
                 Set Reason Info
@@ -198,7 +198,7 @@
 
 
         <ng-template pTemplate="footer">
-            <div class="flex gap-2 justify-content-end">
+            <div class="flex gap-2 justify-end">
                 <p-button type="submit" label="Update" severity="primary" [outlined]="false" [loading]="isSaving"
                     icon="pi pi-check" class="ml-auto" (onClick)="onSubmit(false)"></p-button>
                 <p-button label="Cancel" severity="primary" [outlined]="true" text="true" icon="pi pi-times"

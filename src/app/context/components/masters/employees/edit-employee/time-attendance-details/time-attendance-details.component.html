@@ -1,7 +1,7 @@
-<div class="p-0 surface-card shadow-3 border-round h-full">
+<div class="p-0 bg-surface-0 dark:bg-surface-900 shadow-md rounded-border h-full">
     <p-panel>
         <ng-template pTemplate="header">
-            <div class="flex align-items-center gap-2">
+            <div class="flex items-center gap-2">
                 <p-avatar icon="font-medium ic i-Time-Window" shape="circle" />
                 <span class="font-bold">
                     Time Attendance Details
@@ -16,17 +16,17 @@
         </ng-template>
 
         <form #form="ngForm" (ngSubmit)="onSubmit(form)" novalidate autocomplete="off">
-            <div class="grid nested-grid">
-                <div class="col-12 md:col-4">
-                    <div class="grid formgrid p-fluid p-2">
-                        <div class="col-12 field">
-                            <label for="float-label" class="font-medium text-900">Card Number</label>
+            <div class="grid grid-cols-12 gap-4 nested-grid">
+                <div class="col-span-12 md:col-span-4">
+                    <div class="grid grid-cols-12 gap-4 formgrid p-fluid p-2">
+                        <div class="col-span-12 field">
+                            <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Card Number</label>
                             <input pInputText id="cardNo" class="" [(ngModel)]="employee.cardNo" name="cardNo"
                                 [required]="false" />
                             <small class="p-error" id="username-help">Linked to required.</small>
                         </div>
-                        <div class="col-12 field">
-                            <label for="name" class="font-medium text-900">Work Rule</label>
+                        <div class="col-span-12 field">
+                            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Work Rule</label>
                             <p-inputGroup styleClass="custom-input-group-right">
                                 <p-dropdown [options]="workRules" placeholder="Select Option" name="wrkRulCd"
                                     [(ngModel)]="employee.wrkRulCd" optionLabel="name" optionValue="code"
@@ -40,90 +40,90 @@
                             </p-inputGroup>
 
                         </div>
-                        <div class="col-12 field">
-                            <label for="name" class="font-medium text-900">Work Rule Start Date</label>
+                        <div class="col-span-12 field">
+                            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Work Rule Start Date</label>
                             <p-calendar [iconDisplay]="'input'" [showIcon]="true" [(ngModel)]="employee.workRuleStartDt"
                                 name="workRuleStartDt"></p-calendar>
                             <small class="p-error" id="username-help">Work Rule Start Date is required.</small>
                         </div>
-                        <div class="col-12 field">
-                            <label for="float-label" class="font-medium text-900">Enroll Id</label>
+                        <div class="col-span-12 field">
+                            <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Enroll Id</label>
                             <input pInputText id="cardNo" class="" [(ngModel)]="employee.enrollID" name="enrollID"
                                 [required]="true" />
                             <small class="p-error" id="username-help">Linked to required.</small>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 md:col-8">
-                    <div class="grid formgrid p-fluid p-2">
-                        <div class="col-fixed w-20rem  field">
-                            <label for="name" class="font-medium text-900">FPU verification</label>
-                            <div class="flex align-items-center">
+                <div class="col-span-12 md:col-span-8">
+                    <div class="grid grid-cols-12 gap-4 formgrid p-fluid p-2">
+                        <div class="col-fixed w-80  field">
+                            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">FPU verification</label>
+                            <div class="flex items-center">
                                 <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on" [(ngModel)]="employee.fpUflag"
                                     name="fpUflag"></p-inputSwitch>
                             </div>
                         </div>
-                        <div class="col-fixed w-20rem field">
-                            <label for="name" class="font-medium text-900">Permanent Off</label>
-                            <div class="flex align-items-center">
+                        <div class="col-fixed w-80 field">
+                            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Permanent Off</label>
+                            <div class="flex items-center">
                                 <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on"
                                     [(ngModel)]="employee.isPermanentOff" name="isPermanentOff"></p-inputSwitch>
                             </div>
                         </div>
-                        <div class="col-fixed w-20rem field">
-                            <label for="name" class="font-medium text-900">Machine Admin</label>
-                            <div class="flex align-items-center">
+                        <div class="col-fixed w-80 field">
+                            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Machine Admin</label>
+                            <div class="flex items-center">
                                 <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on" [(ngModel)]="employee.kjAdmin"
                                     name="kjAdmin" [trueValue]="1" [falseValue]="0"></p-inputSwitch>
                             </div>
                         </div>
-                        <div class="col-fixed w-20rem  field">
-                            <label for="name" class="font-medium text-900">Project Employee</label>
-                            <div class="flex align-items-center">
+                        <div class="col-fixed w-80  field">
+                            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Project Employee</label>
+                            <div class="flex items-center">
                                 <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on"
                                     [(ngModel)]="employee.isProjectEmployee" name="isProjectEmployee"></p-inputSwitch>
                             </div>
                         </div>
-                        <div class="col-fixed w-20rem field">
-                            <label for="name" class="font-medium text-900">Non Swiper</label>
-                            <div class="flex align-items-center">
+                        <div class="col-fixed w-80 field">
+                            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Non Swiper</label>
+                            <div class="flex items-center">
                                 <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on" [trueValue]="1"
                                     [falseValue]="0" [(ngModel)]="employee.nonSwiper" name="nonSwiper"></p-inputSwitch>
                             </div>
                         </div>
-                        <div class="col-fixed w-20rem field">
-                            <label for="name" class="font-medium text-900">Notify</label>
-                            <div class="flex align-items-center">
+                        <div class="col-fixed w-80 field">
+                            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Notify</label>
+                            <div class="flex items-center">
                                 <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on"
                                     [(ngModel)]="employee.isNotificationRequired"
                                     name="isNotificationRequired"></p-inputSwitch>
                             </div>
                         </div>
-                        <div class="col-fixed w-20rem field">
-                            <label for="name" class="font-medium text-900">Shift Employee</label>
-                            <div class="flex align-items-center">
+                        <div class="col-fixed w-80 field">
+                            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Shift Employee</label>
+                            <div class="flex items-center">
                                 <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on"
                                     [(ngModel)]="employee.isShiftEmployee" name="isShiftEmployee"></p-inputSwitch>
                             </div>
                         </div>
-                        <div class="col-fixed w-20rem  field">
-                            <label for="name" class="font-medium text-900">Project / Block selection on mobile</label>
-                            <div class="flex align-items-center">
+                        <div class="col-fixed w-80  field">
+                            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Project / Block selection on mobile</label>
+                            <div class="flex items-center">
                                 <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on"
                                     [(ngModel)]="employee.isSelectBlockOnMobile"
                                     name="isSelectBlockOnMobile"></p-inputSwitch>
                             </div>
                         </div>
-                        <div class="col-fixed w-20rem field">
-                            <label for="name" class="font-medium text-900">Overtime Eligible</label>
-                            <div class="flex align-items-center">
+                        <div class="col-fixed w-80 field">
+                            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Overtime Eligible</label>
+                            <div class="flex items-center">
                                 <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on"
                                     [(ngModel)]="employee.isOTEligible" name="isOTEligible"></p-inputSwitch>
                             </div>
                         </div>
-                        <div class="col-fixed w-20rem field">
-                            <label for="name" class="font-medium text-900">Mobile punching</label>
-                            <div class="flex align-items-center">
+                        <div class="col-fixed w-80 field">
+                            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Mobile punching</label>
+                            <div class="flex items-center">
                                 <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on"
                                     [(ngModel)]="employee.hasMobilePunching" name="hasMobilePunching"></p-inputSwitch>
                             </div>
@@ -164,7 +164,7 @@
                 </ng-template>
                 <!-- <ng-template pTemplate="groupfooter" let-data>
                     <tr>
-                        <td colspan="5" class="text-right font-bold pr-6">
+                        <td colspan="5" class="text-right font-bold pr-12">
                             {{data.shiftName}}
                         </td>
                     </tr>
@@ -178,15 +178,15 @@
                         <td class="text-center">
                             <!-- <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
                                 [class]="'flag-' + customer.country.code" style="width: 20px"> -->
-                            <span class="ml-1 vertical-align-middle">{{data.shiftCode}}</span>
+                            <span class="ml-1 align-middle">{{data.shiftCode}}</span>
                         </td>
                         <td class="text-center">
                             {{data.startRange}}
                         </td>
                         <td class="text-center">
-                            <p-chip styleClass="pl-0 pr-3" *ngIf="data.inTime">
+                            <p-chip styleClass="pl-0 pr-4" *ngIf="data.inTime">
                                 <span
-                                    class="bg-green-600 text-white border-circle w-2rem h-2rem flex align-items-center justify-content-center">
+                                    class="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center">
                                     <i class="pi pi-sort-numeric-up"></i>
                                 </span>
                                 <span class="ml-2 font-medium">
@@ -196,9 +196,9 @@
                             <!-- <p-tag [value]="customer.status" [severity]="getSeverity(customer.status)" /> -->
                         </td>
                         <td class="text-center">
-                            <p-chip styleClass="pl-0 pr-3" *ngIf="data.outTime">
+                            <p-chip styleClass="pl-0 pr-4" *ngIf="data.outTime">
                                 <span
-                                    class="bg-red-600 text-white border-circle w-2rem h-2rem flex align-items-center justify-content-center">
+                                    class="bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center">
                                     <i class="pi pi-sort-numeric-down"></i>
                                 </span>
                                 <span class="ml-2 font-medium">
@@ -214,7 +214,7 @@
             </p-table>
         </ng-template>
         <ng-template pTemplate="footer">
-            <div class="flex justify-content-end gap-2">
+            <div class="flex justify-end gap-2">
                 <p-button label="Close" severity="primary" [outlined]="true" text="true" icon="pi pi-times"
                     (onClick)="showWorkRuleReport = !showWorkRuleReport"></p-button>
             </div>

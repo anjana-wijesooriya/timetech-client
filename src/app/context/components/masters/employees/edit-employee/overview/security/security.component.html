@@ -1,14 +1,14 @@
 <div class="p-0">
-    <p-panel [toggleable]="true" styleClass="border-noround">
+    <p-panel [toggleable]="true" styleClass="rounded-none">
         <ng-template pTemplate="header">
-            <div class="flex align-items-center gap-2">
+            <div class="flex items-center gap-2">
                 <span class="font-bold">Web Login</span>
             </div>
         </ng-template>
         <ng-template pTemplate="footer">
-            <div class="flex flex-wrap align-items-center justify-content-between gap-3">
+            <div class="flex flex-wrap items-center justify-between gap-4">
                 <span class="p-text-secondary">Updated 2 hours ago</span>
-                <div class="flex align-items-center gap-2">
+                <div class="flex items-center gap-2">
 
                     <p-button label="Update" severity="primary" [outlined]="true" [loading]="isSavingUsername"
                         icon="pi pi-check" (onClick)="onSubmitUsername(form)" styleClass="w-auto"></p-button>
@@ -17,28 +17,28 @@
         </ng-template>
         <div>
             <form #form="ngForm" novalidate autocomplete="off">
-                <div class="grid formgrid p-fluid p-2">
-                    <div class="field mb-4 col-12 md:col-4">
-                        <label for="name" class="font-medium text-900">Web Login</label>
-                        <div class="flex align-items-center w-auto">
+                <div class="grid grid-cols-12 gap-4 formgrid p-fluid p-2">
+                    <div class="field mb-6 col-span-12 md:col-span-4">
+                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Web Login</label>
+                        <div class="flex items-center w-auto">
                             <p-inputSwitch class="p-inputSwitch-lg" id="base-on" [(ngModel)]="employeeData.hasWebLogin"
                                 name="hasWebLogin" (ngModelChange)="onModelChange(form)"></p-inputSwitch>
                         </div>
-                        <!-- <div class="flex align-items-center">
+                        <!-- <div class="flex items-center">
                             <p-selectButton [options]="stateOptions" formControlName="hasWebLogin" name="hasWebLogin"
                                 [(ngModel)]="employeeData.hasWebLogin" styleClass="flex w-full">
                                 <ng-template let-item pTemplate>
-                                    <div class="inline-flex align-items-center justify-content-center">
+                                    <div class="inline-flex items-center justify-center">
                                         <i [class]="'mr-1 pi pi-check'" *ngIf="item.label == 'Allowed'"></i>
                                         <i [class]="'mr-1 pi pi-times'" *ngIf="item.label == 'Not Allowed'"></i>
-                                        <span class="w-7rem mr-5">{{item.label}}</span>
+                                        <span class="w-28 mr-8">{{item.label}}</span>
                                     </div>
                                 </ng-template>
                             </p-selectButton>
                         </div> -->
                     </div>
-                    <div class="field mb-4 col-12 md:col-4">
-                        <label for="name" class="font-medium text-900">Username</label>
+                    <div class="field mb-6 col-span-12 md:col-span-4">
+                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Username</label>
                         <input pInputText id="name" [(ngModel)]="employeeData.loginUser"
                             [disabled]="!employeeData.hasWebLogin" name="loginUser" />
                         <small class="p-error" id="username-help">Username required.</small>
@@ -47,16 +47,16 @@
             </form>
         </div>
     </p-panel>
-    <p-panel [toggleable]="true" styleClass="border-noround mt-4">
+    <p-panel [toggleable]="true" styleClass="rounded-none mt-6">
         <ng-template pTemplate="header">
-            <div class="flex align-items-center gap-2">
+            <div class="flex items-center gap-2">
                 <span class="font-bold">Change Login Password</span>
             </div>
         </ng-template>
         <ng-template pTemplate="footer">
-            <div class="flex flex-wrap align-items-center justify-content-between gap-3">
+            <div class="flex flex-wrap items-center justify-between gap-4">
                 <span class="p-text-secondary">Updated 5 days ago</span>
-                <div class="flex align-items-center gap-2">
+                <div class="flex items-center gap-2">
                     <p-button label="Change Password" [outlined]="true" class="w-auto" [loading]="isSavingPassword"
                         (onClick)="onSubmitPassword(passwordForm)" icon="pi pi-save">
                     </p-button>
@@ -65,9 +65,9 @@
         </ng-template>
         <div>
             <form #passwordForm="ngForm" novalidate autocomplete="off">
-                <div class="grid formgrid p-fluid p-2">
-                    <div class="field mb-4 col-12 md:col-4">
-                        <label for="name" class="font-medium text-900">New Password</label>
+                <div class="grid grid-cols-12 gap-4 formgrid p-fluid p-2">
+                    <div class="field mb-6 col-span-12 md:col-span-4">
+                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">New Password</label>
                         <p-password [(ngModel)]="passowrd" [toggleMask]="true" name="password" [required]="true"
                             [maxLength]="15">
                             <ng-template pTemplate="header">
@@ -88,8 +88,8 @@
                         </p-password>
                         <small class="p-error">Password required.</small>
                     </div>
-                    <div class="field mb-4 col-12 md:col-4">
-                        <label for="name" class="font-medium text-900">Confirm Password</label>
+                    <div class="field mb-6 col-span-12 md:col-span-4">
+                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Confirm Password</label>
                         <p-password id="name" name="confirmPassowrd" [(ngModel)]="confirmPassowrd" [toggleMask]="true"
                             [feedback]="false" [required]="true" [maxLength]="15">
                         </p-password>

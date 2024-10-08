@@ -1,78 +1,78 @@
 <div class="p-0">
     <form (ngSubmit)="onSubmit()" [formGroup]="validationForm" novalidate autocomplete="off" #form="ngForm">
-        <div class="grid nested-grid">
-            <div class="col-12 pb-0">
-                <div class="grid formgrid p-fluid">
-                    <div class="field mb-4 col-12 md:col-6 lg:col-3">
-                        <label for="name" class="font-medium text-900">Mobile</label>
+        <div class="grid grid-cols-12 gap-4 nested-grid">
+            <div class="col-span-12 pb-0">
+                <div class="grid grid-cols-12 gap-4 formgrid p-fluid">
+                    <div class="field mb-6 col-span-12 md:col-span-6 lg:col-span-3">
+                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Mobile</label>
                         <input pInputText id="name" class="" [(ngModel)]="employee.mobileNo" formControlName="mobileNo"
                             name="mobileNo" />
                         <small class="p-error" id="username-help">Mobile number required.</small>
                     </div>
-                    <div class="field mb-4 col-12 md:col-6 lg:col-3">
-                        <label for="name" class="font-medium text-900">Telephone</label>
+                    <div class="field mb-6 col-span-12 md:col-span-6 lg:col-span-3">
+                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Telephone</label>
                         <input pInputText id="name" class="" [(ngModel)]="employee.telephone"
                             formControlName="telephone" name="telephone" />
                         <small class="p-error" id="username-help">Mobile number required.</small>
                     </div>
-                    <div class="field mb-4 col-12 md:col-6 lg:col-3">
-                        <label for="name" class="font-medium text-900">Official Email</label>
+                    <div class="field mb-6 col-span-12 md:col-span-6 lg:col-span-3">
+                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Official Email</label>
                         <input pInputText id="name" class="" [(ngModel)]="employee.email" formControlName="email"
                             name="email" />
                         <small class="p-error" id="username-help">Official Email required.</small>
                     </div>
-                    <div class="field mb-4 col-12 md:col-6 lg:col-3">
-                        <label for="name" class="font-medium text-900">Personal Email</label>
+                    <div class="field mb-6 col-span-12 md:col-span-6 lg:col-span-3">
+                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Personal Email</label>
                         <input pInputText id="name" class="" [(ngModel)]="employee.personalEmail"
                             formControlName="personalEmail" name="personalEmail" />
                         <small class="p-error" id="username-help">Personal Email required.</small>
                     </div>
-                    <div class="field mb-4 col-12 md:col-6 lg:col-3">
-                        <label for="name" class="font-medium text-900">Natinonality</label>
+                    <div class="field mb-6 col-span-12 md:col-span-6 lg:col-span-3">
+                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Natinonality</label>
                         <p-dropdown [options]="supportData.nationalities" placeholder="Select Option"
                             formControlName="nationCd" [(ngModel)]="employee.nationCd" [showClear]="true"
                             optionLabel="ds" optionValue="cd" name="nationCd" inputId="float-label"></p-dropdown>
                         <small class="p-error" id="username-help">Natinonality required.</small>
                     </div>
-                    <div class="field mb-4 col-12 md:col-6 lg:col-3">
-                        <label for="name" class="font-medium text-900">Home Country</label>
+                    <div class="field mb-6 col-span-12 md:col-span-6 lg:col-span-3">
+                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Home Country</label>
                         <p-dropdown [options]="supportData.countries" placeholder="Select Option"
                             formControlName="homeCountryCd" [(ngModel)]="employee.homeCountryCd" [showClear]="true"
                             optionLabel="ds" optionValue="cd" inputId="float-label" name="homeCountryCd"></p-dropdown>
                     </div>
-                    <div class="field mb-4 col-12 md:col-6 lg:col-3">
-                        <label for="name" class="font-medium text-900">Date of Birth</label>
+                    <div class="field mb-6 col-span-12 md:col-span-6 lg:col-span-3">
+                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Date of Birth</label>
                         <p-calendar [iconDisplay]="'input'" [showIcon]="true" formControlName="birthDate"
                             [(ngModel)]="employee.birthDate" name="birthDate"></p-calendar>
                     </div>
-                    <div class="field mb-4 col-12 md:col-6 lg:col-3">
-                        <label for="name" class="font-medium text-900">Place of Birth</label>
+                    <div class="field mb-6 col-span-12 md:col-span-6 lg:col-span-3">
+                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Place of Birth</label>
                         <input pInputText id="name" class="" formControlName="birthDs" [(ngModel)]="employee.birthDs"
                             name="birthDs" />
                     </div>
-                    <div class="field mb-4 col-12 md:col-6 lg:col-3">
-                        <label for="name" class="font-medium text-900">Religion</label>
+                    <div class="field mb-6 col-span-12 md:col-span-6 lg:col-span-3">
+                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Religion</label>
                         <p-dropdown [options]="supportData.religions" placeholder="Select Option"
                             formControlName="relgCd" [(ngModel)]="employee.relgCd" name="relgCd" optionLabel="ds"
                             optionValue="cd" inputId="float-label" [showClear]="true"></p-dropdown>
                         <small class="p-error" id="username-help">Religion required.</small>
                     </div>
-                    <div class="field mb-4 col-12 md:col-6 lg:col-3">
-                        <label for="name" class="font-medium text-900">Blood Group</label>
+                    <div class="field mb-6 col-span-12 md:col-span-6 lg:col-span-3">
+                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Blood Group</label>
                         <p-dropdown [options]="bloodGroups" placeholder="Select Option" [showClear]="true"
                             formControlName="bloodGroup" [(ngModel)]="employee.bloodGroup" name="bloodGroup"
                             optionLabel="value" optionValue="key" inputId="float-label"></p-dropdown>
                     </div>
-                    <div class="field mb-4 col-12 md:col-6 lg:col-3">
-                        <label for="name" class="font-medium text-900">Marital status</label>
+                    <div class="field mb-6 col-span-12 md:col-span-6 lg:col-span-3">
+                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Marital status</label>
                         <p-dropdown [options]="maritalStatus" placeholder="Select Option" [showClear]="true"
                             formControlName="maritalStatusCd" [(ngModel)]="employee.maritalStatusCd"
                             name="maritalStatusCd" optionLabel="name" optionValue="key"
                             inputId="float-label"></p-dropdown>
                     </div>
-                    <div class="field mb-4 col-12 md:col-6 lg:col-3">
-                        <label for="name" class="font-medium text-900">Gender</label>
-                        <div class="flex align-items-center">
+                    <div class="field mb-6 col-span-12 md:col-span-6 lg:col-span-3">
+                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Gender</label>
+                        <div class="flex items-center">
                             <p-selectButton [options]="gender" [(ngModel)]="value" optionLabel="icon"
                                 formControlName="sex" name="sex" optionLabel="name" optionValue="key"
                                 [(ngModel)]="employee.sex" styleClass="flex w-full">
@@ -88,33 +88,33 @@
                                             [(ngModel)]="employee.sex" [showClear]="true" name="sex" optionLabel="name"
                                             optionValue="key" inputId="float-label"></p-dropdown> -->
                     </div>
-                    <div class="field mb-4 col-12 md:col-6 lg:col-3">
-                        <label for="name" class="font-medium text-900">Visitors Allowed</label>
-                        <div class="flex align-items-center">
+                    <div class="field mb-6 col-span-12 md:col-span-6 lg:col-span-3">
+                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Visitors Allowed</label>
+                        <div class="flex items-center">
                             <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on"
                                 [(ngModel)]="employee.isVisitorsAllowed" name="isVisitorsAllowed"
                                 formControlName="isVisitorsAllowed"></p-inputSwitch>
                         </div>
                     </div>
-                    <div class="field col-12 md:col-6">
-                        <label for="name" class="font-medium text-900">Profile Picture</label>
-                        <div class="flex align-items-center">
-                            <p-avatar [icon]="'pi pi-user'" styleClass="flex-shrink-0 mr-4" size="xlarge" shape="circle"
+                    <div class="field col-span-12 md:col-span-6">
+                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Profile Picture</label>
+                        <div class="flex items-center">
+                            <p-avatar [icon]="'pi pi-user'" styleClass="shrink-0 mr-6" size="xlarge" shape="circle"
                                 *ngIf="employee.imagePath == undefined || employee.imagePath == '' || employee.imagePath == null ; else empImg"></p-avatar>
                             <ng-template #empImg>
-                                <p-avatar [icon]="'pi pi-sync pi-spinner'" styleClass="flex-shrink-0 mr-4" size="xlarge"
+                                <p-avatar [icon]="'pi pi-sync pi-spinner'" styleClass="shrink-0 mr-6" size="xlarge"
                                     shape="circle" (onImageError)="employee.imagePath = ''"
                                     *ngIf="employee.imagePath == 'spinner'; else picBlock">
                                 </p-avatar>
                                 <ng-template #picBlock>
-                                    <p-avatar [image]="employee?.imagePath" styleClass="flex-shrink-0 mr-4"
+                                    <p-avatar [image]="employee?.imagePath" styleClass="shrink-0 mr-6"
                                         size="xlarge" shape="circle" (onImageError)="employee.imagePath = ''">
                                     </p-avatar>
                                 </ng-template>
 
 
                             </ng-template>
-                            <!-- <img [src]="employee.imagePath" class="mr-4"> -->
+                            <!-- <img [src]="employee.imagePath" class="mr-6"> -->
                             <p-fileUpload mode="basic" chooseLabel="Upload Image" name="file" chooseIcon="pi pi-upload"
                                 [url]="'https://localhost:44319/api/employee/upload-profile-picture?customerId=' + employee.empID"
                                 accept="image/*" [auto]="true" maxFileSize="1000000" (onUpload)="onUploadImage($event)"
@@ -123,54 +123,54 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 pt-0">
-                <div class="grid formgrid p-fluid">
-                    <div class="col-12">
+            <div class="col-span-12 pt-0">
+                <div class="grid grid-cols-12 gap-4 formgrid p-fluid">
+                    <div class="col-span-12">
                         <p-divider [align]="'left'" type="solid">
-                            <div class="inline-flex align-items-center gap-3">
+                            <div class="inline-flex items-center gap-4">
                                 <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on"
                                     [(ngModel)]="employee.hasCompanyAccommodation" name="hasCompanyAccommodation"
                                     formControlName="hasCompanyAccommodation"></p-inputSwitch>
-                                <label for="name" class="font-medium text-900">Company Accomodation</label>
+                                <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Company Accomodation</label>
                             </div>
                         </p-divider>
                     </div>
 
-                    <!-- <div class="field mb-4 col-12">
+                    <!-- <div class="field mb-6 col-span-12">
                         
-                        <div class="flex align-items-center">
+                        <div class="flex items-center">
                             
                         </div>
                     </div> -->
-                    <div class="field mb-4 col-12 md:col-4 ">
-                        <label for="name" class="font-medium text-900">Flat No.</label>
+                    <div class="field mb-6 col-span-12 md:col-span-4 ">
+                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Flat No.</label>
                         <input pInputText id="name" class="" formControlName="roomNo" name="roomNo"
                             [(ngModel)]="employee.roomNo" [disabled]="employee.hasCompanyAccommodation == false" />
                     </div>
-                    <div class="field mb-4 col-12 md:col-4 ">
-                        <label for="name" class="font-medium text-900">Building No.</label>
+                    <div class="field mb-6 col-span-12 md:col-span-4 ">
+                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Building No.</label>
                         <input pInputText id="name" class="" formControlName="building" name="building"
                             [(ngModel)]="employee.building" />
                     </div>
-                    <div class="field mb-4 col-12 md:col-4 ">
-                        <label for="name" class="font-medium text-900">Road No.</label>
+                    <div class="field mb-6 col-span-12 md:col-span-4 ">
+                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Road No.</label>
                         <input pInputText id="name" class="" formControlName="road" name="road"
                             [(ngModel)]="employee.road" />
                     </div>
-                    <div class="field mb-4 col-12 md:col-4 ">
-                        <label for="name" class="font-medium text-900">Block No.</label>
+                    <div class="field mb-6 col-span-12 md:col-span-4 ">
+                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Block No.</label>
                         <input pInputText id="name" class="" formControlName="block" name="block"
                             [(ngModel)]="employee.block" disabled />
                     </div>
-                    <div class="field mb-4 col-12 md:col-4 ">
-                        <label for="name" class="font-medium text-900">Area</label>
+                    <div class="field mb-6 col-span-12 md:col-span-4 ">
+                        <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Area</label>
                         <input pInputText id="name" class="" formControlName="area" name="area"
                             [disabled]="employee.hasCompanyAccommodation == false" [(ngModel)]="employee.area" />
                     </div>
                 </div>
             </div>
             <p-divider styleClass="w-full" class="w-full"></p-divider>
-            <div class="col-12 flex justify-content-end flex-wrap py-0">
+            <div class="col-span-12 flex justify-end flex-wrap py-0">
                 <p-toast></p-toast>
                 <p-button label="Update" severity="primary" [outlined]="true" [loading]="isSaving" icon="pi pi-check"
                     (onClick)="onSubmit()" styleClass="w-auto"></p-button>

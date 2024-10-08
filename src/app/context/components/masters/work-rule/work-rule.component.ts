@@ -414,8 +414,8 @@ export class WorkRuleComponent implements OnInit {
 
         },
         // template: `<div class="w-full py-2">
-        //         <label for="float-label" class="font-medium text-900">Reimbursement</label>
-        //         <div class="flex align-items-center w-auto">
+        //         <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Reimbursement</label>
+        //         <div class="flex items-center w-auto">
         //             <p-inputSwitch class="p-inputSwitch-lg" triggers="focus"></p-inputSwitch>
         //         </div>
         //     </div>`

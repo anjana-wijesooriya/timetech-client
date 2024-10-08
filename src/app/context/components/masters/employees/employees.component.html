@@ -1,30 +1,30 @@
-<div class="grid employees-layout-wrapper">
-    <div class="col-12 surface-ground p-2 mb-0">
-        <div class="card surface-card  p-3 m-0  page-content-wrapper">
+<div class="grid grid-cols-12 gap-4 employees-layout-wrapper">
+    <div class="col-span-12 bg-surface-50 dark:bg-surface-950 p-2 mb-0">
+        <div class="card bg-surface-0 dark:bg-surface-900  p-4 m-0  page-content-wrapper">
             <h5 class="mb-1">Employees</h5>
             <!-- <p> Add, Edit, Delete or Search by Creating custom search criterieas. </p> -->
             <p-toast></p-toast>
 
-            <div #tableContent class="flex flex-row align-items-start justify-content-start w-full"
+            <div #tableContent class="flex flex-row items-start justify-start w-full"
                 [ngClass]="{'table-sidebar-active': showDepartments}">
                 <div class="filterbar-container h-full">
-                    <p-sidebar styleClass="absolute top-auto left-auto bottom-auto h-auto z-3"
+                    <p-sidebar styleClass="absolute top-auto left-auto bottom-auto h-auto z-30"
                         [appendTo]="'#tableContent'" [modal]="false" [(visible)]="showDepartments" position="left">
                         <ng-template pTemplate="header">
-                            <div class="flex flex-column align-items-center justify-content-start">
+                            <div class="flex flex-col items-center justify-start">
                                 <p-dropdown [options]="companies" [(ngModel)]="selectedComapny" optionValue="compId"
                                     optionLabel="name" [showClear]="false" placeholder="Select a Company"
-                                    styleClass="w-15rem"
+                                    styleClass="w-60"
                                     (ngModelChange)="onChangeCompany($event); this.getEmployees();">
                                     <ng-template let-selectedValue pTemplate="selectedItem">
-                                        <div class="flex align-items-center gap-2" *ngIf="selectedValue">
+                                        <div class="flex items-center gap-2" *ngIf="selectedValue">
                                             <img src="assets/context/images/flag/flag_placeholder.png"
                                                 [class]="'flag flag-' + selectedValue.logo" style="width: 21px" />
                                             <div>{{ selectedValue.name }}</div>
                                         </div>
                                     </ng-template>
                                     <ng-template let-company pTemplate="item">
-                                        <div class="flex align-items-center gap-2">
+                                        <div class="flex items-center gap-2">
                                             <img src="assets/context/images/flag/flag_placeholder.png"
                                                 [class]="'flag flag-' + company.logo" style="width: 21px" />
                                             <div>{{ company.name }}</div>
@@ -35,8 +35,8 @@
                             </div>
                         </ng-template>
                         <ng-template pTemplate="content">
-                            <div class="flex flex-column align-items-start justify-content-center">
-                                <div class="flex flex-column  w-full row-gap-3">
+                            <div class="flex flex-col items-start justify-center">
+                                <div class="flex flex-col  w-full gap-y-4">
                                     <div class="mb-0">
                                         <button pButton type="button" *ngIf="isExpand" size="small" label="Expand all"
                                             (click)="expandAll()" class="mr-2" icon="pi pi-plus"></button>
@@ -52,7 +52,7 @@
                                         scrollHeight="calc(100vh - 27rem)">
                                         <ng-template let-node pTemplate="url">
                                             <a [href]="node.data" target="_blank" rel="noopener noreferrer"
-                                                class="text-700 hover:text-primary">{{
+                                                class="text-surface-700 dark:text-surface-100 hover:text-primary">{{
                                                 node.label
                                                 }}</a>
                                         </ng-template>
@@ -67,7 +67,7 @@
                     </p-sidebar>
                 </div>
                 <!-- <div class="col"> -->
-                <div class="grid-container employees-table transition-all transition-duration-300 h-full"
+                <div class="grid-container employees-table transition-all duration-300 h-full"
                     [ngClass]="{'box-layout': isBoxLayout}">
                     <p-table #empTable [columns]="selectedColumns" [value]="_employees" dataKey="id" [rowHover]="true"
                         styleClass="p-datatable-sm p-datatable-gridlines" [paginator]="true" [rows]="25"
@@ -80,7 +80,7 @@
                         columnResizeMode="fit" [autoLayout]="true" (onRowSelect)="showProfile = true">
                         <ng-template pTemplate="caption">
 
-                            <div class="flex flex-wrap justify-content-between">
+                            <div class="flex flex-wrap justify-between">
                                 <div class="flex flex-wrap gap-2">
                                     <button pButton pRipple [label]="'Filter'" [outlined]="true"
                                         icon="pi pi-filter-slash" class="p-button-primary" (click)="showFilterMenu();"
@@ -114,7 +114,7 @@
                         <ng-template pTemplate="header">
                             <tr>
                                 <th pSortableColumn="empCd" pFrozenColumn style="width:7rem !important;">
-                                    <div class="flex justify-content-between align-items-center">
+                                    <div class="flex justify-between items-center">
                                         Code
                                         <p-sortIcon field="empCd"></p-sortIcon>
                                         <p-columnFilter class="ml-auto" type="text" field="empCd" display="menu"
@@ -122,7 +122,7 @@
                                     </div>
                                 </th>
                                 <th pSortableColumn="empName" [hidden]="!isShowColumn('empName')" pResizableColumn>
-                                    <div class="flex justify-content-between align-items-center">
+                                    <div class="flex justify-between items-center">
                                         Name
                                         <p-sortIcon field="empName"></p-sortIcon>
                                         <p-columnFilter class="ml-auto" type="text" field="empName" display="menu"
@@ -131,14 +131,14 @@
                                 </th>
                                 <th pSortableColumn="userProfileObj.name" pResizableColumn
                                     [hidden]="!isShowColumn('userProfileObj.name')">
-                                    <div class="flex justify-content-between align-items-center">
+                                    <div class="flex justify-between items-center">
                                         User Profile
                                         <p-sortIcon field="userProfileObj.name"></p-sortIcon>
                                         <p-columnFilter class="ml-auto" field="userProfileObj" matchMode="in"
                                             display="menu" [showMatchModes]="false" [showOperator]="false"
                                             [showAddButton]="false">
                                             <ng-template pTemplate="header">
-                                                <div class="px-3 pt-3 pb-0">
+                                                <div class="px-4 pt-4 pb-0">
                                                     <span class="font-bold">User Profile Picker</span>
                                                 </div>
                                             </ng-template>
@@ -147,10 +147,10 @@
                                                     placeholder="Any" (onChange)="filter($event.value)"
                                                     optionLabel="name">
                                                     <ng-template let-option pTemplate="item">
-                                                        <div class="inline-block vertical-align-middle">
+                                                        <div class="inline-block align-middle">
                                                             <!-- <img [alt]="option.label"
                                                                                                                 src="https://primefaces.org/cdn/primeng/images/context/avatar/{{ option.image }}" width="24"
-                                                                                                                class="vertical-align-middle" /> -->
+                                                                                                                class="align-middle" /> -->
                                                             <span class="ml-1 mt-1">{{ option.name }}</span>
                                                         </div>
                                                     </ng-template>
@@ -160,14 +160,14 @@
                                     </div>
                                 </th>
                                 <th pSortableColumn="deptDs" pResizableColumn [hidden]="!isShowColumn('deptDs')">
-                                    <div class="flex justify-content-between align-items-center">
+                                    <div class="flex justify-between items-center">
                                         Department
                                         <p-sortIcon field="deptDs"></p-sortIcon>
                                         <p-columnFilter field="deptDs" matchMode="in" display="menu"
                                             [showMatchModes]="false" [showOperator]="false" class="ml-auto"
                                             [showAddButton]="false">
                                             <ng-template pTemplate="header">
-                                                <div class="px-3 pt-3 pb-0">
+                                                <div class="px-4 pt-4 pb-0">
                                                     <span class="font-bold">Department Picker</span>
                                                 </div>
                                             </ng-template>
@@ -176,7 +176,7 @@
                                                     placeholder="Any" (onChange)="filter($event.value)"
                                                     optionLabel="departmentName" optionValue="departmentName">
                                                     <ng-template let-option pTemplate="item">
-                                                        <div class="inline-block vertical-align-middle">
+                                                        <div class="inline-block align-middle">
                                                             <span class="ml-1 mt-1">{{ option.departmentName }}</span>
                                                         </div>
                                                     </ng-template>
@@ -187,14 +187,14 @@
                                 </th>
                                 <th pSortableColumn="designationObj.name" pResizableColumn
                                     [hidden]="!isShowColumn('designationObj.name')">
-                                    <div class="flex justify-content-between align-items-center">
+                                    <div class="flex justify-between items-center">
                                         Designation
                                         <p-sortIcon field="designationObj.name"></p-sortIcon>
                                         <p-columnFilter field="designationObj.name" matchMode="in" display="menu"
                                             [showMatchModes]="false" [showOperator]="false" class="ml-auto"
                                             [showAddButton]="false">
                                             <ng-template pTemplate="header">
-                                                <div class="px-3 pt-3 pb-0">
+                                                <div class="px-4 pt-4 pb-0">
                                                     <span class="font-bold">Designation Picker</span>
                                                 </div>
                                             </ng-template>
@@ -203,7 +203,7 @@
                                                     placeholder="Any" (onChange)="filter($event.value)"
                                                     optionLabel="name">
                                                     <ng-template let-option pTemplate="item">
-                                                        <div class="inline-block vertical-align-middle">
+                                                        <div class="inline-block align-middle">
                                                             <span class="ml-1 mt-1">{{ option.name }}</span>
                                                         </div>
                                                     </ng-template>
@@ -214,7 +214,7 @@
                                 </th>
                                 <th pSortableColumn="nationalID" [hidden]="!isShowColumn('nationalID')"
                                     pResizableColumn>
-                                    <div class="flex justify-content-between align-items-center">
+                                    <div class="flex justify-between items-center">
                                         National ID
                                         <p-sortIcon field="nationalID"></p-sortIcon>
                                         <p-columnFilter type="text" field="nationalID" display="menu"
@@ -222,7 +222,7 @@
                                     </div>
                                 </th>
                                 <th pSortableColumn="email" [hidden]="!isShowColumn('email')" pResizableColumn>
-                                    <div class="flex justify-content-between align-items-center">
+                                    <div class="flex justify-between items-center">
                                         Email
                                         <p-sortIcon field="nationalID"></p-sortIcon>
                                         <p-columnFilter type="text" field="email" display="menu"
@@ -231,14 +231,14 @@
                                 </th>
                                 <th pSortableColumn="active" [hidden]="!isShowColumn('active')"
                                     style="width:5.2rem !important;" class="px-1">
-                                    <div class="flex justify-content-between align-items-center">
+                                    <div class="flex justify-between items-center">
                                         Status
                                         <!-- <p-sortIcon field="active"></p-sortIcon> -->
                                         <p-columnFilter type="boolean" field="isActive" class="ml-1"></p-columnFilter>
                                     </div>
                                 </th>
                                 <th pFrozenColumn alignFrozen="right" style="width:3.5rem !important;">
-                                    <div class="flex justify-content-between align-items-center">
+                                    <div class="flex justify-between items-center">
                                         Edit
                                     </div>
                                 </th>
@@ -248,12 +248,12 @@
                             <tr [pSelectableRow]="employee">
 
                                 <td pFrozenColumn>
-                                    <span class="p-column-title font-bold mr-3">Employee Code:</span>
+                                    <span class="p-column-title font-bold mr-4">Employee Code:</span>
                                     {{employee.empCd}}
                                 </td>
                                 <td [hidden]="!isShowColumn('empName')">
-                                    <span class="p-column-title font-bold mr-3">Employee Name:</span>
-                                    <div class="flex justify-content-start align-items-center">
+                                    <span class="p-column-title font-bold mr-4">Employee Name:</span>
+                                    <div class="flex justify-start items-center">
 
                                         <p-avatar [image]="employee?.imagePath" styleClass="mr-2" shape="circle"
                                             *ngIf="!(employee?.imagePath == ''); else empImage"
@@ -266,27 +266,27 @@
 
                                         </ng-template>
 
-                                        <span class="ml-1 vertical-align-middle">{{ employee.empName }}</span>
+                                        <span class="ml-1 align-middle">{{ employee.empName }}</span>
                                     </div>
                                 </td>
                                 <td [hidden]="!isShowColumn('userProfileObj.name')">
-                                    <span class="p-column-title font-bold mr-3">User Profile:</span>
+                                    <span class="p-column-title font-bold mr-4">User Profile:</span>
                                     {{employee.userProfileObj.name}}
                                 </td>
-                                <td [hidden]="!isShowColumn('deptDs')" class="white-space-normal">
-                                    <span class="p-column-title font-bold mr-3">Department:</span>
+                                <td [hidden]="!isShowColumn('deptDs')" class="whitespace-normal">
+                                    <span class="p-column-title font-bold mr-4">Department:</span>
                                     {{employee.deptDs}}
                                 </td>
                                 <td [hidden]="!isShowColumn('designationObj.name')">
-                                    <span class="p-column-title font-bold mr-3">Designation:</span>
+                                    <span class="p-column-title font-bold mr-4">Designation:</span>
                                     {{employee.designationObj.name}}
                                 </td>
                                 <td [hidden]="!isShowColumn('nationalID')">
-                                    <span class="p-column-title font-bold mr-3">Natinal Id:</span>
+                                    <span class="p-column-title font-bold mr-4">Natinal Id:</span>
                                     {{employee.nationalID}}
                                 </td>
                                 <td [hidden]="!isShowColumn('email')" class="">
-                                    <span class="p-column-title font-bold mr-3">Email:</span>
+                                    <span class="p-column-title font-bold mr-4">Email:</span>
 
                                     <p-button [raised]="true" [label]="employee.email.replace('mailto:', '')"
                                         [link]="true" styleClass="py-1 px-2" *ngIf="employee.email != ''"
@@ -295,8 +295,8 @@
 
                                 </td>
                                 <td [hidden]="!isShowColumn('active')">
-                                    <span class="p-column-title font-bold mr-3">Status:</span>
-                                    <div class="flex text-center justify-content-center">
+                                    <span class="p-column-title font-bold mr-4">Status:</span>
+                                    <div class="flex text-center justify-center">
                                         <p-tag [value]="employee.isActive ? 'Active' : 'Inactive'"
                                             [severity]="employee.isActive ? 'success' : 'danger'" styleClass="mx-auto">
                                         </p-tag>
@@ -322,9 +322,9 @@
                         </ng-template>
                         <ng-template pTemplate="emptymessage">
                             <tr>
-                                <td colspan="8" class="flex flex-wrap justify-content-center">
-                                    <div class="flex justify-content-center flex-wrap h-15rem">
-                                        <div class="flex align-items-center justify-content-center">
+                                <td colspan="8" class="flex flex-wrap justify-center">
+                                    <div class="flex justify-center flex-wrap h-60">
+                                        <div class="flex items-center justify-center">
                                             <p-message severity="warn" text="Employees Data Not Found"></p-message>
                                         </div>
                                     </div>
@@ -334,8 +334,8 @@
                         <ng-template pTemplate="loadingbody">
                             <tr>
                                 <td colspan="8">
-                                    <div class="flex justify-content-center flex-wrap h-15rem">
-                                        <div class="flex align-items-center justify-content-center">
+                                    <div class="flex justify-center flex-wrap h-60">
+                                        <div class="flex items-center justify-center">
                                             <p-message severity="info"
                                                 text="Loading Employee data. Please wait."></p-message>
                                         </div>
@@ -364,7 +364,7 @@
     </ng-template>
 
     <ng-template pTemplate="footer">
-        <div class="flex align-items-center justify-content-end">
+        <div class="flex items-center justify-end">
             <p-button label="Save" severity="primary" [outlined]="true" [loading]="isSaving" icon="pi pi-check"
                 (onClick)="addEmployeeComponent.onSubmit()"></p-button>
         </div>
@@ -386,43 +386,43 @@
     </ng-template>
     <ng-template pTemplate="content">
         <div class="flex-auto overflow-y-auto">
-            <div class="text-center mb-4">
+            <div class="text-center mb-6">
                 <img src="../../../../../assets/context/images/avatar/onyamalimba.png"
                     style="width: 70px; height: 70px;">
-                <div class="text-900 mt-3 mb-2 text-xl font-medium">John Doe</div>
-                <span class="text-700">Sales Manager</span>
+                <div class="text-surface-900 dark:text-surface-0 mt-4 mb-2 text-xl font-medium">John Doe</div>
+                <span class="text-surface-700 dark:text-surface-100">Sales Manager</span>
             </div>
-            <div class="flex align-items-center mb-5">
-                <a class="flex flex-column flex-grow-1 align-items-center gap-2">
+            <div class="flex items-center mb-8">
+                <a class="flex flex-col grow items-center gap-2">
                     <div pripple
-                        class="p-ripple p-element cursor-pointer border-round surface-100 hover:surface-200 transition-colors transition-duration-150 p-3 border-round-2xl">
-                        <i class="pi pi-phone text-xl text-600"></i>
+                        class="p-ripple p-element cursor-pointer rounded-border bg-surface-100 dark:bg-surface-700 hover:bg-surface-200 dark:hover:bg-surface-600 transition-colors duration-150 p-4 rounded-2xl">
+                        <i class="pi pi-phone text-xl text-surface-600 dark:text-surface-200"></i>
                         <span class="p-ink"></span>
                     </div>
-                    <span class="text-sm font-medium text-700">33991113</span>
+                    <span class="text-sm font-medium text-surface-700 dark:text-surface-100">33991113</span>
                 </a>
-                <a class="flex flex-column flex-grow-1 align-items-center gap-2">
+                <a class="flex flex-col grow items-center gap-2">
                     <div pripple
-                        class="p-ripple p-element cursor-pointer border-round surface-100 hover:surface-200 transition-colors transition-duration-150 p-3 border-round-2xl">
-                        <i class="pi pi-envelope text-xl text-600"></i>
+                        class="p-ripple p-element cursor-pointer rounded-border bg-surface-100 dark:bg-surface-700 hover:bg-surface-200 dark:hover:bg-surface-600 transition-colors duration-150 p-4 rounded-2xl">
+                        <i class="pi pi-envelope text-xl text-surface-600 dark:text-surface-200"></i>
                         <span class="p-ink"></span>
                     </div>
-                    <span class="text-sm font-medium text-700">abc&#64;gamail.com</span>
+                    <span class="text-sm font-medium text-surface-700 dark:text-surface-100">abc&#64;gamail.com</span>
                 </a>
             </div>
             <ul class="list-none p-0 m-0">
-                <li class="surface-100 text-sm text-700 font-medium p-2 border-round mb-1">NAME</li>
-                <li class="text-900 p-2">John Doe</li>
-                <li class="surface-100 text-sm text-700 font-medium p-2 border-round mt-4 mb-1">MEMBER SINCE</li>
-                <li class="text-900 p-2">1st Jan 2013</li>
-                <li class="surface-100 text-sm text-700 font-medium p-2 border-round mt-4 mb-1">Department</li>
-                <li class="text-900 p-2">UI/UX Design Team</li>
-                <li class="surface-100 text-sm text-700 font-medium p-2 border-round mt-4 mb-1">Designation</li>
-                <li class="text-900 p-2">Full-Stack Developer</li>
-                <li class="surface-100 text-sm text-700 font-medium p-2 border-round mt-4 mb-1">Company</li>
-                <li class="text-900 p-2">TimeTech Bahrain Company</li>
-                <li class="surface-100 text-sm text-700 font-medium p-2 border-round mt-4 mb-1">Nationality</li>
-                <li class="text-900 p-2">Sri Lankan</li>
+                <li class="bg-surface-100 dark:bg-surface-700 text-sm text-surface-700 dark:text-surface-100 font-medium p-2 rounded-border mb-1">NAME</li>
+                <li class="text-surface-900 dark:text-surface-0 p-2">John Doe</li>
+                <li class="bg-surface-100 dark:bg-surface-700 text-sm text-surface-700 dark:text-surface-100 font-medium p-2 rounded-border mt-6 mb-1">MEMBER SINCE</li>
+                <li class="text-surface-900 dark:text-surface-0 p-2">1st Jan 2013</li>
+                <li class="bg-surface-100 dark:bg-surface-700 text-sm text-surface-700 dark:text-surface-100 font-medium p-2 rounded-border mt-6 mb-1">Department</li>
+                <li class="text-surface-900 dark:text-surface-0 p-2">UI/UX Design Team</li>
+                <li class="bg-surface-100 dark:bg-surface-700 text-sm text-surface-700 dark:text-surface-100 font-medium p-2 rounded-border mt-6 mb-1">Designation</li>
+                <li class="text-surface-900 dark:text-surface-0 p-2">Full-Stack Developer</li>
+                <li class="bg-surface-100 dark:bg-surface-700 text-sm text-surface-700 dark:text-surface-100 font-medium p-2 rounded-border mt-6 mb-1">Company</li>
+                <li class="text-surface-900 dark:text-surface-0 p-2">TimeTech Bahrain Company</li>
+                <li class="bg-surface-100 dark:bg-surface-700 text-sm text-surface-700 dark:text-surface-100 font-medium p-2 rounded-border mt-6 mb-1">Nationality</li>
+                <li class="text-surface-900 dark:text-surface-0 p-2">Sri Lankan</li>
             </ul>
         </div>
     </ng-template>

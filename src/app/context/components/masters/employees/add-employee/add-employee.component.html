@@ -6,94 +6,94 @@
     <ng-template pTemplate="content"> -->
 <form (ngSubmit)="onSubmit()" [formGroup]="validationForm" #form="ngForm" class="needs-validation" novalidate
     autocomplete="off">
-    <div class="grid formgrid p-fluid">
-        <div class="field mb-2 col-12 md:col-6">
-            <label for="name" class="font-medium text-900">Employee Name</label>
+    <div class="grid grid-cols-12 gap-4 formgrid p-fluid">
+        <div class="field mb-2 col-span-12 md:col-span-6">
+            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Employee Name</label>
             <input pInputText id="name" class="" name="name" formControlName="name" />
             <small class="p-error" id="username-help">Employee name required.</small>
         </div>
-        <div class="field mb-2 col-12 md:col-3">
-            <label for="name" class="font-medium text-900">Employee Code</label>
+        <div class="field mb-2 col-span-12 md:col-span-3">
+            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Employee Code</label>
             <input pInputText id="code" class="" name="code" formControlName="code" />
             <small class="p-error" id="username-help">Employee Code required.</small>
         </div>
-        <div class="field mb-2 col-12 md:col-3">
-            <label for="name" class="font-medium text-900">Active Status</label>
-            <div class="flex align-items-center w-auto">
+        <div class="field mb-2 col-span-12 md:col-span-3">
+            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Active Status</label>
+            <div class="flex items-center w-auto">
                 <p-inputSwitch styleClass="p-inputSwitch-lg" id="base-on" name="active" formControlName="active"
                     [pTooltip]="getValue() ? 'Active' : 'Inactive'" triggers="focus"></p-inputSwitch>
             </div>
         </div>
-        <div class="field mb-2 col-12 md:col-4">
-            <label for="name" class="font-medium text-900">Employee known as</label>
+        <div class="field mb-2 col-span-12 md:col-span-4">
+            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Employee known as</label>
             <input pInputText id="code" class="" name="knownAs" formControlName="knownAs" />
             <small class="p-error" id="username-help">Employee Code required.</small>
         </div>
-        <div class="field mb-2 col-12 md:col-4">
-            <label for="name" class="font-medium text-900">Service start date</label>
+        <div class="field mb-2 col-span-12 md:col-span-4">
+            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Service start date</label>
             <p-calendar [iconDisplay]="'input'" [showIcon]="true" name="serviceStartDate"
                 formControlName="serviceStartDate"></p-calendar>
             <small class="p-error" id="username-help">Service start date required.</small>
         </div>
-        <div class="field mb-2 col-12 md:col-4">
-            <label for="name" class="font-medium text-900">Gender</label>
+        <div class="field mb-2 col-span-12 md:col-span-4">
+            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Gender</label>
             <p-dropdown [options]="gender" placeholder="Select Option" formControlName="gender" name="gender"
                 optionLabel="name" optionValue="key" inputId="float-label" [showClear]="true"></p-dropdown>
             <small class="p-error" id="username-help">Gender required.</small>
         </div>
-        <div class="field mb-2 col-12 md:col-4">
-            <label for="name" class="font-medium text-900">Company</label>
+        <div class="field mb-2 col-span-12 md:col-span-4">
+            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Company</label>
             <p-dropdown [options]="companies" placeholder="Select Option" formControlName="companyId" name="companyId"
                 (onChange)="onChangeCompany($event)" optionLabel="name" optionValue="compId" inputId="float-label"
                 [showClear]="true"></p-dropdown>
             <small class="p-error" id="username-help">Company required.</small>
         </div>
-        <div class="field mb-2 col-12 md:col-4">
-            <label for="name" class="font-medium text-900">Department</label>
-            <p-treeSelect class="sm:w-20rem w-full" name="department" formControlName="department"
+        <div class="field mb-2 col-span-12 md:col-span-4">
+            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Department</label>
+            <p-treeSelect class="sm:w-80 w-full" name="department" formControlName="department"
                 containerStyleClass="w-full" id="department" [(ngModel)]="selectedDepartment" [options]="departmentTree"
                 placeholder="Select Department" name="department" [filter]="true" [filterInputAutoFocus]="true"
                 (onNodeSelect)="onSelectDepartment($event)">
             </p-treeSelect>
             <small class="p-error" id="username-help">Department required.</small>
         </div>
-        <div class="field mb-2 col-12 md:col-4">
-            <label for="name" class="font-medium text-900">Work Rule</label>
+        <div class="field mb-2 col-span-12 md:col-span-4">
+            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Work Rule</label>
             <p-dropdown [options]="workRules" placeholder="Select Option" formControlName="workRule" name="workRule"
                 optionLabel="name" optionValue="code" inputId="float-label" [showClear]="true"></p-dropdown>
             <small class="p-error" id="username-help">Work Rule required.</small>
         </div>
-        <div class="field mb-2 col-12 md:col-4">
-            <label for="name" class="font-medium text-900">Nationality</label>
+        <div class="field mb-2 col-span-12 md:col-span-4">
+            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Nationality</label>
             <p-dropdown [options]="supportData.nationalities" placeholder="Select Option" formControlName="nationality"
                 name="nationality" optionLabel="ds" optionValue="cd" inputId="float-label"
                 [showClear]="true"></p-dropdown>
             <small class="p-error" id="username-help">Nationality required.</small>
         </div>
-        <div class="field mb-2 col-12 md:col-4">
-            <label for="name" class="font-medium text-900">Religion</label>
+        <div class="field mb-2 col-span-12 md:col-span-4">
+            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Religion</label>
             <p-dropdown [options]="supportData.religions" placeholder="Select Option" formControlName="religion"
                 name="religion" optionLabel="ds" optionValue="cd" inputId="float-label" [showClear]="true"></p-dropdown>
             <small class="p-error" id="username-help">Religion required.</small>
         </div>
-        <div class="field mb-2 col-12 md:col-4">
-            <label for="name" class="font-medium text-900">Mobile</label>
+        <div class="field mb-2 col-span-12 md:col-span-4">
+            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Mobile</label>
             <input pInputText id="code" class="" name="mobile" formControlName="mobile" />
             <small class="p-error" id="username-help">Valid Mobile required.</small>
         </div>
-        <div class="field mb-2 col-12 md:col-5">
-            <label for="name" class="font-medium text-900">E-mail</label>
+        <div class="field mb-2 col-span-12 md:col-span-5">
+            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">E-mail</label>
             <input pInputText id="code" class="" name="email" formControlName="email" />
             <small class="p-error" id="username-help">Valid E-mail required.</small>
         </div>
-        <!-- <div class="field mb-2 col-12 md:col-3">
-                    <label for="name" class="font-medium text-900">Discontinued</label>
-                    <div class="flex align-items-center w-auto">
+        <!-- <div class="field mb-2 col-span-12 md:col-span-3">
+                    <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Discontinued</label>
+                    <div class="flex items-center w-auto">
 
                     </div>
                 </div> -->
-        <div class="field mb-2 col-12 md:col-7">
-            <label for="name" class="font-medium text-900">Discontinued Employee</label>
+        <div class="field mb-2 col-span-12 md:col-span-7">
+            <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Discontinued Employee</label>
             <div class="p-inputgroup custom-input-group">
                 <span class="p-inputgroup-addon">
                     <p-inputSwitch class="p-inputSwitch-lg mt-auto ml-auto" id="base-on"
@@ -108,18 +108,18 @@
                     name="discontinuedEmployee" formControlName="discontinuedEmployee" [filter]="true"
                     class="report-persons" [showClear]="true" [(ngModel)]="selectedDisEmployee" styleClass="p-fluid">
                     <!-- <ng-template let-item pTemplate="group">
-                                    <div class="flex flex-wrap justify-content-between align-items-center">
-                                        <div class="font-semibold text-900">{{ item.label }}</div>
+                                    <div class="flex flex-wrap justify-between items-center">
+                                        <div class="font-semibold text-surface-900 dark:text-surface-0">{{ item.label }}</div>
                                     </div>
                                 </ng-template> -->
                     <ng-template let-item pTemplate="item">
-                        <div class="flex justify-content-between align-items-center">
-                            <div class="flex flex-column">
+                        <div class="flex justify-between items-center">
+                            <div class="flex flex-col">
                                 <span class="font-semibold">{{ item.employeeName }}</span>
                                 <span class="font-semibold">{{ item.departmentName }}</span>
                             </div>
-                            <div class="flex flex-column justify-content-end flex-wrap">
-                                <span class="font-semibold text-900 text-right">{{item.employeeCode}}</span>
+                            <div class="flex flex-col justify-end flex-wrap">
+                                <span class="font-semibold text-surface-900 dark:text-surface-0 text-right">{{item.employeeCode}}</span>
                             </div>
                         </div>
                     </ng-template>
@@ -132,7 +132,7 @@
 </form>
 <!-- </ng-template> -->
 <!-- <ng-template pTemplate="footer">
-        <div class="flex align-items-center justify-content-end">
+        <div class="flex items-center justify-end">
             <p-button label="Save" severity="primary" [outlined]="true" [loading]="isSaving" icon="pi pi-check"
                 (onClick)="onSubmit()"></p-button>
         </div>

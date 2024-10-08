@@ -1,7 +1,7 @@
-<div class="p-0 surface-card shadow-3 border-round h-full">
-    <p-tabMenu [model]="menuItemsTab" [activeItem]="activeItem" styleClass="border-round">
+<div class="p-0 bg-surface-0 dark:bg-surface-900 shadow-md rounded-border h-full">
+    <p-tabMenu [model]="menuItemsTab" [activeItem]="activeItem" styleClass="rounded-border">
         <ng-template pTemplate="item" let-item>
-            <a class="p-menuitem-link flex justify-content-between align-items-center p-3">
+            <a class="p-menuitem-link flex justify-between items-center p-4">
                 <div>
                     <span [class]="'font-bold ' + item.icon"></span>
                     <span> {{ item.label }}</span>
@@ -14,23 +14,23 @@
         </ng-template>
     </p-tabMenu>
 
-    <div class="p-4 scalein  animation-duration-300" *ngIf="this.activeItem.label == 'Salary'">
+    <div class="p-6 animate-scalein  animate-duration-300" *ngIf="this.activeItem.label == 'Salary'">
         <div class="p-0">
             <!-- <form (ngSubmit)="onSubmit()" novalidate autocomplete="off" #form="ngForm">
-                <div class="field mb-2 col-12 md:col-6 lg:col-3">
-                    <label for="nickname2" class="font-medium text-900">Effective Month</label>
+                <div class="field mb-2 col-span-12 md:col-span-6 lg:col-span-3">
+                    <label for="nickname2" class="font-medium text-surface-900 dark:text-surface-0">Effective Month</label>
                     <p-calendar [iconDisplay]="'input'" [showIcon]="true" name="efectiveMonth" [required]="true"
                         [(ngModel)]="salary.efectiveMonth"></p-calendar>
                     <small class="p-error" id="username-help">Effective Month required.</small>
                 </div>
-                <div class="field mb-2 col-12 md:col-6 lg:col-4">
-                    <label for="name" class="font-medium text-900">Basic Salary</label>
+                <div class="field mb-2 col-span-12 md:col-span-6 lg:col-span-4">
+                    <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Basic Salary</label>
                     <input pInputText id="name" class="" name="empName" [(ngModel)]="salary.basicSalary"
                         [required]="true" />
                     <small class="p-error" id="username-help">Basic Salary required.</small>
                 </div>
-                <div class="field mb-2 col-12 md:col-6 lg:col-4">
-                    <label for="name" class="font-medium text-900">Currency</label>
+                <div class="field mb-2 col-span-12 md:col-span-6 lg:col-span-4">
+                    <label for="name" class="font-medium text-surface-900 dark:text-surface-0">Currency</label>
                     <p-dropdown [options]="userProfiles" placeholder="Select a Profile" optionLabel="name"
                         inputId="float-label" name="userProfile" [(ngModel)]="salary.userProfile" optionValue="id"
                         [showClear]="true" [required]="true">

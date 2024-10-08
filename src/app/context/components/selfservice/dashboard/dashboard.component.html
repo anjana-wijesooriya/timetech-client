@@ -1,14 +1,14 @@
-<div class="flex grid">
+<div class="flex grid grid-cols-12 gap-4">
 
-    <div class="p-2 col-12 md:col-12 xl:col-3">
-        <div class="flex h-full px-4 py-2 shadow-2 flex-column sm:flex-row md:align-items-center justify-content-between"
+    <div class="p-2 col-span-12 md:col-span-12 xl:col-span-3">
+        <div class="flex h-full px-6 py-2 shadow flex-col sm:flex-row md:items-center justify-between"
             style="border-radius: 1rem; background: linear-gradient(0deg, rgba(0, 123, 255, 0.5), rgba(0, 123, 255, 0.5)), linear-gradient(92.54deg, rgb(28, 128, 207) 47.88%, rgb(255, 255, 255) 100.01%);">
-            <div class="flex mb-2 flex-column align-items-center sm:align-items-start justify-content-center xs:">
+            <div class="flex mb-2 flex-col items-center sm:items-start justify-center xs:">
                 <div class="mt-2 mb-1 text-xl font-bold text-blue-100">Welcome Back, John</div>
                 <div class="text-base font-medium text-white">You have 5 unread Notifications.</div>
                 <div class="hidden font-medium text-white text-l">our last login was on 01/02/2023 at 10:24 am</div>
             </div>
-            <div class="flex flex-row lg:flex-column align-items-center justify-content-center">
+            <div class="flex flex-row lg:flex-col items-center justify-center">
                 <p-avatar image="../../../../../assets/context/images/avatar/onyamalimba.png" styleClass="mr-2"
                     size="xlarge" shape="circle"></p-avatar>
 
@@ -17,33 +17,33 @@
             </div>
         </div>
     </div>
-    <div class="flex flex-wrap p-0 col-12 xl:col-9 stats-cards">
-        <div class="p-2 col-12 sm:col-6 md:col-3 lg:col-6 xl:col-3">
+    <div class="flex flex-wrap p-0 col-span-12 xl:col-span-9 stats-cards">
+        <div class="p-2 col-span-12 sm:col-span-6 md:col-span-3 lg:col-span-6 xl:col-span-3">
             <div class="h-full mb-0 card" *ngIf="!loadingCards.stats; else statsSkelaton">
-                <div class="flex flex-wrap align-content-center align-items-center justify-content-between">
-                    <div class="flex flex-wrap flex-column">
-                        <span class="block mb-3 font-medium text-500">Total Hours</span>
-                        <div class="text-xl font-medium text-900">{{attendanceDetails.totalHours}}H</div>
+                <div class="flex flex-wrap content-center items-center justify-between">
+                    <div class="flex flex-wrap flex-col">
+                        <span class="block mb-4 font-medium text-surface-500 dark:text-surface-300">Total Hours</span>
+                        <div class="text-xl font-medium text-surface-900 dark:text-surface-0">{{attendanceDetails.totalHours}}H</div>
                     </div>
-                    <div class="flex bg-blue-100 align-items-center justify-content-center border-round"
+                    <div class="flex bg-blue-100 items-center justify-center rounded-border"
                         style="width: 4rem;height: 4rem;">
                         <i class="text-xl text-blue-500 pi pi-shopping-cart"></i>
                     </div>
                 </div>
                 <span class="font-medium text-green-500">24 new </span>
-                <span class="text-500">since last
+                <span class="text-surface-500 dark:text-surface-300">since last
                     visit
                 </span>
             </div>
             <ng-template #statsSkelaton>
                 <div class="h-full mb-0 card">
                     <div
-                        class="flex flex-wrap flex-r align-content-center align-items-center justify-content-between ">
-                        <div class="w-8">
-                            <p-skeleton width="w-full" styleClass="mb-3 mr-2"></p-skeleton>
+                        class="flex flex-wrap flex-r content-center items-center justify-between ">
+                        <div class="w-8/12">
+                            <p-skeleton width="w-full" styleClass="mb-4 mr-2"></p-skeleton>
                             <p-skeleton width="w-full" styleClass="mb-2 mr-2"></p-skeleton>
                         </div>
-                        <div class="flex align-items-center justify-content-center border-round"
+                        <div class="flex items-center justify-center rounded-border"
                             style="width: 4rem;height: 4rem;">
                             <p-skeleton size="4rem" styleClass="mr-2"></p-skeleton>
                         </div>
@@ -51,14 +51,14 @@
                 </div>
             </ng-template>
         </div>
-        <div class="p-2 col-12 sm:col-6 md:col-3 lg:col-6 xl:col-3">
+        <div class="p-2 col-span-12 sm:col-span-6 md:col-span-3 lg:col-span-6 xl:col-span-3">
             <div class="h-full mb-0 card" *ngIf="!loadingCards.stats; else statsSkelaton">
-                <div class="flex flex-wrap align-content-center align-items-center justify-content-between ">
-                    <div class="flex flex-wrap flex-column">
-                        <span class="block mb-3 font-medium text-500">Extra Hours</span>
-                        <div class="text-xl font-medium text-900">{{attendanceDetails.overtimeHours}}H</div>
+                <div class="flex flex-wrap content-center items-center justify-between ">
+                    <div class="flex flex-wrap flex-col">
+                        <span class="block mb-4 font-medium text-surface-500 dark:text-surface-300">Extra Hours</span>
+                        <div class="text-xl font-medium text-surface-900 dark:text-surface-0">{{attendanceDetails.overtimeHours}}H</div>
                     </div>
-                    <div class="flex bg-orange-100 align-items-center justify-content-center border-round"
+                    <div class="flex bg-orange-100 items-center justify-center rounded-border"
                         style="width: 4rem; height: 4rem;">
                         <i class="text-xl text-orange-500 pi pi-map-marker"></i>
                     </div>
@@ -66,17 +66,17 @@
                 <span class="font-medium text-green-500">
                     %52+
                 </span>
-                <span class="text-500">since last week</span>
+                <span class="text-surface-500 dark:text-surface-300">since last week</span>
             </div>
         </div>
-        <div class="p-2 col-12 sm:col-6 md:col-3 lg:col-6 xl:col-3">
+        <div class="p-2 col-span-12 sm:col-span-6 md:col-span-3 lg:col-span-6 xl:col-span-3">
             <div class="h-full mb-0 card" *ngIf="!loadingCards.stats; else statsSkelaton">
-                <div class="flex flex-wrap align-content-center align-items-center justify-content-between ">
-                    <div class="flex flex-wrap flex-column">
-                        <span class="block mb-3 font-medium text-500">Late Entry</span>
-                        <div class="text-xl font-medium text-900">{{attendanceDetails.lateEntryHours}}H</div>
+                <div class="flex flex-wrap content-center items-center justify-between ">
+                    <div class="flex flex-wrap flex-col">
+                        <span class="block mb-4 font-medium text-surface-500 dark:text-surface-300">Late Entry</span>
+                        <div class="text-xl font-medium text-surface-900 dark:text-surface-0">{{attendanceDetails.lateEntryHours}}H</div>
                     </div>
-                    <div class="flex align-items-center justify-content-center bg-cyan-100 border-round"
+                    <div class="flex items-center justify-center bg-cyan-100 rounded-border"
                         style="width: 4rem; height: 4rem;">
                         <i class="text-xl pi pi-inbox text-cyan-500"></i>
                     </div>
@@ -84,17 +84,17 @@
                 <span class="font-medium text-green-500">
                     520
                 </span>
-                <span class="text-500">newly registered</span>
+                <span class="text-surface-500 dark:text-surface-300">newly registered</span>
             </div>
         </div>
-        <div class="p-2 col-12 sm:col-6 md:col-3 lg:col-6 xl:col-3">
+        <div class="p-2 col-span-12 sm:col-span-6 md:col-span-3 lg:col-span-6 xl:col-span-3">
             <div class="h-full mb-0 card" *ngIf="!loadingCards.stats; else statsSkelaton">
-                <div class="flex flex-wrap align-content-center align-items-center justify-content-between ">
-                    <div class="flex flex-wrap flex-column">
-                        <span class="block mb-3 font-medium text-500">Early Exit</span>
-                        <div class="text-xl font-medium text-900">{{attendanceDetails.lateEntryHours}}H</div>
+                <div class="flex flex-wrap content-center items-center justify-between ">
+                    <div class="flex flex-wrap flex-col">
+                        <span class="block mb-4 font-medium text-surface-500 dark:text-surface-300">Early Exit</span>
+                        <div class="text-xl font-medium text-surface-900 dark:text-surface-0">{{attendanceDetails.lateEntryHours}}H</div>
                     </div>
-                    <div class="flex bg-purple-100 align-items-center justify-content-center border-round"
+                    <div class="flex bg-purple-100 items-center justify-center rounded-border"
                         style="width: 4rem; height: 4rem;">
                         <i class="text-xl text-purple-500 pi pi-comment"></i>
                     </div>
@@ -102,176 +102,176 @@
                 <span class="font-medium text-green-500">
                     85
                 </span>
-                <span class="text-500">responded</span>
+                <span class="text-surface-500 dark:text-surface-300">responded</span>
             </div>
         </div>
     </div>
-    <div class="flex p-2 col-12 lg:col-6 xl:col-4 flex-column surface-ground">
+    <div class="flex p-2 col-span-12 lg:col-span-6 xl:col-span-4 flex-col bg-surface-50 dark:bg-surface-950">
         <ng-template #staticsticsSkeleton>
-            <div class="h-full p-4 shadow-2 border-round surface-card">
-                <div class="mb-4">
+            <div class="h-full p-6 shadow rounded-border bg-surface-0 dark:bg-surface-900">
+                <div class="mb-6">
 
-                    <!-- <p-skeleton height="2rem" styleClass="text-xl font-medium text-900 w-12 lg:w-5 block"></p-skeleton> -->
+                    <!-- <p-skeleton height="2rem" styleClass="text-xl font-medium text-surface-900 dark:text-surface-0 w-full lg:w-5/12 block"></p-skeleton> -->
                     <p-skeleton height="2rem"></p-skeleton>
                 </div>
-                <div class="flex p-1 border-round flex-column">
+                <div class="flex p-1 rounded-border flex-col">
                     <p-skeleton
-                        styleClass="p-1 border-round flex flex-row justify-content-between flex-wrap h-5rem"></p-skeleton>
+                        styleClass="p-1 rounded-border flex flex-row justify-between flex-wrap h-20"></p-skeleton>
                 </div>
-                <div class="flex flex-wrap justify-content-around">
-                    <div class="flex flex-wrap m-2 flex-column align-items-center">
+                <div class="flex flex-wrap justify-around">
+                    <div class="flex flex-wrap m-2 flex-col items-center">
                         <p-skeleton
-                            styleClass="flex align-items-center justify-content-center m-1 w-5rem">Remaining</p-skeleton>
-                        <p-skeleton styleClass="flex align-items-center justify-content-center m-1 w-6rem">2 Hrs 36
+                            styleClass="flex items-center justify-center m-1 w-20">Remaining</p-skeleton>
+                        <p-skeleton styleClass="flex items-center justify-center m-1 w-24">2 Hrs 36
                             Min</p-skeleton>
                     </div>
-                    <div class="flex flex-wrap m-2 flex-column align-items-center">
+                    <div class="flex flex-wrap m-2 flex-col items-center">
                         <p-skeleton
-                            styleClass="flex align-items-center justify-content-center m-1 w-5rem">Remaining</p-skeleton>
-                        <p-skeleton styleClass="flex align-items-center justify-content-center m-1 w-6rem">2 Hrs 36
+                            styleClass="flex items-center justify-center m-1 w-20">Remaining</p-skeleton>
+                        <p-skeleton styleClass="flex items-center justify-center m-1 w-24">2 Hrs 36
                             Min</p-skeleton>
                     </div>
-                    <div class="flex flex-wrap m-2 flex-column align-items-center">
+                    <div class="flex flex-wrap m-2 flex-col items-center">
                         <p-skeleton
-                            styleClass="flex align-items-center justify-content-center m-1 w-5rem">Remaining</p-skeleton>
-                        <p-skeleton styleClass="flex align-items-center justify-content-center m-1 w-6rem">2 Hrs 36
+                            styleClass="flex items-center justify-center m-1 w-20">Remaining</p-skeleton>
+                        <p-skeleton styleClass="flex items-center justify-center m-1 w-24">2 Hrs 36
                             Min</p-skeleton>
                     </div>
                 </div>
             </div>
         </ng-template>
-        <div class="h-full p-4 shadow-2 border-round surface-card"
+        <div class="h-full p-6 shadow rounded-border bg-surface-0 dark:bg-surface-900"
             *ngIf="!loadingCards.statistics; else staticsticsSkeleton">
-            <div class="flex mb-4 align-items-center justify-content-between">
-                <span class="text-xl font-medium text-900">Statistics</span>
+            <div class="flex mb-6 items-center justify-between">
+                <span class="text-xl font-medium text-surface-900 dark:text-surface-0">Statistics</span>
                 <p-dropdown [options]="options"></p-dropdown>
             </div>
-            <div class="flex p-1 bg-orange-100 border-round flex-column">
-                <div class="flex flex-row flex-wrap p-1 bg-orange-100 border-round justify-content-between">
+            <div class="flex p-1 bg-orange-100 rounded-border flex-col">
+                <div class="flex flex-row flex-wrap p-1 bg-orange-100 rounded-border justify-between">
                     <div
-                        class="flex m-2 font-bold flex-column align-content-between align-content-center h-4rem border-round">
+                        class="flex m-2 font-bold flex-col content-between content-center h-16 rounded-border">
                         <p class="flex my-auto">Work Time</p>
                         <h4 class="flex my-auto">6 Hrs : 54 Min</h4>
                     </div>
                 </div>
             </div>
-            <div class="flex flex-wrap justify-content-around">
-                <div class="flex flex-wrap m-2 flex-column">
-                    <p class="flex m-1 align-items-center justify-content-center">Remaining</p>
-                    <h6 class="flex m-1 align-items-center justify-content-center">2 Hrs 36 Min</h6>
+            <div class="flex flex-wrap justify-around">
+                <div class="flex flex-wrap m-2 flex-col">
+                    <p class="flex m-1 items-center justify-center">Remaining</p>
+                    <h6 class="flex m-1 items-center justify-center">2 Hrs 36 Min</h6>
                 </div>
-                <div class="flex flex-wrap m-2 flex-column">
-                    <p class="flex m-1 align-items-center justify-content-center">Overtime</p>
-                    <h6 class="flex m-1 align-items-center justify-content-center">0 Hrs 00 Min</h6>
+                <div class="flex flex-wrap m-2 flex-col">
+                    <p class="flex m-1 items-center justify-center">Overtime</p>
+                    <h6 class="flex m-1 items-center justify-center">0 Hrs 00 Min</h6>
                 </div>
-                <div class="flex flex-wrap m-2 flex-column">
-                    <p class="flex m-1 align-items-center justify-content-center">Break</p>
-                    <h6 class="flex m-1 align-items-center justify-content-center">1 Hrs 20 Min</h6>
+                <div class="flex flex-wrap m-2 flex-col">
+                    <p class="flex m-1 items-center justify-center">Break</p>
+                    <h6 class="flex m-1 items-center justify-center">1 Hrs 20 Min</h6>
                 </div>
             </div>
         </div>
 
     </div>
-    <div class="flex p-2 col-12 lg:col-6 xl:col-4 flex-column surface-ground">
+    <div class="flex p-2 col-span-12 lg:col-span-6 xl:col-span-4 flex-col bg-surface-50 dark:bg-surface-950">
         <ng-template #leavesTemplate>
-            <div class="h-full p-4 shadow-2 b border-round surface-card">
-                <div class="mb-4">
+            <div class="h-full p-6 shadow b rounded-border bg-surface-0 dark:bg-surface-900">
+                <div class="mb-6">
                     <p-skeleton height="2rem"></p-skeleton>
                 </div>
-                <div class="flex grid">
-                    <div class="p-3 col-12 sm:col-6 lg:col-4">
-                        <div class="mx-auto mb-3 align-items-center justify-content-center">
-                            <p-skeleton styleClass="h-4rem"></p-skeleton>
+                <div class="flex grid grid-cols-12 gap-4">
+                    <div class="p-4 col-span-12 sm:col-span-6 lg:col-span-4">
+                        <div class="mx-auto mb-4 items-center justify-center">
+                            <p-skeleton styleClass="h-16"></p-skeleton>
                         </div>
-                        <p-skeleton styleClass="h-1rem"></p-skeleton>
+                        <p-skeleton styleClass="h-4"></p-skeleton>
                     </div>
-                    <div class="p-3 col-12 sm:col-6 lg:col-4">
-                        <div class="mx-auto mb-3 align-items-center justify-content-center">
-                            <p-skeleton styleClass="h-4rem"></p-skeleton>
+                    <div class="p-4 col-span-12 sm:col-span-6 lg:col-span-4">
+                        <div class="mx-auto mb-4 items-center justify-center">
+                            <p-skeleton styleClass="h-16"></p-skeleton>
                         </div>
-                        <p-skeleton styleClass="h-1rem"></p-skeleton>
+                        <p-skeleton styleClass="h-4"></p-skeleton>
                     </div>
-                    <div class="p-3 col-12 sm:col-6 lg:col-4">
-                        <div class="mx-auto mb-3 align-items-center justify-content-center">
-                            <p-skeleton styleClass="h-4rem"></p-skeleton>
+                    <div class="p-4 col-span-12 sm:col-span-6 lg:col-span-4">
+                        <div class="mx-auto mb-4 items-center justify-center">
+                            <p-skeleton styleClass="h-16"></p-skeleton>
                         </div>
-                        <p-skeleton styleClass="h-1rem"></p-skeleton>
+                        <p-skeleton styleClass="h-4"></p-skeleton>
                     </div>
-                    <div class="p-3 col-12 sm:col-6 lg:col-4">
-                        <div class="mx-auto mb-3 align-items-center justify-content-center">
-                            <p-skeleton styleClass="h-4rem"></p-skeleton>
+                    <div class="p-4 col-span-12 sm:col-span-6 lg:col-span-4">
+                        <div class="mx-auto mb-4 items-center justify-center">
+                            <p-skeleton styleClass="h-16"></p-skeleton>
                         </div>
-                        <p-skeleton styleClass="h-1rem"></p-skeleton>
+                        <p-skeleton styleClass="h-4"></p-skeleton>
                     </div>
-                    <div class="p-3 col-12 sm:col-6 lg:col-4">
-                        <div class="mx-auto mb-3 align-items-center justify-content-center">
-                            <p-skeleton styleClass="h-4rem"></p-skeleton>
+                    <div class="p-4 col-span-12 sm:col-span-6 lg:col-span-4">
+                        <div class="mx-auto mb-4 items-center justify-center">
+                            <p-skeleton styleClass="h-16"></p-skeleton>
                         </div>
-                        <p-skeleton styleClass="h-1rem"></p-skeleton>
+                        <p-skeleton styleClass="h-4"></p-skeleton>
                     </div>
-                    <div class="p-3 col-12 sm:col-6 lg:col-4">
-                        <div class="mx-auto mb-3 align-items-center justify-content-center">
-                            <p-skeleton styleClass="h-4rem"></p-skeleton>
+                    <div class="p-4 col-span-12 sm:col-span-6 lg:col-span-4">
+                        <div class="mx-auto mb-4 items-center justify-center">
+                            <p-skeleton styleClass="h-16"></p-skeleton>
                         </div>
-                        <p-skeleton styleClass="h-1rem"></p-skeleton>
+                        <p-skeleton styleClass="h-4"></p-skeleton>
                     </div>
                 </div>
             </div>
         </ng-template>
-        <div class="h-full p-4 shadow-2 b border-round surface-card"
+        <div class="h-full p-6 shadow b rounded-border bg-surface-0 dark:bg-surface-900"
             *ngIf="!loadingCards.leaves; else leavesTemplate">
-            <div class="flex mb-4 align-items-center justify-content-between">
-                <span class="text-xl font-medium text-900">Attendance
+            <div class="flex mb-6 items-center justify-between">
+                <span class="text-xl font-medium text-surface-900 dark:text-surface-0">Attendance
                     and Leaves</span>
                 <p-dropdown [options]="years"></p-dropdown>
             </div>
-            <div class="flex grid">
-                <div class="p-3 col-12 sm:col-6 lg:col-4">
+            <div class="flex grid grid-cols-12 gap-4">
+                <div class="p-4 col-span-12 sm:col-span-6 lg:col-span-4">
                     <div class="text-center">
-                        <div class="flex mx-auto mb-3  align-items-center justify-content-center">
+                        <div class="flex mx-auto mb-4  items-center justify-center">
                             <h4 class="text-primary">9</h4>
                         </div>
-                        <span class="font-medium text-900">Total Leaves</span>
+                        <span class="font-medium text-surface-900 dark:text-surface-0">Total Leaves</span>
                     </div>
                 </div>
-                <div class="p-3 col-12 sm:col-6 lg:col-4">
+                <div class="p-4 col-span-12 sm:col-span-6 lg:col-span-4">
                     <div class="text-center">
-                        <div class="flex mx-auto mb-3  align-items-center justify-content-center">
+                        <div class="flex mx-auto mb-4  items-center justify-center">
                             <h4 class="text-pink-500">5.5</h4>
                         </div>
-                        <span class="font-medium text-900">Total Annual Leaves</span>
+                        <span class="font-medium text-surface-900 dark:text-surface-0">Total Annual Leaves</span>
                     </div>
                 </div>
-                <div class="p-3 col-12 sm:col-6 lg:col-4">
+                <div class="p-4 col-span-12 sm:col-span-6 lg:col-span-4">
                     <div class="text-center">
-                        <div class="flex mx-auto mb-3  align-items-center justify-content-center">
+                        <div class="flex mx-auto mb-4  items-center justify-center">
                             <h4 class="text-teal-500">9</h4>
                         </div>
-                        <span class="font-medium text-900"> Sick leaves </span>
+                        <span class="font-medium text-surface-900 dark:text-surface-0"> Sick leaves </span>
                     </div>
                 </div>
-                <div class="p-3 col-12 sm:col-6 lg:col-4">
+                <div class="p-4 col-span-12 sm:col-span-6 lg:col-span-4">
                     <div class="text-center">
-                        <div class="flex mx-auto mb-3  align-items-center justify-content-center">
+                        <div class="flex mx-auto mb-4  items-center justify-center">
                             <h4 class="text-purple-500">0</h4>
                         </div>
-                        <span class="font-medium text-900">Leave Loss of pay</span>
+                        <span class="font-medium text-surface-900 dark:text-surface-0">Leave Loss of pay</span>
                     </div>
                 </div>
-                <div class="p-3 col-12 sm:col-6 lg:col-4">
+                <div class="p-4 col-span-12 sm:col-span-6 lg:col-span-4">
                     <div class="text-center">
-                        <div class="flex mx-auto mb-3  align-items-center justify-content-center">
+                        <div class="flex mx-auto mb-4  items-center justify-center">
                             <h4 class="text-cyan-500">214</h4>
                         </div>
-                        <span class="font-medium text-900">Absent Leaves</span>
+                        <span class="font-medium text-surface-900 dark:text-surface-0">Absent Leaves</span>
                     </div>
                 </div>
-                <div class="p-3 col-12 sm:col-6 lg:col-4">
+                <div class="p-4 col-span-12 sm:col-span-6 lg:col-span-4">
                     <div class="text-center">
-                        <div class="flex mx-auto mb-3  align-items-center justify-content-center">
+                        <div class="flex mx-auto mb-4  items-center justify-center">
                             <h4 class="text-red-600">2</h4>
                         </div>
-                        <span class="font-medium text-900">Short Hours</span>
+                        <span class="font-medium text-surface-900 dark:text-surface-0">Short Hours</span>
                     </div>
                 </div>
 
@@ -279,18 +279,18 @@
         </div>
     </div>
 
-    <div class="flex p-2 col-12 lg:col-6 xl:col-4 flex-column surface-ground">
-        <div class="h-full p-4 shadow-2 b border-round surface-card">
-            <div class="flex mb-4 align-items-center justify-content-between">
-                <span class="text-xl font-medium text-900">Leaves Information</span>
+    <div class="flex p-2 col-span-12 lg:col-span-6 xl:col-span-4 flex-col bg-surface-50 dark:bg-surface-950">
+        <div class="h-full p-6 shadow b rounded-border bg-surface-0 dark:bg-surface-900">
+            <div class="flex mb-6 items-center justify-between">
+                <span class="text-xl font-medium text-surface-900 dark:text-surface-0">Leaves Information</span>
             </div>
-            <div class="row-gap-2 align-items-center justify-content-center">
+            <div class="gap-y-2 items-center justify-center">
                 <div class="w-full">
                     <p-meterGroup [value]="annualLeavesInfo" labelPosition="start" [max]="getAllAnnualLeavesCount">
                         <ng-template pTemplate="label">
                         </ng-template>
                         <ng-template pTemplate="start" let-totalPercent="totalPercent">
-                            <div class="relative flex gap-2 mt-1 mb-1 ml-2 justify-content-start align-items-center">
+                            <div class="relative flex gap-2 mt-1 mb-1 ml-2 justify-start items-center">
                                 <div class="flex flex-row gap-1">
                                     <span class="font-medium  text-md">Total Annual Leaves:</span>
                                     <span
@@ -299,9 +299,9 @@
                             </div>
                         </ng-template>
                         <ng-template pTemplate="end" let-totalPercent="totalPercent">
-                            <div class="relative flex gap-2 mt-0 ml-2 justify-content-start align-items-center">
+                            <div class="relative flex gap-2 mt-0 ml-2 justify-start items-center">
                                 <ng-container *ngFor="let meterItem of annualLeavesInfo; let index = index">
-                                    <div class="flex flex-wrap align-items-center">
+                                    <div class="flex flex-wrap items-center">
                                         <i class="mr-1 pi pi-circle-fill" [style]="{ color: meterItem.color }"></i>
                                         <span class="text-secondary text-md">{{meterItem.label}}</span>
                                         <span class="ml-2 font-medium">({{meterItem.value}})</span>
@@ -311,12 +311,12 @@
                         </ng-template>
                     </p-meterGroup>
                 </div>
-                <div class="w-full mt-3">
+                <div class="w-full mt-4">
                     <p-meterGroup [value]="sickLeavesInfo" labelPosition="start" [max]="getAllSickLeavesCount">
                         <ng-template pTemplate="label">
                         </ng-template>
                         <ng-template pTemplate="start" let-totalPercent="totalPercent">
-                            <div class="relative flex gap-2 mt-1 mb-0 ml-2 justify-content-end align-items-center">
+                            <div class="relative flex gap-2 mt-1 mb-0 ml-2 justify-end items-center">
                                 <div class="flex flex-row gap-1">
                                     <span class="font-medium  text-md">Total Sick Leaves:</span>
                                     <span
@@ -325,9 +325,9 @@
                             </div>
                         </ng-template>
                         <ng-template pTemplate="end" let-totalPercent="totalPercent">
-                            <div class="relative flex gap-2 mt-0 ml-2 justify-content-end align-items-center">
+                            <div class="relative flex gap-2 mt-0 ml-2 justify-end items-center">
                                 <ng-container *ngFor="let meterItem of sickLeavesInfo; let index = index">
-                                    <div class="flex flex-wrap align-items-center">
+                                    <div class="flex flex-wrap items-center">
                                         <i class="mr-1 pi pi-circle-fill" [style]="{ color: meterItem.color }"></i>
                                         <span class="text-secondary text-md">{{meterItem.label}}</span>
                                         <span class="ml-2 font-medium">({{meterItem.value}})</span>
@@ -341,49 +341,49 @@
         </div>
     </div>
 
-    <div class="flex p-2 col-12 lg:col-6 xl:col-4 flex-column surface-ground">
+    <div class="flex p-2 col-span-12 lg:col-span-6 xl:col-span-4 flex-col bg-surface-50 dark:bg-surface-950">
 
         <ng-template #exeptionsTemplate>
-            <div class="h-full p-4 shadow-2 border-round card surface-card">
-                <div class="mb-4">
+            <div class="h-full p-6 shadow rounded-border card bg-surface-0 dark:bg-surface-900">
+                <div class="mb-6">
                     <p-skeleton height="2rem"></p-skeleton>
                 </div>
-                <div class="flex w-full gap-3 mt-4 align-items-center">
+                <div class="flex w-full gap-4 mt-6 items-center">
                     <p-skeleton shape="circle" height="3rem" width="3rem"></p-skeleton>
                     <div class="w-full">
-                        <div class="flex flex-wrap mb-1 justify-content-between align-items-end">
-                            <p-skeleton styleClass="flex w-4rem h-2rem"></p-skeleton>
-                            <p-skeleton styleClass="flex w-5rem h-1rem"></p-skeleton>
+                        <div class="flex flex-wrap mb-1 justify-between items-end">
+                            <p-skeleton styleClass="flex w-16 h-8"></p-skeleton>
+                            <p-skeleton styleClass="flex w-20 h-4"></p-skeleton>
                         </div>
                         <p-skeleton height="0.5rem"></p-skeleton>
                     </div>
                 </div>
-                <div class="flex w-full gap-3 mt-4 align-items-center">
+                <div class="flex w-full gap-4 mt-6 items-center">
                     <p-skeleton shape="circle" height="3rem" width="3rem"></p-skeleton>
                     <div class="w-full">
-                        <div class="flex flex-wrap mb-1 justify-content-between align-items-end">
-                            <p-skeleton styleClass="flex w-4rem h-2rem"></p-skeleton>
-                            <p-skeleton styleClass="flex w-5rem h-1rem"></p-skeleton>
+                        <div class="flex flex-wrap mb-1 justify-between items-end">
+                            <p-skeleton styleClass="flex w-16 h-8"></p-skeleton>
+                            <p-skeleton styleClass="flex w-20 h-4"></p-skeleton>
                         </div>
                         <p-skeleton height="0.5rem"></p-skeleton>
                     </div>
                 </div>
-                <div class="flex w-full gap-3 mt-4 align-items-center">
+                <div class="flex w-full gap-4 mt-6 items-center">
                     <p-skeleton shape="circle" height="3rem" width="3rem"></p-skeleton>
                     <div class="w-full">
-                        <div class="flex flex-wrap mb-1 justify-content-between align-items-end">
-                            <p-skeleton styleClass="flex w-4rem h-2rem"></p-skeleton>
-                            <p-skeleton styleClass="flex w-5rem h-1rem"></p-skeleton>
+                        <div class="flex flex-wrap mb-1 justify-between items-end">
+                            <p-skeleton styleClass="flex w-16 h-8"></p-skeleton>
+                            <p-skeleton styleClass="flex w-20 h-4"></p-skeleton>
                         </div>
                         <p-skeleton height="0.5rem"></p-skeleton>
                     </div>
                 </div>
-                <div class="flex w-full gap-3 mt-4 align-items-center">
+                <div class="flex w-full gap-4 mt-6 items-center">
                     <p-skeleton shape="circle" height="3rem" width="3rem"></p-skeleton>
                     <div class="w-full">
-                        <div class="flex flex-wrap mb-1 justify-content-between align-items-end">
-                            <p-skeleton styleClass="flex w-4rem h-2rem"></p-skeleton>
-                            <p-skeleton styleClass="flex w-5rem h-1rem"></p-skeleton>
+                        <div class="flex flex-wrap mb-1 justify-between items-end">
+                            <p-skeleton styleClass="flex w-16 h-8"></p-skeleton>
+                            <p-skeleton styleClass="flex w-20 h-4"></p-skeleton>
                         </div>
                         <p-skeleton height="0.5rem"></p-skeleton>
                     </div>
@@ -391,25 +391,25 @@
             </div>
         </ng-template>
 
-        <div class="h-full p-4 shadow-2 border-round card surface-card"
+        <div class="h-full p-6 shadow rounded-border card bg-surface-0 dark:bg-surface-900"
             *ngIf="!loadingCards.exceptions; else exeptionsTemplate">
-            <div class="flex mb-4 align-items-center justify-content-between">
-                <span class="text-xl font-medium text-900">Exceptions</span>
+            <div class="flex mb-6 items-center justify-between">
+                <span class="text-xl font-medium text-surface-900 dark:text-surface-0">Exceptions</span>
                 <p-calendar class="max-w-full dashboard-month-picker" [inline]="true" [showWeek]="true"></p-calendar>
             </div>
 
-            <div class="flex w-full gap-3 mt-4 align-items-center">
-                <img class="hidden w-3rem h-3rem" src="assets/context/images/dashboard/banking-4.svg" alt="Food">
+            <div class="flex w-full gap-4 mt-6 items-center">
+                <img class="hidden w-12 h-12" src="assets/context/images/dashboard/banking-4.svg" alt="Food">
                 <div class="w-full">
-                    <div class="flex flex-wrap w-full justify-content-between align-items-center">
+                    <div class="flex flex-wrap w-full justify-between items-center">
                         <span class="font-semibold">Absent</span>
                         <div class="flex">
                             <span
-                                class="pr-2 text-sm font-semibold text-color-secondary border-right-2 surface-border">{{getPrecentage(attendanceDetails.absent)}}</span>
+                                class="pr-2 text-sm font-semibold text-muted-color border-r-2 border-surface">{{getPrecentage(attendanceDetails.absent)}}</span>
                             <span class="ml-2 text-sm font-semibold">{{attendanceDetails.absent}}/30</span>
                         </div>
                     </div>
-                    <div class="w-full mt-2 overflow-hidden border-round"
+                    <div class="w-full mt-2 overflow-hidden rounded-border"
                         style="height: 7px; background-color: var(--surface-border);">
                         <div class="h-full border-left-round"
                             style="background: linear-gradient(-120deg, rgb(198, 55, 55), rgba(198, 55, 55, 0.3) 70%); width: 79%;"
@@ -418,16 +418,16 @@
                     </div>
                 </div>
             </div>
-            <div class="flex w-full gap-3 mt-4 align-items-center "><img class="hidden w-3rem h-3rem"
+            <div class="flex w-full gap-4 mt-6 items-center "><img class="hidden w-12 h-12"
                     src="assets/context/images/dashboard/banking-6.svg" alt="Utilities">
                 <div class="w-full">
-                    <div class="flex flex-wrap w-full justify-content-between align-items-center"><span
+                    <div class="flex flex-wrap w-full justify-between items-center"><span
                             class="font-semibold">Missing Swipe</span>
                         <div class="flex"><span
-                                class="pr-2 text-sm font-semibold text-color-secondary border-right-2 surface-border">{{getPrecentage(attendanceDetails.missingSwipe)}}</span><span
+                                class="pr-2 text-sm font-semibold text-muted-color border-r-2 border-surface">{{getPrecentage(attendanceDetails.missingSwipe)}}</span><span
                                 class="ml-2 text-sm font-semibold">{{attendanceDetails.missingSwipe}}/30</span></div>
                     </div>
-                    <div class="w-full mt-2 overflow-hidden border-round"
+                    <div class="w-full mt-2 overflow-hidden rounded-border"
                         style="height: 7px; background-color: var(--surface-border);">
                         <div class="h-full border-left-round"
                             [ngStyle]="{'width': getPrecentage(attendanceDetails.missingSwipe)}"
@@ -436,16 +436,16 @@
                     </div>
                 </div>
             </div>
-            <div class="flex w-full gap-3 mt-4 align-items-center"><img class="hidden w-3rem h-3rem"
+            <div class="flex w-full gap-4 mt-6 items-center"><img class="hidden w-12 h-12"
                     src="assets/context/images/dashboard/banking-8.svg" alt="Travel">
                 <div class="w-full">
-                    <div class="flex flex-wrap w-full justify-content-between align-items-center"><span
+                    <div class="flex flex-wrap w-full justify-between items-center"><span
                             class="font-semibold">Late Entry</span>
                         <div class="flex"><span
-                                class="pr-2 text-sm font-semibold text-color-secondary border-right-2 surface-border">{{getPrecentage(attendanceDetails.lateEntry)}}</span><span
+                                class="pr-2 text-sm font-semibold text-muted-color border-r-2 border-surface">{{getPrecentage(attendanceDetails.lateEntry)}}</span><span
                                 class="ml-2 text-sm font-semibold">{{attendanceDetails.lateEntry}}/30</span></div>
                     </div>
-                    <div class="w-full mt-2 overflow-hidden border-round"
+                    <div class="w-full mt-2 overflow-hidden rounded-border"
                         style="height: 7px; background-color: var(--surface-border);">
                         <div class="h-full border-left-round"
                             [ngStyle]="{'width': getPrecentage(attendanceDetails.lateEntry)}"
@@ -454,16 +454,16 @@
                     </div>
                 </div>
             </div><!---->
-            <div class="flex w-full gap-3 mt-4 align-items-center"><img class="hidden w-3rem h-3rem"
+            <div class="flex w-full gap-4 mt-6 items-center"><img class="hidden w-12 h-12"
                     src="assets/context/images/dashboard/banking-8.svg" alt="Travel">
                 <div class="w-full">
-                    <div class="flex flex-wrap w-full justify-content-between align-items-center"><span
+                    <div class="flex flex-wrap w-full justify-between items-center"><span
                             class="font-semibold">Early Exit</span>
                         <div class="flex"><span
-                                class="pr-2 text-sm font-semibold text-color-secondary border-right-2 surface-border">{{getPrecentage(attendanceDetails.earlyEntry)}}</span><span
+                                class="pr-2 text-sm font-semibold text-muted-color border-r-2 border-surface">{{getPrecentage(attendanceDetails.earlyEntry)}}</span><span
                                 class="ml-2 text-sm font-semibold">{{attendanceDetails.earlyEntry}}/30</span></div>
                     </div>
-                    <div class="w-full mt-2 overflow-hidden border-round"
+                    <div class="w-full mt-2 overflow-hidden rounded-border"
                         style="height: 7px; background-color: var(--surface-border);">
                         <div class="h-full border-left-round"
                             [ngStyle]="{'width': getPrecentage(attendanceDetails.earlyEntry)}"
@@ -475,43 +475,43 @@
         </div>
     </div>
 
-    <div class="p-2 col-12 lg:col-4 surface-ground">
+    <div class="p-2 col-span-12 lg:col-span-4 bg-surface-50 dark:bg-surface-950">
         <ng-template #attendance>
-            <div class="h-full p-4 shadow-2 border-round surface-card">
-                <div class="mb-4">
+            <div class="h-full p-6 shadow rounded-border bg-surface-0 dark:bg-surface-900">
+                <div class="mb-6">
                     <p-skeleton height="2rem"></p-skeleton>
                 </div>
-                <div class="flex flex-column justify-content-center">
-                    <div class="flex flex-wrap justify-content-center">
-                        <p-skeleton styleClass="flex w-4rem h-1rem border-round m-2"></p-skeleton>
-                        <p-skeleton styleClass="flex w-4rem h-1rem border-round m-2"></p-skeleton>
-                        <p-skeleton styleClass="flex w-4rem h-1rem border-round m-2"></p-skeleton>
-                        <p-skeleton styleClass="flex w-4rem h-1rem border-round m-2"></p-skeleton>
-                        <p-skeleton styleClass="flex w-4rem h-1rem border-round m-2"></p-skeleton>
+                <div class="flex flex-col justify-center">
+                    <div class="flex flex-wrap justify-center">
+                        <p-skeleton styleClass="flex w-16 h-4 rounded-border m-2"></p-skeleton>
+                        <p-skeleton styleClass="flex w-16 h-4 rounded-border m-2"></p-skeleton>
+                        <p-skeleton styleClass="flex w-16 h-4 rounded-border m-2"></p-skeleton>
+                        <p-skeleton styleClass="flex w-16 h-4 rounded-border m-2"></p-skeleton>
+                        <p-skeleton styleClass="flex w-16 h-4 rounded-border m-2"></p-skeleton>
                     </div>
-                    <div class="flex flex-wrap justify-content-center">
-                        <p-skeleton shape="circle" styleClass="flex w-15rem h-15rem m-2"></p-skeleton>
+                    <div class="flex flex-wrap justify-center">
+                        <p-skeleton shape="circle" styleClass="flex w-60 h-60 m-2"></p-skeleton>
                     </div>
                 </div>
             </div>
         </ng-template>
-        <div class="h-full p-4 shadow-2 border-round surface-card"
+        <div class="h-full p-6 shadow rounded-border bg-surface-0 dark:bg-surface-900"
             *ngIf="!loadingCards.attendanceChart; else attendance">
-            <div class="flex mb-2 align-items-center justify-content-between">
-                <span class="text-xl font-medium text-900">Monthly Overview</span>
+            <div class="flex mb-2 items-center justify-between">
+                <span class="text-xl font-medium text-surface-900 dark:text-surface-0">Monthly Overview</span>
                 <p-calendar class="max-w-full dashboard-month-picker" [inline]="true" [showWeek]="true"></p-calendar>
 
             </div>
-            <!-- <div class="flex grid px-3 mt-0 mb-2 justify-content-center">
-                <div class="relative flex flex-wrap mr-1 transition-all border-solid cursor-pointer col-6 md:col-4 justify-content-center border-1 border-primary-500 transition-duration-300 hover:shadow-5 h-5rem">
-                    <div class="flex align-items-center justify-content-center">Attendance</div>
-                    <div class="flex align-items-center justify-content-center">
+            <!-- <div class="flex grid grid-cols-12 gap-4 px-4 mt-0 mb-2 justify-center">
+                <div class="relative flex flex-wrap mr-1 transition-all border-solid cursor-pointer col-span-6 md:col-span-4 justify-center border border-primary-500 duration-300 hover:shadow-xl h-20">
+                    <div class="flex items-center justify-center">Attendance</div>
+                    <div class="flex items-center justify-center">
                         <apx-chart [series]="options4.series" [chart]="options4.chart" [tooltip]="options4.tooltip"></apx-chart>
                     </div>
                 </div>
-                <div class="relative flex flex-wrap transition-all cursor-pointer col-6 md:col-6 justify-content-center transition-duration-300 hover:shadow-3 h-5rem">
-                    <div class="flex align-items-center justify-content-center">Working Hours</div>
-                    <div class="flex align-items-center justify-content-center">
+                <div class="relative flex flex-wrap transition-all cursor-pointer col-span-6 md:col-span-6 justify-center duration-300 hover:shadow-md h-20">
+                    <div class="flex items-center justify-center">Working Hours</div>
+                    <div class="flex items-center justify-center">
                         <apx-chart [series]="options1.series" [chart]="options1.chart" [plotOptions]="options1.plotOptions"
                             [tooltip]="options1.tooltip">
                         </apx-chart>
@@ -519,7 +519,7 @@
                     
                 </div>
             </div> -->
-            <div class="flex flex-row flex-wrap p-1 border-round justify-content-center">
+            <div class="flex flex-row flex-wrap p-1 rounded-border justify-center">
                 <div class="w-full h-auto m-auto">
                     <p-chart [type]="attendenceChartOptions.type" [data]="attendenceChartOptions.data"
                         [options]="attendenceChartOptions.options" [plugins]="attendenceChartOptions.plugins"
@@ -532,13 +532,13 @@
             </div>
         </div>
     </div>
-    <div class="flex p-2 col-12 lg:col-6 xl:col-4 flex-column surface-ground">
+    <div class="flex p-2 col-span-12 lg:col-span-6 xl:col-span-4 flex-col bg-surface-50 dark:bg-surface-950">
         <ng-template #orgChartSkeleton>
-            <div class="h-full p-4 shadow-2 border-round surface-card">
-                <div class="mb-4">
-                    <p-skeleton height="2rem" styleClass="text-xl font-medium text-900"></p-skeleton>
+            <div class="h-full p-6 shadow rounded-border bg-surface-0 dark:bg-surface-900">
+                <div class="mb-6">
+                    <p-skeleton height="2rem" styleClass="text-xl font-medium text-surface-900 dark:text-surface-0"></p-skeleton>
                 </div>
-                <div class="flex justify-content-center">
+                <div class="flex justify-center">
                     <div class="p-organizationchart p-component p-organizationchart-preservespace">
                         <table class="p-element p-organizationchart-table">
                             <tbody>
@@ -546,8 +546,8 @@
                                     <td colspan="4" class="text-center">
                                         <div
                                             class="p-organizationchart-node-content p-organizationchart-selectable-node">
-                                            <div class="flex p-2 flex-column align-items-center">
-                                                <p-skeleton shape="circle" styleClass="mb-3 w-3rem h-3rem"></p-skeleton>
+                                            <div class="flex p-2 flex-col items-center">
+                                                <p-skeleton shape="circle" styleClass="mb-4 w-12 h-12"></p-skeleton>
                                                 <p-skeleton width="4rem" height="1rem"
                                                     styleClass="font-bold mb-1"></p-skeleton>
                                                 <p-skeleton width="3rem" height="1rem" styleClass=""></p-skeleton>
@@ -577,9 +577,9 @@
                                                 <td>
                                                     <div
                                                         class="p-organizationchart-node-content p-organizationchart-selectable-node">
-                                                        <div class="flex p-2 flex-column align-items-center">
+                                                        <div class="flex p-2 flex-col items-center">
                                                             <p-skeleton shape="circle"
-                                                                styleClass="mb-3 w-3rem h-3rem"></p-skeleton>
+                                                                styleClass="mb-4 w-12 h-12"></p-skeleton>
                                                             <p-skeleton width="4rem" height="1rem"
                                                                 styleClass="font-bold mb-1"></p-skeleton>
                                                             <p-skeleton width="3rem" height="1rem"
@@ -597,9 +597,9 @@
                                                 <td>
                                                     <div
                                                         class="p-organizationchart-node-content p-organizationchart-selectable-node">
-                                                        <div class="flex p-2 flex-column align-items-center">
+                                                        <div class="flex p-2 flex-col items-center">
                                                             <p-skeleton shape="circle"
-                                                                styleClass="mb-3 w-3rem h-3rem"></p-skeleton>
+                                                                styleClass="mb-4 w-12 h-12"></p-skeleton>
                                                             <p-skeleton width="4rem" height="1rem"
                                                                 styleClass="font-bold mb-1"></p-skeleton>
                                                             <p-skeleton width="3rem" height="1rem"
@@ -617,19 +617,19 @@
                 </div>
             </div>
         </ng-template>
-        <div class="h-full p-4 shadow-2 border-round surface-card"
+        <div class="h-full p-6 shadow rounded-border bg-surface-0 dark:bg-surface-900"
             *ngIf="!loadingCards.orgChart; else orgChartSkeleton">
             <!-- !loadingCards.orgChart; else orgChartSkeleton -->
 
-            <div class="flex mb-4 align-items-center justify-content-between">
-                <div class="text-xl font21w-medium text-900">Reporting Structure</div>
+            <div class="flex mb-6 items-center justify-between">
+                <div class="text-xl font21w-medium text-surface-900 dark:text-surface-0">Reporting Structure</div>
             </div>
-            <div class="flex justify-content-center">
+            <div class="flex justify-center">
                 <p-organizationChart [value]="orgChartData" selectionMode="none" [(selection)]="selectedNodes"
                     preserveSpace="false">
                     <ng-template let-node pTemplate="person">
                         <div class="p-2 text-center">
-                            <img [src]="node.data.image" class="mb-3 w-3rem h-3rem" />
+                            <img [src]="node.data.image" class="mb-4 w-12 h-12" />
                             <div class="font-bold">{{ node.data.name }}</div>
                             <div>{{ node.data.title }}</div>
                         </div>
@@ -639,13 +639,13 @@
         </div>
     </div>
 
-    <div class="flex p-2 col-12 lg:col-8 flex-column surface-ground" style="display:none;">
-        <div class="h-full p-4 shadow-2 border-round surface-card">
-            <div class="flex mb-2 align-items-center justify-content-between">
-                <span class="text-xl font-medium text-900">Working Hours</span>
+    <div class="flex p-2 col-span-12 lg:col-span-8 flex-col bg-surface-50 dark:bg-surface-950" style="display:none;">
+        <div class="h-full p-6 shadow rounded-border bg-surface-0 dark:bg-surface-900">
+            <div class="flex mb-2 items-center justify-between">
+                <span class="text-xl font-medium text-surface-900 dark:text-surface-0">Working Hours</span>
                 <p-dropdown [options]="weeks"></p-dropdown>
             </div>
-            <div class="flex flex-row flex-wrap p-1 border-round justify-content-center">
+            <div class="flex flex-row flex-wrap p-1 rounded-border justify-center">
                 <div class="w-full h-auto m-auto">
                     <p-chart [type]="WorkingHoursChartOptions.type" [data]="WorkingHoursChartOptions.data"
                         [options]="WorkingHoursChartOptions.options" [responsive]="true"></p-chart>
@@ -654,40 +654,40 @@
         </div>
     </div>
 
-    <div class="flex p-2 col-12 lg:col-6 xl:col-4 flex-column surface-ground">
+    <div class="flex p-2 col-span-12 lg:col-span-6 xl:col-span-4 flex-col bg-surface-50 dark:bg-surface-950">
 
     </div>
 
 
-    <div class="hidden pt-0 pr-0 col-12 lg:col-6 xl:col-4 surface-ground">
-        <div class="p-4 shadow-2 border-round surface-card ">
-            <div class="flex grid">
-                <div class="col-12 sm:col-6 justify-content-center">
-                    <div class="flex p-3 text-center bg-blue-50 border-round flex-column"><i
-                            class="block mb-4 text-4xl text-blue-500 pi pi-play"></i><span
-                            class="text-5xl text-black-alpha-90">152h</span>
-                        <div class="mt-3 font-medium text-blue-700">Total Hours</div>
+    <div class="hidden pt-0 pr-0 col-span-12 lg:col-span-6 xl:col-span-4 bg-surface-50 dark:bg-surface-950">
+        <div class="p-6 shadow rounded-border bg-surface-0 dark:bg-surface-900 ">
+            <div class="flex grid grid-cols-12 gap-4">
+                <div class="col-span-12 sm:col-span-6 justify-center">
+                    <div class="flex p-4 text-center bg-blue-50 rounded-border flex-col"><i
+                            class="block mb-6 text-4xl text-blue-500 pi pi-play"></i><span
+                            class="text-5xl text-black/90">152h</span>
+                        <div class="mt-4 font-medium text-blue-700">Total Hours</div>
                     </div>
                 </div>
-                <div class="col-12 sm:col-6 justify-content-center">
-                    <div class="flex p-3 text-center bg-purple-50 border-round flex-column"><i
-                            class="block mb-4 text-4xl text-purple-500 pi pi-users"></i><span
-                            class="text-5xl text-black-alpha-90">21000h</span>
-                        <div class="mt-3 font-medium text-purple-700">Extra Hours</div>
+                <div class="col-span-12 sm:col-span-6 justify-center">
+                    <div class="flex p-4 text-center bg-purple-50 rounded-border flex-col"><i
+                            class="block mb-6 text-4xl text-purple-500 pi pi-users"></i><span
+                            class="text-5xl text-black/90">21000h</span>
+                        <div class="mt-4 font-medium text-purple-700">Extra Hours</div>
                     </div>
                 </div>
-                <div class="col-12 sm:col-6 justify-content-center">
-                    <div class="flex p-3 text-center bg-teal-50 border-round flex-column"><i
-                            class="block mb-4 text-4xl text-teal-500 pi pi-camera"></i><span
-                            class="text-5xl text-black-alpha-90">71.2h</span>
-                        <div class="mt-3 font-medium text-teal-700">Late Entry</div>
+                <div class="col-span-12 sm:col-span-6 justify-center">
+                    <div class="flex p-4 text-center bg-teal-50 rounded-border flex-col"><i
+                            class="block mb-6 text-4xl text-teal-500 pi pi-camera"></i><span
+                            class="text-5xl text-black/90">71.2h</span>
+                        <div class="mt-4 font-medium text-teal-700">Late Entry</div>
                     </div>
                 </div>
-                <div class="col-12 sm:col-6 justify-content-center">
-                    <div class="flex p-3 text-center bg-indigo-50 border-round flex-column"><i
-                            class="block mb-4 text-4xl text-indigo-500 pi pi-thumbs-up"></i><span
-                            class="text-5xl text-black-alpha-90">4500h</span>
-                        <div class="mt-3 font-medium text-indigo-700">Early Exit</div>
+                <div class="col-span-12 sm:col-span-6 justify-center">
+                    <div class="flex p-4 text-center bg-indigo-50 rounded-border flex-col"><i
+                            class="block mb-6 text-4xl text-indigo-500 pi pi-thumbs-up"></i><span
+                            class="text-5xl text-black/90">4500h</span>
+                        <div class="mt-4 font-medium text-indigo-700">Early Exit</div>
                     </div>
                 </div>
             </div>
@@ -703,43 +703,43 @@
     </ng-template>
     <ng-template pTemplate="content">
         <div class="flex-auto overflow-y-auto">
-            <div class="mb-4 text-center">
+            <div class="mb-6 text-center">
                 <img src="../../../../../assets/context/images/avatar/onyamalimba.png"
                     style="width: 70px; height: 70px;">
-                <div class="mt-3 mb-2 text-xl font-medium text-900">John Doe</div>
-                <span class="text-700">Sales Manager</span>
+                <div class="mt-4 mb-2 text-xl font-medium text-surface-900 dark:text-surface-0">John Doe</div>
+                <span class="text-surface-700 dark:text-surface-100">Sales Manager</span>
             </div>
-            <div class="flex mb-5 align-items-center">
-                <a class="flex gap-2 flex-column flex-grow-1 align-items-center">
+            <div class="flex mb-8 items-center">
+                <a class="flex gap-2 flex-col grow items-center">
                     <div pripple
-                        class="p-3 transition-colors cursor-pointer p-ripple p-element border-round surface-100 hover:surface-200 transition-duration-150 border-round-2xl">
-                        <i class="text-xl pi pi-phone text-600"></i>
+                        class="p-4 transition-colors cursor-pointer p-ripple p-element rounded-border bg-surface-100 dark:bg-surface-700 hover:bg-surface-200 dark:hover:bg-surface-600 duration-150 rounded-2xl">
+                        <i class="text-xl pi pi-phone text-surface-600 dark:text-surface-200"></i>
                         <span class="p-ink"></span>
                     </div>
-                    <span class="text-sm font-medium text-700">33991113</span>
+                    <span class="text-sm font-medium text-surface-700 dark:text-surface-100">33991113</span>
                 </a>
-                <a class="flex gap-2 flex-column flex-grow-1 align-items-center">
+                <a class="flex gap-2 flex-col grow items-center">
                     <div pripple
-                        class="p-3 transition-colors cursor-pointer p-ripple p-element border-round surface-100 hover:surface-200 transition-duration-150 border-round-2xl">
-                        <i class="text-xl pi pi-envelope text-600"></i>
+                        class="p-4 transition-colors cursor-pointer p-ripple p-element rounded-border bg-surface-100 dark:bg-surface-700 hover:bg-surface-200 dark:hover:bg-surface-600 duration-150 rounded-2xl">
+                        <i class="text-xl pi pi-envelope text-surface-600 dark:text-surface-200"></i>
                         <span class="p-ink"></span>
                     </div>
-                    <span class="text-sm font-medium text-700">abc&#64;gamail.com</span>
+                    <span class="text-sm font-medium text-surface-700 dark:text-surface-100">abc&#64;gamail.com</span>
                 </a>
             </div>
             <ul class="p-0 m-0 list-none">
-                <li class="p-2 mb-1 text-sm font-medium surface-100 text-700 border-round">NAME</li>
-                <li class="p-2 text-900">John Doe</li>
-                <li class="p-2 mt-4 mb-1 text-sm font-medium surface-100 text-700 border-round">MEMBER SINCE</li>
-                <li class="p-2 text-900">1st Jan 2013</li>
-                <li class="p-2 mt-4 mb-1 text-sm font-medium surface-100 text-700 border-round">Department</li>
-                <li class="p-2 text-900">UI/UX Design Team</li>
-                <li class="p-2 mt-4 mb-1 text-sm font-medium surface-100 text-700 border-round">Designation</li>
-                <li class="p-2 text-900">Full-Stack Developer</li>
-                <li class="p-2 mt-4 mb-1 text-sm font-medium surface-100 text-700 border-round">Company</li>
-                <li class="p-2 text-900">TimeTech Bahrain Company</li>
-                <li class="p-2 mt-4 mb-1 text-sm font-medium surface-100 text-700 border-round">Nationality</li>
-                <li class="p-2 text-900">Sri Lankan</li>
+                <li class="p-2 mb-1 text-sm font-medium bg-surface-100 dark:bg-surface-700 text-surface-700 dark:text-surface-100 rounded-border">NAME</li>
+                <li class="p-2 text-surface-900 dark:text-surface-0">John Doe</li>
+                <li class="p-2 mt-6 mb-1 text-sm font-medium bg-surface-100 dark:bg-surface-700 text-surface-700 dark:text-surface-100 rounded-border">MEMBER SINCE</li>
+                <li class="p-2 text-surface-900 dark:text-surface-0">1st Jan 2013</li>
+                <li class="p-2 mt-6 mb-1 text-sm font-medium bg-surface-100 dark:bg-surface-700 text-surface-700 dark:text-surface-100 rounded-border">Department</li>
+                <li class="p-2 text-surface-900 dark:text-surface-0">UI/UX Design Team</li>
+                <li class="p-2 mt-6 mb-1 text-sm font-medium bg-surface-100 dark:bg-surface-700 text-surface-700 dark:text-surface-100 rounded-border">Designation</li>
+                <li class="p-2 text-surface-900 dark:text-surface-0">Full-Stack Developer</li>
+                <li class="p-2 mt-6 mb-1 text-sm font-medium bg-surface-100 dark:bg-surface-700 text-surface-700 dark:text-surface-100 rounded-border">Company</li>
+                <li class="p-2 text-surface-900 dark:text-surface-0">TimeTech Bahrain Company</li>
+                <li class="p-2 mt-6 mb-1 text-sm font-medium bg-surface-100 dark:bg-surface-700 text-surface-700 dark:text-surface-100 rounded-border">Nationality</li>
+                <li class="p-2 text-surface-900 dark:text-surface-0">Sri Lankan</li>
             </ul>
         </div>
     </ng-template>

@@ -210,7 +210,7 @@ export function clone<T>(source: T): T {
 }
 
 function isValidKey(key: string) {
-  return ['__proto__', 'prototype', 'constructor'].indexOf(key) === -1;
+  return ['[object Object]', 'prototype', 'function Object() { [native code] }'].indexOf(key) === -1;
 }
 
 /**

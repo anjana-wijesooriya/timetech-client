@@ -22,9 +22,9 @@ export class AppComponent implements OnInit {
   constructor(private primengConfig: PrimeNGConfig, private layoutService: LayoutService, private router: Router) { }
 
   ngOnInit() {
-    this.primengConfig.ripple = true;
+    // this.primengConfig.ripple = true;
 
-    this.primengConfig.ripple = true;       //enables core ripple functionality
+    // this.primengConfig.ripple = true;       //enables core ripple functionality
 
     //optional configuration with the default configuration
     const config: AppConfig = {
@@ -56,5 +56,7 @@ export class AppComponent implements OnInit {
 
     Alpine.start();
   }
+
+  
 }
 

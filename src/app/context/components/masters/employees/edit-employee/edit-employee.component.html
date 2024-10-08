@@ -1,40 +1,40 @@
-<div class="grid  nested-grid surface-ground">
-    <div class="col-12 pb-0">
-        <div class="flex flex-column sm:flex-row align-items-center gap-4">
+<div class="grid grid-cols-12 gap-4  nested-grid bg-surface-50 dark:bg-surface-950">
+    <div class="col-span-12 pb-0">
+        <div class="flex flex-col sm:flex-row items-center gap-6">
 
-            <div class="flex flex-column sm:flex-row align-items-center gap-3">
+            <div class="flex flex-col sm:flex-row items-center gap-4">
                 <!-- <img
                     src="../../../../../../assets/context/images/avatar/asiyajavayant.png"
-                    class="w-3rem h-3rem flex-shrink-0"> -->
+                    class="w-12 h-12 shrink-0"> -->
 
 
                 <p-avatar icon="pi pi-user" *ngIf="employee == undefined || employee?.imagePath == ''; else empImage"
-                    styleClass="flex-shrink-0 ">
+                    styleClass="shrink-0 ">
                 </p-avatar>
                 <ng-template #empImage>
-                    <p-avatar [icon]="'pi pi-sync pi-spinner'" styleClass="flex-shrink-0 mr-4" size="xlarge"
+                    <p-avatar [icon]="'pi pi-sync pi-spinner'" styleClass="shrink-0 mr-6" size="xlarge"
                         shape="circle" (onImageError)="employee.imagePath = ''"
                         *ngIf="employee.imagePath == 'spinner'; else picBlock">
                     </p-avatar>
                     <ng-template #picBlock>
-                        <p-avatar [image]="employee?.imagePath" styleClass="flex-shrink-0 " shape="circle"
+                        <p-avatar [image]="employee?.imagePath" styleClass="shrink-0 " shape="circle"
                             (onImageError)="employee.imagePath = ''">
                         </p-avatar>
                     </ng-template>
                 </ng-template>
 
 
-                <div class="flex flex-column align-items-center sm:align-items-start">
-                    <h4 class="text-800 font-medium m-0 mb-1">{{employeeBasic?.empName}} has 2 unapproved leave requests
+                <div class="flex flex-col items-center sm:items-start">
+                    <h4 class="text-surface-800 dark:text-surface-50 font-medium m-0 mb-1">{{employeeBasic?.empName}} has 2 unapproved leave requests
                     </h4>
-                    <p class="text-600 m-0">Please update {{employeeBasic?.empShName}}'s personal details</p>
+                    <p class="text-surface-600 dark:text-surface-200 m-0">Please update {{employeeBasic?.empShName}}'s personal details</p>
                 </div>
             </div>
-            <div class="flex flex-wrap gap-2 sm:ml-auto justify-content-center">
+            <div class="flex flex-wrap gap-2 sm:ml-auto justify-center">
                 <div class="flex">
 
                     <div (click)="employeeMenu.toggle($event)"
-                        class=" shadow-4 flex align-items-center p-2 cursor-pointer hover:surface-0 border-round transition-duration-200">
+                        class=" shadow-lg flex items-center p-2 cursor-pointer hover:bg-surface-0 dark:hover:bg-surface-900 rounded-border duration-200">
                         <i [class]="selectedMenuItem.icon"></i>
                         <span class="font-semibold ml-2">{{selectedMenuItem.label}}</span>
                         <i class="pi pi-angle-down ml-auto"></i>
@@ -42,19 +42,19 @@
 
                 </div>
                 <p-overlayPanel #employeeMenu appendTo="body" styleClass="w-auto employee-menu">
-                    <div class="flex flex-column">
+                    <div class="flex flex-col">
                         <p-menu #dpOne [model]="employeeMenuItems" styleClass="w-auto">
                             <ng-template pTemplate="submenuheader" let-item>
                                 <span class="text-primary font-bold" style="color: var(--primary-color) !important;">{{
                                     item.label }}</span>
                             </ng-template>
                             <ng-template pTemplate="item" let-item>
-                                <a pRipple class="flex align-items-center p-menuitem-link hover:underline text-primary"
+                                <a pRipple class="flex items-center p-menuitem-link hover:underline text-primary"
                                     style="color: var(--text-color) !important;">
                                     <span [class]="item.icon"></span>
                                     <span class="ml-2">{{ item.label }}</span>
                                     <!-- <p-badge *ngIf="item.badge" class="ml-auto" [value]="item.badge" />
-                                    <span *ngIf="item.shortcut" class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">
+                                    <span *ngIf="item.shortcut" class="ml-auto border border-surface rounded-border bg-surface-100 dark:bg-surface-700 text-xs p-1">
                                         {{ item.shortcut }}
                                     </span> -->
                                 </a>
@@ -62,9 +62,9 @@
                         </p-menu>
                     </div>
                 </p-overlayPanel>
-                <!-- <div class="flex gap-2 align-items-center justify-content-center">
+                <!-- <div class="flex gap-2 items-center justify-center">
                     <button type="button" pbutton="" ptooltip="Exchange" tooltipposition="bottom" icon="pi pi-arrows-h"
-                        class="p-element p-button-rounded p-button-outlined flex-shrink-0 p-button p-component p-button-icon-only">
+                        class="p-element p-button-rounded p-button-outlined shrink-0 p-button p-component p-button-icon-only">
                         <span class="p-button-icon pi pi-arrows-h" aria-hidden="true"></span>
                     </button>
                     <p-selectButton [options]="['Tabs', 'Steps']" [(ngModel)]="menuType" [unselectable]="true">
@@ -74,26 +74,26 @@
 
         </div>
     </div>
-    <div class="col-12">
-        <div class="grid">
-            <div class="col-3 pr-0">
-                <div styleClass="surface-card shadow-2 border-round p-3 h-full" *ngIf="false">
+    <div class="col-span-12">
+        <div class="grid grid-cols-12 gap-4">
+            <div class="col-span-3 pr-0">
+                <div styleClass="bg-surface-0 dark:bg-surface-900 shadow rounded-border p-4 h-full" *ngIf="false">
                     <p-skeleton width="100%" height="100%" styleClass="w-full h-full" />
                 </div>
-                <div class="shadow-2 border-round p-3 h-full">
-                    <div class="flex flex-column justify-content-center align-items-center mb-3">
+                <div class="shadow rounded-border p-4 h-full">
+                    <div class="flex flex-col justify-center items-center mb-4">
                         <div>
                             <p-avatar icon="text-7xl pi pi-user"
                                 *ngIf="employee == undefined || employee?.imagePath == ''; else empImageL"
-                                styleClass="w-12rem h-12rem flex-shrink-0 ">
+                                styleClass="w-48 h-48 shrink-0 ">
                             </p-avatar>
                             <ng-template #empImageL>
-                                <p-avatar [icon]="'pi pi-sync pi-spinner'" styleClass="w-12rem h-12rem flex-shrink-0"
+                                <p-avatar [icon]="'pi pi-sync pi-spinner'" styleClass="w-48 h-48 shrink-0"
                                     shape="circle" (onImageError)="employee.imagePath = ''"
                                     *ngIf="employee.imagePath == 'spinner'; else picBlockL">
                                 </p-avatar>
                                 <ng-template #picBlockL>
-                                    <p-avatar [image]="employee?.imagePath" styleClass="w-12rem h-12rem flex-shrink-0"
+                                    <p-avatar [image]="employee?.imagePath" styleClass="w-48 h-48 shrink-0"
                                         (onImageError)="employee.imagePath =''">
                                     </p-avatar>
                                 </ng-template>
@@ -101,8 +101,8 @@
 
                             </ng-template>
                         </div>
-                        <div class="flex flex-column justify-content-center align-items-center row-gap-2 ">
-                            <div class="text-900 font-medium text-xl text-center" [title]="employeeBasic?.empName">
+                        <div class="flex flex-col justify-center items-center gap-y-2 ">
+                            <div class="text-surface-900 dark:text-surface-0 font-medium text-xl text-center" [title]="employeeBasic?.empName">
                                 {{employeeBasic?.empShName}}</div>
                             <p-chip>
                                 <span class="font-medium text-xl p-2">
@@ -113,74 +113,74 @@
 
                     </div>
                     <ul class="list-none m-0 p-0">
-                        <li class="px-0 py-1 mb-2 flex flex-row border-round-xl surface-200 gao gap-2">
-                            <div class="flex flex-wrap justify-content-center align-items-center p-2">
+                        <li class="px-0 py-1 mb-2 flex flex-row rounded-xl bg-surface-200 dark:bg-surface-600 gao gap-2">
+                            <div class="flex flex-wrap justify-center items-center p-2">
                                 <i class="font-medium text-3xl ic i-Internet"></i>
                             </div>
-                            <div class=" flex flex-column justify-content-start align-items-start  row-gap-1">
-                                <span class="text-600 font-medium text-xs">COMPANY</span>
-                                <span class="text-900 font-medium text-md">{{employeeBasic?.compDs}}</span>
+                            <div class=" flex flex-col justify-start items-start  gap-y-1">
+                                <span class="text-surface-600 dark:text-surface-200 font-medium text-xs">COMPANY</span>
+                                <span class="text-surface-900 dark:text-surface-0 font-medium text-md">{{employeeBasic?.compDs}}</span>
                             </div>
                         </li>
-                        <li class="px-0 py-1 mb-2 flex flex-row border-round-xl surface-200 gap-2">
-                            <div class="flex flex-wrap justify-content-center align-items-center p-2">
+                        <li class="px-0 py-1 mb-2 flex flex-row rounded-xl bg-surface-200 dark:bg-surface-600 gap-2">
+                            <div class="flex flex-wrap justify-center items-center p-2">
                                 <i class="font-medium text-3xl ic i-Management"></i>
                             </div>
-                            <div class=" flex flex-column justify-content-start align-items-start  row-gap-1">
-                                <span class="text-600 font-medium text-xs">DEPARTMENT</span>
-                                <span class="text-900 font-medium text-md">{{employeeBasic?.deptDs}}</span>
+                            <div class=" flex flex-col justify-start items-start  gap-y-1">
+                                <span class="text-surface-600 dark:text-surface-200 font-medium text-xs">DEPARTMENT</span>
+                                <span class="text-surface-900 dark:text-surface-0 font-medium text-md">{{employeeBasic?.deptDs}}</span>
                             </div>
                         </li>
-                        <li class="px-0 py-1 mb-2 flex flex-row border-round-xl surface-200 gap-2">
-                            <div class="flex flex-wrap justify-content-center align-items-center p-2">
+                        <li class="px-0 py-1 mb-2 flex flex-row rounded-xl bg-surface-200 dark:bg-surface-600 gap-2">
+                            <div class="flex flex-wrap justify-center items-center p-2">
                                 <i class="font-medium text-3xl ic i-Male-21"></i>
                             </div>
-                            <div class=" flex flex-column justify-content-start align-items-start  row-gap-1">
-                                <span class="text-600 font-medium text-xs">EMPLOYEE CODE</span>
-                                <span class="text-900 font-medium text-md">{{employeeBasic?.empCd}}</span>
+                            <div class=" flex flex-col justify-start items-start  gap-y-1">
+                                <span class="text-surface-600 dark:text-surface-200 font-medium text-xs">EMPLOYEE CODE</span>
+                                <span class="text-surface-900 dark:text-surface-0 font-medium text-md">{{employeeBasic?.empCd}}</span>
                             </div>
                         </li>
-                        <li class="px-0 py-1 mb-2 flex flex-row border-round-xl surface-200 gap-2">
-                            <div class="flex flex-wrap justify-content-center align-items-center p-2">
+                        <li class="px-0 py-1 mb-2 flex flex-row rounded-xl bg-surface-200 dark:bg-surface-600 gap-2">
+                            <div class="flex flex-wrap justify-center items-center p-2">
                                 <i class="font-medium text-3xl ic i-Telephone"></i>
                             </div>
-                            <div class=" flex flex-column justify-content-start align-items-start  row-gap-1">
-                                <span class="text-600 font-medium text-xs">MOBILE</span>
-                                <span class="text-900 font-medium text-md">{{employeeBasic?.mobileNo}}</span>
+                            <div class=" flex flex-col justify-start items-start  gap-y-1">
+                                <span class="text-surface-600 dark:text-surface-200 font-medium text-xs">MOBILE</span>
+                                <span class="text-surface-900 dark:text-surface-0 font-medium text-md">{{employeeBasic?.mobileNo}}</span>
                             </div>
                         </li>
-                        <li class="px-0 py-1 mb-2 flex flex-row border-round-xl surface-200 gap-2">
-                            <div class="flex flex-wrap justify-content-center align-items-center p-2">
+                        <li class="px-0 py-1 mb-2 flex flex-row rounded-xl bg-surface-200 dark:bg-surface-600 gap-2">
+                            <div class="flex flex-wrap justify-center items-center p-2">
                                 <i class="font-medium text-3xl ic i-Email"></i>
                             </div>
-                            <div class=" flex flex-column justify-content-start align-items-start  row-gap-1">
-                                <span class="text-600 font-medium text-xs">EMAIL</span>
-                                <span class="text-900 font-medium text-md">{{employeeBasic?.email}}</span>
+                            <div class=" flex flex-col justify-start items-start  gap-y-1">
+                                <span class="text-surface-600 dark:text-surface-200 font-medium text-xs">EMAIL</span>
+                                <span class="text-surface-900 dark:text-surface-0 font-medium text-md">{{employeeBasic?.email}}</span>
                             </div>
                         </li>
-                        <li class="px-0 py-1 mb-2 flex flex-row border-round-xl surface-200 gap-2">
-                            <div class="flex flex-wrap justify-content-center align-items-center p-2">
+                        <li class="px-0 py-1 mb-2 flex flex-row rounded-xl bg-surface-200 dark:bg-surface-600 gap-2">
+                            <div class="flex flex-wrap justify-center items-center p-2">
                                 <i class="font-medium text-3xl ic i-ID-3"></i>
                             </div>
-                            <div class=" flex flex-column justify-content-start align-items-start  row-gap-1">
-                                <span class="text-600 font-medium text-xs">USER PROFILE</span>
-                                <span class="text-900 font-medium text-md">{{employeeBasic?.userProfileName}}</span>
+                            <div class=" flex flex-col justify-start items-start  gap-y-1">
+                                <span class="text-surface-600 dark:text-surface-200 font-medium text-xs">USER PROFILE</span>
+                                <span class="text-surface-900 dark:text-surface-0 font-medium text-md">{{employeeBasic?.userProfileName}}</span>
                             </div>
                         </li>
-                        <li class="px-0 py-1 mb-0 flex flex-row border-round-xl surface-200 gap-2">
-                            <div class="flex flex-wrap justify-content-center align-items-center p-2">
+                        <li class="px-0 py-1 mb-0 flex flex-row rounded-xl bg-surface-200 dark:bg-surface-600 gap-2">
+                            <div class="flex flex-wrap justify-center items-center p-2">
                                 <i class="font-medium text-3xl ic i-Calendar"></i>
                             </div>
-                            <div class=" flex flex-column justify-content-start align-items-start  row-gap-1">
-                                <span class="text-600 font-medium text-xs">JOINED DATE</span>
+                            <div class=" flex flex-col justify-start items-start  gap-y-1">
+                                <span class="text-surface-600 dark:text-surface-200 font-medium text-xs">JOINED DATE</span>
                                 <span
-                                    class="text-900 font-medium text-md">{{employeeBasic?.serviceStartDtString}}</span>
+                                    class="text-surface-900 dark:text-surface-0 font-medium text-md">{{employeeBasic?.serviceStartDtString}}</span>
                             </div>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="col-9">
+            <div class="col-span-9">
                 <router-outlet></router-outlet>
             </div>
         </div>

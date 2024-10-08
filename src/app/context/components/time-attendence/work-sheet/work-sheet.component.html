@@ -1,15 +1,15 @@
-<div class="grid support-wrapper woraksheet-wrapper">
+<div class="grid grid-cols-12 gap-4 support-wrapper woraksheet-wrapper">
 
-    <div class="flex flex-wrap w-full p-2 mb-3 justify-content-center surface-ground">
+    <div class="flex flex-wrap w-full p-2 mb-4 justify-center bg-surface-50 dark:bg-surface-950">
 
         <p-confirmDialog></p-confirmDialog>
         <p-toast></p-toast>
         <div class="flex flex-wrap items-center justify-center w-full h-full">
 
             <div *ngIf="viewType==1"
-                class="block w-full p-3 m-0 rounded-lg bg-gray-2 card surface-card page-content-wrapper shadow-secondary-1 dark:bg-surface-dark dark:text-white text-surface animate-fade-right">
-                <div class="flex w-full pb-3 mb-3 card-header border-bottom-1 surface-border justify-content-between">
-                    <div class="flex flex-wrap justify-between gap-3 align-items-center">
+                class="block w-full p-4 m-0 rounded-lg bg-gray-2 card bg-surface-0 dark:bg-surface-900 page-content-wrapper shadow-secondary-1 dark:bg-surface-dark dark:text-white text-surface animate-fade-right">
+                <div class="flex w-full pb-4 mb-4 card-header border-b border-surface justify-between">
+                    <div class="flex flex-wrap justify-between gap-4 items-center">
                         <p-button icon="pi pi-arrow-left text-xl" [rounded]="true" [outlined]="true" severity="primary"
                             (onClick)="goBack()" />
                         <h5 class="m-0">Edit Attendance</h5>
@@ -37,7 +37,7 @@
                             <div
                                 class="relative items-center w-1/6 p-2 transition duration-500 border rounded-md shadow-sm hover:shadow-md hover:shadow-teal-400">
                                 <input type="text" id="floating_outlined"
-                                    class="block px-2.5 pb-2.5 pt-4 w-full  text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                    class="block px-2.5 pb-2.5 pt-6 w-full  text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                     placeholder=" " readonly [value]="selectedWorksheet.empCd" />
                                 <label for="floating_outlined"
                                     class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
@@ -47,7 +47,7 @@
                             <div
                                 class="relative items-center w-1/6 p-2 transition duration-500 border rounded-md shadow-sm hover:shadow-md hover:shadow-teal-400">
                                 <input type="text" id="floating_outlined"
-                                    class="block px-2.5 pb-2.5 pt-4 w-full  text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                    class="block px-2.5 pb-2.5 pt-6 w-full  text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                     placeholder=" " readonly [value]="selectedWorksheet.empName" />
                                 <label for="floating_outlined"
                                     class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
@@ -57,7 +57,7 @@
                             <div
                                 class="relative items-center w-1/6 p-2 transition duration-500 border rounded-md shadow-sm hover:shadow-md hover:shadow-teal-400">
                                 <input type="text" id="floating_outlined"
-                                    class="block px-2.5 pb-2.5 pt-4 w-full  text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                    class="block px-2.5 pb-2.5 pt-6 w-full  text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                     placeholder=" " readonly [value]="selectedWorksheet.deptDs" />
                                 <label for="floating_outlined"
                                     class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
@@ -67,7 +67,7 @@
                             <div
                                 class="relative items-center w-1/6 p-2 transition duration-500 border rounded-md shadow-sm hover:shadow-md hover:shadow-teal-400">
                                 <input type="text" id="floating_outlined"
-                                    class="block px-2.5 pb-2.5 pt-4 w-full text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                    class="block px-2.5 pb-2.5 pt-6 w-full text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                     placeholder=" " readonly [value]="getLocalDate(selectedWorksheet.trnDate)" />
                                 <label for="floating_outlined"
                                     class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
@@ -81,7 +81,7 @@
                                 <p-dropdown [options]="reasons" formControlName="reason" [checkmark]="true"
                                     optionLabel="reasonName" optionValue="code" [showClear]="true"
                                     placeholder="Select a Reason" styleClass="w-full"
-                                    class="block px-2.5 pb-2 pt-2 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" />
+                                    class="block px-2.5 pb-2 pt-2 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" />
                                 <label for="floating_outlined"
                                     class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
                                     Reason
@@ -89,11 +89,11 @@
                             </div>
 
                         </div>
-                        <div class="grid grid-cols-2 grid-rows-1 gap-2 mt-3">
+                        <div class="grid grid-cols-12 gap-4 grid-cols-2 grid-rows-1 gap-2 mt-4">
                             <div class="space-y-2">
                                 <p-panel>
                                     <ng-template pTemplate="header">
-                                        <div class="flex w-full justify-content-between align-items-center">
+                                        <div class="flex w-full justify-between items-center">
                                             <h6 class="m-0 font-bold">
                                                 IN - OUT
                                             </h6>
@@ -110,19 +110,19 @@
                                             </div>
                                         </div>
                                     </ng-template>
-                                    <div class="grid grid-cols-2 gap-4 formgrid">
-                                        <div class="w-full col-12 md:col-6 p-fluid">
-                                            <label for="float-label" class="font-medium text-900">Shift IN</label>
+                                    <div class="grid grid-cols-12 gap-4 grid-cols-2 gap-6 formgrid">
+                                        <div class="w-full col-span-12 md:col-span-6 p-fluid">
+                                            <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Shift IN</label>
                                             <p-calendar [showIcon]="true" [iconDisplay]="'input'" [showTime]="true"
                                                 [timeOnly]="true" ariaLabel="Date"
                                                 formControlName="shiftIN"></p-calendar>
                                             <small class="p-error" id="username-help"></small>
                                         </div>
-                                        <div class="w-full col-12 md:col-6 p-fluid">
-                                            <label for="float-label" class="font-medium text-900">Shift OUT</label>
+                                        <div class="w-full col-span-12 md:col-span-6 p-fluid">
+                                            <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Shift OUT</label>
                                             <p-inputGroup>
                                                 <p-calendar [timeOnly]="true" [hourFormat]="24" [showIcon]="true"
-                                                    [iconDisplay]="'input'" inputStyleClass="border-noround-right"
+                                                    [iconDisplay]="'input'" inputStyleClass="rounded-r-none"
                                                     disabled="true" formControlName="shiftOUT"></p-calendar>
                                                 <p-inputGroupAddon>
                                                     <p-checkbox [binary]="true" pTooltip="Next Day" disabled="true"
@@ -130,8 +130,8 @@
                                             </p-inputGroup>
                                             <small class="p-error" id="username-help"></small>
                                         </div>
-                                        <div class="w-full col-12 md:col-6 p-fluid">
-                                            <label for="float-label" class="font-medium text-900">IN</label>
+                                        <div class="w-full col-span-12 md:col-span-6 p-fluid">
+                                            <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">IN</label>
                                             <div class="relative">
                                                 <div
                                                     class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
@@ -145,8 +145,8 @@
                                                     [enableKeyboardInput]="true"></ngx-material-timepicker>
                                             </div>
                                         </div>
-                                        <div class="w-full col-12 md:col-6 p-fluid">
-                                            <label for="float-label" class="font-medium text-900">Out</label>
+                                        <div class="w-full col-span-12 md:col-span-6 p-fluid">
+                                            <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Out</label>
                                             <div class="relative">
                                                 <p-inputGroup>
                                                     <div
@@ -169,28 +169,28 @@
 
                                     </div>
                                 </p-panel>
-                                <div class="flex gap-3 card flex-column md:flex-row">
-                                    <div class="grid grid-cols-2 gap-4 formgrid">
-                                        <div class="w-full col-12 md:col-6 p-fluid">
-                                            <label for="float-label" class="font-medium text-900">Shift</label>
+                                <div class="flex gap-4 card flex-col md:flex-row">
+                                    <div class="grid grid-cols-12 gap-4 grid-cols-2 gap-6 formgrid">
+                                        <div class="w-full col-span-12 md:col-span-6 p-fluid">
+                                            <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Shift</label>
                                             <p-dropdown [options]="shifts" [checkmark]="true" optionLabel="shiftCode"
                                                 formControlName="shift" optionValue="code" [showClear]="true"
                                                 placeholder="Select a Shift" />
                                         </div>
-                                        <div class="w-full col-12 md:col-6 p-fluid">
-                                            <label for="float-label" class="font-medium text-900">Work Rule</label>
+                                        <div class="w-full col-span-12 md:col-span-6 p-fluid">
+                                            <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Work Rule</label>
                                             <p-dropdown [options]="workRules" [checkmark]="true" optionLabel="name"
                                                 formControlName="wr" optionValue="code" [showClear]="true"
                                                 placeholder="Select a Work Rule" />
                                         </div>
-                                        <div class="w-full col-12 md:col-6 p-fluid">
-                                            <label for="nickname2" class="w-full font-medium text-900">Emp
+                                        <div class="w-full col-span-12 md:col-span-6 p-fluid">
+                                            <label for="nickname2" class="w-full font-medium text-surface-900 dark:text-surface-0">Emp
                                                 Explanation</label>
                                             <textarea id="address" rows="3" cols="30" pInputTextarea class="w-full"
                                                 formControlName="empRemarks" name="notes"></textarea>
                                         </div>
-                                        <div class="w-full col-12 md:col-6 p-fluid">
-                                            <label for="nickname2" class="w-full font-medium text-900">Remarks</label>
+                                        <div class="w-full col-span-12 md:col-span-6 p-fluid">
+                                            <label for="nickname2" class="w-full font-medium text-surface-900 dark:text-surface-0">Remarks</label>
                                             <textarea id="address" rows="3" cols="30" pInputTextarea class="w-full"
                                                 formControlName="remarks" name="notes"></textarea>
                                         </div>
@@ -200,7 +200,7 @@
                             <div>
                                 <p-panel>
                                     <ng-template pTemplate="header">
-                                        <div class="flex w-full justify-content-between align-items-center">
+                                        <div class="flex w-full justify-between items-center">
                                             <h6 class="m-0 font-bold">
                                                 Results
                                             </h6>
@@ -212,9 +212,9 @@
                                             </div>
                                         </div>
                                     </ng-template>
-                                    <div class="grid grid-cols-3 gap-3 formgrid">
-                                        <div class="w-full col-12 md:col-6 p-fluid">
-                                            <label for="float-label" class="font-medium text-900">NH</label>
+                                    <div class="grid grid-cols-12 gap-4 grid-cols-3 gap-4 formgrid">
+                                        <div class="w-full col-span-12 md:col-span-6 p-fluid">
+                                            <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">NH</label>
                                             <div class="relative">
                                                 <div
                                                     class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
@@ -227,8 +227,8 @@
                                                     [enableKeyboardInput]="true"></ngx-material-timepicker>
                                             </div>
                                         </div>
-                                        <div class="w-full col-12 md:col-6 p-fluid">
-                                            <label for="float-label" class="font-medium text-900">Miss Time</label>
+                                        <div class="w-full col-span-12 md:col-span-6 p-fluid">
+                                            <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Miss Time</label>
                                             <div class="relative">
                                                 <div
                                                     class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
@@ -241,8 +241,8 @@
                                                     [enableKeyboardInput]="true"></ngx-material-timepicker>
                                             </div>
                                         </div>
-                                        <div class="w-full col-12 md:col-6 p-fluid">
-                                            <label for="float-label" class="font-medium text-900">Break Hrs</label>
+                                        <div class="w-full col-span-12 md:col-span-6 p-fluid">
+                                            <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Break Hrs</label>
                                             <div class="relative">
                                                 <div
                                                     class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
@@ -255,8 +255,8 @@
                                                     [enableKeyboardInput]="true"></ngx-material-timepicker>
                                             </div>
                                         </div>
-                                        <div class="w-full col-12 md:col-6 p-fluid">
-                                            <label for="float-label" class="font-medium text-900">OT1</label>
+                                        <div class="w-full col-span-12 md:col-span-6 p-fluid">
+                                            <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">OT1</label>
                                             <div class="relative">
                                                 <div
                                                     class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
@@ -269,8 +269,8 @@
                                                     [enableKeyboardInput]="true"></ngx-material-timepicker>
                                             </div>
                                         </div>
-                                        <div class="w-full col-12 md:col-6 p-fluid">
-                                            <label for="float-label" class="font-medium text-900">OT2</label>
+                                        <div class="w-full col-span-12 md:col-span-6 p-fluid">
+                                            <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">OT2</label>
                                             <div class="relative">
                                                 <div
                                                     class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
@@ -283,8 +283,8 @@
                                                     [enableKeyboardInput]="true"></ngx-material-timepicker>
                                             </div>
                                         </div>
-                                        <div class="w-full col-12 md:col-6 p-fluid">
-                                            <label for="float-label" class="font-medium text-900">OT3</label>
+                                        <div class="w-full col-span-12 md:col-span-6 p-fluid">
+                                            <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">OT3</label>
                                             <div class="relative">
                                                 <div
                                                     class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
@@ -297,8 +297,8 @@
                                                     [enableKeyboardInput]="true"></ngx-material-timepicker>
                                             </div>
                                         </div>
-                                        <div class="w-full col-12 md:col-6 p-fluid">
-                                            <label for="float-label" class="font-medium text-900">Late Entry</label>
+                                        <div class="w-full col-span-12 md:col-span-6 p-fluid">
+                                            <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Late Entry</label>
                                             <div class="relative">
                                                 <div
                                                     class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
@@ -311,8 +311,8 @@
                                                     [enableKeyboardInput]="true"></ngx-material-timepicker>
                                             </div>
                                         </div>
-                                        <div class="w-full col-12 md:col-6 p-fluid">
-                                            <label for="float-label" class="font-medium text-900">Early Exit</label>
+                                        <div class="w-full col-span-12 md:col-span-6 p-fluid">
+                                            <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Early Exit</label>
                                             <div class="relative">
                                                 <div
                                                     class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
@@ -327,7 +327,7 @@
                                         </div>
                                     </div>
                                 </p-panel>
-                                <div class="w-full align-items-start" *ngIf="false">
+                                <div class="w-full items-start" *ngIf="false">
                                     <p-fileUpload mode="advanced" chooseLabel="Add Attachment" name="files"
                                         ngDefaultControl [formControl]="uploadControl" chooseIcon="pi pi-upload"
                                         multiple="true" [url]="fileUploadUrl" accept="image/*, application/pdf"
@@ -339,9 +339,9 @@
                                             let-removeUploadedFileCallback="removeUploadedFileCallback">
                                             <div *ngIf="files?.length > 100">
                                                 <h5>Pending</h5>
-                                                <div class="flex flex-wrap gap-5 p-0 sm:p-5">
+                                                <div class="flex flex-wrap gap-8 p-0 sm:p-8">
                                                     <div *ngFor="let file of files; let i = index"
-                                                        class="flex gap-3 px-6 m-0 card flex-column border-1 surface-border align-items-center">
+                                                        class="flex gap-4 px-12 m-0 card flex-col border border-surface items-center">
                                                         <div>
                                                             <img role="presentation" [alt]="file.name"
                                                                 [src]="file.objectURL" width="100" height="50" />
@@ -358,22 +358,22 @@
 
                                             </div>
                                             <!-- <div *ngIf="selectedTicket.attachment1 != ''">
-                                            <div class="flex flex-wrap p-0 justify-content-center">
+                                            <div class="flex flex-wrap p-0 justify-center">
                                                 <div
-                                                    class="flex w-full row-gap-2 p-2 m-0 card flex-column border-1 surface-border align-items-center">
+                                                    class="flex w-full gap-y-2 p-2 m-0 card flex-col border border-surface items-center">
                                                     <div>
                                                         <p-avatar
                                                             [icon]="getDocumentIconByUrl(selectedTicket.attachment1)"
-                                                            styleClass="w-12rem h-8rem"> </p-avatar>
+                                                            styleClass="w-48 h-32"> </p-avatar>
                                                     </div>
                                                     <div class="flex flex-row gap-2">
                                                         <p-button icon="pi pi-times" (onClick)="removeAttachment(0)"
                                                             [outlined]="true" [rounded]="true" severity="danger"
-                                                            styleClass="w-2rem h-2rem" />
+                                                            styleClass="w-8 h-8" />
                                                         <p-button icon="pi pi-download"
                                                             (onClick)="downloadAttachment(selectedTicket.attachment1)"
                                                             [outlined]="true" [rounded]="true" severity="info"
-                                                            styleClass="w-2rem h-2rem" />
+                                                            styleClass="w-8 h-8" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -387,7 +387,7 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-2 grid-rows-1 gap-2 mt-3">
+                        <div class="grid grid-cols-12 gap-4 grid-cols-2 grid-rows-1 gap-2 mt-4">
                             <div class="relative leading-none shadow-xl">
                                 <div class="flex w-full bg-white ">
                                     <div class="flex flex-wrap items-baseline self-start flex-auto p-2">
@@ -422,7 +422,7 @@
                                                     <td>{{ data.machName }}</td>
                                                     <td class="text-center">
                                                         <div
-                                                            class="w-10 h-10 flex items-center justify-center rounded-full text-base tracking-[0.15px] font-bold bg-primary-600 text-white dark:bg-primary-200 dark:text-neutral-900">
+                                                            class="w-10/12 h-10 flex items-center justify-center rounded-full text-base tracking-[0.15px] font-bold bg-primary-600 text-white dark:bg-primary-200 dark:text-neutral-900">
                                                             {{ data.terminalType }}
                                                         </div>
                                                     </td>
@@ -441,7 +441,7 @@
                                             tableStyleClass="w-full" [autoLayout]="true"
                                             tableStyleClass="table-layout-fixed" [loading]="isLoadingPunchData">
                                             <ng-template pTemplate="caption">
-                                                <div class="flex justify-between align-items-center">
+                                                <div class="flex justify-between items-center">
                                                     <h5 class="m-0">Machine Data</h5>
                                                     <button type="button" pButton pRipple label="Add"
                                                         icon="pi pi-search"
@@ -473,7 +473,7 @@
                                                     <td>{{ data.machName }}</td>
                                                     <td>
                                                         <div
-                                                            class="inline-flex flex-row items-center border border-secondary-100 dark:border-secondary-700 gap-2 h-8 py-1.5 px-3 bg-secondary-100 dark:bg-secondary-700 rounded-lg text-sm tracking-[.00714em]">
+                                                            class="inline-flex flex-row items-center border border-secondary-100 dark:border-secondary-700 gap-2 h-8 py-1.5 px-4 bg-secondary-100 dark:bg-secondary-700 rounded-lg text-sm tracking-[.00714em]">
                                                             {{ data.trnTypeS }}
                                                         </div>
                                                     </td>
@@ -483,7 +483,7 @@
                                                     </td>
                                                     <td>
                                                         <div
-                                                            class="w-10 h-10 flex items-center justify-center rounded-full text-base tracking-[0.15px] font-bold bg-primary-600 text-white dark:bg-primary-200 dark:text-neutral-900">
+                                                            class="w-10/12 h-10 flex items-center justify-center rounded-full text-base tracking-[0.15px] font-bold bg-primary-600 text-white dark:bg-primary-200 dark:text-neutral-900">
                                                             {{ data.terminalType }}
                                                         </div>
 
@@ -507,21 +507,21 @@
             </div>
 
             <div *ngIf="viewType==0"
-                class="block w-full p-3 m-0 rounded-lg bg-gray-2 card surface-card page-content-wrapper shadow-secondary-1 dark:bg-surface-dark dark:text-white text-surface animate-fade-right">
+                class="block w-full p-4 m-0 rounded-lg bg-gray-2 card bg-surface-0 dark:bg-surface-900 page-content-wrapper shadow-secondary-1 dark:bg-surface-dark dark:text-white text-surface animate-fade-right">
                 <div #cardHeader id="card-header"
-                    class="flex flex-wrap w-full pb-3 mb-3 card-header border-bottom-1 surface-border justify-content-between">
-                    <div class="flex flex-wrap gap-3 align-items-center">
+                    class="flex flex-wrap w-full pb-4 mb-4 card-header border-b border-surface justify-between">
+                    <div class="flex flex-wrap gap-4 items-center">
                         <!-- <p-button icon="pi pi-arrow-left text-xl" [rounded]="true" [outlined]="true" severity="primary"
                                 /> -->
                         <h5 class="m-0">Daily Worksheet</h5>
                     </div>
-                    <div class="flex flex-wrap gap-3">
+                    <div class="flex flex-wrap gap-4">
                     </div>
                 </div>
-                <div class="flex flex-wrap w-full justify-content-center ">
+                <div class="flex flex-wrap w-full justify-center ">
                     <div
-                        class="block px-4 pt-3 pb-2 bg-white rounded-lg text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
-                        <div class="grid grid-cols-3 gap-2">
+                        class="block px-6 pt-4 pb-2 bg-white rounded-lg text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
+                        <div class="grid grid-cols-12 gap-4 grid-cols-3 gap-2">
 
                             <div class="field p-fluid">
                                 <small id="username-help">
@@ -537,14 +537,14 @@
                                 <p-dropdown [options]="companies" [showClear]="false" placeholder="Filter by Company"
                                     [(ngModel)]="selectedCompany" (onChange)="onChangeCompany()" styleClass="w-full">
                                     <ng-template let-selectedValue pTemplate="selectedItem">
-                                        <div class="flex gap-2 align-items-center" *ngIf="selectedValue">
+                                        <div class="flex gap-2 items-center" *ngIf="selectedValue">
                                             <img src="assets/context/images/flag/flag_placeholder.png"
                                                 [class]="'flag flag-' + selectedValue.logo" style="width: 21px" />
                                             <div>{{ selectedValue.name }}</div>
                                         </div>
                                     </ng-template>
                                     <ng-template let-company pTemplate="item">
-                                        <div class="flex gap-2 align-items-center">
+                                        <div class="flex gap-2 items-center">
                                             <img src="assets/context/images/flag/flag_placeholder.png"
                                                 [class]="'flag flag-' + company.logo" style="width: 21px" />
                                             <div>{{ company.name }}</div>
@@ -587,13 +587,13 @@
                                     placeholder="Select Employees" optionLabel="empName" optionValue="empID"
                                     display="chip" [showClear]="true" styleClass="w-full">
                                     <ng-template let-employee pTemplate="item">
-                                        <div class="flex gap-2 align-items-center">
+                                        <div class="flex gap-2 items-center">
                                             <b>[{{ employee.empCd }}] - </b>
                                             <div>{{ employee.empName }}</div>
                                         </div>
                                     </ng-template>
                                     <!-- <ng-template let-value pTemplate="selectedItems">
-                                            <div class="inline-flex gap-2 px-1 align-items-center" *ngFor="let option of value">
+                                            <div class="inline-flex gap-2 px-1 items-center" *ngFor="let option of value">
                                                 <div>{{ option.empName }},</div>
                                             </div>
                                             <div *ngIf="!value || value.length === 0">Select Employees</div>
@@ -629,116 +629,116 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex justify-center w-full mt-2 flex-column ">
+                <div class="flex justify-center w-full mt-2 flex-col ">
                     <p-table #supportTable [rowHover]="true" [value]="virtualWorksheets" [loading]="isLoading"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                         [rows]="rowsPerPage" [showCurrentPageReport]="true" (onPage)="pageChange($event)"
                         [rowsPerPageOptions]="[25, 50, 100]" dataKey="code" [first]="first" [paginator]="true"
-                        styleClass="p-datatable-gridlines" scrollHeight="calc(100vh - 40rem)" class="border-round"
+                        styleClass="p-datatable-gridlines" scrollHeight="calc(100vh - 40rem)" class="rounded-border"
                         tableStyleClass="w-full" [scrollable]="true" >
                         <ng-template pTemplate="header">
                             <tr>
                                 <th style="width:3.5rem !important;" alignFrozen="left" pFrozenColumn>
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         #
                                     </div>
                                 </th>
                                 <th pSortableColumn="code" alignFrozen="left" pFrozenColumn>
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         Code
                                     </div>
                                 </th>
                                 <th pSortableColumn="name" alignFrozen="left" pFrozenColumn>
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         Employee
                                     </div>
                                 </th>
                                 <!-- <th pSortableColumn="shiftStartRange">
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         Department
                                     </div>
                                 </th> -->
                                 <th pSortableColumn="nhinTime">
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         Date
                                     </div>
                                 </th>
                                 <!-- <th pSortableColumn="latestAllowed">
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         Day
                                     </div>
                                 </th> -->
                                 <th pSortableColumn="earliestAllowed">
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         IN
                                     </div>
                                 </th>
                                 <th pSortableColumn="nhoutTime">
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         OUT
                                     </div>
                                 </th>
                                 <th pSortableColumn="shiftEndRange">
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         NH
                                     </div>
                                 </th>
                                 <th pSortableColumn="nh">
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         Miss
                                     </div>
                                 </th>
                                 <th pSortableColumn="dgv_Active">
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         Late
                                     </div>
                                 </th>
                                 <th pSortableColumn="isRotaShift">
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         Early
                                     </div>
                                 </th>
                                 <th pSortableColumn="isRotaShift">
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         OT1
                                     </div>
                                 </th>
                                 <th pSortableColumn="isRotaShift">
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         OT2
                                     </div>
                                 </th>
                                 <th pSortableColumn="isRotaShift">
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         Break
                                     </div>
                                 </th>
                                 <th pSortableColumn="isRotaShift">
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         Reason
                                     </div>
                                 </th>
                                 <th pSortableColumn="isRotaShift">
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         Edit
                                     </div>
                                 </th>
                                 <th pSortableColumn="isRotaShift">
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         Shift
                                     </div>
                                 </th>
                                 <th pSortableColumn="isRotaShift">
-                                    <div class="flex justify-content-center align-items-center">
+                                    <div class="flex justify-center items-center">
                                         Spcl Lv.
                                     </div>
                                 </th>
-                                <th class="text-center" class="w-4rem" alignFrozen="right" pFrozenColumn>Edit</th>
+                                <th class="text-center" class="w-16" alignFrozen="right" pFrozenColumn>Edit</th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-rowIndex="rowIndex" let-data>
                             <tr class="">
-                                <td class="text-center text-900" pFrozenColumn>{{rowIndex + 1}}</td>
+                                <td class="text-center text-surface-900 dark:text-surface-0" pFrozenColumn>{{rowIndex + 1}}</td>
                                 <td pFrozenColumn>{{ data.empCd }}</td>
                                 <td pFrozenColumn>
                                     <span class="block font-semibold text-gray-800 dark:text-neutral-200">
@@ -769,13 +769,13 @@
                                 <td class="text-center"> {{ transform(data.oT2) }}</td>
                                 <td class="text-center"> {{ transform(data.brkHrs) }}</td>
                                 <td class="text-center"> {{ data.multipleReason }}</td>
-                                <td class="text-center text-900">
+                                <td class="text-center text-surface-900 dark:text-surface-0">
                                     <i class="pi"
                                         [ngClass]="data.edited ? 'text-green-500 pi-check-circle' : 'text-red-500 pi-times-circle'"></i>
                                 </td>
                                 <td> {{ data.wrName }}</td>
                                 <td> {{ data.specialLeaveHrType }}</td>
-                                <td class="text-center text-900" alignFrozen="right" pFrozenColumn>
+                                <td class="text-center text-surface-900 dark:text-surface-0" alignFrozen="right" pFrozenColumn>
                                     <button pButton pRipple icon="pi pi-pencil" pTooltip="View"
                                         class="mr-2 p-button-rounded p-button-info p-button-outlined"
                                         (click)="onEdit(data)"></button>
@@ -809,15 +809,15 @@
         </ng-template>
         <ng-template pTemplate="content">
             <form [formGroup]="punchForm">
-                <div class="grid grid-cols-1 grid-rows-3 gap-2">
-                    <div class="w-full col-12 md:col-6 p-fluid">
-                        <label for="float-label" class="font-medium text-900">Date</label>
+                <div class="grid grid-cols-12 gap-4 grid-cols-1 grid-rows-3 gap-2">
+                    <div class="w-full col-span-12 md:col-span-6 p-fluid">
+                        <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Date</label>
                         <p-calendar [showIcon]="true" [iconDisplay]="'input'" [showTime]="false" [timeOnly]="false"
                             ariaLabel="Date" formControlName="tranDate" disabled="true"></p-calendar>
                         <small class="p-error" id="username-help"></small>
                     </div>
-                    <div class="w-full col-12 p-fluid">
-                        <label for="float-label" class="font-medium text-900">Time</label>
+                    <div class="w-full col-span-12 p-fluid">
+                        <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Time</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
                                 <i class="pi pi-clock"></i>
@@ -831,8 +831,8 @@
                                 [enableKeyboardInput]="true" [defaultTime]="'00:00'"></ngx-material-timepicker> -->
                         </div>
                     </div>
-                    <div class="w-full col-12 md:col-6 p-fluid">
-                        <label for="float-label" class="font-medium text-900">Type</label>
+                    <div class="w-full col-span-12 md:col-span-6 p-fluid">
+                        <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Type</label>
                         <p-selectButton [options]="['In', 'Out']" formControlName="tranType" styleClass="flex" />
                     </div>
                 </div>
@@ -840,7 +840,7 @@
 
         </ng-template>
         <ng-template pTemplate="footer">
-            <div class="flex gap-2 justify-content-end">
+            <div class="flex gap-2 justify-end">
                 <p-button type="submit" label="Add Punch" severity="primary" [outlined]="true" [loading]="isSavingPunch"
                     icon="pi pi-check" class="ml-auto" (onClick)="onSubmitPunch()"></p-button>
                 <p-button label="Cancel" severity="primary" [outlined]="true" text="true" icon="pi pi-times"
@@ -858,16 +858,16 @@
             </div>
         </ng-template>
         <ng-template pTemplate="content">
-            <div class="max-w-xl pt-3">
+            <div class="max-w-xl pt-4">
                 <div class="space-y-5">
-                    <div class="grid grid-cols-1 gap-3" *ngIf="selectedWorksheet">
+                    <div class="grid grid-cols-12 gap-4 grid-cols-1 gap-4" *ngIf="selectedWorksheet">
                         <div class="relative">
                             <div class="absolute top-2.5 left-3 flex items-center text-gray-500">
                                 <label for="example12" class="block text-xs font-medium text-gray-700">Employee
                                     Name</label>
                             </div>
                             <input type="text" id="example12" readonly="true"
-                                class="block w-full pt-4 border-gray-300 rounded-md shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500"
+                                class="block w-full pt-6 border-gray-300 rounded-md shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500"
                                 [value]="selectedWorksheet?.empName" />
                         </div>
                         <div class="relative">
@@ -875,7 +875,7 @@
                                 <label for="example12" class="block text-xs font-medium text-gray-700">Code</label>
                             </div>
                             <input type="text" id="example12" readonly="true"
-                                class="block w-full pt-4 border-gray-300 rounded-md shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500"
+                                class="block w-full pt-6 border-gray-300 rounded-md shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500"
                                 [value]="selectedWorksheet?.empCd" />
                         </div>
                         <div class="relative">
@@ -884,7 +884,7 @@
                                     class="block text-xs font-medium text-gray-700">Department</label>
                             </div>
                             <input type="text" id="example12" readonly="true"
-                                class="block w-full pt-4 border-gray-300 rounded-md shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500"
+                                class="block w-full pt-6 border-gray-300 rounded-md shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500"
                                 [value]="selectedWorksheet?.deptDs" />
                         </div>
                         <div class="relative">
@@ -892,17 +892,17 @@
                                 <label for="example12" class="block text-xs font-medium text-gray-700">Date</label>
                             </div>
                             <input type="text" id="example12" readonly="true"
-                                class="block w-full pt-4 border-gray-300 rounded-md shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500"
+                                class="block w-full pt-6 border-gray-300 rounded-md shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500"
                                 [value]="selectedWorksheet?.trnDate | date: 'dd/MM/yyyy'" />
                         </div>
                         <div class="w-full p-fluid" *ngIf="slideType == 0">
-                            <label for="float-label" class="font-medium text-900">Leave Type</label>
+                            <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Leave Type</label>
                             <p-dropdown [options]="leaves" [checkmark]="true" optionLabel="leaveName" f
                                 optionValue="leaveCd" [showClear]="false" placeholder="Select a Leave Type"
                                 [(ngModel)]="selectedLeaveType" />
                         </div>
                         <div class="w-full p-fluid" *ngIf="slideType == 1">
-                            <label for="float-label" class="font-medium text-900">Shift</label>
+                            <label for="float-label" class="font-medium text-surface-900 dark:text-surface-0">Shift</label>
                             <p-dropdown [options]="shifts" [checkmark]="true" optionLabel="shiftCode" optionValue="code"
                                 [showClear]="false" placeholder="Select a Shift" [(ngModel)]="selectedShift" />
                         </div>
@@ -911,7 +911,7 @@
             </div>
         </ng-template>
         <ng-template pTemplate="footer">
-            <div class="flex gap-2 justify-content-end">
+            <div class="flex gap-2 justify-end">
                 <p-button type="submit" label="Update" severity="primary" [outlined]="true"
                     [loading]="isSavingSlideData" icon="pi pi-check" class="ml-auto" (onClick)="onSubmitSlideData()"
                     [loading]="isSavingSlideData"></p-button>

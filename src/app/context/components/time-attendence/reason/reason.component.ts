@@ -190,8 +190,8 @@ export class ReasonComponent implements OnInit, ICommonActions {
           label: 'Color',
           description: 'Descriotion',
           required: false,
-          styleClass: 'flex w-full align-items-center justify-content-between py-2 gap-2',
-          class: 'w-5rem'
+          styleClass: 'flex w-full items-center justify-between py-2 gap-2',
+          class: 'w-20'
         },
       },
       {
@@ -202,7 +202,7 @@ export class ReasonComponent implements OnInit, ICommonActions {
           label: 'Hours to be missed',
           description: 'Descriotion',
           required: false,
-          styleClass: 'flex w-full align-items-center justify-content-between py-2 gap-2',
+          styleClass: 'flex w-full items-center justify-between py-2 gap-2',
           class: 'p-inputSwitch-lg'
         },
       },
@@ -214,7 +214,7 @@ export class ReasonComponent implements OnInit, ICommonActions {
           label: 'Active',
           description: 'Descriotion',
           required: false,
-          styleClass: 'flex w-full align-items-center justify-content-between py-2 gap-2',
+          styleClass: 'flex w-full items-center justify-between py-2 gap-2',
           class: 'p-inputSwitch-lg'
         },
       },
@@ -226,7 +226,7 @@ export class ReasonComponent implements OnInit, ICommonActions {
           label: 'Payroll Import',
           description: 'Descriotion',
           required: false,
-          styleClass: 'flex w-full align-items-center justify-content-between py-2 gap-2',
+          styleClass: 'flex w-full items-center justify-between py-2 gap-2',
           class: 'p-inputSwitch-lg'
         },
       },
@@ -238,7 +238,7 @@ export class ReasonComponent implements OnInit, ICommonActions {
           label: 'Excuse Reason',
           description: 'Descriotion',
           required: false,
-          styleClass: 'flex w-full align-items-center justify-content-between py-2 gap-2',
+          styleClass: 'flex w-full items-center justify-between py-2 gap-2',
           class: 'p-inputSwitch-lg'
         },
       },

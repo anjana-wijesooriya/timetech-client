@@ -1,5 +1,5 @@
-<div class="grid">
-    <div class="col-12 md:col-6">
+<div class="grid grid-cols-12 gap-4">
+    <div class="col-span-12 md:col-span-6">
         <div class="card">
             <h5>Left Align</h5>
             <p-timeline [value]="events1">
@@ -9,7 +9,7 @@
             </p-timeline>
         </div>
     </div>
-    <div class="col-12 md:col-6">
+    <div class="col-span-12 md:col-span-6">
         <div class="card">
             <h5>Right Align</h5>
             <p-timeline [value]="events1" align="right">
@@ -19,7 +19,7 @@
             </p-timeline>
         </div>
     </div>
-    <div class="col-12 md:col-6">
+    <div class="col-span-12 md:col-span-6">
         <div class="card">
             <h5>Alternate Align</h5>
             <p-timeline [value]="events1" align="alternate">
@@ -29,7 +29,7 @@
             </p-timeline>
         </div>
     </div>
-    <div class="col-12 md:col-6">
+    <div class="col-span-12 md:col-span-6">
         <div class="card">
             <h5>Opposite Content</h5>
             <p-timeline [value]="events1">
@@ -49,7 +49,7 @@
     <p-timeline [value]="events1" align="alternate" styleClass="customized-timeline">
         <ng-template pTemplate="marker" let-event>
             <span
-                class="flex z-1 w-2rem h-2rem align-items-center justify-content-center text-white border-circle shadow-2"
+                class="flex z-10 w-8 h-8 items-center justify-center text-white rounded-full shadow"
                 [style.backgroundColor]="event.color">
                 <i [ngClass]="event.icon"></i>
             </span>
@@ -57,12 +57,12 @@
         <ng-template pTemplate="content" let-event>
             <p-card [header]="event.status" [subheader]="event.date">
                 <img *ngIf="event.image" [src]="'assets/context/images/product/' + event.image" [alt]="event.name"
-                    width="200" class="shadow-2" />
-                <p class="line-height-3 my-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed
+                    width="200" class="shadow" />
+                <p class="leading-normal my-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed
                     consequuntur error repudiandae numquam deserunt
                     quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate
                     neque quas!</p>
-                <button pButton label="Read more" class="p-button-outlined mb-5"></button>
+                <button pButton label="Read more" class="p-button-outlined mb-8"></button>
             </p-card>
         </ng-template>
     </p-timeline>

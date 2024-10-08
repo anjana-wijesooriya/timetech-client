@@ -43,6 +43,9 @@ import { InputSwitchCustom } from '../../utilities/custom-controls/input-switch.
 import { InputFieldWrapper } from '../../utilities/field-wrappers/input-wrapper.component';
 import { MessageService, ConfirmationService, FilterService } from 'primeng/api';
 import { AlertService } from 'src/app/context/service/alert.service';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { DatePickerModule } from 'primeng/datepicker';
 
 @NgModule({
   declarations: [
@@ -74,14 +77,17 @@ import { AlertService } from 'src/app/context/service/alert.service';
     ToastModule,
     ScrollerModule,
     ListboxModule,
+    FloatLabelModule,
     ToolbarModule,
     TreeSelectModule,
     TableModule,
     InputTextModule,
     OverlayPanelModule,
     MultiSelectModule,
+    DatePickerModule,
     PanelModule,
     ButtonModule,
+    SelectButtonModule,
     TagModule,
     BadgeModule,
     FieldsetModule,

@@ -1,20 +1,20 @@
 <div class="flex h-screen">
     <div
-        class="hidden w-8 px-6 py-6 bg-cover lg:flex flex-column justify-content-between align-items-center bg-norepeat">
+        class="flex-col items-center justify-between hidden w-8/12 px-12 py-12 bg-cover lg:flex bg-norepeat">
         <img src="../../../../../assets/context/images/login/hr.jpg" class="w-full img-fluid rounded-top" alt="" />
 
     </div>
 
-    <div class="flex w-full h-full px-6 py-6 lg:w-4 flex-column justify-content-between align-items-center"
+    <div class="flex flex-col items-center justify-between h-full px-12 py-12 w-12/12 lg:w-4/12"
         style="background-color: var(--surface-0);">
-        <div class="w-full px-6 my-4 text-center z-5">
-            <div class="flex w-full align-items-center justify-content-center">
+        <div class="z-50 w-full px-12 my-6 text-center">
+            <div class="flex items-center justify-center w-full">
                 <img src="../../../../../assets/context/images/time-tech/TimeTech_M.png" alt="timetch-layout"
-                    class="w-7rem">
+                    class="w-28">
             </div>
-            <h1 class="mt-4 text-4xl font-light text-primary-500">Sign in to TimeTech</h1>
+            <h1 class="mt-6 text-4xl font-light text-primary-500">Sign in to TimeTech</h1>
             <p>Welcome, Please use the form to sign-in TimeTech network</p>
-            <div class="my-5 text-left">
+            <div class="my-8 text-left">
                 <p-messages></p-messages>
                 <form [formGroup]="signinForm" (ngSubmit)="onSubmitLogin()" novalidate autocomplete="off">
 
@@ -32,7 +32,7 @@
                         </small>
                     </div>
                     <div class="field p-fluid">
-                        <label for="password" class="block mt-3 mb-2" style="color: #4c566a;">Password</label>
+                        <label for="password" class="block mt-4 mb-2" style="color: #4c566a;">Password</label>
                         <span class="block p-input-icon-right">
                             <i class="pi pi-lock"></i>
                             <input type="password" pinputtext="" class="w-full p-inputtext p-component p-element"
@@ -48,7 +48,7 @@
                             Enter a valid password.
                         </small>
                     </div>
-                    <p-checkbox label="Remember me" value="SaveInfo" class="mt-5 p-element">
+                    <p-checkbox label="Remember me" value="SaveInfo" class="mt-8 p-element">
                         <div data-pc-name="checkbox" data-pc-section="root" class="p-checkbox p-component">
                             <div class="p-hidden-accessible" data-pc-section="hiddenInputWrapper"
                                 data-p-hidden-accessible="true">
@@ -63,7 +63,7 @@
                         <label data-pc-section="label" class="p-checkbox-label ng-star-inserted"> Remember me</label>
                         <!---->
                     </p-checkbox>
-                    <div class="flex gap-3 mt-4 align-items-center justify-content-between">
+                    <div class="flex items-center justify-between gap-4 mt-6">
                         <p-button pbutton type="submit" label="Login" tabindex="0" [loading]="loading">
                         </p-button>
                         <a href="#" class="secondary-button">Forgot Password?</a>
@@ -80,12 +80,12 @@
         </div>
 
     </div>
-    <div class="flex w-full h-full px-6 py-6 text-center lg:w-4 flex-column justify-content-between"
+    <div class="flex flex-col justify-between h-full px-12 py-12 text-center w-12/12 lg:w-4/12"
         style="display: none !important;">
-        <img alt="timetech-layout" class="mt-4 w-15rem"
+        <img alt="timetech-layout" class="mt-6 w-60"
             src="../../../../../assets/context/images/time-tech/TimeTech_M.png">
-        <div class="flex gap-4 flex-column align-items-center">
-            <div class="mb-3">
+        <div class="flex flex-col items-center gap-6">
+            <div class="mb-4">
                 <h2>Login to your account</h2>
                 <p>Forget password?
                     <a href="javascript:" class="font-medium cursor-pointer text-primary hover:underline">Click here
@@ -95,18 +95,18 @@
             </div>
             <span class="p-input-icon-left">
                 <i class="pi pi-user"></i>
-                <input id="email" type="text" placeholder="Username" pInputText class="w-20rem">
+                <input id="email" type="text" placeholder="Username" pInputText class="w-80">
             </span>
 
             <span class="p-input-icon-left">
                 <i class="pi pi-key"></i>
-                <input type="password" id="password" pInputText placeholder="Password" class="w-20rem" />
+                <input type="password" id="password" pInputText placeholder="Password" class="w-80" />
             </span>
 
-            <button pButton pRipple label="Sign In" class="w-20rem" [routerLink]="['/']"></button>
+            <button pButton pRipple label="Sign In" class="w-80" [routerLink]="['/']"></button>
         </div>
 
-        <p class="font-semibold text-color-secondary">
+        <p class="font-semibold text-muted-color">
             A problem?
             <a class="font-medium cursor-pointer text-primary hover:underline">Click here</a>
             and let us help you.
