@@ -350,6 +350,16 @@ p-calendar .p-inputtext.p-inputtext-sm {
     padding: 0.4375rem 0.65625rem !important;
 }
 
+.p-dropdown.ng-invalid.ng-touched,
+.p-select.ng-invalid.ng-touched {
+    outline: 1px solid var(--p-selectbutton-invalid-border-color);
+    outline-offset: 0;
+}
+
+.field:has(> .p-select.ng-invalid.ng-touched) .p-error {
+    border-color: var(--p-selectbutton-invalid-border-color) !important;
+}
+
 .dashboard-month-picker {
 
     .p-yearpicker,

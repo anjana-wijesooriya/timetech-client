@@ -27,7 +27,7 @@ export class SchedulingShiftWrComponent implements OnInit {
   table: any;
   selectedCompany: any = this.baseService.userDetails$.getValue();
   data = signal(this.entries);
-  tableEntries: any[] =[];
+  tableEntries: any[] = [];
   companies: CompanyModel[] = [];
   stateOptions: any[] = [{ label: 'Active', value: false }, { label: 'Inactive', value: true }];
   selectedStatus: any = false;
@@ -51,7 +51,7 @@ export class SchedulingShiftWrComponent implements OnInit {
   showDetails: boolean = false;
   constructor(private sharedService: SharedService, private breadcrumbState: BreadcrumbStateService, private companyService: CompanyService,
     private fb: FormBuilder, private alert: AlertService, public baseService: BaseService, private confirmationService: ConfirmationService,
-    private shiftService: ShiftService, private datepipe: DatePipe, private worksheetService: WorksheetService, private employeeService: EmployeeService) {}
+    private shiftService: ShiftService, private datepipe: DatePipe, private worksheetService: WorksheetService, private employeeService: EmployeeService) { }
 
   ngOnInit(): void {
     this.table = createAngularTable(() => ({
@@ -73,9 +73,9 @@ export class SchedulingShiftWrComponent implements OnInit {
     ]);
   }
 
-  getEntries(onload:boolean = false) {
+  getEntries(onload: boolean = false) {
     this.loading = true;
-    const { companyId, id } = this.baseService.userDetails$.getValue(); 
+    const { companyId, id } = this.baseService.userDetails$.getValue();
     this.shiftService.getShiftWorkrule(onload ? companyId : this.selectedCompany, id, this.selectedStatus).subscribe(res => {
       this.tableEntries = res;
       this.data.set(this.entries);
@@ -85,12 +85,12 @@ export class SchedulingShiftWrComponent implements OnInit {
 
   bindForm() {
     this.addForm = this.fb.nonNullable.group({
-      fWR: new FormControl('',Validators.required),
-      offDay: new FormControl('',Validators.required),
-      muslim: new FormControl('',Validators.required),
-      sWR: new FormControl('',Validators.required), 
-      sShift: new FormControl('',Validators.required),
-      narration: new FormControl('',Validators.required),
+      fWR: new FormControl('', Validators.required),
+      offDay: new FormControl('', Validators.required),
+      muslim: new FormControl('', Validators.required),
+      sWR: new FormControl('', Validators.required),
+      sShift: new FormControl('', Validators.required),
+      narration: new FormControl('', Validators.required),
       compId: new FormControl(this.baseService.userDetails$.getValue().companyId)
     })
   }
@@ -102,11 +102,11 @@ export class SchedulingShiftWrComponent implements OnInit {
           this.companies = res;
           this.selectedCompany = this.baseService.userDetails$.getValue().companyId;
           this.onChangeCompany();
-          
+
           // this.getEmployees();
         }
       })
-  }  
+  }
 
   onChangeCompany() {
     this.getDepartments();
@@ -134,6 +134,7 @@ export class SchedulingShiftWrComponent implements OnInit {
   }
 
   onSave() {
+    this.addForm.markAllAsTouched();
     if (this.addForm.valid) {
       var obj = this.addForm.value;
       obj.startDate = this.dateRange[0];
@@ -167,7 +168,7 @@ export class SchedulingShiftWrComponent implements OnInit {
             a.workrule = workrule;
             return a;
           });
-          
+
         }
       })
   }
@@ -222,7 +223,7 @@ export class SchedulingShiftWrComponent implements OnInit {
         // this.isSavingSlideData = true;//
         const { id } = this.baseService.userDetails$.getValue()
         data.isDelete = true;
-        
+        data.isLoading = true;
         this.shiftService.deleteShiftWorkrule(this.selectedCompany, data.docNo, id, false).subscribe(res => {
           this.alert.success('Rocord Rollbacked')
           this.getEntries();
@@ -320,7 +321,7 @@ export class SchedulingShiftWrComponent implements OnInit {
     })
   }
 
-  onClickAdd(){
+  onClickAdd() {
     this.showAddNewPanel = !this.showAddNewPanel;
     this.bindForm();
   }
