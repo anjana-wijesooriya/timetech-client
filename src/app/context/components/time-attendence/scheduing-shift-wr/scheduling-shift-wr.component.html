@@ -1,9 +1,9 @@
 
 
 <div class="duty-roster group [perspective:5000px]" >
-
-
-    <div class=" h-full w-full transition-all duration-500 [transform-style:preserve-3d]"
+    <p-toast />
+    <p-confirmdialog />
+    <div class=" w-full transition-all duration-500 absolute [transform-style:preserve-3d]"
         [ngClass]="{ '[transform:rotateY(180deg)]' : showAddNewPanel }" data-shade="900" data-rounded="xlarge" data-palettle="trust">
         <!-- <div class="absolute flex flex-col w-full h-full gap-4 p-6 rounded-lg glass-effect effect-3d glassmorphism ">
             <div class="flex items-center justify-between">
@@ -16,7 +16,8 @@
             </div>
         </div> -->
         
-        <div class="min-w-full card variant-outlined variant-elevated absolute  [backface-visibility:hidden]" fancy="true" gradient="true">
+        <div class=" !rounded-2xl bg-white/30 !border !card-shadow !shadow-3xl !feedback-bg mx-auto bg-zinc dark:bg-slate  py-3 px-4 w-12 absolute top-0 [backface-visibility:hidden]" 
+        data-shadow="3xl" data-palettle="trust" data-shade="900" data-rounded="3xl">
             <!-- <span class="text-xs text-caption">Great UX</span> -->
             <h2 class="mt-2 text-lg font-medium text-title">Schedule Shift or Workrule</h2>
             <!-- <p class="mt-3 text-sm">Provident fugit vero voluptate. dolores voluptates inventore nisi.</p> -->
@@ -79,12 +80,12 @@
                             <th pSortableColumn="code">
                                 <div class="flex flex-row items-center justify-center gap-1">
                                     <span
-                                        class="rounded-full inline-flex items-center font-medium relative !text-purpule-600 !bg-purple-200 px-2.5 py-1 ">
+                                        class="rounded-full inline-flex items-center font-medium relative px-2.5 py-1 text-md !text-purple-600 !bg-purple-300">
                                         Shift
                                     </span>
-                                    <div>|</div>
+                                    <div>/</div>
                                     <span
-                                        class="rounded-full inline-flex items-center font-medium relative !text-indigo-600 !bg-indigo-00 px-2.5 py-1 ">
+                                        class="rounded-full inline-flex items-center font-medium relative px-2.5 py-1 text-md !text-indigo-600 !bg-indigo-300">
                                         Workrule
                                     </span>
                                 </div>
@@ -148,12 +149,12 @@
                             </td>
                             <td class="justify-center text-center">
                                 <span *ngIf="data.havingWR"
-                                    class=" !bg-success-200 !text-success-800 !dark:bg-success-500/15 !dark:text-success-300 rounded-[--badge-radius] font-medium w-fit py-0.5 text-md !bg-opacity-50 ng-star-inserted flex items-center px-2 gap-2">
+                                    class=" !bg-success-200 !text-success-800 !dark:bg-success-500/15 !dark:text-success-300 rounded-[--badge-radius] font-medium w-fit py-0.5 text-md !bg-opacity-50 flex items-center px-2 gap-2 mx-auto">
                                     <span class="!text-teal-500 bx bx-tada-hover icon-square-check-big"></span>
                                     <span>YES</span>
                                 </span>
                                 <span *ngIf="!data.havingWR"
-                                    class=" !bg-rose-100 !text-rose-800 !dark:bg-rose-900 !dark:text-rose-300 rounded-[--badge-radius] font-medium w-fit py-0.5 text-md !bg-opacity-50 ng-star-inserted flex items-center px-2 gap-2">
+                                    class=" !bg-rose-100 !text-rose-800 !dark:bg-rose-900 !dark:text-rose-300 rounded-[--badge-radius] font-medium w-fit py-0.5 text-md !bg-opacity-50 flex items-center px-2 gap-2 mx-auto">
                                     <span class="!text-rose-500 bx bx-tada-hover icon-square-x text-lg"></span>
                                     <span>NO</span>
                                 </span>
@@ -169,12 +170,12 @@
                             </td>
                             <td class="justify-center">
                                 <span *ngIf="data.muslim"
-                                    class=" !bg-success-200 !text-success-800 !dark:bg-success-500/15 !dark:text-success-300 rounded-[--badge-radius] font-medium w-fit py-0.5 text-md !bg-opacity-50 ng-star-inserted flex items-center px-2 gap-2">
+                                    class=" !bg-success-200 !text-success-800 !dark:bg-success-500/15 !dark:text-success-300 rounded-[--badge-radius] font-medium w-fit py-0.5 text-md !bg-opacity-50 flex items-center px-2 gap-2  mx-auto">
                                     <span class="!text-teal-500 bx bx-tada-hover icon-square-check-big"></span>
                                     <span>YES</span>
                                 </span>
                                 <span *ngIf="!data.muslim"
-                                    class=" !bg-rose-100 !text-rose-800 !dark:bg-rose-900 !dark:text-rose-300 rounded-[--badge-radius] font-medium w-fit py-0.5 text-md !bg-opacity-50 ng-star-inserted flex items-center px-2 gap-2">
+                                    class=" !bg-rose-100 !text-rose-800 !dark:bg-rose-900 !dark:text-rose-300 rounded-[--badge-radius] font-medium w-fit py-0.5 text-md !bg-opacity-50 flex items-center px-2 gap-2  mx-auto">
                                     <span class="!text-rose-500 bx bx-tada-hover icon-square-x text-lg"></span>
                                     <span>NO</span>
                                 </span>
@@ -193,12 +194,12 @@
                             <td class="justify-center text-center">
                                 
                                 <span *ngIf="data.deleted"
-                                    class=" !bg-success-200 !text-success-800 !dark:bg-success-500/15 !dark:text-success-300 rounded-[--badge-radius] font-medium w-fit py-0.5 text-md !bg-opacity-50 ng-star-inserted flex items-center px-2 gap-2">
+                                    class=" !bg-success-200 !text-success-800 !dark:bg-success-500/15 !dark:text-success-300 rounded-[--badge-radius] font-medium w-fit py-0.5 text-md !bg-opacity-50 flex items-center px-2 gap-2  mx-auto">
                                     <span class="!text-teal-500 bx bx-tada-hover icon-square-check-big"></span>
                                     <span>YES</span>
                                 </span>
                                 <span *ngIf="!data.deleted"
-                                    class=" !bg-rose-100 !text-rose-800 !dark:bg-rose-900 !dark:text-rose-300 rounded-[--badge-radius] font-medium w-fit py-0.5 text-md !bg-opacity-50 ng-star-inserted flex items-center px-2 gap-2">
+                                    class=" !bg-rose-100 !text-rose-800 !dark:bg-rose-900 !dark:text-rose-300 rounded-[--badge-radius] font-medium w-fit py-0.5 text-md !bg-opacity-50 flex items-center px-2 gap-2  mx-auto">
                                     <span class="!text-rose-500 bx bx-tada-hover icon-square-x text-lg"></span>
                                     <span>NO</span>
                                 </span>
@@ -212,12 +213,12 @@
                             </td>
                             <td class="justify-center text-center">
                                 <span *ngIf="data.rollbacked"
-                                    class=" !bg-success-200 !text-success-800 !dark:bg-success-500/15 !dark:text-success-300 rounded-[--badge-radius] font-medium w-fit py-0.5 text-md !bg-opacity-50 ng-star-inserted flex items-center px-2 gap-2">
+                                    class=" !bg-success-200 !text-success-800 !dark:bg-success-500/15 !dark:text-success-300 rounded-[--badge-radius] font-medium w-fit py-0.5 text-md !bg-opacity-50 ng-star-inserted flex items-center px-2 gap-2 mx-auto">
                                     <span class="!text-teal-500 bx bx-tada-hover icon-square-check-big"></span>
                                     <span>YES</span>
                                 </span>
                                 <span *ngIf="!data.rollbacked"
-                                    class=" !bg-rose-100 !text-rose-800 !dark:bg-rose-900 !dark:text-rose-300 rounded-[--badge-radius] font-medium w-fit py-0.5 text-md !bg-opacity-50 ng-star-inserted flex items-center px-2 gap-2">
+                                    class=" !bg-rose-100 !text-rose-800 !dark:bg-rose-900 !dark:text-rose-300 rounded-[--badge-radius] font-medium w-fit py-0.5 text-md !bg-opacity-50 ng-star-inserted flex items-center px-2 gap-2 mx-auto">
                                     <span class="!text-rose-500 bx bx-tada-hover icon-square-x text-lg"></span>
                                     <span>NO</span>
                                 </span>
@@ -242,11 +243,11 @@
                                 <div class="inline-flex gap-2 px-2 flex-nowrap">
                                     <button pButton pRipple icon="icon-view" pTooltip="View"
                                         class="p-2 p-button-rounded p-button-info p-button-outlined p-button-raised"
-                                        (click)="deleteConfirm($event, data)">
+                                        (click)="viewData($event, data)">
                                     </button>
                                     <button pButton pRipple icon="icon-undo-dot" pTooltip="Rollback"
                                         class="p-2 p-button-rounded p-button-warn p-button-outlined p-button-raised"
-                                        (click)="deleteConfirm($event, data)">
+                                        (click)="rollbackConfirm($event, data)">
                                     </button>
                                     <button pButton pRipple icon="icon-trash-2" pTooltip="Delete"
                                         class="p-2 p-button-rounded p-button-danger p-button-outlined p-button-raised"
@@ -257,44 +258,157 @@
                         </tr>
                     </ng-template>
                 </p-table>
+                <p-dialog (onHide)="selectedDetails = []" header="Infor" [modal]="true" [(visible)]="showDetails" [style]="{ width: '50rem' }" >
+                        <p-table [value]="selectedDetails" >
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Name</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Shift/Workrule</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-product>
+                                <tr>
+                                    <td>{{ data.empCode }}</td>
+                                    <td>{{ data.empName }}</td>
+                                    <td>{{ data.startDate }}</td>
+                                    <td>{{ data.endDate }}</td>
+                                    <td>
+                                        <span class="rounded-full inline-flex items-center font-medium relative  px-2.5 py-1 text-md"
+                                            [ngClass]="data.shiftName == null ? '!text-indigo-600 !bg-indigo-300' : '!text-purple-600 !bg-purple-300'">
+                                            {{data.shiftName == null ? data.workrule : data.shiftName}}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                </p-dialog >
             </div>
         </div>
 
-        <div fancy="true" gradient="true" data-fancy="true" data-gradient="true"
-        class="min-w-full card variant-outlined gradient-true variant-elevated absolute [transform:rotateY(180deg)] [backface-visibility:hidden]">
+        <div 
+        class="!card !rounded-2xl bg-white/30 !border !card-shadow !shadow-3xl !feedback-bg  bg-zinc dark:bg-slate mx-auto py-3 px-4 w-12 absolute top-0 [transform:rotateY(180deg)] [backface-visibility:hidden]">
             <!-- <span class="text-xs text-caption">Great UX</span> -->
-             <div>
-                <button pButton pRipple class="btn variant-soft sz-lg icon-only intent-primary size-[3rem]" (click)="showAddNewPanel = !showAddNewPanel;">
+             <div class="flex flex-wrap items-center gap-3 ">
+                <button pButton pRipple class="btn !variant-soft !sz-lg !icon-only !intent-primary px-4 py-2 p-button-outlined p-button-rounded shadow-2xl shadow-primary-950" (click)="showAddNewPanel = !showAddNewPanel;">
                     <i class="text-2xl bx bx-tada-hover icon-arrow-big-left-dash"></i>
                     
                 </button>
-                <h2 class="mt-2 text-lg font-medium text-title">Add Schedule for Shift or Workrule</h2>
+                <h2 class="block text-[--title-text-color] text-lg font-medium mb-1">Add Schedule for Shift or Workrule</h2>
+
+                <button pButton pRipple label="Save as New" icon="pi pi-save"
+                    class="btn !variant-soft !sz-lg !icon-only !intent-primary px-4 py-2 p-button-outlined shadow-2xl shadow-primary-950 ml-auto"
+                    (click)="onSave()">
+                    <i class="text-2xl bx bx-tada-hover icon-arrow-big-left-dash"></i>
+                
+                </button>
              </div>
             
             <!-- <p class="mt-3 text-sm">Provident fugit vero voluptate. dolores voluptates inventore nisi.</p> -->
         
             <div class="mt-4">
-                <form #form="ngForm">
+                <form #form="ngForm" [formGroup]="addForm">
                 
-                    <div class="grid gap-4 sm:grid-cols-4 sm:gap-6">
+                    <div class="grid gap-4 sm:grid-cols-6 sm:gap-6">
                     
-                        <div class="sm:col-span-2">
-                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Name</label>
-                    
-                            <p-datepicker [numberOfMonths]="2" selectionMode="range" [iconDisplay]="'input'" [showIcon]="true" />
+                        <!-- <div > -->
+                            <div class="flex flex-col sm:col-span-2">
+                                <p-fluid class="field">
+                                    <label for="name" class="block font-medium text-gray-900 dark:text-white">Date Range</label>
+                                    <p-datepicker [numberOfMonths]="2" selectionMode="range" [iconDisplay]="'input'" [showIcon]="true" 
+                                    [(ngModel)]="dateRange" [ngModelOptions]="{standalone: true}"  dataType="string"/>
+                                    <small class="p-error" id="username-help">Field is required.</small>
+                                </p-fluid>
+                                <p-fluid class="field">
+                                    <label for="Company" class="block font-medium text-gray-900 dark:text-white">Company</label>
+                                    <p-select [options]="companies" optionLabel="name" placeholder="Select a Company" styleClass="w-full" formControlName="compId"/>
+                                    <small class="p-error" id="username-help">Field is required.</small>
+                                </p-fluid>
+                                <p-fluid class="field">
+                                    <label for="name" class="block font-medium text-gray-900 dark:text-white">Having a Workrule</label>
+                                    <p-select [options]="workRules" optionLabel="name" placeholder="Select a Workrule" styleClass="w-full" 
+                                    formControlName="fWR"/>
+                                    <small class="p-error" id="username-help">Field is required.</small>
+                                </p-fluid>
+                                <div class="flex flex-wrap justify-center w-full gap-3">
+                                    <div class="inline-flex gap-2 py-2">
+                                        <p-toggleswitch  formControlName="offDay"/>
+                                        <label for="sw4" class="mb-0 text-title">Include OFF day</label>
+                                    </div>
+                                    <div class="inline-flex gap-2 py-2">
+                                        <p-toggleswitch formControlName="muslim" />
+                                        <label for="sw4" class="mb-0 text-title">Muslims only</label>
+                                    </div>
+                                </div>
+                                <p-fluid class="field">
+                                    <label for="name" class="block font-medium text-gray-900 dark:text-white">Remarks</label>
+                                    <textarea rows="5" cols="30" pTextarea class="w-full border rounded"  formControlName="narration">
+                                    </textarea>
+                                    <small class="p-error" id="username-help">Field is required.</small>
+                                </p-fluid>
+                                <p-fluid class="field">
+                                    <p-fieldset legend="Set WorkRule or Shift" styleClass="flex w-full p-[--card-padding] rounded-[--card-radius] bg-[--ui-bg] border card-shadow">
+                                        <div class="flex flex-col space-y-2">
+                                            <p-fluid class="field">
+                                                <label for="name" class="block font-medium text-gray-900 dark:text-white">Workrule</label>
+                                                <p-select [options]="workRules" optionLabel="name" placeholder="Select a Workrule" styleClass="w-full" 
+                                                formControlName="sWR"/>
+                                                <small class="p-error" id="username-help">Field is required.</small>
+                                            </p-fluid>
+                                            <p-fluid class="field">
+                                                <label for="name" class="block font-medium text-gray-900 dark:text-white">Shift</label>
+                                                <p-select [options]="shifts" optionLabel="name" placeholder="Select a Workrule" styleClass="w-full"
+                                                formControlName="sShift" />
+                                                <small class="p-error" id="username-help">Field is required.</small>
+                                            </p-fluid>
+                                        </div>
+                                    </p-fieldset>
+                                </p-fluid>
+                            </div>
+                            
                             <!-- <input type="text" name="name" id="name"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                                     placeholder="Type product name" required=""> -->
+                        <!-- </div> -->
+                        <div class="flex flex-row gap-4 sm:col-span-4">
+                            <p-fluid class="field">
+                                <p-fieldset legend="Departments"
+                                    styleClass="flex w-full h-full p-[--card-padding] rounded-[--card-radius] bg-[--ui-bg] !border !card-shadow">
+                                    <div class="flex flex-col ">
+                                        <p-fluid class="field">
+                                            <div class="flex flex-row gap-4">
+                                                <button type="button" pButton icon="pi pi-plus" label="Expand all" (click)="expandAll()" class="p-button-outlined"></button>
+                                                <button type="button" pButton icon="pi pi-minus" label="Collapse all" (click)="collapseAll()" class="p-button-outlined"></button>
+                                            </div>
+                                            <p-tree [value]="departmentTree" class="w-full"  selectionMode="checkbox" [(selection)]="selectedDepartments"
+                                            (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="nodeUnselect($event)"  
+                                            filter="true"/>
+                                        </p-fluid>
+                                    </div>
+                                </p-fieldset>
+                            </p-fluid>
+                            <p-fluid class="field">
+                                <p-fieldset legend="Employees"
+                                    styleClass="flex w-full h-full p-[--card-padding] rounded-[--card-radius] bg-[--ui-bg] !border !card-shadow">
+                                    <div class="flex flex-col h-full">
+                                        <p-fluid class="h-full field">
+                                            <p-listbox [options]="groupedEmployees" 
+                                                listStyleClass="w-full h-full" class="w-full h-full" filter="true" [(ngModel)]="employees"
+                                                 [ngModelOptions]="{standalone: true}" multiple="true" checkmark="true"
+                                                 optionLabel="empName" optionValue="empID" styleClass="w-full h-full">
+                                            </p-listbox>
+                                            <small class="p-error" id="username-help">Field is required.</small>
+                                        </p-fluid>
+                                    </div>
+                                    
+                                </p-fieldset>
+                            </p-fluid>
                         </div>
-                    
-                    
                     </div>
-                
                 </form>
             </div>
         </div>
-        
-        
-        
     </div>
 </div>

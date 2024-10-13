@@ -121,7 +121,7 @@ $employeeTableWidth: calc(100% - 21rem);
 
 .p-datatable {
     .table-layout-fixed {
-        table-layout: fixed;
+        table-layout: auto;
     }
 
     .p-datatable-tbody>tr>td {
@@ -630,6 +630,14 @@ formly-wrapper-primeng-form-field {
 //             background-color: transparent !important;
 //         }
 // }
+
+.duty-roster {
+    p-fieldset {
+        .p-fieldset-content-container{
+            width: 100%;
+        }
+    }
+}
  .app-card {
         background-color: rgb(146 151 179 / 13%) !important;
         border: 1px solid rgb(255 255 255 / 31%) !important;

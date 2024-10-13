@@ -8,10 +8,12 @@ import { ListboxModule } from 'primeng/listbox';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { SetReasonComponent } from './set-reason/set-reason.component';
 import { DutyRosterComponent } from './duty-roster/duty-roster.component';
+import { QuickRefComponent } from './quick-ref/quick-ref.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
     CommonModule,
     TimeAttendenceRoutingModule

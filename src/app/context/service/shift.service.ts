@@ -27,4 +27,22 @@ export class ShiftService extends BaseService {
     getShiftWorkrule(compId: number, userId: number, isDelete: boolean) {
         return this.http.get<any>(`${this.baseUrl}/shift-workrule?compId=${compId}&loggedUser=${userId}&isDelete=${isDelete}`);
     }
+
+    SaveShiftWorkrule(compId: number, userId: number, isDelete: boolean, docNo, undo, startDate, endDate, deptIds, empIds, workrule, offDay, muslim, setWorkrule, shift, narration) {
+        return this.http.post<any>(`${this.baseUrl}/shift-workrule?compId=${compId}&userId=${userId}&delete=${isDelete}&docNo=${docNo}&undo=${undo}
+            &startDate=${startDate}&endDate=${endDate}&deptIds=${deptIds}&empIds=${empIds}&fWR=${workrule}&offDay=${offDay}&muslim=${muslim}&sWR=${setWorkrule}
+            &sShift=${shift}&narration=${narration}`, {});
+    }
+
+    deleteShiftWorkrule(compId: number, docNo: number, userId: number, isDelete: boolean) {
+        return this.http.put<any>(`${this.baseUrl}/shift-workrule?compId=${compId}&docNo=${docNo}&userId=${userId}&delete=${isDelete}`, {});
+    }
+
+    rollbackShiftWorkrule(compId: number, docNo: number, userId: number, isDelete: boolean) {
+        return this.http.put<any>(`${this.baseUrl}/shift-workrule?compId=${compId}&docNo=${docNo}&userId=${userId}&delete=${isDelete}`, {});
+    }
+
+    getShiftWorkruleDetails(compId: number, docId: number) {
+        return this.http.get<any>(`${this.baseUrl}/shift-workrule-details?compId=${compId}&docId=${docId}`);
+    }
 }

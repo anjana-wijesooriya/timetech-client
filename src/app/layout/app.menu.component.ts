@@ -289,16 +289,27 @@ export class AppMenuComponent implements OnInit {
             const setwrshift = {
                 "btnId": "Set Shift/Workrule",
                 "btnTag": "/TimeTechCore/pages/TA/ShiftWR4Period.aspx",
-                "btnPicture": "pi pi-question-circle pi",
+                "btnPicture": "bx bx-calendar-exclamation",
                 "sequence": 4,
                 "btnSeq": 4,
                 "btnToolTip": "Set Shift/Workrule",
                 "btnDisplay": "Set Shift/Workrule",
                 "groupName": "Time Attendance"
             };
+            const quickRef = {
+                "btnId": "Quick Ref",
+                "btnTag": "/TimeTechCore/pages/TA/quickRef.aspx",
+                "btnPicture": "bx bx-universal-access",
+                "sequence": 4,
+                "btnSeq": 4,
+                "btnToolTip": "Quick Ref",
+                "btnDisplay": "Quick Ref",
+                "groupName": "Time Attendance"
+            };
             if (baseModuleId == 1) {
                 response.push(importDuty);
                 response.push(setwrshift);
+                response.push(quickRef);
             }
 
             // response.push(reasonsMenu);

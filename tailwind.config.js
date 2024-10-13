@@ -3,8 +3,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 const svgToDataUri = require('mini-svg-data-uri')
 const {default: flattenColorPalette} = require('tailwindcss/lib/util/flattenColorPalette');
-const { palettes } = require('@tailus/themer');
-import { visualizations,animations,components,shade, rounded, palettesArray, palettes, palette, grays, defaultFeedbackColors } from "@tailus/themer-plugins" 
+const { palettes } = require('@tailus/themer'); 
 
 module.exports = {
     corePlugins: {
@@ -22,7 +21,7 @@ module.exports = {
     darkMode: 'class', // or 'media' or 'class'
     theme: {
         extend: {
-            colors: palettes.trust
+            colors: palettes.trust, 
         },
     },
     variants: {
@@ -55,6 +54,7 @@ module.exports = {
         require('tailwind-glassmorphism'),
 
         require('@tailus/themer'),
+        require('@tailus/themer-form'),
 //    require("./js/components/reflect"),
         function ({addVariant}) {
             addVariant(

@@ -9,6 +9,7 @@ const routes: Routes = [
     { path: 'duty-roster', loadChildren: () => import('./duty-roster/duty-roster.module').then(m => m.DutyRosterModule) },
     { path: 'duty-roster-import', loadChildren: () => import('./duty-roster-import/duty-roster-import.module').then(m => m.DutyRosterImportModule) },
     { path: 'schedule-shift-or-workrule', loadChildren: () => import('./scheduing-shift-wr/scheduing-shift-wr.module').then(m => m.ScheduingShiftWrModule) },
+    { path: 'quick-ref', loadChildren: () => import('./quick-ref/quick-ref.module').then(m => m.QuickRefModule) },
 ];
 
 @NgModule({

@@ -1,0 +1,142 @@
+
+:root {
+        /* Border Radius */
+        --card-radius: theme(borderRadius.xl);
+        --btn-radius: var(--card-radius);
+        --badge-radius: var(--btn-radius);
+        --input-radius: var(--btn-radius);
+        --avatar-radius: theme(borderRadius.full);
+        --annonce-radius: var(--avatar-radius);
+
+        /* Border Color */
+        --ui-border-color: theme(colors.gray.200);
+        --btn-border: theme(colors.gray.200);
+        --badge-border: var(--btn-border);
+        --input-border: var(--ui-border-color);
+        --ui-disabled-border: theme(colors.gray.100);
+        --ui-error-border: theme(colors.danger.600);
+        --ui-success-border: theme(colors.success.600);
+        --input-outline: theme(colors.primary.600);
+
+        /* Background */
+
+        --ui-bg: theme(colors.white/var(--ui-bg-opacity));
+        --ui-soft-bg: theme(colors.gray.100);
+        --overlay-bg: theme(colors.gray.950/0.25);
+        --input-bg: var(--ui-soft-bg);
+        --ui-disabled-bg: theme(colors.gray.100);
+
+        /* Padding */
+        --card-padding: theme("spacing[6]");
+
+        /* Typography */
+        --display-text-color: theme(colors.gray.950);
+        --title-text-color: var(--display-text-color);
+        --body-text-color: theme(colors.gray.700);
+        --caption-text-color: theme(colors.gray.500);
+        --placeholder-text-color: theme(colors.gray.400);
+
+        /* Opacity */
+        --ui-bg-opacity: 1;
+
+        color: var(--body-text-color);
+
+        @apply dark:[--ui-border-color:theme('colors.gray.800')] dark:[--ui-disabled-bg:theme('colors.gray.900')] dark:[--ui-bg:theme('colors.gray.900/var(--ui-bg-opacity)')] dark:[--ui-soft-bg:theme('colors.gray.800')] dark:[--display-text-color:theme('colors.white')] dark:[--body-text-color:theme('colors.gray.300')] dark:[--placeholder-text-color:theme('colors.gray.600')]
+    }
+
+    * {
+        border-color: var(--ui-border-color);
+    }
+
+    button:disabled {
+        border: none !important;
+        background: var(--ui-disabled-bg) !important;
+        background-image: none !important;
+        box-shadow: none !important;
+        color: var(--placeholder-text-color) !important;
+        pointer-events: none !important;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+        @apply outline-2 outline-offset-2 focus-visible:outline outline-primary-600
+    }
+
+    input:user-invalid,textarea:user-invalid,select:user-invalid {
+        --input-border: var(--ui-error-border);
+        --ui-border-color: var(--ui-error-border);
+        --input-outline: var(--ui-error-border);
+        --title-text-color: theme(colors.danger.600);
+
+        @apply dark:[--title-text-color:theme(colors.danger.400)]
+    }
+
+    /* Data attributes */
+    /* Rounded Data attributes */
+    [data-rounded="none"] {
+        --card-radius: theme(borderRadius.none);
+        --avatar-radius: theme(borderRadius.none);
+    }
+
+    [data-rounded="default"] {
+        --card-radius: theme("borderRadius.DEFAULT");
+    }
+
+    [data-rounded="small"] {
+        --card-radius: theme("borderRadius.sm");
+    }
+
+    [data-rounded="medium"] {
+        --card-radius: theme("borderRadius.md");
+    }
+
+    [data-rounded="large"] {
+        --card-radius: theme("borderRadius.lg");
+    }
+
+    [data-rounded="xlarge"] {
+        --card-radius: theme("borderRadius.xl");
+    }
+
+    [data-rounded="2xlarge"] {
+        --card-radius: theme("borderRadius.2xl");
+        --input-radius: theme("borderRadius.xl");
+    }
+
+    [data-rounded="3xlarge"] {
+        --card-radius: theme("borderRadius.3xl");
+        --input-radius: theme("borderRadius.xl");
+    }
+
+    [data-rounded="full"] {
+        --card-radius: theme("borderRadius.3xl");
+        --btn-radius: theme("borderRadius.full");
+        --input-radius: theme("borderRadius.2xl");
+    }
+
+    /* Shade Data Attributes */
+
+    [data-shade="glassy"] {
+        --ui-bd-blur: theme("blur[2xl]");
+        --ui-bg-opacity: 0.75;
+        --ui-bg: theme("colors.white/var(--ui-bg-opacity)");
+
+        @apply dark:[--ui-bg-opacity:0.5] dark:[--ui-border-color:theme(colors.gray.50/0.1)] dark:[--ui-bg:theme(colors.gray.700/var(--ui-bg-opacity))] dark:[--ui-soft-bg:theme(colors.gray.600/0.50)]
+    }
+
+    [data-shade="800"] {
+        @apply dark:[--ui-border-color:theme(colors.gray.700)] dark:[--ui-bg:theme(colors.gray.800)] dark:[--ui-soft-bg:theme(colors.gray.900)]
+    }
+
+    [data-shade="900"] {
+        @apply dark:[--ui-border-color:theme(colors.gray.800)] dark:[--ui-bg:theme(colors.gray.900)] dark:[--ui-soft-bg:theme(colors.gray.800)]
+    }
+
+    [data-shade="925"] {
+        @apply dark:[--ui-border-color:theme(colors.gray.800)] dark:[--ui-bg:theme(colors.gray.925)] dark:[--ui-soft-bg:theme(colors.gray.800)]
+    }
+
+    [data-shade="950"] {
+        @apply dark:[--ui-border-color:theme(colors.gray.800)] dark:[--ui-bg:theme(colors.gray.950)] dark:[--ui-soft-bg:theme(colors.gray.800)]
+    }
+
